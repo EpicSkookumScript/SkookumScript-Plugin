@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Callback invoked just _after_ this component has been attached to an actor
+// Meant to be overridden in your custom subclass
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+()
+  [
+  ]

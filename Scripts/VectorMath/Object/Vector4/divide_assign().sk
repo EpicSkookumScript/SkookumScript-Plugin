@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// /= Divides itself by supplied value
+//
+// # Params:
+//   operand: amount to divide each axis vaule by
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec /= 3
+//   vec.divide_assign(3)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real operand) Vector4
+

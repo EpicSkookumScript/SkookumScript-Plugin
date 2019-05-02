@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Description Maximum - returns *reference* to either this number or num if it is larger.
+//             The original number remains unchanged.
+// Returns     *reference* to either this number or num if it is larger
+// Arg         num - number to compare
+// Examples    do_stuff(num.max(100))
+//             num := num.max(100)
+//
+//             !num1:  3
+//             !num2:  42
+//             num1.max(num2)    // returns reference to num2/42
+//
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+  
+  // Equivalent to:
+  
+  //[
+  //if >= num [this] else [num]
+  //]

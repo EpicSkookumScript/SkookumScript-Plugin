@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   name: name to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   name1 := name2
+//   name1.assign(name2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Name name) Name
+

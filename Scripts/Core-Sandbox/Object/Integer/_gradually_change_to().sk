@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer new_value, Real interval:  1.0) 
+
+  [
+  !inc_value:  if new_value > this [1] else [-1]
+  
+  Debug.println("Gradually changing ", this, " to ", new_value)
+  
+  loop
+    [
+    if this = new_value [exit]
+    _wait(interval)
+    this += inc_value
+    Debug.println("  ", this)
+    ]
+  ]  

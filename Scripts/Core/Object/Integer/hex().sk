@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Convert to hexadecimal String.
+// 
+// Returns: hex string version of itself
+//
+// Examples
+//   42.hex  // returns "2a"
+//
+// See: radix(), binary(), octal(), String(), String@int_hex()
+//---------------------------------------------------------------------------------------
+
+() String
+
+  [
+  radix(16)
+  ]

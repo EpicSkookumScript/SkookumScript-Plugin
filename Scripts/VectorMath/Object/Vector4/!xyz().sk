@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Constructor.  Initializes x, y, z values to supplied values
+//
+// # Params:
+//   x: x value
+//   y: y value
+//   z: you figure it out
+//
+// # Returns: itself
+//
+// # Examples:
+//   !vec: Vector4!xyz(1 2 3)
+//
+// # See:       Vector4!(), Vector4!xy(), Vector4!copy()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real x, Real y, Real z) Vector4
+

@@ -1,0 +1,42 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure `test` with
+// each item as an argument and removes/rejects items that return true.
+//
+// # Returns: itself
+//
+// # Examples:
+//   {3 4 5 8}.reject[item.pow2?]  // {3, 5}
+//
+//   // To keep orignal list and return new reduced list use instantiation operator `!`:
+//   !nums:  {3 4 5 8}
+//   !num2s: nums!reject[item.pow2?]  // nums stays the same
+//   println("nums:  " nums)          // {3, 4, 5, 8}
+//   println("num2s: " num2s)         // {3, 5}
+//
+// # See:       select(), do_*(), all?(), any?()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item) Boolean test) ThisClass_
+
+  [
+  !idx: 0
+  
+  loop
+    [
+    if idx >= length
+        [
+        exit
+        ]
+      test(at(idx))
+        [
+        remove_at(idx)
+        ]
+      else
+        [
+        idx++
+        ]
+    ]
+
+  this
+  ]  

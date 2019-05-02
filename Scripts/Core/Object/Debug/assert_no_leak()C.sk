@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// If condition is false, stop program execution and display an error message
+// If condition is true, do nothing
+// Additionally, also display an error message if memory usage is not the same 
+// before and after invoking this method
+//---------------------------------------------------------------------------------------
+
+(Boolean condition, String message : "")
+

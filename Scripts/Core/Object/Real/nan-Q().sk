@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Determines if this is Not a Number (NaN) - representing an undefined or
+// unrepresentable value.
+// 
+// https://en.wikipedia.org/wiki/NaN
+//
+// See: !nan(), !infinity(), !min(), !max(), finite?(), infinite?()
+//---------------------------------------------------------------------------------------
+
+() Boolean

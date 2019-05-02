@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Returns true/false with 50/50 chance
+//
+// #Returns: true/false
+// #Examples:
+//   if @@random.coin_toss? [do_this] else [do_that]
+//   // call 50% of the time
+//   do_stuff when @@random.coin_toss?
+//---------------------------------------------------------------------------------------
+
+() Boolean

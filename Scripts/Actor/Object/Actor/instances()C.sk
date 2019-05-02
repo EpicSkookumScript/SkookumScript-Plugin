@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Get the instantiated actors derived from this class and all subclasses.
+// 
+// Returns: List of all instances of this class
+// Examples:
+//   ```
+//   !actors: Actor.instances
+//
+//   // Assuming there is an Enemy subclass
+//   !enemies: Enemy.instances
+//   enemies%do_stuff
+//
+// See: instances_length(), named(), find_instance(), find_named()
+//---------------------------------------------------------------------------------------
+
+() List{ThisClass_}
+

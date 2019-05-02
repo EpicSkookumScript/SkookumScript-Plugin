@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Removes item/element at specified index position.
+// Examples    {0, "one", 2.0}.pop_at(1)  // list becomes {0, 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer index)
+// Returns itself
+ThisClass_
+
+
+
+

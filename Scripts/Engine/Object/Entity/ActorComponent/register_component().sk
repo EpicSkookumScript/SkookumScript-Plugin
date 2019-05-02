@@ -1,0 +1,6 @@
+//---------------------------------------------------------------------------------------
+// Register this component, creating any rendering/physics state. 
+// Will also adds to outer Actor's Components array, if not already present.
+//---------------------------------------------------------------------------------------
+
+()

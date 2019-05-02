@@ -1,0 +1,410 @@
+//############################## Conditionals #######################################
+
+//////////////////////////////// Single then clause /////////////////////////////////
+
+// C++
+
+if (test()) do_this();
+
+if (expr != 5) do_this();
+
+if (test()) { do_this1(); do_this2(); }
+
+if (test())
+  {
+  do_this1();
+  do_this2();
+  }
+
+
+// SkookumScript
+
+if test [do_this]
+
+if expr ~= 5 [do_this]
+
+if test [do_this1 do_this2]
+
+if test
+  [
+  do_this1
+  do_this2
+  ]
+
+// Statement modifier version
+do_this when test
+
+// Negated statement modifier version
+do_that unless test  
+  
+
+//////////////////////////////// Then - else ////////////////////////////////////////
+
+// C++
+
+if (test()) do_this(); else do_that();
+
+if (test()) do_this()
+else do_that();
+
+if (test())
+  do_this();
+else
+  do_that();
+
+if (test())
+  {
+  do_this();
+  }
+else
+  {
+  do_that();
+  }
+
+if (test())
+  {
+  do_this1();
+  do_this2();
+  }
+else
+  {
+  do_that1();
+  do_that2();
+  }
+
+
+// SkookumScript
+
+if test [do_this] else [do_that]
+
+if test [do_this]
+else    [do_that]
+
+if test
+  [do_this]
+else
+  [do_that]
+
+if test
+  [
+  do_this
+  ]
+else
+  [
+  do_that
+  ]
+  
+if test
+  [
+  do_this1
+  do_this2
+  ]
+else
+  [
+  do_that1
+  do_that2
+  ]
+
+
+//////////////////////////////// Multi-if ///////////////////////////////////////////
+
+// C++
+
+if (test1())
+  do_one();
+else
+  if (test2())
+    do_two();
+  else
+    do_three();
+
+if (test1())
+  {
+  do_one1();
+  do_one2();
+  }
+else
+  {
+  if (test2())
+    {
+    do_two1();
+    do_two2();
+    }
+  else
+    {
+    do_three1();
+    do_three2();
+    }
+  }
+
+
+// SkookumScript
+
+if test1 [do_one]
+  test2  [do_two]
+  else   [do_three]
+
+if test1
+    [
+    do_one1
+    do_one2
+    ]
+  test2
+    [
+    do_two1
+    do_two2
+    ]
+  else
+    [
+    do_three1
+    do_three2
+    ]
+
+    
+//////////////////////////////// if Expression with Result //////////////////////////
+
+// C++
+
+float num =
+  test1()
+    ? get_one()
+    : test2()
+      ? get_two()
+      : get_three();
+
+      
+float num;
+
+if (test1())
+  {
+  do_one();
+  num = get_one();
+  }
+else
+  {
+  if (test2())
+    {
+    do_two();
+    num = get_two();
+    }
+  else
+    {
+    do_three();
+    num = get_three();
+    }
+  }
+      
+    
+// SkookumScript
+
+!num:
+  if test1 [get_one]
+    test2  [get_two]
+    else   [get_three]
+
+
+!num:
+  if test1
+      [
+      do_one
+      get_one
+      ]
+    test2
+      [
+      do_two
+      get_two
+      ]
+    else
+      [
+      do_three
+      get_three
+      ]
+    
+    
+//////////////////////////////// Multi-case /////////////////////////////////////////
+
+// C++
+
+switch (expr)
+  {
+  case val1:
+    do_one();
+    break;
+
+  case val2:
+    do_two();
+    break;
+
+  default:
+    do_three();
+  }
+
+switch (expr)
+  {
+  case val1:
+    do_one1();
+    do_one2();
+    break;
+
+  case val2:
+    do_two1();
+    do_two2();
+    break;
+
+  default:
+    do_three1();
+    do_three2();
+  }
+
+
+// SkookumScript
+
+case expr
+  val1 [do_one]
+  val2 [do_two]
+  else [do_three]
+
+case expr
+  val1
+    [
+    do_one1
+    do_one2
+    ]
+  val2
+    [
+    do_one1
+    do_one2
+    ]
+  else
+    [
+    do_three1
+    do_three2
+    ]
+
+    
+//////////////////////////////// Multi-case with Result //////////////////////////////
+
+// C++
+
+float num;
+
+switch (expr)
+  {
+  case val1:
+    num = get_one();
+    break;
+
+  case val2:
+    num = get_two();
+    break;
+
+  default:
+    num = get_do_three();
+  }
+
+
+// SkookumScript
+
+!num:
+  case expr
+    val1 [do_one]
+    val2 [do_two]
+    else [do_three]
+
+    
+//############################## Iteration / Loops ##################################
+
+// C++
+
+for (int count = 0; count < 10; count++)
+  {
+  do_this();
+  do_that();
+  }
+
+int count = 0;
+while (count < 10)
+  {
+  do_this();
+  do_that();
+  count++;
+  }
+
+
+int count = 0;
+do
+  {
+  do_this();
+  do_that();
+  count++;
+  }
+while (count < 10)
+
+
+// Middle exit
+int count = 0;
+while (true)
+  {
+  do_this();
+  if (count >= 10) break;
+  do_that();
+  count++;
+  }
+
+
+// SkookumScript
+
+10.do[do_this do_that]
+
+10.do
+  [
+  do_this
+  do_that
+  ]
+
+// 'while' loop
+!count: 0
+loop
+  [
+  if count >= 10 [exit]
+  do_this
+  do_that
+  count++
+  ]
+
+// 'do while' loop
+!count: 0
+loop
+  [
+  do_this
+  do_that
+  count++
+  if count >= 10 [exit]
+  ]
+
+
+// Middle exit
+!count: 0
+loop
+  [
+  do_this
+  if count >= 10 [exit]
+  do_that
+  count++
+  ]
+
+
+// Named loops
+loop outer
+  [
+  do_outer
+  
+  loop
+    [
+    do_inner
+    if expr1 [exit outer]
+      expr2  [exit]
+    ]
+  ]
+
+

@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Determines the cosine of the supplied angle in radians - the ratio of the length of
+// the adjacent side to the length of the hypotenuse of a triangle.
+// Also sometimes called the sine compliment.
+//
+// https://en.wikipedia.org/wiki/Trigonometric_functions#cosine
+// http://mathworld.wolfram.com/Cosine.html
+//
+// #Params:
+//   rad: angle in radians
+//
+// #Result: -1 <= x <= 1
+//
+// #Notes: With a maximum error of about 2.75e-5 at cos(45 degrees)
+//
+// #Examples:
+//   !num: Real.cos(radian_angle)
+//   real_arg(Real.cos(radian_angle))
+//   real_arg(cos(radian_angle))       // Real. is inferred when desired type is known
+//
+// #See: sin(), tan(), asin(), acos(), atan2(), !deg_to_rad(), !rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+(Real rad) Real

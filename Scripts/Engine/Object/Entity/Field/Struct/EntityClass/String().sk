@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Converter to a string representation of itself
+//
+// # Returns: itself as a string
+//
+// # Examples:
+//   !str1: entity.String
+//   !str2: entity>>String  // only converts entity if it needs to
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() String
+

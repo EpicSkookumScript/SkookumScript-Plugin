@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Converts this object to a code/literal string representation of itself.
+// Used in debugging when building callstack, etc.
+// 
+// # Params:
+//   The number of parameters should always be zero - including no default parameters
+//
+// # Returns: code/literal string representation of itself
+//
+// # Notes:     Override for custom representation
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() 
+
+  [
+  // Call String converter by default
+  this.String
+  ]

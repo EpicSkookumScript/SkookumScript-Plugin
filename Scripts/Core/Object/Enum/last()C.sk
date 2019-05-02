@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Returns last ordinal enumeration.
+//
+// # Returns: last enumeration
+//
+// # Examples:
+//   // EAxis{none, x, y, z}
+//   println(EAxis.last)    // EAxis.@@z
+//
+// # See: at(), index(), first()
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+
+  [
+  at(-1)
+  ]

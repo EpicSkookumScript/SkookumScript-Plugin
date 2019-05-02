@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description /= Divides itself by supplied value
+// Returns     itself
+// Examples    num /= 3.0  // or num.divide_assign(3.0)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

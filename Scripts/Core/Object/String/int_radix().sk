@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Convert all or initial substring of this string to an Integer with the specified
+// radix/base.
+// 
+// Params:
+//   radix: radix/base to use for conversion - 2 binary, 16 hexadecimal, etc.
+//
+// Returns: Integer value of entire string or a substring
+//
+// Examples:
+//   "101010".int_radix(2)  // returns 42
+//
+// See: Integer(), int_binary(), int_octal(), int_hex()
+//---------------------------------------------------------------------------------------
+
+(Integer radix: 10) Integer
+
+  [
+  parse_int(, radix)
+  ]

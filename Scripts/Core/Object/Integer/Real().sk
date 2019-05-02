@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Returns real number (floating point) representation of itself
+// Returns     itself as a real
+// Examples    
+// See Also    
+// Notes       
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

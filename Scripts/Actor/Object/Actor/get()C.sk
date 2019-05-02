@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Description Get the actor with the specified name or just return the actor if the
+//             argument already is an actor - asserts if not found
+// Returns     Actor found - or nil if not found
+// Examples    !actor1:  Actor.get('Actor001')
+//             !actor2:  Actor.get(actor1)
+//             actor1.do_actor_stuff
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(<Actor|Symbol> actor_or_name) ThisClass_
+
+  [
+  if actor_or_name.class_of?(Symbol)
+    [
+    named(actor_or_name<>)
+    ]
+  else
+    [ 
+    actor_or_name<>ThisClass_
+    ]
+  ]
+  

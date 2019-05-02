@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Sets the x, y, and z values to new values
+//
+// # Params:
+//   x: new x-axis vaule
+//   y: new y-axis vaule
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec.xy_set(1 2)
+//
+// #See Also
+//   x_set(), y_set(), x(), y(), zero()
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real x, Real y) Vector2
+

@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0.0f and 1.0f with a
+//             positive sloping distribution - i.e. more likely to get numbers at the
+//             end of the range.
+// Returns     a psuedo-random number between 0.0f and 1.0f
+// Examples    num: random.up_slope
+// See Also    operator(), uniform(), triangle(), normal(), down_slope(), thorn(),
+//             nose(), and the integer versions of the same methods
+// Notes       It has a distribution that looks like:
+//               |      /|
+//               |    /  |
+//               |  /    |
+//               |/      |
+//              0.0f    1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

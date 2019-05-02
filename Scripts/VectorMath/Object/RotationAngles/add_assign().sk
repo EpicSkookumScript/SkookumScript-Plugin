@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// += Adds supplied RotationAngles to itself
+//
+// # Params:
+//   rot: RotationAngles to add
+//
+// # Returns: itself
+//
+// # Examples:
+//   rot1 += rot2 
+//   rot1.add_assign(rot2)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(RotationAngles rot) RotationAngles
+

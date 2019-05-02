@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Appends item/element to the end of the list if the exact same item (==) is
+//             not already present in the list.
+// Returns     true if item appended, false if not
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ItemClass_ item) Boolean
+
+// When return arguments are in place use:
+// (ItemClass_ item) {Integer find_index} Boolean

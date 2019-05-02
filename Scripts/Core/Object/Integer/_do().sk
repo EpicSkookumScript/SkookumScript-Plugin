@@ -1,0 +1,35 @@
+//---------------------------------------------------------------------------------------
+// Loops/iterates calling supplied potentially durational closure code n times where n is
+// this Integer.
+//
+// The index value is passed as an argument and is exclusive: 0..n-1
+//
+// # Examples:
+//   4._do
+//     [
+//     _wait(idx>>)  // >> converts Integer to Real
+//     println(idx)
+//     ]
+//
+//   // Prints
+//   0
+//   1  // waits 1 second
+//   2  // waits 2 seconds
+//   3  // waits 3 seconds
+//
+// # See:       do(), do_by(), do_reverse(), to(), to_pre()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(+(Integer idx) code)
+
+  [
+  !idx: 0
+  
+  loop
+    [
+    if idx >= this [exit]
+    code(idx)
+    idx++
+    ]
+  ]  

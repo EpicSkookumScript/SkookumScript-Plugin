@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Keeps count items starting at index and removes the rest.
+// Examples    {0, "one", 2.0, 3, "four"}.crop(1, 3)
+//               changes list to {"one", 2.0, 3}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer index, Integer count)
+// Returns itself
+ThisClass_
+
+
+

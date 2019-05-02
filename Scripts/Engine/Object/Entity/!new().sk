@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Default constructor
+//
+// Create a new instance of an engine object.  The returned object will be fully initialized.
+// If flags contains RF_NeedsLoad (indicating that the object still needs to load its object data from disk), 
+// components are not instanced (this will instead occur in PostLoad()).
+// 
+// Params:
+//   outer : The object to create this object within (the Outer property for the new object will be set to the value specified here)
+//   name  : The name to give the new object. If no value (Name!none) is specified, the object will be given a unique name in the form of ClassName_#
+//   flags : The ObjectFlags (RF_x) to assign to the new object. Some flags can affect the behavior of constructing the object
+//
+// Returns: Reference to a fully initialized object of the specified class
+//
+//---------------------------------------------------------------------------------------
+
+(Entity outer : Entity!null, Name name : Name!none, Integer flags : 0) ThisClass_

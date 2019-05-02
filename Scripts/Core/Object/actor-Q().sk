@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Returns true if this is an actor object instance.
+// 
+// #See Also    class?() class_actor?() subclass?() superclass?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+// true if an actor, false if not
+() Boolean
+
+  [
+  false
+  ]
+

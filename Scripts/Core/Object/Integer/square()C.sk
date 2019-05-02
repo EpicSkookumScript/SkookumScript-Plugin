@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Determines square of supplied number: num^2
+// 
+// Returns: square of num
+//
+// Examples:
+//   !num: Integer.square(3)          // returns 9
+//   integer_arg(Integer.square(num))
+//   integer_arg(square(num))         // Integer. is inferred
+//   num := square(num)               // modifies itself with result
+//
+// See: cube(), pow(), sqrt()
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+  //[num*num]

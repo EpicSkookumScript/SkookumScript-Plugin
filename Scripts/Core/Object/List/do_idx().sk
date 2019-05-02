@@ -1,0 +1,41 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure code with each
+// item as an argument.
+//
+// #Examples
+//
+//   {"here" "are" "some" "words"}.do_idx
+//     [if idx.mod(2) = 1 [item.uppercase]]
+//
+//   // Result
+//   {"here", "ARE", "some", "WORDS"}
+//
+//
+//   {"here" "are" "some" "words"}.do_idx
+//     [
+//     item.
+//       [
+//       append(" [")
+//       append(idx>>)
+//       append("]")
+//       ]
+//     ]
+//
+//   // Result
+//   {"here [0]", "are [1]", "some [2]", "words [3]"}
+//
+// #See Also   _do()
+// #Notes      Use _*() versions for durational iteration.
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item Integer idx) code) ThisClass_
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  length.do[code(at(idx) idx)]
+  this  
+  ]  
+  */

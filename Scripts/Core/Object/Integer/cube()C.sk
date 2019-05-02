@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Determines cube of supplied number: num^3
+// 
+// Returns: cube of num
+//
+// Examples:
+//   !num: Integer.cube(3)          // returns 27
+//   integer_arg(Integer.cube(num))
+//   integer_arg(cube(num))         // Integer. is inferred
+//   num := cube(num)               // modifies itself with result
+//
+// See: square(), pow(), sqrt()
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+  //[num*num*num]

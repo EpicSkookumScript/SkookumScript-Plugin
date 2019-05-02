@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between min_val and max_val with a uniform
+//             distribution - i.e. each number in the range is just as likely as any
+//             other.
+// Returns     a psuedo-random number between min_val and max_val
+// Examples    !num:  @@random.uniform_range(50 100)
+// See Also    operator(), triangle(), normal(), up_slope(), down_slope(), thorn(),
+//             nose(), and the integer versions of the same methods
+// Notes       The uniform distribution generator is faster than the algorithms for
+//             other distributions.
+//             It has a distribution that looks like:
+//                |          |
+//                |__________|
+//                |          |
+//                |          |
+//             min_val    max_val
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real min, Real max) Real
+

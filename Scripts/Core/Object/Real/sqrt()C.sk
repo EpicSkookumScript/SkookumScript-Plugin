@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Determine the square root of the specified `radicand`. radicand^.5
+// 
+// https://en.wikipedia.org/wiki/Square_root
+// 
+// Returns: square root of `radicand`
+//
+// Examples:
+//   !num: Real.sqrt(9.0)     // returns 3.0
+//   real_arg(Real.sqrt(num))
+//   real_arg(sqrt(num))      // Real. is inferred
+//   num := sqrt(num)         // modifies itself with result
+//
+// See: square(), cube(), pow()
+//---------------------------------------------------------------------------------------
+
+(Real radicand) Real

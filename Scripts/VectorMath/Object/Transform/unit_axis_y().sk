@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Get the y-direction of this transform
+//
+// # Returns: Vector3 direction of the y-axis for this transform
+//
+// # Examples:
+//   !dest : some_transform.unit_axis_y * distance // Go right along the transform axis
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+() Vector3

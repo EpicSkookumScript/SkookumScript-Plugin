@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Swap the content value of this number with the supplied number.
+// 
+// Params:
+//   num: number to assign from and to assign current number to
+//
+// Returns: itself
+//
+// Examples:
+//   num1.swap(num2)
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  
+// Equivalent to:
+
+// [
+// !old_num: this!
+// this := num
+// num  := old_num
+// this
+// ]

@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Logical inequality - same as ~= operator. Returns true if both objects are *not* 
+// logically the same.
+//
+// # Params:
+//   rot: RotationAngles to compare
+//
+// # Returns: true if *not* equal false if not
+//
+// # Examples:
+//   obj1 ~= obj2
+//   obj1.not_equal?(obj2)
+//
+// # See:
+//   =   equal?()
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(RotationAngles rot) Boolean
+

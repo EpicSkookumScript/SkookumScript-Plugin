@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// OOP version of clamp - Returns a number that lies inclusively within the range of the
+// supplied minimum and maximum values returning a *reference*:
+//   - to the current value if it is within the range
+//   - to min if current value is less than min
+//   - to max if current value is greater than max
+//
+// The original number remains unchanged.
+//
+// Returns: either this number if it lies in the desired range or min or max
+//
+// Examples:
+//   !num:     42
+//   !clamped: num.clamp(0 100)
+//   do_stuff(num.clamp(0 100))
+//   num := num.clamp(0 100)
+//
+// See: between?(), <Integer>@clamp()
+//---------------------------------------------------------------------------------------
+
+( Integer min
+  Integer max
+) Integer
+

@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Puts the last item in the list at the front and shifts all the other items
+//             up one position.
+// Examples    {0, 1, 2, 3}.rotate_up  // list becomes {3, 0, 1, 2}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+()
+// Returns itself
+ThisClass_
+
+
+

@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// The class `Class` does not have any members in its native directory.  All instances
+// of `Class` may use any class or instance member of `Object`.  If the type of class is
+// known - for example if it is a `String` class rather than just some `Class` - then it
+// may use any class member of its class all the way up its superclasses to `Object`.
+//
+// Author(s): Conan Reis
+

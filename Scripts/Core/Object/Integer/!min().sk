@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Minimum possible value limit for Integer
+// (Integer is 32-bits - same as INT32_MIN in C++)
+// 
+// Examples:
+//   !small_num: Integer!min
+//
+//   // If type known, Integer can be omitted
+//   42 = !min
+//   42.max(!min)
+//
+// See: !max()
+//---------------------------------------------------------------------------------------
+
+() Integer 
+  //[-2147483648]

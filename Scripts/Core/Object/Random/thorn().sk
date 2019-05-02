@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0.0f and 1.0f with a thorn
+//             shaped distribution - i.e. more likely to get numbers in the middle of
+//             the range, starting with a convex slope and ending with a concave slope.
+// Returns     a psuedo-random number between 0.0f and 1.0f
+// Examples    num: random.thorn
+// See Also    operator(), uniform(), triangle(), normal(), up_slope(), down_slope(),
+//             nose(), and the integer versions of the same methods
+// Notes       It has a distribution that looks like:
+//               |         |
+//               |   /|    |
+//               | /   \   |
+//               |/      -_|
+//              0.0f      1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Calculates the cross product between this vector and the one supplied
+//
+// # Returns: 
+//     the vector cross product
+//     in this case of 2D vectors, the cross product is a scalar
+//     equaling the sine of the angle between the vectors times the product of their magnitudes
+//
+// # Examples:
+//   !sin_angle: vec1.cross(vec2)
+//
+// # See:       dot()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector2 vec) Real
+

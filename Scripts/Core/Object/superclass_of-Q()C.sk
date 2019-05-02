@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Determines if this class is a superclass/parent of the supplied class 'subclass'
+// 
+// #Examples
+//  if class1.superclass_of?(class2) [do_class1_stuff]
+//
+// #See Also    class_of?(), subclass_of?(), class_actor?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // class to check
+  <Object> subclass
+  // true if superclass of 'subclass', false if not
+) Boolean

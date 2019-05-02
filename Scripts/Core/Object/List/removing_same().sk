@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// - Description
+// Removes all *equivalent* items - exact same object (==), not necessarily logically
+// equal (:=) - in variable length group from this list.
+//
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+({} list)
+// Returns itself
+ThisClass_
+

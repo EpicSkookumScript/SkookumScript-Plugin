@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determines if yaw, pitch, and roll are zero.
+//
+// # Returns: true if yaw, pitch, and roll are zero, false if not
+//
+// # Examples:
+//   if angles.zero? [do_stuff()]
+//   do_stuff() when angles.zero?
+//
+// # See:       zero()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

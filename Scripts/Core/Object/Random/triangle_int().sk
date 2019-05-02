@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0 and (limit - 1) with a
+//             triangle shaped distribution - i.e. more likely to get numbers in the
+//             middle of the range.
+// Returns     a psuedo-random number between 0 and (limit - 1)
+// Arg         limit - the upper range - 1 of the number to generate.  It must not
+//             exceed (2^16 - 1) = UINT16_MAX = 65535.  If a larger integer range is
+//             desired, use uniform_uint() which returns a random number up to
+//             UINT32_MAX or use one of the floating point generation routines and
+//             multiply the result by the desired range.
+// Examples    num: random.triangle(100)  // 0-99
+// See Also    operator(), uniform(), uniform_uint(), normal(), up_slope(),
+//             down_slope(), thorn(), nose(), and the float versions of the same methods
+// Notes       It is relatively efficient for a non-uniform distribution.
+//             It has a distribution that looks like:
+//               |   /\   |
+//               |  /  \  |
+//               | /    \ |
+//               |/      \|
+//               0     limit-1
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer limit) Integer
+

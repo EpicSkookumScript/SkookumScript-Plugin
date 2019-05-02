@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// - Description Inserts items in supplied list before the specified index position.
+//
+// - Examples
+// {0, "one", 2.0}.insert_group("la", "dee", "da", 1#index)
+//   changes list to {0, "la", "dee", "da", "one", 2.0}
+//
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // Items to insert
+  {ItemClass_} list,
+
+  // Index to insert.  It can only be specified using a named argument - i.e. with a
+  // arg#index or arg#1
+  Integer index:  0
+)
+// Returns itself
+ThisClass_
+

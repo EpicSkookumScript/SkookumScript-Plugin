@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Description Set seed value.  Any Random with the same seed will end up generating the
+//             same sequence of numbers.  This allows repeatable results with random
+//             numbers and a means to describe a "randomly generated" yet predictable
+//             object with just the seed value.
+// Arg         time_seed - the seed for the random number generator to use.  It creates
+//             a seed based on the system time as default.  (Default time_seed())
+// Examples    random.set_seed(1234567)
+// See Also    seed()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer seed)
+

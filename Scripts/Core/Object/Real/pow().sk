@@ -1,0 +1,28 @@
+//---------------------------------------------------------------------------------------
+// Determines the exponentiation of this base number to the power of the `exponent`.
+//
+//   base^exponent
+//
+// https://en.wikipedia.org/wiki/Exponentiation
+// http://mathworld.wolfram.com/Power.html
+// 
+// Params:
+//   exponent: essentially the number of times to multiply the base
+//
+// Returns: exponent product result
+//
+// Notes:
+//   ***The caret symbol `^` is not used as an exponention operator - it is used with
+//   closure literals instead since they are more common.
+//
+//   This is an OOP-style instance method rather than a functional-style class method
+//   since it often an operator (`^`) and it reads more naturally.
+//   4.5.pow(1.5) // Four point five to the power of one point five
+//
+// Examples:
+//   2.0.pow(3.0)  // 2^3
+//  
+// See: square(), cube(), sqrt()
+//---------------------------------------------------------------------------------------
+
+(Real exponent) Real

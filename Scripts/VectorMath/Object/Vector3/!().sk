@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Default constructor.  Initializes x, y, z values to 0.0
+//
+// # Returns: itself
+//
+// # Examples:
+//   !vec: Vector3!
+//
+// # See:       Vector3!xyz(), Vector3!xy(). Vector3!copy()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Vector3
+

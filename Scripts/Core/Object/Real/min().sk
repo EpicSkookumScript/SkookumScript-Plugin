@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------------------
+// Minimum - returns *reference* to either this number or num if it is smaller.
+// The original number remains unchanged.
+//
+// Params:
+//   num: number to compare
+//
+// Returns: *reference* to either this number or num if it is smaller
+//
+// Examples
+//   do_stuff(num.min(100.0))
+//   num := num.min(100.0)
+//
+//   !num1:  3.0
+//   !num2:  42.0
+//   num1.min(num2)    // returns reference to num1/3.0
+//
+// See: max(), class version of min() and max()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  
+  // Equivalent to:
+  
+  //[
+  //if <= num [this] else [num]
+  //]

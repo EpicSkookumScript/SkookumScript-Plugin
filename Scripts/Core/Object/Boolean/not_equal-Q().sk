@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// [Same as ~= operator]
+// Returns true if both objects are *not* logically the same (i.e. one is true and one is
+// false)
+//
+// # Examples:
+//   obj1? ~= obj2?        // operator form
+//   obj1?.not_equal?(obj2?)  // method form
+//
+// # Notes:
+//   this  | operand | result
+//   ------+---------+-------
+//   false | false   | false
+//   false | true    | true
+//   true  | false   | true
+//   true  | true    | false
+//
+// # See:
+//   =   equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//---------------------------------------------------------------------------------------
+
+(Boolean operand) Boolean
+

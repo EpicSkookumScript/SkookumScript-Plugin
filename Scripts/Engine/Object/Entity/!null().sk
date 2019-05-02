@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Null constructor - used to deliberately create a null entity
+// A null Entity is different from nil:
+// nil is a different SkookumScript type (class None) 
+// a null Entity is still of type Entity but does not refer to a valid Entity
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

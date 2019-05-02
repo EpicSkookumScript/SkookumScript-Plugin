@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// * Apply inverse rotation to this vector
+//
+// # Params:
+//   rot: rotation to inverse-apply
+//
+// # Returns:
+//   new vector which is this vector un-rotated by the rotation
+//
+// # Examples:
+//   vec2: vec1.unrotate_by(rot1)
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Rotation rot) Vector3
+

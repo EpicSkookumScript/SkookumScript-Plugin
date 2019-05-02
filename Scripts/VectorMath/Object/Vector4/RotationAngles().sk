@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// * Convert the vector to a rotation angle
+//
+// # Returns:
+//   new rotation angle
+//
+// # Examples:
+//   !rot : [vec1 - vec2].RotationAngles
+//   Vector4!xyzw(1 0 1 1).RotationAngles
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+() RotationAngles
+

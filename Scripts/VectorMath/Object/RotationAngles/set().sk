@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Sets the yaw, pitch, and roll values to new values
+//
+// # Params:
+//   yaw: new yaw vaule
+//   pitch: new pitch vaule
+//   roll: new roll vaule
+//
+// # Returns: itself
+//
+// # Examples:
+//   angles.yaw_pitch_roll_set(90 45 0)
+//
+// #See Also
+//   yaw_set(), pitch_set(), roll_set(), yaw(), pitch(), roll(), zero()
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Real yaw, Real pitch, Real roll) RotationAngles
+

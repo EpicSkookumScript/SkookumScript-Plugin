@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Get the instantiated actors derived from this class and all subclasses.
+//
+// Returns:  List of all instances of this class
+// Examples: Actor.instances%_do_stuff
+// See:      instances_first(), instances_from(), named(), find_named()
+//---------------------------------------------------------------------------------------
+
+() List{ThisClass_}
+

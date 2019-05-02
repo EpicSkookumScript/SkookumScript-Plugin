@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Get the first actor instance of this class.
+//
+// Returns: First actor instance - asserts if this class has no instances
+// See:     instances_first(), instances_from(), named(), find_named()
+// Examples:
+//   Character.instance_first.character_action
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

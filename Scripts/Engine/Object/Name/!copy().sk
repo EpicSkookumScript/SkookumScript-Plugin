@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   name: name to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !name1: Name!
+//   !name2: name1!             // Recommended shortcut - same as code below
+//   !name3: name1!copy
+//   !name4: Name!copy(name1)
+//
+// # See:       Name!()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Name name) Name
+

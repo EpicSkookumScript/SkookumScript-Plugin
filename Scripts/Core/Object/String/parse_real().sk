@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Convert all or a substring of this string to a Real value
+// 
+// Params:
+//   start_idx: starting character position to begin parse
+//
+// Return Params:
+//   stop_idx: character index position where parse stopped 
+//
+// Returns: Real value of entire string or a substring
+//
+// See: Real(), parse_int()
+//---------------------------------------------------------------------------------------
+
+( Integer start_idx: 0
+; Integer stop_idx
+) Real

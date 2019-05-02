@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Determines if the specified bit is set.
+//
+// #Examples
+//   2r10100.bit_set?(2)  // returns true
+//   //43210  <- bit index
+//
+//   do_stuff(num.bit_set?(3))
+//
+//   if num.bit_set?(3)
+//     [ do_set_stuff ]
+//   else
+//     [ do_cleared_stuff ]
+//---------------------------------------------------------------------------------------
+
+( // Bit index to test
+  Integer bit
+  // true if bit is set or false if not
+) Boolean
+

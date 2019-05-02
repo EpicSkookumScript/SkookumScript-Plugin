@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// CS Params   seed() Integer
+// Description Gets the current seed value of the Random instance.  Any Random with the
+//             same seed will end up generating the same sequence of numbers.  This
+//             allows repeatable results with random numbers and a means to describe a
+//             "randomly generated" yet predictable object with just the seed value.
+// Returns     the integer seed
+// Examples    seed: random.seed
+// See Also    set_seed()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

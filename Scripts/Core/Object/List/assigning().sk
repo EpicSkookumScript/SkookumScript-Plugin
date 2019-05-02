@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// - Description Assigns this list to the items in variable length group.
+// - Examples    {0, "one", 2.0}.assign_group(3, "four")  // list is now {3, "four"}
+// - Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+({ItemClass_} list)
+// Returns itself
+ThisClass_
+

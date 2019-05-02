@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0.0f and 1.0f with a nose
+//             shaped distribution [kooky name, I know] - i.e. more likely to get
+//             numbers in the beginning of the range, starting with a convex slope,
+//             rounding out, and ending with a concave slope.
+// Returns     a psuedo-random number between 0.0f and 1.0f
+// Examples    num: random.nose
+// See Also    operator(), uniform(), triangle(), normal(), up_slope(), down_slope(),
+//             thorn(), and the integer versions of the same methods
+// Notes       It has a distribution that looks like:
+//               |       |
+//               | --    |
+//               |/  \   |
+//               ||    -_|
+//              0.0f    1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real

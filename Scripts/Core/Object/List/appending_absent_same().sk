@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// - Description
+// Appends all items from variable length group that are not already in this list.  Items
+// are tested to determine if the exact same / equivalent object (==) is present, not
+// necessarily logically equal (=) object.
+//
+// - Notes
+// append_absent_list_eqv(), union_eqv() and union_group_eqv() are all essentially the
+// same method just with different name to cover common naming conventions (and variable
+// length groups vs. lists).
+//
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+({ItemClass_} list)
+// Returns itself
+ThisClass_
+
+

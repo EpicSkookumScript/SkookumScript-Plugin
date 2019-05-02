@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Determines if this is either positive or negative infinity.
+// Different than `!max()` which is the largest finite value that can be represented.
+// 
+// https://en.wikipedia.org/wiki/Floating-point_arithmetic#Infinities
+//
+// See: !infinite(), !nan(), !max(), !min(), finite?(), nan?()
+//---------------------------------------------------------------------------------------
+
+() Boolean 

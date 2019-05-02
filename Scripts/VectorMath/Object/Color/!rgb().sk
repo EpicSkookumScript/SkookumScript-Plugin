@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Constructor.  Initializes r, g, b values to supplied values
+//
+// # Params:
+//   r: r value
+//   g: g value
+//   b: you figure it out
+//
+// # Returns: itself
+//
+// # Examples:
+//   !col: Color!rgb(1 0.5 1)
+//
+// # See:       Color!(), Color!copy()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real r, Real g, Real b) Color
+

@@ -1,0 +1,187 @@
+//############################## Conditionals #######################################
+
+//////////////////////////////// Single then clause /////////////////////////////////
+
+if expr [do_this]
+
+if expr ~= 5 [do_this]
+
+if expr [do_this1 do_this2]
+
+if expr
+  [
+  do_this1
+  do_this2
+  ]
+
+// Statement modifier version
+do_this when test
+
+// Negated statement modifier version
+do_that unless test  
+  
+
+//////////////////////////////// Then - else ////////////////////////////////////////
+
+if expr [do_this] else [do_that]
+
+if expr [do_this]
+else    [do_that]
+
+if expr
+  [do_this]
+else
+  [do_that]
+
+if expr
+  [
+  do_this1
+  do_this2
+  ]
+else
+  [
+  do_that1
+  do_that2
+  ]
+
+
+//////////////////////////////// Multi-if ///////////////////////////////////////////
+
+if expr1 [do_one]
+  expr2  [do_two]
+  else   [do_three]
+
+if expr1
+    [
+    do_one1
+    do_one2
+    ]
+  expr2
+    [
+    do_one1
+    do_one2
+    ]
+  else
+    [
+    do_three1
+    do_three2
+    ]
+
+    
+//////////////////////////////// if Expression with Result //////////////////////////
+
+!num:
+  if test1 [get_one]
+    test2  [get_two]
+    else   [get_three]
+
+
+!num:
+  if test1
+      [
+      do_one
+      get_one
+      ]
+    test2
+      [
+      do_two
+      get_two
+      ]
+    else
+      [
+      do_three
+      get_three
+      ]
+
+      
+//////////////////////////////// Multi-case /////////////////////////////////////////
+
+case expr
+  val1 [do_one]
+  val2 [do_two]
+  else [do_three]
+
+case expr
+  val1
+    [
+    do_one1
+    do_one2
+    ]
+  val2
+    [
+    do_one1
+    do_one2
+    ]
+  else
+    [
+    do_three1
+    do_three2
+    ]
+
+
+//////////////////////////////// Multi-case with Result //////////////////////////////
+
+!num:
+  case expr
+    val1 [do_one]
+    val2 [do_two]
+    else [do_three]
+
+    
+//############################## Iteration / Loops ##################################
+
+
+10.do[do_this do_that]
+
+10.do
+  [
+  do_this
+  do_that
+  ]
+
+// 'while' loop
+!count: 0
+loop
+  [
+  if count >= 10 [exit]
+  do_this
+  do_that
+  count++
+  ]
+
+// 'do while' loop
+!count: 0
+loop
+  [
+  do_this
+  do_that
+  count++
+  if count >= 10 [exit]
+  ]
+
+
+// Middle exit
+!count: 0
+loop
+  [
+  do_this
+  if count >= 10 [exit]
+  do_that
+  count++
+  ]
+
+
+// Named loops
+loop outer
+  [
+  do_outer
+  
+  loop
+    [
+    do_inner
+    if expr1 [exit outer]
+      expr2  [exit]
+    ]
+  ]
+
+

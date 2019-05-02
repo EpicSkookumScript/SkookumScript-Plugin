@@ -1,0 +1,147 @@
+=========================================================================================
+Agog Labs C++ library.
+Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+All rights reserved.
+=========================================================================================
+
+
+This is the Agog Core library.
+
+It contains all the basic structures and types that are used to make up more sophisticated
+classes.  It is for the most part platform independent.
+
+
+=========================================================================================
+Library Dependencies
+=========================================================================================
+
+  C Runtime (CRT) [Multi-threaded DLL]
+
+
+=========================================================================================
+Preprocessor defines
+=========================================================================================
+
+Defines:
+ 
+  See "Build Targets" below.
+  
+  See AgogCore.hpp - it has many useful defines and structures and should be included
+  in all Agog code files and before any other includes.  [It is alright to first include
+  an Agog code file that itself first includes AgogCore.hpp]
+  
+  Also see ADebug.hpp - it has many useful defines and structures as well.
+
+  
+  Defines to note in particular:
+
+	  AEX_CATCH_ALL (ADebug.hpp) - if defined, all unknown exceptions are caught after they
+	    are thrown.  See full description at definition.
+  	
+    ASTR_ENABLE_WIDE_CHAR (AString.hpp) - indicates whether functions that use wide
+      characters should be compiled or not.  For example the Nintendo GameCube does not
+      support wide characters.
+      
+    *Automatically defined if A_UNOPTIMIZED is defined
+
+      A_INL_IN_CPP (AgogCore.hpp) - Controls inlining of functions - See definition for
+        full description.
+      
+    *Automatically defined if A_EXTRA_CHECK is defined
+    
+      A_BOUNDS_CHECK (ADebug.hpp) - enable bounds checking on indexable objects
+        - i.e. ensure that index value arguments are within valid index ranges.
+      
+      ADEBUG_COMMANDS (ADebug.hpp) - if defined, 'debug' commands are enabled - A_DPRINT(),
+        A_DBREAK(), and ADEBUG_CODE().  
+    
+      AORPOOL_USAGE_COUNT (AObjReusePool.hpp) - Track the current and maximum number of
+        objects used by the AObjReusePool<> class
+
+      AIDX_PTR_GUARD (AObjReusePool.hpp) - Enable bounds/integrity checks for the AIdxPtr<> class
+
+      AIDX_PTR_STATS (AIndexPointer.hpp) - Enable statistics for tracking/debugging for the
+        AIdxPtr<> class
+
+
+Platform Specific
+
+  Windows 32-bit specific: _WIN32, _LIB, _CRT_SECURE_NO_WARNINGS
+
+    Also these for including window.h stuff in a few places for debugging
+      WIN32_LEAN_AND_MEAN
+      WINVER=0x0500
+      _WIN32_WINDOWS=0x0500
+      _WIN32_WINNT=0x0500
+
+
+=========================================================================================
+Build Targets	[for all projects, not just AgogCore]
+=========================================================================================
+
+               Build Properties
+Target     Checked Optimized CRT Dbg  Use
+---------  ------- --------- -------  -----------------
+Debug         X                 X     General programming
+DebugCRTOpt   X                       General programming with optimized C Runtime
+Developer     X        X              Most project developers [includes tools]
+Shipping               X              User final/shipping/gold version
+
+  - Build Properties:
+     'Checked'   - Extra checking is performed and tool/editor hook ins are present
+     'Optimized' - Fully optimized compile and code is inlined (faster, but harder to debug)
+  - Executables with different build types are appended with -TargetName to tell them apart.
+  - Debug info is included in all builds.  The binaries (exe, lib, and obj files) have no
+    extra info stored in them - all debug info is stored in separate .pdb files.  [The only
+    difference of a binary compiled without debug info is that a path to the .pdb file is
+    stored in the binary, though the binary will still work just fine without the .pdb file
+    present.]
+
+
+Defines that are present for the build properties:
+
+  Property   Defines if present    Defines if not present
+  ---------  ------------------    ----------------------
+  Checked    A_EXTRA_CHECK             
+  Optimized  NDEBUG                A_UNOPTIMIZED
+
+
+Defines that are present for the build targets:
+
+  Target       Defines
+  -----------  --------------
+  Debug        A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG
+  DebugCRTOpt  A_EXTRA_CHECK;A_UNOPTIMIZED
+  Developer    A_EXTRA_CHECK;NDEBUG
+  Shipping     NDEBUG
+
+
+=========================================================================================
+Code Comments & Documentation
+=========================================================================================
+
+These comment task list tokens are used to mark areas of the code that still need work
+or that contain certain gotchas or other information:
+
+  $Note	   - Used in areas of code that contain known gotchas that should be called to
+             the attention of programmers in that area, but that otherwise are working
+             and free of known bugs.
+  $Revisit - Code needs to be looked at again in the future.  Often used for code that
+             only partially meets requirements or that can possibly be rewritten more
+             efficiently or more elegantly.
+  $Vital   - Code needs to be modified as soon as possible.  Often used in areas that are
+             incomplete or have known errors.
+  $HACK	   - Temporary code that does not meet full requirements, is very inefficient or
+             has known bugs.  Code should be replaced as soon as possible
+
+The token should be followed by a dash and the email name of the author making the note
+- it shoud be consistent and different than what the author usually used to indicate
+authorship so that it can be easily searched.  I use "Conan Reis" to indicate authorship
+and "CReis" in comment task list tokens.  For platform specific comments include the
+abbreviated platform name in brackets after the user name (ex: [PC], [PS3], [X360],
+[Wii], [NDS], etc.)
+
+For example:
+
+// $Revisit - CReis Put in auto-parse and ensure that all pointers to this code structure are updated
+

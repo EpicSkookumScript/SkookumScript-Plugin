@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Description Returns a new copy of itself.  Useful to pass this number by value rather
+//             than as a reference.
+// Returns     copy of itself
+// Examples    do_stuff(num.Integer)
+//             !num2:  num1.Integer
+//
+//             do_stuff(num.as_copy)
+//             !num2:  num1.as_copy
+// Also See    as_copy()           
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

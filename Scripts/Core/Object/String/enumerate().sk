@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Description Increments any postfixed number by amount specified.  If the string does
+//             not have a previously postfixed number then increment_by is appended to
+//             the string padded with zeros if necessary as specified by min_digits.
+// Returns     Postfixed value.
+// Arg         increment_by - step value / amount to increment by
+// Arg         min_digits - minimum number of digits to use for postfix value.  If a
+//             previous postfix value is present, its number of digits is used and this
+//             number is ignored.
+// Examples    "test".enumerate    // becomes "test0001"
+//             "test0".enumerate   // becomes "test1"
+//             "test00".enumerate  // becomes "test01"
+//             "test99".enumerate  // becomes "test100"
+//
+//             // To test a string in the workspace window and returning the new string:
+//             str.[enumerate self]
+//              
+// See Also    increment()/++
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Integer increment_by: 1
+  min_digits: 4
+) Integer

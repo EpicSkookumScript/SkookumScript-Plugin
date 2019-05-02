@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Default constructor. Set name to empty string
+//
+// # Returns: itself
+//
+// # Examples:
+//   !name: Name!("Bob")
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(String name) Name
+

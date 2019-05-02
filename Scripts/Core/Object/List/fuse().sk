@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Appends items from lists in variable length group to the end of this list.
+//
+// #Returns: itself
+// #Notes:   This method allows duplicate items.
+// #Examples
+//   {0 "one" 2.0}.appending({3 "four"} {5 "six"})
+//   // list is now {0, "one", 2.0, 3, "four", 5, "six"}
+//---------------------------------------------------------------------------------------
+
+({ThisClass_} lists) ThisClass_
+  [
+  lists.do[append_list(item)]
+  this
+  ]

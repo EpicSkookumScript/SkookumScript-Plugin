@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Prints SkookumScript execution memory pool usage to log.
+//
+// Execution memory is the *working* memory used by structures such as instance objects
+// and invoked coroutines rather than the memory used by the program code.
+// 
+// Returns: Total execution bytes used.
+//---------------------------------------------------------------------------------------
+
+() Integer

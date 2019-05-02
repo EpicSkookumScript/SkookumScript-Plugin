@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Returns a copy of the smaller of the two supplied values.
+//
+// Examples:
+//   !larger: Integer.max(a b)
+//   integer_arg(Integer.max(a b))
+//   integer_arg(max(a b))       // If type known, Integer. can be omitted
+//
+// See: min(), max() - instance OOP version
+//---------------------------------------------------------------------------------------
+
+( Integer num1
+  Integer num2
+) Integer
+
+  //[
+  //if num1 <= num2 [num1!]
+  //  else [num2!]
+  //]

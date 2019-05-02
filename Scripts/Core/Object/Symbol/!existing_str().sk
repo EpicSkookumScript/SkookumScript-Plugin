@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Create symbol from pre-existing symbol string.
+// If the supplied string does not exist as symbol then create a null/empty symbol.
+//
+// Params:
+//   str: string of pre-existing symbol
+//
+// Examples:
+//  Symbol!existing_str("test")
+//
+// See: existing_id()
+//---------------------------------------------------------------------------------------
+
+(String str) 

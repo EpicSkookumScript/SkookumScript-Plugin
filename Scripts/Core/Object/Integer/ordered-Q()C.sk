@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Determines if all the supplied numbers are in order:
+// num1 <= num2 <= ... <= numN
+// 
+// Returns: true if ordered, false if not
+//
+// Examples:
+//   if Integer.ordered?(num1 num2 num3 num4)
+//     [all_good]
+//
+// See: between?()  
+//---------------------------------------------------------------------------------------
+
+({Integer} nums) Boolean
+  [
+  [nums.length <= 1] // treat 0 and 1 item as ordered
+    or
+    [
+    !prev: nums.first!
+    nums.all?[[prev <= item] and [prev := item true]]
+    ]
+  ]

@@ -1,0 +1,39 @@
+//---------------------------------------------------------------------------------------
+// Loops/iterates calling supplied immediate closure code with index 0 to n-1 where n is
+// this Integer and stepping by the supplied step value.
+//
+// The index value is passed as an argument and is exclusive: 0..n-1
+//
+// # Examples
+//   8.do_by 2 [println(idx)]
+//
+//   // Prints
+//   0
+//   2
+//   4
+//   6
+//
+// # Notes:     Use _*() versions for durational iteration.
+// # See:       do(), _do(), do_reverse(), to(), to_pre()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Integer step
+  (Integer idx) code
+)
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  !idx: 0
+  
+  loop
+    [
+    if idx >= this [exit]
+    code(idx)
+    idx += step
+    ]
+  ]  
+  */
+  

@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Value for golden ratio. Also known as divine proportion, golden mean, or golden
+// section (Latin: sectio aurea) - related to the Fibonacci Sequence.
+// Its value is equal to (1 + sqrt(5)) / 2
+//
+// Some twentieth-century artists and architects, including Le Corbusier and Dali, have
+// proportioned their works to approximate the golden ratio?especially in the form of the
+// golden rectangle, in which the ratio of the longer side to the shorter is the golden
+// ratio - believing this proportion to be aesthetically pleasing. The golden ratio
+// appears in some patterns in nature, including the spiral arrangement of leaves and
+// other plant parts.
+//
+// https://en.wikipedia.org/wiki/Golden_ratio
+//
+// Examples:
+//   !golden: Real!golden_ratio
+//
+//   // If type known, Real can be omitted
+//   !golden2: 2.0 * !golden_ratio
+//   32.0.min(!golden_ratio)
+//
+// See: !pi(), !min(), !max(), !meter(), Integer@fibonacci()
+//---------------------------------------------------------------------------------------
+
+() Real 
+  //[1.6180339887498948482045868343656381]

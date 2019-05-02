@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Default constructor.  Initializes r, g, b values to 0.0
+//
+// # Returns: itself
+//
+// # Examples:
+//   !col: Color!
+//
+// # See:       Color!rgb(), Color!xy(). Color!copy()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Color
+

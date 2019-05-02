@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Constructor - Set world position/translation and rotation of transform
+// Author(s)   Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Vector3 translation, Rotation rotation)
+
+  [
+  Transform@!()
+  @translation := translation
+  @rotation := rotation
+  ]
+

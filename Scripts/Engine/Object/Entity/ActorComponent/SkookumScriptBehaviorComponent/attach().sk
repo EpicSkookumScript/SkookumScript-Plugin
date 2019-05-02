@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Attach this component to an actor
+//
+// # Params:
+//   actor:          Actor to attach to
+//   component_name: Name to give to UE4 ActorComponent created for attaching
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Actor actor, Name component_name : Name!none)
+

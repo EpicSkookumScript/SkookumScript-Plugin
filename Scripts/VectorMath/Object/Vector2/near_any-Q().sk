@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Determines if the distance between this vector and any of the supplied points is
+// within the supplied distance.
+//
+// # Returns:
+//   `true` if pos is within the supplied distance of a point in points, `false` if not.
+//
+// # Examples:
+//   do_stuff when vec.near_any?(vec1 vec2 vec3)
+//
+// #Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Real     distance
+  {Vector2} points
+) Boolean
+
+  [
+  !dist_sqr: distance * distance
+
+  points.any?[item.near?(this, dist_sqr)]
+  ]

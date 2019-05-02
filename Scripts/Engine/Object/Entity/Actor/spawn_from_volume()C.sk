@@ -1,0 +1,43 @@
+//---------------------------------------------------------------------------------------
+// Spawn actor of this class type at a random location within the volume
+// IMPORTANT: Make sure your volume contains a BoxCollision component 
+//
+// Params:
+//   volume: actor containing a Box Collision component
+//   owner: optional owner Actor
+//   world_context: optional world context
+//
+// Returns: actor spawned
+//
+// Example:
+//   !bad_guy: Enemy.spawn_from_volume(spawn_volume)
+//
+// See: spawn_at_xform()
+// Author: Shadi Dadenji
+//---------------------------------------------------------------------------------------
+
+( Actor volume
+  Actor owner: Actor!null
+  World world_context: @@world
+) ThisClass_
+
+  [
+  !box_component : volume.component_by_class(BoxComponent.static_class)<>BoxComponent
+
+  //make sure we have a BoxComponent otherwise we can't figure out the extent of the volume   
+  Debug.assert(box_component.valid?, "Volume supplied does not have a Box Component.") 
+
+  !extent : box_component.scaled_box_extent  
+ 
+  !offset : Vector3!
+  offset.@x := MathLib.random_float_in_range(-extent.@x, extent.@x) 
+  offset.@y := MathLib.random_float_in_range(-extent.@y, extent.@y) 
+  //we don't randomize z as we want to spawn the actor on the ground 
+  
+  !location : volume.actor_location + offset.rotate_by(volume.transform.@rotation) 
+
+  !xform : Transform!
+  xform.@translation := location
+    
+  spawn_at_xform(xform owner world_context)
+  ]

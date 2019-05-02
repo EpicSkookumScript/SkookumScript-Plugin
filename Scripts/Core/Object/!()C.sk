@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Class constructor - called when the class is initialized
+//
+// # Examples:  called by system - do not call yourself
+// # Author(s): 
+//---------------------------------------------------------------------------------------
+
+()
+
+  [
+  @@random: Random!
+  
+  // Note that the @@world object is created by the system
+  ]

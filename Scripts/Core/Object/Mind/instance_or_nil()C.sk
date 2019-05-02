@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Get the singleton for 'Mind' class (including any subclass) or nil if one does not
+// exist and assert if there is more than one.
+//
+// Returns: mind singleton or nil (asserts if more than 1)
+//
+// Examples:
+//   ```
+//   Mind.instance_or_nil%do_mind_stuff
+//   ```
+//
+// See: instance(), instance?(), instances_length()
+//---------------------------------------------------------------------------------------
+
+() <ThisClass_|None>
+

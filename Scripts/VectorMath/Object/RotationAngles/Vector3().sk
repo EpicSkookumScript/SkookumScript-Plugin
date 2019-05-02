@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Returns a new Vector3 that is the rotation as a unit vector facing in its direction.
+//
+// # Returns:
+//   new Vector3 that is a unit vector facing in the direction of the RotationAngles
+//
+// # Examples:
+//   rot1.Vector3
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+() Vector3
+

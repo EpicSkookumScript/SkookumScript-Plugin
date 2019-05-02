@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure code with each
+// item as an argument.
+//
+// #Examples
+//   {"here" "are" "some" "words"}.do_reverse[Debug.println(item)]
+//
+//   // Prints
+//   words
+//   some
+//   are
+//   here
+//
+// #See Also   do(), do_idx(), _do()
+// #Notes      Use _*() versions for durational iteration.
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item) code) ThisClass_
+
+  [
+  // $Revisit - CReis Rewrite as C++ call
+  length.do_reverse[code(at(idx))]
+  this  
+  ]

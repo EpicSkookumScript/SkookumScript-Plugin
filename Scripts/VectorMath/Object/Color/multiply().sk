@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// * Returns a new value that is the product of itself and the supplied value.
+//
+// # Params:
+//   operand: amount to multiply each axis vaule by
+//
+// # Returns:
+//   new color that is the product of this color with each axis multiplied by the
+//   supplied value.
+//
+// # Examples:
+//   col2: col1 * 3
+//   col2: col1.multiply(3)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real operand) Color
+

@@ -1,0 +1,28 @@
+//---------------------------------------------------------------------------------------
+// Linear interpolation based on `alpha` between `begin` and `end`.
+// Where 100% `begin` when `alpha` = 0 and 100% `end` when `alpha` = 1.
+//
+// https://en.wikipedia.org/wiki/Linear_interpolation
+// 
+// Params:
+//   begin: starting value
+//   end:   ending value
+//   alpha:
+//     percentage between 0 and 1, though can be above or below and will just give
+//     result that is before `begin` or after `end` accordingly.
+//     Also known as parameter (t).
+//
+// Returns: interpolated value between `begin` and `end`
+//
+// Examples:
+//   !num: Real.lerp(.25 1 5)     // returns 2.0
+//   real_arg(Real.lerp(.25 1 5))
+//   real_arg(lerp(.25 1 5))      // If type known, Real. is inferred
+//
+// See: clamp()
+//---------------------------------------------------------------------------------------
+
+( Integer begin
+  Integer end
+  Real    alpha
+) Integer

@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// `Object` - the root class for all classes.
+//
+// Author(s): Conan Reis
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~
+
+// Set object ID validation type and time:
+//   none:  accept none during compile [used to temporarily disable object ids]
+//   any:   accept any during compile
+//   parse: validate using list during compile
+//   defer: accept any during compile and validate using list in separate pass/run
+//   exist:
+//     validate using list during compile if it exists (parse) - otherwise accept
+//     any during compile and validate using list in separate pass/run (defer)
+//object_id_validate: any
+
+// Create a separate binary file for this class and its subclasses so that they can be
+// loaded to / unloaded from from memory on demand.
+//demand_load: false

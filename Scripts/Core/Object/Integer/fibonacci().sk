@@ -1,0 +1,71 @@
+//---------------------------------------------------------------------------------------
+// Computes the Fibonacci number at this index in the Fibonacci series
+//
+// #Examples
+//   10.fibonacci  // 55
+//   42.fibonacci  // 267914296
+//
+// #Notes
+//   Index values greater than 46 will have integer overflow when using 32-bit integers.
+//       
+// #See        http://skookumscript.com/blog/2016/07-11-fibonacci/
+// #Author(s)  Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() Integer
+
+/* This is implemented in fast C++ though it could have been written in script.
+   Here are two example script implementations.
+   
+  // Recursive
+  [
+  if this < 2 [this] else [[this - 1].fibonacci + [this - 2].fibonacci]
+  ]
+  
+  // Iterative
+  [
+  if this < 2
+    [this]
+  else
+    [
+    !prev: 1
+    !next: 1
+    !sum:  0
+    2.to_pre this
+      [
+      sum  := prev + next
+      prev := next
+      next := sum
+      ]
+      
+    next
+    ]    
+  ]
+  
+  // Optimized
+  // Bind : is faster than assignment :=
+  // loop is faster than to_pre (which uses a closure)
+  // Though best optimiation is to write it in C++
+  [
+  if this < 2
+    [this]
+  else
+    [
+    !prev: 1
+    !next: 1
+    !sum
+    !count: this - 2
+    loop
+      [
+      if count = 0 [exit]
+      count--
+      sum  : prev + next
+      prev : next
+      next : sum
+      ]
+      
+    next
+    ]
+  ]  
+  
+*/

@@ -1,0 +1,34 @@
+//---------------------------------------------------------------------------------------
+// Gets random item from list.
+//
+// Params:
+//   rnd_gen: random number generator to use
+//
+// Return Params:
+//   index_found: random index used
+//
+// Returns: random item
+//
+// Examples:
+//   ```
+//   !letters: {"A" "B" "C" "D"}
+//   !letter:  letters.any(; !idx)
+//   println("letter: " letter ", random idx: " idx)
+//
+//   // Tell random bad guy in list to do something
+//   bad_guys.any._do_something
+//   ```
+//
+// Notes:     The list must not be empty - use `any_or_nil()` if list can be empty.
+// See:       any_or_nil(), at(), first(), last(), find?()
+// Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Random  rnd_gen: @@random
+; Integer index_found  
+) ItemClass_
+
+  [
+  index_found: rnd_gen.uniform_int(length)
+  at(index_found)
+  ]  

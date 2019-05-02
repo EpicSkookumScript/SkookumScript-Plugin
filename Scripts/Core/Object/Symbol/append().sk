@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Appends supplied string to itself [same as add_assign()/+=]
+// Returns     itself
+// Arg         str - string suffix to add to this symbol
+// Examples    sym += "_suffix"  // or sym.add_assign("_suffix")
+// Also See    add_assign(), add(), String@enumerate()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) Symbol

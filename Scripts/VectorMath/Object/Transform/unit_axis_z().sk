@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Get the z-direction of this transform
+//
+// # Returns: Vector3 direction of the z-axis for this transform
+//
+// # Examples:
+//   !dest : some_transform.unit_axis_z * distance // Go up along the transform
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+() Vector3

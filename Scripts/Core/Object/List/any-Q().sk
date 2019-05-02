@@ -1,0 +1,43 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure `test` with
+// each item as an argument and stops with first `test` that returns true.
+//
+// # Returns: `true` if test returns true for any item, otherwise `false`
+//
+// # Examples:
+//   {3 4 5}.any?[item.pow2?]  // true
+//   {3 5 7}.any?[item.pow2?]  // false
+//
+// # See:       do_*(), _do*(), all?()
+// # Notes:     Same as find?() without also optionally returning index.
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item) Boolean test) Boolean
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  !count:   length
+  !idx:     0
+  !result?: false
+  
+  loop
+    [
+    if idx >= count
+        [
+        exit
+        ]
+      test(at(idx))
+        [
+        result?: true
+        exit
+        ]
+
+    idx++
+    ]
+
+  result?
+  ]  
+  */

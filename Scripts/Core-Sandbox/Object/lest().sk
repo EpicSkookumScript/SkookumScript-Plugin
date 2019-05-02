@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Runs code unless test is true.
+//
+// #Examples
+//   lest test? [do_stuff]
+//
+// Same as:
+//   if not test? [do_stuff]
+//
+//   do_stuff unless test?
+//
+//   do_stuff when not test?
+//---------------------------------------------------------------------------------------
+
+( test?
+  () code
+)
+
+  [
+  code() unless test?
+  ]  

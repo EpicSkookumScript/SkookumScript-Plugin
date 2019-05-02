@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Detaches this invoked object from its caller (if it has one) so that it is
+//             essentially "branched" and notifies its caller if it has one.
+// Arg         caller_success - if true it returns to the caller that it completed
+//             successfully and if false it returns to the caller that it failed to
+//             complete.
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Boolean caller_success:  true)
+

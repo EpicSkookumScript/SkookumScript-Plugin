@@ -1,0 +1,30 @@
+//---------------------------------------------------------------------------------------
+// Determines the the multi-valued inverse tangent or four quadrand arc tangent.
+// Also known as `arctan2()` or tan^-1.
+// It takes two arguments y and x, not both equal to zero, representing the coordinates
+// of an arbitrary point (x, y)in the X/Y-plane, excluding the origin. The ratio y/x is
+// interpreted as the tangent of an angle theta, spanned by the X-axis and the ray from
+// the origin to this point. The returned angle in radians is confined to the interval
+// (-pi, pi] and positive for y>0 (upper half-plane).
+//
+// Besides resolving the inconvenience of the principal values of the single value
+// `arctan` not covering all the four quadrants of the X/Y-plane with rays, `atan2`
+// also avoids the problem of division by zero in `arctan(y/0)`, because `atan2(y,0)` is
+// intended to return a valid answer as long as `y~=0`.
+//
+// https://en.wikipedia.org/wiki/Atan2
+// http://mathworld.wolfram.com/InverseTangent.html
+//
+// #Result: angle in radians confined to the interval (-pi, pi]
+//
+// #Examples:
+//   !num: Real.tan(rad)
+//   real_arg(Real.tan(rad))
+//   real_arg(tan(rad))       // Real. is inferred when desired type is known
+//
+// #See: cos(), sin(), asin(), acos(), atan2(), !deg_to_rad(), !rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+( Real y
+  Real x
+) Real

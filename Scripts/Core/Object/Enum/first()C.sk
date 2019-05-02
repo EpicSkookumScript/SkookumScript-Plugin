@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Returns first ordinal enumeration.
+//
+// # Returns: first enumeration
+//
+// # Examples:
+//   // EAxis{none, x, y, z}
+//   println(EAxis.first)  // EAxis.@@none
+//
+// # See: at(), index(), first()
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+
+  [
+  at(0)
+  ]

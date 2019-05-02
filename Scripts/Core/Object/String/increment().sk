@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Description Increments any postfixed number by 1 and keeps the same number of digits
+//             [unless the increment cannot be displayed without adding another digit].
+//             If the string does not have a previously postfixed number then 0001 is
+//             appended.
+// Returns     itself
+// Examples    "test"++    // becomes "test0001"
+//             "test0"++   // becomes "test1"
+//             "test00"++  // becomes "test01"
+//             "test99"++  // becomes "test100"
+// See Also    enumerate()             
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+
+  [
+  enumerate
+  this
+  ]

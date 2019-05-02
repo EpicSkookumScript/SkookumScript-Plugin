@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Description Set updater class hook condition - only run hooks when updater (generally
+//             the originating script of a command) of a method/response is an actor of
+//             the specified class (or subclass if subclass_check is true).
+//             [The enable state of the hook remains unchanged.]
+// Arg         hook_name - name of hook to modify condition
+// Arg         updater_class - class to trigger on when it is the updater (or <Mind> to
+//             clear this condition)
+// Arg         subclass_check - if true the subclasses of updater_class are checked as 
+//             well as class_p and if false only class_p is checked.
+// Examples    Debug.hook_condition_updater_class('TraceRM', MissionX, false)
+// See Also    other hook_condition_*() methods
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol hook_name, <Mind> updater_class, Boolean subclass_check)
+

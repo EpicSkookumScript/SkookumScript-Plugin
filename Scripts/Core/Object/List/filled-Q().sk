@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// Returns true if there are any items/elements in the list otherwise it returns false.
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean

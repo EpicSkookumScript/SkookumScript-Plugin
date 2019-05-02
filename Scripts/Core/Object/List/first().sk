@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Returns item/element at first (zeroth) index position.
+// Examples    {0, "one", 2.0}.first() // returns 0
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() ItemClass_
+
+

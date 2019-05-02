@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Convert this string to an Integer
+//
+// Examples:
+//  str.Integer
+//  str>>Integer
+//
+// See: parse_int(), int_radix(), int_binary(), int_octal(), int_hex()     
+//---------------------------------------------------------------------------------------
+
+() Integer
+

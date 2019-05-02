@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Create a string version of this symbol's unique identifier value  - not a translation
+// - just the id as a number in the form ·12345678·
+//
+// #Note
+//   · is the "interpunct" character or "middle dot".  Type via Alt+0183. It was chosen
+//   to be somewhat unique to aid in parsing it in output logs and for its aesthetics.
+//   [It may change when SkookumScript is updated to use Unicode.]
+//
+// #See Also   id(), String()
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+

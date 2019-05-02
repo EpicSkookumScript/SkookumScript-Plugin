@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// - Description Appends item/element to the end of the list.
+// - Notes       This method allows duplicate items.
+// - Examples    {0, "one", 2.0}.append("three")  // list becomes {0, "one", 2.0, "three"}
+// - Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ItemClass_ item)
+// Returns itself
+ThisClass_
+
+

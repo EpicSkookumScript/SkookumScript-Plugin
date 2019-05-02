@@ -1,0 +1,14 @@
+// Copy constructor
+//
+// #Examples
+//   !list1: {1 2 3 4}
+//   !list2: list1!      // Recommended shortcut - same as code below
+//   !list3: list1!copy
+//   !list4: List{Integer}!copy(val1)
+//   !list5: List!copy(val1)  // Returns list of type List{Object} rather than List{Integer}
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(List{ItemClass_} list)
+

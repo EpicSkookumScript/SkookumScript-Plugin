@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Converts to Integer representation of itself - 0 if false and 1 if true.
+//
+// # Examples
+//   value?>>Integer  // operator version
+//   value?.Integer   // method version
+//
+// # See:   Integer.Boolean()
+// # Notes: This is often done in other languages as auto-coercion.
+//---------------------------------------------------------------------------------------
+
+() Integer
+

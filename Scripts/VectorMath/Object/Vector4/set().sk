@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Sets the x, y, z, and w values to new values
+//
+// # Params:
+//   x: new x-axis value
+//   y: new y-axis value
+//   z: new z-axis value
+//   w: new w-axis value
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec.xyzw_set(1 2 3)
+//
+// #See Also
+//   x_set(), y_set(), z_set(), w_set(), x(), y(), z(), w(), zero()
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real x, Real y, Real z, Real w) Vector4
+

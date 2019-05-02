@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Converts supplied angle in degrees to angle in radians (rad).
+// 
+// Params:
+//   degrees: degree value to convert to radians
+//
+// Returns: value in radians
+//
+// Examples:
+//   !deg: 180.0  
+//   !rad: Real.deg_to_rad(deg)
+//
+//   // If type known, Real. can be omitted
+//   !value: 2.0 * deg_to_rad(deg)
+//   value.min(deg_to_rad(deg))
+//
+// See: !min(), !max(), !meter(), !golden_ratio(), rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+(Real degrees) Real
+  //[degrees * !pi / 180]

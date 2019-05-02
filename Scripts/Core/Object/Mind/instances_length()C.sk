@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Get the number of mind object instances derived from this class and all subclasses.
+//
+// Returns: Number of all instances of this class
+// Examples:
+//   ```
+//  !count:  Mind.instances_length
+//  ```
+//
+// See: instance(), instance?(), instance_or_nil()
+//---------------------------------------------------------------------------------------
+
+() Integer
+

@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   col: color to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   col1 := col2
+//   col1.assign(col2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Color col) Color
+

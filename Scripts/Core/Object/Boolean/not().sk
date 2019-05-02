@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Returns a new Boolean value that is the negation of the current value
+// - if this is true it returns false, if it is false it returns true.
+//
+// # Returns: new negated value
+// # Examples:
+//   not value?  // operator version
+//   value?.not  // method version
+//
+// # Notes:
+//   this  | result
+//   ------+-------
+//   false | true
+//   true  | false
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

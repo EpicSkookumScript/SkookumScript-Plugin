@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// - Description
+// Removes all *equivalent* items - exact same object, not necessarily logically equal (=)
+// - in specified list from this list.
+//
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+(List list)
+// Returns itself
+ThisClass_
+
+

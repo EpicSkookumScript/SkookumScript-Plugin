@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// -= Subtracts supplied value from itself
+//
+// # Params:
+//   vec: vector to subtract
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec1 -= vec2
+//   vec1.subtract_assign(vec2)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector4 vec) Vector4
+

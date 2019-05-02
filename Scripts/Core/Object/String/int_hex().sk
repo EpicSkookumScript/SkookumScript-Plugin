@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Convert all or initial substring of this string to an Integer using hexadecimal /
+// base 16.
+// 
+// Returns: Integer value of entire string or a substring
+//
+// Examples:
+//   "2a".int_hex  // returns 42
+//
+// See: Integer(), int_radix(), int_binary(), int_octal()
+//---------------------------------------------------------------------------------------
+
+() Integer
+
+  [
+  parse_int(, 16)
+  ]

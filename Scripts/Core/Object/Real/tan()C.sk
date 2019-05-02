@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Determines the tangent of the supplied angle in radians - the ratio of the length of
+// the opposite side to the length of the adjacent side of a right triangle. Called
+// tangent because it can be represented as a line segment tangent to the circle
+// inscribed with the right trangle, that is the line that touches the circle.
+//
+// https://en.wikipedia.org/wiki/Trigonometric_functions#tan
+// http://mathworld.wolfram.com/Tangent.html
+//
+// #Params:
+//   rad: angle in radians
+//
+// #Result: the tangent
+//
+// #Examples:
+//   !num: Real.tan(rad)
+//   real_arg(Real.tan(rad))
+//   real_arg(tan(rad))       // Real. is inferred when desired type is known
+//
+// #See: cos(), sin(), asin(), acos(), atan2(), !deg_to_rad(), !rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+(Real rad) Real

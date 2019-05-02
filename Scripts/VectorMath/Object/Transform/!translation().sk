@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Constructor - Set world position/translation of transform
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector3 translation)
+
+  [
+  Transform@!()
+  @translation := translation
+  ]
+

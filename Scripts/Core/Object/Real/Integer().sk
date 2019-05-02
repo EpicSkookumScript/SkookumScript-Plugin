@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Returns integer number representation of itself rounded to nearest integer.
+// 
+// #Returns: itself rounded to an integer
+//---------------------------------------------------------------------------------------
+
+() Integer
+

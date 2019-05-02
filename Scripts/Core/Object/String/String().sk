@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Returns string representation of itself - defaulting to class name if
+//             there isn't a more appropriate representation
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+
+// The atomic C++ is a bit faster, but it is equivalent to:
+// [ this ]

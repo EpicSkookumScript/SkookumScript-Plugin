@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// Abort all coroutines currently using this object as their scope
+//
+// #Author(s)   Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Boolean success? : false)

@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Description Creates a new empty list of the same type and returns it.
+// Returns     new empty list
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

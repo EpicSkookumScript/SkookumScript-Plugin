@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Gets a component of this class type from the specified actor object with the specified
+// tag name. It assumes that there is at least one matching component.
+// 
+// Params:
+//   owner: actor to get component from
+//   tag: name of tag to match
+//
+// Returns: matching component
+//
+// Examples:
+//  !capsule: CapsuleComponent.get_from_tag(owner "TagName">>)
+//  println(capsule.component_velocity)
+//
+// See: from(), list_from(), list_from_tag()
+//---------------------------------------------------------------------------------------
+
+( Actor owner
+  Name  tag
+) ThisClass_

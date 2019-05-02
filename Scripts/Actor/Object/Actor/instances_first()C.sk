@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Get the first actor instance of this class.
+// Returns     First actor instance - asserts if this class has no instances
+// Examples    !guy: Character.named_fist
+//             guy.do_character_stuff
+//
+// See Also    named(), find_instance(), find_named()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

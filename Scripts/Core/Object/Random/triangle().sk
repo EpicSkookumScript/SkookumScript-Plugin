@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0.0f and 1.0f with a triangle
+//             shaped distribution - i.e. more likely to get numbers in the middle of
+//             the range.
+// Returns     a psuedo-random number between 0.0f and 1.0f
+// Examples    num: random.triangle
+// See Also    operator(), uniform(), normal(), up_slope(), down_slope(), thorn(),
+//             nose(), and the integer versions of the same methods
+// Notes       It is relatively efficient for a non-constant distribution.
+//             It has a distribution that looks like:
+//               |   /\   |
+//               |  /  \  |
+//               | /    \ |
+//               |/      \|
+//              0.0f     1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

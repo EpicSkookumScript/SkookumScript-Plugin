@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Converter to a string representation of itself
+//
+// # Returns: itself as a string
+//
+// # Examples:
+//   !str1: vec.String
+//   !str2: vec>>String  // only converts vec if it needs to
+//
+// # Notes:
+//   The string will be in the form of "(1.1, 2.2, 3.3)" and it will use scientific
+//   notation if it is shorter.
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+

@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Test coroutine
+//---------------------------------------------------------------------------------------
+
+()
+
+  [
+  Debug.println("Member: Master._test_sequence() - Mind instance constructor called.")
+  _wait(0.25)
+  Debug.print("\nStarting _test_sequence()...\n")
+  branch [ _test(1) ]
+  _wait(3)
+  Debug.print("Starting another sequence...\n")
+  branch [ _test(0.5) ]
+  _wait(5)
+  Debug.print("Ending _test_sequence()...\n")
+  _test
+  ] 
+

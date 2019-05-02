@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   col: color to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !col1: Color!rgb(1 2 3)
+//   !col2: col1!             // Recommended shortcut - same as code below
+//   !col3: col1!copy
+//   !col4: Color!copy(col1)
+//
+// # See:       Color!(), Color!rgb()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Color col) Color
+

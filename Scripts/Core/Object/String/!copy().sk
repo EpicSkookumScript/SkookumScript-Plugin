@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// #Examples
+//   !val1: "SomeString"
+//   !val2: val1!      // Recommended shortcut - same as code below
+//   !val3: val1!copy
+//   !val4: String!copy(val1)
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String source)
+
+

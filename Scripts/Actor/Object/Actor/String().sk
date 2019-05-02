@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Description Returns string representation of itself
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+
+// Script version
+//  [
+//  // Creates string in the form: 'name' <Class>
+//  "'".
+//    [
+//    append(Debug.sym_to_str(name)  // 'name
+//    append("' <")
+//    append(Object@String)              // <class name>
+//    append(">")
+//    ]
+//  ]

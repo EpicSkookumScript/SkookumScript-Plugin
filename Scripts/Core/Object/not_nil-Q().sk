@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Determines if this object is not the 'nil' object
+//
+// #Examples
+//  if obj.not_nil? [this_if_not_nil] else [this_if_nil]
+//
+//  obj.do_stuff when obj.not_nil?
+//
+//  obj%do_stuff  // Same as above
+//
+// #See Also    nil?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+
+  [
+  true
+  ]

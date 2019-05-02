@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Description Returns a new version of this value that is bit shifted down by the number
+//             of bits supplied.
+//             The original number remains unchanged.
+// Returns     new version of this value bit shifted down
+// Examples    // essentially 32/(2^2) = 32/4 = 8
+//             // 32 >> 2 in C++
+//             32.bit_shift_down(2)
+//             do_stuff(num.bit_shift_down(3))
+//             num := num.bit_shift_down(3)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer bits) Integer
+

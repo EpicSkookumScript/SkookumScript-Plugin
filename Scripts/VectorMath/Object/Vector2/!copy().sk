@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   vec: vector to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !vec1: Vector2!xyz(1 2 3)
+//   !vec2: vec1!             // Recommended shortcut - same as code below
+//   !vec3: vec1!copy
+//   !vec4: Vector2!copy(vec1)
+//
+// # See:       Vector2!(), Vector2!xyz(), Vector2!xy()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector2 vec) Vector2
+

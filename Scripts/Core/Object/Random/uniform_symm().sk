@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between -1.0f and +1.0f with a uniform
+//             distribution - i.e. each number in the range is just as likely as any
+//             other.
+// Returns     a psuedo-random number between -1.0f and +1.0f
+// Examples    num: random.uniform_symm
+// See Also    operator(), triangle(), normal(), up_slope(), down_slope(), thorn(),
+//             nose(), and the integer versions of the same methods
+// Notes       The uniform distribution generator is faster than the algorithms for
+//             other distributions.
+//             It has a distribution that looks like:
+//               |          |
+//               |__________|
+//               |          |
+//               |          |
+//             -1.0f       1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

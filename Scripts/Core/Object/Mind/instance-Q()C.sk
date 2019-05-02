@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Determine if this 'Mind' class (including any subclass) has a singleton - i.e. just
+// one instance.
+//
+// Returns: true if singleton or false if 0 or more than one of this mind type
+//
+// Examples:
+//   ```
+//   if Mind.instance?
+//     [
+//     Mind.instance.do_mind_stuff
+//     ]
+//   ```
+//
+// See: instance(), instance_or_nil(), instances_length()
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Description Set invoked method/response caller hook condition - only run hooks when
+//             this particular invoked method/response is in the call stack - i.e. only
+//             run when a call is in the same "thread" as this call.
+//             Once the invoked method/response goes out of scope this hook will auto-
+//             disable since it will never activate.
+//             [The enable state of the hook remains unchanged.]
+// Arg         hook_name - name of hook to modify condition
+// Arg         caller - invoked method or response to look in the call stack for
+// Examples    Debug.hook_condition_invoked_caller('TraceRM', this_code)
+// See Also    other hook_condition_*() methods
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol hook_name, InvokedContextBase caller)
+

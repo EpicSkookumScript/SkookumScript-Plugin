@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Functional verseion of clamp - Return number based on `value` that is inclusively
+// between the supplied min and max values and if `value` is over or under then use min
+// or max - whichever it is closest to.
+//
+// #Returns: clamped value
+//
+// #Examples:
+//   !value:   11
+//   !clamped: Integer.clamp(num 1 10)  // returns 10
+//   integer_arg(clamp(num 1 10)        // Integer. is inferred when desired type is known
+//
+// See: between?(), Integer@clamp()
+//---------------------------------------------------------------------------------------
+
+( Integer value
+  Integer min_value
+  Integer max_value
+) Integer
+

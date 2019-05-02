@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Get the instantiated actors derived from each of the classes passed as arguments and
+// store them all in a new list with items of this class type.
+//
+// Returns:  List of this class type containing all instances of the supplied classes
+// See:      instances(), instances_first()
+// Examples:
+//   // Get all the enemies, heroes and target points
+//   // and put them in a list of type List{Actor}
+//   Actor.instances_from(Enemy Hero TargetPoint)
+//   // Get all the enemies and heroes and put
+//   // them in a list of type List{Pawn}
+//   Pawn.instances_from(Enemy Hero)
+//---------------------------------------------------------------------------------------
+
+({<ThisClass_>} classes) List{ThisClass_}
+  [
+  !list: ThisClass_{}
+  classes.do[list.append_list(item.instances)]
+  list
+  ]

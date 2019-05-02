@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// [Same as >= operator]
+// Returns true if this object is alphabetically greater than or equal to the supplied
+// object. Character comparison is case sensitive.
+//
+// #Examples
+//   str1 >= str2  // or str1.greater_or_equal?(str2)
+//
+// #See Also
+//   =   equal?()
+//   ~=  not_equal?()
+//   >   greater?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) Boolean
+

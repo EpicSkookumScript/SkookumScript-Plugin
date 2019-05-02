@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Swaps the index locations of two items/elements.
+// Examples    {0, "one", 2.0}.swap(1, 2) // changes list to {0, 2.0, "one"}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer index1, Integer index2)
+// Returns itself
+ThisClass_
+
+
+

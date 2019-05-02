@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Returns string representation of itself - defaulting to class name if
+//             there isn't a more appropriate representation
+// Examples    
+// See Also    
+// Notes       
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+
+

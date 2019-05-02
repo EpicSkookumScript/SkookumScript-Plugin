@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Assignment - equivalent to operator :=
+// Returns     itself
+// Examples    str := "hello"  // or str.assign("hello")
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) String
+

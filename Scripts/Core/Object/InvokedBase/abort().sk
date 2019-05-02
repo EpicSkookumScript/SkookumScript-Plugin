@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Description Aborts this invoked object and notifies its caller if it has one.
+// Arg         caller_success - if true it returns to the caller that it completed
+//             successfully and if false it returns to the caller that it failed to
+//             complete.
+// Arg         abort_subcalls - if true abort all sub-calls and if false detach all
+//             sub-calls.
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Boolean caller_success:  true,
+  Boolean abort_subcalls:  true
+)
+

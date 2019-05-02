@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Gets a list of components of this class type from the specified actor object.
+// 
+// Params:
+//   owner: actor to get component from
+//
+// Returns: list of matching components
+//
+// Examples:
+//  !capsules: CapsuleComponent.get_list_from(owner)
+//  capsules.do[println(item.component_velocity)]
+//
+// See: from(), from_tag(), list_from_tag()
+//---------------------------------------------------------------------------------------
+
+( Actor owner) List{ThisClass_}

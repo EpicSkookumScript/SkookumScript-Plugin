@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// * Returns a new value that is the product of itself and the supplied value.
+//
+// # Params:
+//   operand: amount to multiply each axis vaule by
+//
+// # Returns:
+//   new vector that is the product of this vector with each axis multiplied by the
+//   supplied value.
+//
+// # Examples:
+//   vec2: vec1 * 3
+//   vec2: vec1.multiply(3)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real operand) Vector4
+

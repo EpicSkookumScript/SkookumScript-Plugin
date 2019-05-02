@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// - Description
+// operator +  In-place concatenation.  Appends specified list at its end and returns
+// itself.
+//
+// - Notes
+// This method allows duplicate items.
+//
+// - Examples  {0, "one", 2.0} += {"three", 4}  // returns {0, "one", 2.0, "three", 4}
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ list)
+//Itself concatenated with 'list'
+ThisClass_
+

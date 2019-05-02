@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Inserts the supplied item/element before the specified index position.
+// Examples    {0, "one", 2.0}.insert("insert", 1)
+//               changes list to {0, "insert", "one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ItemClass_ item, Integer index:  0)
+// Returns itself
+ThisClass_
+
+
+

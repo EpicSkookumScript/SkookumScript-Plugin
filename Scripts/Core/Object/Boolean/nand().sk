@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------------------
+// Returns true if either this or operand? are false.
+//
+// Note, this method uses short-circuit evaluation (or lazy evaluation)
+// - if this Boolean is false then the operand? expression will not even be evaluated.
+//
+// # Params:
+//   operand?: Boolean expression to evaluate only if this Boolean object is true
+//
+// # Returns: true if either this or operand? are false, false if not
+// # Examples:
+//   value1? nand value2?   // operator form
+//   value1?.nand(value2?)  // method form
+//
+// # Notes:
+//   this  | operand | result
+//   ------+---------+-------
+//   false | false*  | true
+//   false | true*   | true
+//   true  | false   | true
+//   true  | true    | false
+//
+//   * not even evaluated
+//---------------------------------------------------------------------------------------
+
+(operand?) Boolean
+

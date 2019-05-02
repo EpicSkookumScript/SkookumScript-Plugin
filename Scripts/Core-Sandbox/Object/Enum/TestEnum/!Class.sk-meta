@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// TestEnum - example Enum class
+//
+// Author(s): Conan Reis
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~
+
+// Create a separate binary file for this class and its subclasses so that they can be
+// loaded to / unloaded from from memory on demand.
+demand_load: false
+
+// Allow object id look-up of named instances for this class
+object_id_lookup: false
+
+// Set object id validation type and time:
+//   none:  accept none during compile [used to temporarily disable object ids]
+//   any:   accept any during compile
+//   parse: validate using list during compile
+//   defer: accept any during compile and validate using list in separate pass/run
+//   exist:
+//     validate using list during compile if it exists (parse) - otherwise accept
+//     any during compile and validate using list in separate pass/run (defer)
+object_id_validate: any

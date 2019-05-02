@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   xform: transform to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !xform1: Transform!
+//   !xform2: xform1!             // Recommended shortcut - same as code below
+//   !xform3: xform1!copy
+//   !xform4: Transform!copy(xform1)
+//
+// # See:       Transform!()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Transform xform) Transform
+

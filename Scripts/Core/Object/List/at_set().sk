@@ -1,0 +1,33 @@
+//---------------------------------------------------------------------------------------
+// Index operator {}
+// Replaces item at specified index position to supplied item reference.
+// Can be used as operator `list{idx}: obj` or as method `list.at_set(idx obj)`.
+//
+// # Params:
+//   index:
+//     0-based index position of item reference to replace. If a negative index is
+//     supplied, then the index is counted from the end of the list. -1 is last item,
+//     -2 is second to last item, etc.
+//   item:
+//     item reference to replace existing item reference with. It must be an object class
+//     type that is compatible with the current list item type.
+//
+// # Returns: itself
+//
+// # Examples:
+//   !list: {0 "one" 2.0 'three'}
+//   list{1}: "ONE"      // {0 "ONE" 2.0 'three'}
+//   list.at_set(0 nil)  // {nil "ONE" 2.0 'three'}
+//   list{-1}: 'Three'   // {nil "ONE" 2.0 'Three'}
+//
+// # See: at(), items_set(), swap()
+//---------------------------------------------------------------------------------------
+
+( Integer    index
+  ItemClass_ item
+) ThisClass_
+
+
+
+
+

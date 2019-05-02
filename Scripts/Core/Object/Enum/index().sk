@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Gets the ordinal index position of this enumeration.
+// 
+// # Returns: ordinal index position of this enumeration
+//
+// # Examples:  
+//   // EAxis{none, x, y, z}
+//   println(EAxis.@@none.index)  // 0
+//   println(EAxis.@@x.index)     // 1
+//   println(EAxis.@@z.index))    // 3
+//
+// # See: at(), first(), last()
+//---------------------------------------------------------------------------------------
+
+() Integer 
+  // Looks similar to this internally:
+  //[
+  //this>>Integer
+  //]

@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Callback invoked just _before_ this component is detached from its actor
+// Meant to be overridden in your custom subclass
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+()
+  [
+  ]

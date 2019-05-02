@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Swap the content value of this number with the supplied number.
+// 
+// Params:
+//   num: number to take value from and give current value to
+//
+// Returns: itself
+//
+// Examples:
+//   num1.swap(num2)
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+  
+// Equivalent to:
+
+// [
+// !old_num: this!
+// this := num
+// num  := old_num
+// this
+// ]

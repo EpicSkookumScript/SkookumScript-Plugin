@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Integer
+// Signed and currently 32-bit (-2147483648 to 2147483647) - equivalent to int32_t in C++
+// - may be changed to 64-bit in near future.
+//
+// See: Real
+// Author(s): Conan Reis
+

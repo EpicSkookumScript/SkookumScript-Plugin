@@ -1,0 +1,56 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure `test` with
+// each item as an argument and stops with first `test` that returns true.
+//
+// # Params:
+//   random: random number generator to use
+//
+// # Return Params:
+//   index_found: index where `test` returned true or `this.length` if not found
+//
+// # Returns: `true` if test returns true for any item, otherwise `false`
+//
+// # Examples:
+//   !idx
+//   !found?: {3 4 5}.find?[item.pow2?]; idx
+//   println("found?: " found? ", idx: " idx) // found?: true, idx: 1
+//   found?: {3 5 7}.find?[item.pow2?]; idx
+//   println("found?: " found? ", idx: " idx) // found?: false, idx: 3
+//
+// # See:       do_*(), _do*(), all?()
+// # Notes:     Same as any?() and also optionally returns index.
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( (ItemClass_ item) Boolean test
+; Integer index_found  
+) Boolean
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  !count:   length
+  !idx:     0
+  !result?: false
+  
+  loop
+    [
+    if idx >= count
+        [
+        exit
+        ]
+      test(at(idx))
+        [
+        result?: true
+        exit
+        ]
+
+    idx++
+    ]
+
+  index_found: idx
+  result?
+  ]
+  */
+    

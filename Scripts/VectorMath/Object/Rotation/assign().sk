@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   rot: rotation to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   rot1 := rot2
+//   rot1.assign(rot2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Rotation rot) Rotation
+

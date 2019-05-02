@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Logical equality - same as = operator. Returns true if both objects are logically the
+// same - though they may be different objects.
+//
+// # Params:
+//   rot: RotationAngles to compare
+//
+// # Returns: true if equal false if not
+//
+// # Examples:
+//   obj1 = obj2
+//   obj1.equal?(obj2)
+//
+// # See:
+//   ~=  not_equal?()
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(RotationAngles rot) Boolean
+

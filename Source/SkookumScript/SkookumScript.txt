@@ -1,0 +1,101 @@
+=========================================================================================
+Agog Labs C++ library.
+Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+=========================================================================================
+
+
+This is the SkookumScript library.
+
+It is used in both a Game Engine and in SkookumScript Tools such as the SkookumScript IDE.
+It is for the most part platform independant.
+
+
+=========================================================================================
+Library Dependencies
+=========================================================================================
+
+  AgogCore.lib (C Runtime (CRT) [Multi-threaded DLL])
+
+
+=========================================================================================
+Preprocessor defines
+=========================================================================================
+
+Defines:
+ 
+  See "Build Targets" below.
+
+  Each of the libraries that this library is depandant on should have their doc files
+  examined to note any defines or other useful info.
+
+
+  SKOOKUM = # [See below]
+
+  These are the possible flags that may be set for the SKOOKUM define:
+    1  - [SK_DEBUG]     Include extra SkookumScript debugging code.
+    2  - [SK_CODE_IN]   Include ability to parse SkookumScript string code into internal data strucutres.
+    4  - [SK_CODE_OUT]  Include ability to generate SkookumScript string code from internal data structures.
+    8  - [SK_COMPILED_IN]  Include ability to read in SkookumScript compiled binary code and convert it to internal data structures.
+    16 - [SK_COMPILED_OUT] Include ability to generate SkookumScript compiled binary code from internal data structures.
+
+  The SS_* flags are defined in Sk.hpp
+
+  Here are some common configuration values for the SKOOKUM define:
+
+    SkookumScript IDE - and tools that need to generate compiled binary code
+
+      SKOOKUM = 31  [SK_DEBUG | SK_CODE_IN | SK_CODE_OUT | SK_COMPILED_IN | SK_COMPILED_OUT]
+
+    Game - and other tools that do not to generate compiled binary code
+
+      SKOOKUM = 15  [SK_DEBUG | SK_CODE_IN | SK_CODE_OUT | SK_COMPILED_IN]
+
+    Game (Release / Final) - provided game doesn't allow new code on the fly and the compiled binary code is well debugged
+
+      SKOOKUM = 8   [SK_COMPILED_IN]
+
+
+Platform Specific Defines:
+
+  Windows specific: _WIN32, _LIB
+
+
+=========================================================================================
+Build Targets	[for all projects]
+=========================================================================================
+
+               Build Properties
+Target     Checked Optimized CRT Dbg  Use
+---------  ------- --------- -------  -----------------
+Debug         X                 X     General programming
+DebugCRTOpt   X                       General programming with optimized C Runtime
+Developer     X        X              Most project developers [includes tools]
+Shipping               X              User final/shipping/gold version
+
+  - Build Properties:
+     'Checked'   - Extra checking is performed and tool/editor hook ins are present
+     'Optimized' - Fully optimized compile and code is inlined (faster, but harder to debug)
+  - Executables with different build types are appended with -TargetName to tell them apart.
+  - Debug info is included in all builds.  The binaries (exe, lib, and obj files) have no
+    extra info stored in them - all debug info is stored in separate .pdb files.  [The only
+    difference of a binary compiled without debug info is that a path to the .pdb file is
+    stored in the binary, though the binary will still work just fine without the .pdb file
+    present.]
+
+
+Defines that are present for the build properties:
+
+  Property   Defines if present    Defines if not present
+  ---------  ------------------    ----------------------
+  Checked    A_EXTRA_CHECK             
+  Optimized  NDEBUG                A_UNOPTIMIZED
+
+
+Defines that are present for the build targets:
+
+  Target       Defines
+  -----------  --------------
+  Debug        A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG;SKOOKUM=31
+  DebugCRTOpt  A_EXTRA_CHECK;A_UNOPTIMIZED;SKOOKUM=31
+  Developer    A_EXTRA_CHECK;NDEBUG;SKOOKUM=31
+  Shipping     NDEBUG;SKOOKUM=8

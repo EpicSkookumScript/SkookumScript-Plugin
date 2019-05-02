@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Determines the sine of the supplied angle in radians - the ratio of the length of the
+// side that is opposite that angle to the length of the longest side (the hypotenuse) of
+// a right triangle
+// 
+// https://en.wikipedia.org/wiki/Trigonometric_functions#sine
+// http://mathworld.wolfram.com/Sine.html
+//
+// #Params:
+//   rad: angle in radians
+//
+// #Result: -1 <= x <= 1
+//
+// #Notes: With a maximum error of about 2.75e-5 at sin(45 degrees)
+//
+// #Examples:
+//   !num: Real.sin(rad)
+//   real_arg(Real.sin(rad))
+//   real_arg(sin(rad))       // Real. is inferred when desired type is known
+//
+// #See: cos(), tan(), asin(), acos(), atan2(), !deg_to_rad(), !rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+(Real rad) Real

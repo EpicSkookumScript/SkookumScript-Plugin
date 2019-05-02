@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determines if this class is the same class or a subclass/child/descendant of (derived 
+// from) the supplied 'class'
+// 
+// #Examples
+//  if class1.class_of?(MyClass) [do_my_class_stuff]
+//
+// #See Also    subclass_of?(), superclass_of?(), class_actor?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // class to check
+  <Object> class
+  // true if same class or subclass of 'class', false if not
+) Boolean

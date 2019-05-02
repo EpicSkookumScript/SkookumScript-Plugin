@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description += Appends supplied string to itself
+// Returns     itself
+// Examples    str += "hello"  // or str.add_assign("hello")
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) String
+

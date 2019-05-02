@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description / Returns a new value that is itself divided by the supplied value.
+// Returns     new value that is itself divided by the supplied value.
+// Examples    num / 3.0  // or num.divide(3.0)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

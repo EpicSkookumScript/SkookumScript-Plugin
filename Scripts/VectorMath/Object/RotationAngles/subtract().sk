@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// - Returns a new RotationAngles that is itself minus the supplied RotationAngles.
+//
+// # Params:
+//   rot: RotationAngles to subtract
+//
+// # Returns:
+//   new RotationAngles that is itself minus the supplied RotationAngles.
+//
+// # Examples:
+//   rot1 - rot2
+//   rot1.subtract(rot2)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(RotationAngles rot) RotationAngles
+

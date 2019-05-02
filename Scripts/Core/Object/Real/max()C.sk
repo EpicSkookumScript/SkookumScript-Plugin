@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Returns a copy of the larger of the two supplied values.
+//
+// Examples:
+//   !larger: Real.max(a b)
+//   real_arg(Real.max(a b))
+//   real_arg(max(a b))       // If type known, Real. can be omitted
+//
+// See: min(), max() - instance OOP version
+//---------------------------------------------------------------------------------------
+
+( Real num1
+  Real num2
+) Real
+
+  //[
+  //if num1 >= num2 [num1!]
+  //  else [num2!]
+  //]

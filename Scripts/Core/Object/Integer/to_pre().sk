@@ -1,0 +1,60 @@
+//---------------------------------------------------------------------------------------
+// Loops/iterates calling supplied immediate closure code with index n to last *exclusive*
+// where n is this Integer. The index will increase or decrease depending on the values
+// of this and last. If n and last are equal then no call is made.
+//
+// The index value is passed as an argument and is exclusive: n..[last-1]
+//
+// # Examples:
+//   2.to_pre 5 [println(idx)]
+//
+//   // Prints
+//   2
+//   3
+//   4
+//
+//   5.to_pre 2 [println(idx)]
+//
+//   // Prints
+//   5
+//   4
+//   3
+//
+// # Notes:     Use _*() versions for durational iteration.
+// # See:       to(), do(), do_by(), do_reverse(), _do()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Integer last
+  (Integer idx) code
+)
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  !idx: this!
+  
+  if this <= last
+    [
+    // increasing index
+    loop
+      [
+      if idx >= last [exit]
+      code(idx)
+      idx++
+      ]
+    ]
+  else
+    [
+    // decreasing index
+    loop
+      [
+      if idx <= last [exit]
+      code(idx)
+      idx--
+      ]
+    ]
+  ]
+  */
+    

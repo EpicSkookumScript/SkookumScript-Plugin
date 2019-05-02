@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Returns true if empty - i.e. string length is 0
+//
+// #Examples
+//   if str.empty? [fill(str)]
+//
+//   fill(str) when str.empty?
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+// true if empty, false if not
+() Boolean
+

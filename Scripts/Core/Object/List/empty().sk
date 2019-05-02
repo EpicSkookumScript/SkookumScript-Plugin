@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Removes all items/elements from list.
+// Notes       The name "empty" is an alternate to using "remove_all"
+// Examples    {0, "one", 2.0}.empty  // list becomes {}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+()
+// Returns itself
+ThisClass_
+

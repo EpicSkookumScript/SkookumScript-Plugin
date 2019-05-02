@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Returns the absolute value of the specified number.
+// The absolute value or modulus |num| is the non-negative value of num without regard to
+// its sign. Namely, |num| = num for a positive num, |num| = -num for a negative num (in
+// which case -num is positive), and |0| = 0.
+//
+// The absolute value of a number may be thought of as its distance from zero.
+//
+// https://en.wikipedia.org/wiki/Absolute_value
+// http://mathworld.wolfram.com/AbsoluteValue.html
+//
+// #Examples:
+//   !num:  Integer.abs(-42)       // returns 42
+//   !num2: Integer.abs(42)        // returns 42
+//   integer_arg(Integer.abs(num))
+//   integer_arg(abs(num))        // Integer. is inferred
+//   num := abs(num)              // modifies itself with result
+//
+// #See: clamp()
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

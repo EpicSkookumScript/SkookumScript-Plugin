@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Description Modulo or integer division remainder (another math term is "common
+//             residue of a congruence").
+//             See http://mathworld.wolfram.com/Modulus.html for more info.
+//             The original number remains unchanged.
+// Returns     integer division remainder
+// Arg         modulus - essentially the divisor
+// Examples    do_stuff(num.mod(100))
+//             num := num.mod(100)
+//
+//             1234.mod(100)    // returns 34
+//
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer modulus) Integer
+  

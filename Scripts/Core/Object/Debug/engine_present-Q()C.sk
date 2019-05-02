@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Determines if the engine/game is present/hooked-in
+//
+// #Examples
+//   if Debug.is_engine_present?
+//     [
+//     do_game_stuff
+//     ]
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

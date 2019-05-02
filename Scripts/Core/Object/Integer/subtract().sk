@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description - Returns a new value that is itself minus the supplied value.
+// Returns     new value that is itself minus the supplied value.
+// Examples    num - 3  // or num.subtract(3)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

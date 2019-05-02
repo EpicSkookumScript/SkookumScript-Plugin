@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Return number based on `value` that is inclusively between the supplied min and max
+// values and if `value` is over or under then use min or max - whichever it is closest to.
+//
+// #Returns: clamped value
+//
+// #Examples:
+//   !value:   11.0
+//   !clamped: Real.clamp(num 1 10)  // returns 10.0
+//   real_arg(clamp(num 1 10)        // Real. is inferred when desired type is known
+//
+// See: between?()
+//---------------------------------------------------------------------------------------
+
+( Real value
+  Real min_value
+  Real max_value
+) Real
+

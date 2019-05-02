@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Constructor.  Initialize all components x,y,z to the supplied scalar
+//
+// # Params:
+//   s: scalar value
+//
+// # Returns: itself
+//
+// # Examples:
+//   !vec: Vector3!scalar(0.5)
+//
+// # See:       Vector3!(), Vector3!xyz(), Vector3!xy(), Vector3!copy()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Real s) Vector3
+

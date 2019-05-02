@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// ++ Increases its enumeration value by one.
+//
+// !!!Important!!! This is a simplistic method that assumes:
+//   - there will be an enumeration that follows this current one
+//   - the value of the next enumeration is the value of the current
+//     enumeration + 1
+//
+// #Returns: itself
+// #Example: enum++  // or enum.increment
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

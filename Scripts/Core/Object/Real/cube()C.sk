@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Determines cube of supplied number: num^3
+// 
+// Returns: cube of num
+//
+// Examples:
+//   !num: Real.cube(3.0)     // returns 27.0
+//   real_arg(Real.cube(num))
+//   real_arg(cube(num))      // Real. is inferred
+//   num := cube(num)         // modifies itself with result
+//
+// See: square(), pow(), sqrt()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  //[num*num*num]

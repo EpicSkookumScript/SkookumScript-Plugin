@@ -1,0 +1,47 @@
+// EObjectTypeQuery
+// EnumPath: /Script/Engine.EObjectTypeQuery
+
+()
+
+  [
+  @@object_type_query_1: EObjectTypeQuery!int(0) // world static
+  @@object_type_query_2: EObjectTypeQuery!int(1) // world dynamic
+  @@object_type_query_3: EObjectTypeQuery!int(2) // pawn
+  @@object_type_query_4: EObjectTypeQuery!int(3) // physics body
+  @@object_type_query_5: EObjectTypeQuery!int(4) // vehicle
+  @@object_type_query_6: EObjectTypeQuery!int(5) // destructible
+  @@object_type_query_7: EObjectTypeQuery!int(6) // custom
+  @@object_type_query_8: EObjectTypeQuery!int(7)
+  @@object_type_query_9: EObjectTypeQuery!int(8)
+  @@object_type_query_10: EObjectTypeQuery!int(9)
+  @@object_type_query_11: EObjectTypeQuery!int(10)
+  @@object_type_query_12: EObjectTypeQuery!int(11)
+  @@object_type_query_13: EObjectTypeQuery!int(12)
+  @@object_type_query_14: EObjectTypeQuery!int(13)
+  @@object_type_query_15: EObjectTypeQuery!int(14)
+  @@object_type_query_16: EObjectTypeQuery!int(15)
+  @@object_type_query_17: EObjectTypeQuery!int(16)
+  @@object_type_query_18: EObjectTypeQuery!int(17)
+  @@object_type_query_19: EObjectTypeQuery!int(18)
+  @@object_type_query_20: EObjectTypeQuery!int(19)
+  @@object_type_query_21: EObjectTypeQuery!int(20)
+  @@object_type_query_22: EObjectTypeQuery!int(21)
+  @@object_type_query_23: EObjectTypeQuery!int(22)
+  @@object_type_query_24: EObjectTypeQuery!int(23)
+  @@object_type_query_25: EObjectTypeQuery!int(24)
+  @@object_type_query_26: EObjectTypeQuery!int(25)
+  @@object_type_query_27: EObjectTypeQuery!int(26)
+  @@object_type_query_28: EObjectTypeQuery!int(27)
+  @@object_type_query_29: EObjectTypeQuery!int(28)
+  @@object_type_query_30: EObjectTypeQuery!int(29)
+  @@object_type_query_31: EObjectTypeQuery!int(30)
+  @@object_type_query_32: EObjectTypeQuery!int(31)
+  @@object_type_query_max: EObjectTypeQuery!int(32)
+  
+  @@object_type_world_static:   @@object_type_query_1
+  @@object_type_world_dynamic:  @@object_type_query_2
+  @@object_type_pawn:           @@object_type_query_3
+  @@object_type_physics_body:   @@object_type_query_4
+  @@object_type_vehicle:        @@object_type_query_5
+  @@object_type_destructible:   @@object_type_query_6
+  ]

@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Value for pi - the ratio of a circle's circumference to its diameter.
+//
+// https://en.wikipedia.org/wiki/Pi
+// http://mathworld.wolfram.com/Pi.html
+//
+// Notes:
+//   Muliples of pi are often used to represent angles in radians (rad).
+//   pi/4 radians =  45 degrees
+//   pi/2 radians =  90 degrees
+//   1pi radians  = 180 degrees
+//   2pi radians  = 360 degrees
+//
+// Examples:
+//   !pi2: Real!pi * 2
+//
+//   // If type known, Real can be omitted
+//   !pi2: 2.0 * !pi
+//   32.0.min(!pi)
+//
+// See: !min(), !max(), !meter(), !golden_ratio(), deg_to_rad(), rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+() Real 
+  //[3.1415926535897932384626433832795]

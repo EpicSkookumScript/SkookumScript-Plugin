@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// [Same as > operator]
+// Returns true if this object is logically greater than the supplied object.
+//
+// #Examples
+//   obj1 > obj2  // or obj1.greater?(obj2)
+//
+// #See Also
+//   =   equal?()
+//   ~=  not_equal?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ enum) Boolean
+

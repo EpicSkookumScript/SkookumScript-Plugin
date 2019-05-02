@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// [Same as = operator]
+// Returns true if both objects are logically the same - though they may be different
+// objects.
+//
+// #Examples
+//   obj1 = obj2  // or obj1.equal?(obj2)
+//
+// #See Also
+//   ~=  not_equal?()
+//   >   greater?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Actor operand) Boolean
+

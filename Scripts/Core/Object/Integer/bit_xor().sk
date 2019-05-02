@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the bitwise exclusive or of this value and the one supplied.
+//             The original number remains unchanged.
+// Returns     bitwise exclusive or of this value and the one supplied
+// Examples    do_stuff(num1.bit_xor(num2))
+//             num1 := num1.bit_xor(num2)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

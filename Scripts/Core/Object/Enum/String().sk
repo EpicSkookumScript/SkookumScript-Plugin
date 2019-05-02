@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Description Returns string representation of itself
+// Returns     itself as a string
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+

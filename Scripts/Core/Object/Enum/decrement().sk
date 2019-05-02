@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// -- Decreases its enumeration value by one.
+//
+// !!!Important!!! This is a simplistic method that assumes:
+//   - there will be an enumeration before this current one
+//   - the value of the previous enumeration is the value of the current
+//     enumeration - 1
+//
+// #Returns: itself
+// #Example: enum--  // or enum.decrement
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

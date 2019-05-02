@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Append the supplied string to the end of this string
+// Returns     itself
+// Examples    "Skookum" append("Script")  // SkookumScript
+// See Also    +=
+// Notes       
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) String

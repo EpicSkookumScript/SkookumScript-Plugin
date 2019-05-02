@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Converter to a string representation of itself
+//
+// # Returns: itself as a string
+//
+// # Examples:
+//   !str1: angles.String
+//   !str2: angles>>String  // only converts angles if it needs to
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() String
+

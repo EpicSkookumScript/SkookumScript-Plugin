@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// String
+//
+// SkookumScript strings are mutable - you can change them after they have been created,
+// including reducing or increasing their number of characters.
+//
+// The `String` class is restrained by design since there are usually more efficient
+// mechanisms to use in games such as enumerations or Symbol objects.
+// However, the internal C++ AString class that the SkookumScript String is based on has
+// much more functionality that can be exposed as needed.
+//
+// Author(s): Conan Reis
+

@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   angles: rotation angles to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !angles1: RotationAngles!yaw_pitch_roll(90 0 0)
+//   !angles2: angles1!             // Recommended shortcut - same as code below
+//   !angles3: angles1!copy
+//   !angles4: RotationAngles!copy(angles1)
+//
+// # See:       RotationAngles!(), RotationAngles!yaw_pitch_roll(), RotationAngles!xy()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(RotationAngles angles) RotationAngles
+

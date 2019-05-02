@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Determines square of supplied number: num^2
+// 
+// Returns: square of num
+//
+// Examples:
+//   !num: Real.square(3.0)     // returns 9.0
+//   real_arg(Real.square(num))
+//   real_arg(square(num))      // Real. is inferred
+//   num := square(num)         // modifies itself with result
+//
+// See: cube(), pow(), sqrt()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  //[num*num]

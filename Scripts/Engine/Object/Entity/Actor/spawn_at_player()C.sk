@@ -1,0 +1,31 @@
+//---------------------------------------------------------------------------------------
+// Spawn an actor of this class type in front of the player
+// 
+// Params:
+//   owner: optional owner Actor
+//   world_context: optional world context
+//
+// Returns: an actor of this class type
+//
+// Examples:
+//   !bad_guy: Enemy.spawn_at_player
+//   bad_guy.spawn_default_controller
+//   bad_guy._path_to_actor(TargetPoint.named("TargetPoint4"))
+//
+// See: spawn_at_xform()
+//---------------------------------------------------------------------------------------
+
+( Vector3 local_offset: Vector3!forward * Real.@@meter
+  Actor owner: Actor!null
+  World world_context: @@world
+) ThisClass_
+
+  [
+  !xform: GameLib.player_pawn.transform
+  xform.@translation += [MathLib.transform_direction(xform local_offset)]
+  !rotation_angles: MathLib.find_look_at_rotation(xform.@translation GameLib.player_pawn.transform.@translation)
+  rotation_angles.@pitch := 0.0
+  rotation_angles.@roll := 0.0
+  xform.@rotation := rotation_angles.Rotation
+  spawn_at_xform(xform owner world_context)
+  ]

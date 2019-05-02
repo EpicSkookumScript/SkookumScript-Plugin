@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Maximum possible value limit for Real
+// (Real is 32-bits - same as FLT_MAX in C++)
+// 
+// Examples:
+//   !big_num: Real!max
+//
+//   // If type known, Real can be omitted
+//   if 42.0 = !max [println("42 is bigger than I thought!")]
+//   42.0.min(!max)
+//
+// See: !infinity(), !min(), !meter(), !nan(), !pi()
+//---------------------------------------------------------------------------------------
+
+() Real 
+  //[3.402823466e38]

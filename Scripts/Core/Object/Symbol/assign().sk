@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Assignment - equivalent to operator :=
+// Returns     itself
+// Examples    sym := 'hello'  // or sym.assign('hello')
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol sym) Symbol
+

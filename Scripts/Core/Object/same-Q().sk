@@ -1,0 +1,43 @@
+//---------------------------------------------------------------------------------------
+// Determines if both objects are identical/equivalent - i.e. they are exactly the same
+// object using the same location in memory, etc.
+//
+// #Examples
+//   // Are obj1 and obj2 two variables referring to the same object?
+//   obj1.same?(obj2)
+//
+//   // Are obj1 and obj2 *logically* equal - i.e. they can be different objects with
+//   // similar contents.
+//   obj1 = obj2       // shortcut for: obj.equal?(obj2)
+//
+//
+//   !str1: "hello"  
+//   !str2: "hello"    // different string object also set to "hello"
+//   !str3: str1       // str3 is bound to the same string object as str1
+//   !str4: "hi"     
+//
+//   str1.same?(str2)  // false - different objects
+//   str1.same?(str3)  // true
+//   str1.same?(str4)  // false
+//
+//   str1 = str2       // true - different string objects with the same characters
+//   str1 = str3       // true
+//   str1 = str4       // false
+//
+// #Notes
+//   Comparison to other languages:
+//     C++:                  &obj1 == &obj2
+//     C#:                   object.RefrenceEquals(obj1, obj2)
+//     JavaScript and Swift: obj1 === obj2
+//     Python:               obj1 is obj2
+//     Ruby:                 obj1.equal?(obj2)
+//
+// #See Also    equal?() =, not_equal?() ~=
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // object to compare
+  Object operand
+  // true if equivalent, false if not
+) Boolean
+

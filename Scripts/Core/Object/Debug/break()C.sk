@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Description Essentially just like setting a "soft" breakpoint with the IDE though via
+//             an explicit script call.  Pauses execution of game, converts all the
+//             objects passed as arguments into a message string and prints it out and
+//             breaks at the call point in the IDE or asserts if the runtime is not
+//             connected to the IDE.
+//             If no arguments are passed then "Debug->Continue to resume..." is used as
+//             a default.
+// Examples    Debug.break("Got to this point in script on actor ", name)
+// See Also    print(), println()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+({Object} objs_as_strs)
+

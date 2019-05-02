@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Sets yaw, pitch and roll to 0.0
+//
+// # Returns: itself
+//
+// # Examples:
+//   angles.zero
+//
+// # See:
+//   yaw_set(), pitch_set(), roll_set(), yaw_pitch_roll_set(), yaw(), pitch(), roll()
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() RotationAngles
+

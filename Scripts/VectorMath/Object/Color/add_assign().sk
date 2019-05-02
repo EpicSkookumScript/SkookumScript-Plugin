@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// += Adds supplied color to itself
+//
+// # Params:
+//   col: color to add
+//
+// # Returns: itself
+//
+// # Examples:
+//   col1 += col2 
+//   col1.add_assign(col2)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Color col) Color
+

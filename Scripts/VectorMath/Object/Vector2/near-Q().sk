@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Determines if this vector and the one supplied are *almost* the same as defined by the
+// distance between them being less or equal to the squared epsilon value also supplied.
+//
+// # Params:
+//   vec:
+//     vector to compare
+//   epsilon_sq:
+//     squared epsilon used to determine if the two vectors are within the squared 
+//     distance or less.  (Default 0.025 -i.e 0.05 non squared)
+//
+// # Returns: true if almost the same, false if not
+//
+// # Examples:
+//   if vec1.near?(vec2) [do_stuff]
+//   do_stuff when vec1.near?(vec2)
+//
+// # See:       equal?[=]
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector2 vec, Real epsilon_sq: 0.0025) Boolean
+

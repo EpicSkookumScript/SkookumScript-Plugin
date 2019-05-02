@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Copies specified hook settings to a new hook with a new name that is not
+//             initially enabled.
+// Arg         hook_name - name of hook to enable or disable
+// Arg         new_name - name of new hook or existing hook to copy settings to
+// See Also    enable_hook(), is_hook_enabled()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol hook_name, String new_name)
+

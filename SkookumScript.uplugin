@@ -1,0 +1,94 @@
+{
+  "FileVersion" : 3,
+  "Version": 1,
+  "VersionName": "3.0.5663",
+  "EngineVersion" : "4.22.0",
+  "FriendlyName" : "SkookumScript",
+  "Description": "The superpowered scripting language and tool suite.",
+  "Category": "Scripting",
+  "CreatedBy" : "Agog Labs Inc.",
+  "CreatedByURL" : "http://SkookumScript.com",
+  "DocsURL" : "http://skookumscript.com/docs/",
+  "MarketplaceURL" : "com.epicgames.launcher://ue/marketplace/content/38694f554c2c4b9f84c585256d509481",
+  "SupportURL": "http://forum.skookumscript.com/",
+  "EnabledByDefault" : true,
+  "CanContainContent" : false,
+  "IsBetaVersion" : false,
+  "Installed" : true,
+  "SupportedPrograms" : ["UnrealHeaderTool"],
+  "CanBeUsedWithUnrealHeaderTool" : true,
+  "Modules": [
+    {
+      "Name": "SkookumScriptGenerator",
+      "Type": "Program",
+      "LoadingPhase": "PostConfigInit",
+      "WhitelistPrograms" : ["UnrealHeaderTool"]
+    },
+    {
+      "Name": "SkookumScriptRuntime",
+      "Type": "Runtime",
+      "LoadingPhase": "PreLoadingScreen",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Mac",
+        "Linux",
+        "IOS",
+        "TVOS",
+        "Android",
+        "XboxOne",
+        "PS4"
+      ]
+    },
+    {
+      "Name": "AgogCore",
+      "Type": "Runtime",
+      "LoadingPhase": "None",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Mac",
+        "Linux",
+        "IOS",
+        "TVOS",
+        "Android",
+        "XboxOne",
+        "PS4"
+      ]
+    },
+    {
+      "Name": "SkookumScript",
+      "Type": "Runtime",
+      "LoadingPhase": "None",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Mac",
+        "Linux",
+        "IOS",
+        "TVOS",
+        "Android",
+        "XboxOne",
+        "PS4"
+      ]
+    },
+    {
+      "Name": "SkookumScriptEditor",
+      "Type": "Editor",
+      "LoadingPhase": "Default",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Mac"
+      ]
+    },
+    {
+      "Name": "SkookumScriptEditorGUI",
+      "Type": "Editor",
+      "LoadingPhase": "PostEngineInit",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Mac"
+      ]
+    }
+  ]
+}

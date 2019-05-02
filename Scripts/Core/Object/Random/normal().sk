@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0.0f and 1.0f with a normal
+//             distribution - i.e. more likely to get numbers in the middle of the range.
+//             Normal disributions occur frequently in nature.
+// Returns     a psuedo-random number between 0.0f and 1.0f
+// Examples    num: random.normal
+// See Also    operator(), uniform(), triangle(), up_slope(), down_slope(), thorn(),
+//             nose(), and the integer versions of the same methods
+// Notes       It has a distribution that looks like:
+//               |           |
+//               |    _-_    |
+//               |   /   \   |
+//               |_ -     - _|
+//              0.0f        1.0f
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

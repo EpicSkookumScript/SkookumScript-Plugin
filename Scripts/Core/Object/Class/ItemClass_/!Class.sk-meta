@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// The generic/reflective class `ItemClass_` refers to the class type of the items/
+// elements of the class scope that uses it in its members - such as items in the List
+// class.  It is never actually used directly as a class - only as an alias to another
+// class type and as such does not have any members in its native directory.
+//
+// Its name has a trailing underscore `_` to indicate that it is generic/reflective and
+// to set it apart from other classes.
+//
+// See: ThisClass_, Auto_
+//
+// Author(s): Conan Reis
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~
+

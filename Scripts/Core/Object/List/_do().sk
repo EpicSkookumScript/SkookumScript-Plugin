@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied durational closure code with each
+// item as an argument and waiting for it to finish before moving on to the next item.
+//
+// # Examples:
+//   // Has each guy jump one after the other
+//   !guys: {guy1 guy2 guy3}
+//   guys._do[item._jump]
+//
+//   // Waits varying durations
+//   !nums: {1.0 3.0 2.0}
+//   nums._do
+//     [
+//     println("Waiting " item " seconds...")
+//     _wait(item)
+//     println("Waited " item " seconds.")
+//     ]
+//
+// # See:       do_*(), _do*(), all?(), any?()
+// # Notes:     Use do*() versions for immediate iteration.
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(+(ItemClass_ item) code)
+
+  [
+  !count: length
+  !idx:   0
+  
+  loop
+    [
+    if idx >= count [exit]
+    code(at(idx))
+    idx++
+    ]
+  ]  

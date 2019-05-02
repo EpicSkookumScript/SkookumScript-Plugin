@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Test coroutine
+//---------------------------------------------------------------------------------------
+
+(Real interval: 0) 
+
+  [
+  // Make a copy of the interval
+  !wait_secs: interval!
+
+  @test?: wait_secs <= 0
+
+  loop
+    [
+    // Exit when interval is <= 0 for any call to _test()
+    if @test? [ exit ]
+    
+    _wait
+    test_print(wait_secs)
+    _wait(wait_secs)
+    ]
+  ] 

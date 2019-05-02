@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// * Apply rotation to this vector
+//
+// # Params:
+//   rot: rotation to apply
+//
+// # Returns:
+//   new vector which is this vector rotated by the rotation
+//
+// # Examples:
+//   vec2: vec1.rotate_by(rot1)
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Rotation rot) Vector3
+

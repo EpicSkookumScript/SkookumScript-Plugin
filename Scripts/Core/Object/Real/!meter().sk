@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Multiple/co-efficient used on world co-ordinate system unit to get one meter/metre in
+// length.
+//
+// Examples:
+//   !meters42: Real!meter * 42
+//
+//   // If type known, Real can be omitted
+//   !meters42: 42.0 * !meter
+//   !back1: Vector3!backward * !meter
+//
+// See: !min(), !max(), !pi()
+//---------------------------------------------------------------------------------------
+
+() Real 
+  [
+  // A meter/metre in length in the world co-ordinate system.
+  // Many engines use a meter as there standard unit of length.
+  // Set this value accordingly for engines that use a different standard length
+  // - Unreal Engine 4 uses 1 cm so this value is 100.0 for UE4.
+  this := 1.0
+  ]

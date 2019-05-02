@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Returns: itself
+// # Examples:
+//   result? := false       // operator form
+//   result?.assign(false)  // method form
+//---------------------------------------------------------------------------------------
+
+(value?) Boolean
+

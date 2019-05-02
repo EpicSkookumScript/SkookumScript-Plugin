@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Removes item/element at first (zeroth) index position.
+// Examples    {0, "one", 2.0}.remove_first  // list becomes {"one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+()
+// Returns itself
+ThisClass_
+
+
+

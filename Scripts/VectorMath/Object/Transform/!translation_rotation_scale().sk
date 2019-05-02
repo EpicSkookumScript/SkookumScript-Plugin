@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Constructor - Set world position/translation, rotation and scale of transform
+// Author(s)   Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Vector3 translation, Rotation rotation, Vector3 scale)
+
+  [
+  Transform@!()
+  @translation := translation
+  @rotation := rotation
+  @scale := scale
+  ]

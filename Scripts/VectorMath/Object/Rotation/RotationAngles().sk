@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Converter to a rotation angles representation of itself
+//
+// # Returns: itself as rotation angles
+//
+// # Examples:
+//   !rot1: rotation.RotationAngles
+//   !rot2: rotation>>RotationAngles  // only converts rotation if it needs to
+//
+// # Notes:
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() RotationAngles

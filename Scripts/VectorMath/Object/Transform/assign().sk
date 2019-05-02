@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   xform: transform to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   xform1 := xform2
+//   xform1.assign(xform2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Transform xform) Transform
+

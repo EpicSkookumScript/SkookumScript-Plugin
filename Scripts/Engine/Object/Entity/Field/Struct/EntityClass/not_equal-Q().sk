@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// [Same as = operator]
+// Returns true if both objects are *not* logically the same.
+//
+// #Examples
+//   class1 ~= class2  // or class1.not_equal?(class2)
+//
+// See: = equal?()
+//---------------------------------------------------------------------------------------
+
+(EntityClass operand) Boolean
+  [
+  MathLib.not_equal_class_class(this operand)
+  ]
+  

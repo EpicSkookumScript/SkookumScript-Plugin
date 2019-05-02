@@ -1,0 +1,40 @@
+//---------------------------------------------------------------------------------------
+// Iterates over the list calling supplied immediate closure `test` with each item as an
+// argument and removes/rejects items that return true and appends them to `list`.
+//
+// # Returns: itself
+//
+// # Examples:
+//   // removes {4, 8} and appends to nums
+//   !nums: Integer{}
+//   {3 4 5 8}.moves_to nums [item.pow2?]
+//   nums // {4, 8}
+//
+// # See: pop(), reject(), select(), do_*(), all?(), any?()
+//---------------------------------------------------------------------------------------
+
+( ThisClass_ list
+  (ItemClass_ item) Boolean test
+) ThisClass_
+
+  [
+  !idx: 0
+  
+  loop
+    [
+    if idx >= length
+        [
+        exit
+        ]
+      test(at(idx))
+        [
+        list.append(pop_at(idx))
+        ]
+      else
+        [
+        idx++
+        ]
+    ]
+      
+  this
+  ]  

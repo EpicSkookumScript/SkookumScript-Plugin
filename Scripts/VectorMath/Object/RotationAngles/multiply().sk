@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// * Returns a new value that is the product of itself and the supplied value.
+//
+// # Params:
+//   operand: amount to multiply each axis vaule by
+//
+// # Returns:
+//   new RotationAngles that is the product of this RotationAngles with each axis 
+//   multiplied by the supplied value.
+//
+// # Examples:
+//   rot2: rot1 * 3
+//   rot2: rot1.multiply(3)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(Real operand) RotationAngles
+

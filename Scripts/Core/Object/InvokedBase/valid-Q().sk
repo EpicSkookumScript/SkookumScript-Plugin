@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Determines if the invokable is still valid (true) and not stale (false)
+//
+// #Notes
+//   If the invokable is stale, all its methods will fail or return default results.
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// + Returns a new vector that is the sum of itself and the supplied vector.
+//
+// # Params:
+//   vec: vector to add
+//
+// # Returns:
+//   new vector that is the sum of itself and the supplied vector.
+//
+// # Examples:
+//   vec1 + vec2
+//   vec1.add(vec2)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector3 vec) Vector3
+

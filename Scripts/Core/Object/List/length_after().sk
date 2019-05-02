@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the remaining number/length of items/elements in the list that
+//             follow the supplied index.  [Essentially count-index]
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer index) Integer

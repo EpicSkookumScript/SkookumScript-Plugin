@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   angles: rotation angles to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   angles1 := angles2
+//   angles1.assign(angles2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(RotationAngles angles) RotationAngles
+

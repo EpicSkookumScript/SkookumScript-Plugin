@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Removes count items from the end of the list and returns them in a new list.
+// Examples    {0, "one", 2.0, 3, "four"}.pop_range_last(3)
+//               changes list to {0, "one"} and returns {2.0, 3, "four"}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer count) ThisClass_
+
+

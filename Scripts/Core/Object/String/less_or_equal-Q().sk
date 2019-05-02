@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// [Same as <= operator]
+// Returns true if this object is alphabetically less than or equal to the supplied object.
+// Character comparison is case sensitive.
+//
+// #Examples
+//   obj1 <= obj2  // or obj1.less_or_equal?(obj2)
+//
+// #See Also
+//   =   equal?()
+//   ~=  not_equal?()
+//   >   greater?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) Boolean
+

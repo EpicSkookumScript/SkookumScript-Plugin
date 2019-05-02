@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Index operator {}
+// Returns item at specified index position.
+// Can be used as operator `list{idx}` or as method `list.at(idx)`.
+//
+// # Params:
+//   index:
+//     0-based index position. If negative index is supplied, then it returns from the
+//     end of the list. -1 is last item, -2 is second to last item, etc.
+//
+// # Returns: item at specified index
+//
+// # Examples:
+//   !list: {0 "one" 2.0 'three'}
+//   println(list{1})     // "one"
+//   println(list.at(0))  // 0
+//   println(list{-1})    // 'three'
+//
+// # See: at_set(), first(), last(), any(), any_but(), any_or_nil()
+//---------------------------------------------------------------------------------------
+
+(Integer index) ItemClass_
+
+

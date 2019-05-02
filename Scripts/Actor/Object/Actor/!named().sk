@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// Description Script Constructor - called whenever an actor is created via a script
+// Examples    !actor:  Actor!named('MyActor')
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol name)

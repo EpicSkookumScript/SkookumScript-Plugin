@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// [Same as ~= operator]
+// Returns true if both objects are *not* logically the same - i.e. strings contain
+// different characters.  Character comparison is case sensitive.
+//
+// #Examples
+//   str1 ~= str2  // or str1.not_equal?(str2)
+//
+// #See Also
+//   =   equal?()
+//   >   greater?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) Boolean
+

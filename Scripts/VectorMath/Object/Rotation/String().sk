@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Converter to a string representation of itself
+//
+// # Returns: itself as a string
+//
+// # Examples:
+//   !str1: rotation.String
+//   !str2: rotation>>String  // only converts rotation if it needs to
+//
+// # Notes:
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() String

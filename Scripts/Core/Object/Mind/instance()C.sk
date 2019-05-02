@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Get the singleton for 'Mind' class (including any subclass) and assert if there is 0 
+// or more than one of this type of `Mind` object.
+//
+// Returns: mind singleton (asserts if not just 1)
+//
+// Examples:
+//   ```
+//   Mind.instance.do_mind_stuff
+//   ```
+//
+// See: instance_or_nil(), instance?(), instances_length()
+//---------------------------------------------------------------------------------------
+
+() ThisClass_
+

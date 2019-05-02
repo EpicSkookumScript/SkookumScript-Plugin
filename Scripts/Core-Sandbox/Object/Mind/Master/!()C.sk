@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Class Constructor
+//---------------------------------------------------------------------------------------
+
+()
+
+  [
+  Debug.print(
+    "Double click on lines in the log that start with 'Member:' or 'File:'\n"
+    "Member: <Master>.!() - Mind class constructor called.\n"
+    )
+  ]
+

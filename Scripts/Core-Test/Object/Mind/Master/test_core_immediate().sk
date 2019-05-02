@@ -1,0 +1,122 @@
+// Unit test core library functionality
+
+()
+  [
+  !v:0
+  
+  //=== Boolean ===
+  
+  // and
+  Debug.assert_no_leak(true and true)
+  Debug.assert_no_leak(not [true and false])
+  Debug.assert_no_leak(not [false and true])
+  Debug.assert_no_leak(not [false and false])
+  
+  // or
+  Debug.assert_no_leak(true or true)
+  Debug.assert_no_leak(true or false)
+  Debug.assert_no_leak(false or true)
+  Debug.assert_no_leak(not [false or false])
+
+  // nand
+  Debug.assert_no_leak(not [true nand true])
+  Debug.assert_no_leak(true nand false)
+  Debug.assert_no_leak(false nand true)
+  Debug.assert_no_leak(false nand false)    
+  
+  // nor
+  Debug.assert_no_leak(not [true nor true])
+  Debug.assert_no_leak(not [true nor false])
+  Debug.assert_no_leak(not [false nor true])
+  Debug.assert_no_leak(false nor false)
+  
+  // xor
+  Debug.assert_no_leak(not [true xor true])
+  Debug.assert_no_leak(true xor false)
+  Debug.assert_no_leak(false xor true)
+  Debug.assert_no_leak(not [false xor false])  
+  
+  // nxor
+  Debug.assert_no_leak(true nxor true)
+  Debug.assert_no_leak(not [true nxor false])
+  Debug.assert_no_leak(not [false nxor true])
+  Debug.assert_no_leak(false nxor false)  
+  
+  // short-circuit evaluation
+  Debug.assert_no_leak([v:=42 true and [v++=7] v=43])   
+  Debug.assert_no_leak([v:=42 false and [v++=7] v=42])    
+  Debug.assert_no_leak([v:=42 true or [v++=7] v=42])   
+  Debug.assert_no_leak([v:=42 false or [v++=7] v=43])      
+  Debug.assert_no_leak([v:=42 true nand [v++=7] v=43])   
+  Debug.assert_no_leak([v:=42 false nand [v++=7] v=42])    
+  Debug.assert_no_leak([v:=42 true nor [v++=7] v=42])   
+  Debug.assert_no_leak([v:=42 false nor [v++=7] v=43])
+  
+  // misc
+  Debug.assert_no_leak(false.Integer=0)
+  Debug.assert_no_leak(true.Integer=1)
+
+  //=== Integer ===
+  
+  // arithmetic
+  Debug.assert_no_leak(-6.abs=6)
+  Debug.assert_no_leak(42.abs=42)
+  Debug.assert_no_leak([6+7]=13)
+  Debug.assert_no_leak([6-7]=-1)
+  Debug.assert_no_leak([6*9]=54)
+  Debug.assert_no_leak([3409/42]=81)
+  Debug.assert_no_leak(3409.mod(42)=7)
+  Debug.assert_no_leak(42--=41)
+  Debug.assert_no_leak(42++=43)
+  Debug.assert_no_leak(42.negate=-42)
+  Debug.assert_no_leak([v:=5 v+=6 v=11])
+  Debug.assert_no_leak([v:=5 v-=6 v=-1])
+  Debug.assert_no_leak([v:=5 v*=6 v=30])
+  Debug.assert_no_leak([v:=32 v/=6 v=5]) 
+  
+  // bitwise operations
+  Debug.assert_no_leak(623.bit_and(987)=587)
+  Debug.assert_no_leak(623.bit_or(987)=1023)
+  Debug.assert_no_leak(42.bit_not=-43)
+  Debug.assert_no_leak(42.bit_set?(3))
+  Debug.assert_no_leak(not 42.bit_set?(4))
+  Debug.assert_no_leak(42.bit_shift_up(3)=336)
+  Debug.assert_no_leak(42.bit_shift_down(3)=5)
+  Debug.assert_no_leak(42.bit_xor(66)=104)
+  
+  // comparison, clamping
+  Debug.assert_no_leak(42=[11+31])
+  Debug.assert_no_leak(42~=[12+31])
+  Debug.assert_no_leak(8>6)
+  Debug.assert_no_leak(not 6>8)
+  Debug.assert_no_leak(6<8)
+  Debug.assert_no_leak(not 8<6)
+  Debug.assert_no_leak(42>=42)
+  Debug.assert_no_leak(42>=31)
+  Debug.assert_no_leak(42<=42)
+  Debug.assert_no_leak(42<=47)  
+  Debug.assert_no_leak(42.max(81)=81)
+  Debug.assert_no_leak(81.max(42)=81)
+  Debug.assert_no_leak(42.min(81)=42)
+  Debug.assert_no_leak(81.min(42)=42)
+  Debug.assert_no_leak(42.clamp(10 100)=42)
+  Debug.assert_no_leak(42.clamp(1 27)=27)
+  Debug.assert_no_leak(42.clamp(81 100)=81)
+
+  // misc
+  Debug.assert_no_leak(0.sign=1)
+  Debug.assert_no_leak(42.sign=1)
+  Debug.assert_no_leak(-42.sign=-1)
+  Debug.assert_no_leak(32.pow2?)
+  Debug.assert_no_leak(not 31.pow2?)
+  Debug.assert_no_leak(7.between?(1 10))
+  Debug.assert_no_leak(not 7.between?(10 15))
+ 
+  // loops
+  Debug.assert_no_leak([v:=6 7.do[v+=idx] v=27])
+  Debug.assert_no_leak([v:=6 7.do_by(2,(Integer idx)[v+=idx]) v=18])
+  Debug.assert_no_leak([v:=8 9.do_reverse[v+=idx] v=44])
+
+ 
+    
+  ]

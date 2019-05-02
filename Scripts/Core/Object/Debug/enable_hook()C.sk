@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Enables/disables specified hook.
+// Arg         hook_name - name of hook to enable or disable
+// Arg         enable - true to enable or false to disable
+// See Also    is_hook_enabled()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol hook_name, Boolean enable:  true)
+

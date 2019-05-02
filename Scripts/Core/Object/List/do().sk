@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure code with each
+// item as an argument.
+//
+// # Examples:
+//   // Prints
+//   //   Item: 1
+//   //   Item: 2
+//   //   Item: 3
+//   {1 2 3}.do
+//     [
+//     println("Item: " item)
+//     ]
+//
+//   // Prints {-1, 2, -3, 4}
+//   {1 -2 3 -4}.do[item.negate]
+//   
+//   // Simple method calls can alternatively use the apply `%` operator
+//   {1 -2 3 -4}%negate
+//
+// # See:       do_*(), _do*(), all?(), any?()
+// # Notes:     Use _*() versions for durational iteration.
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item) code) ThisClass_
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  length.do[code(at(idx))]
+  this  
+  ]  
+  */
+  

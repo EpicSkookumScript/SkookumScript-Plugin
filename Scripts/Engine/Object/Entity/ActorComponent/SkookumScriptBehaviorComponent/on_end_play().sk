@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Callback invoked when gameplay for this component ends 
+// Meant to be overridden in your custom subclass
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(EEndPlayReason end_play_reason)
+  [
+  ]

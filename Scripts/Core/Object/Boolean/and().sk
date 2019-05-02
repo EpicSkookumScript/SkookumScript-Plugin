@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------------------
+// Returns true if this and operand? are true.
+//
+// Note, this method uses short-circuit evaluation (or lazy evaluation)
+// - if this Boolean is false then the operand? expression will not even be evaluated.
+//
+// # Params:
+//   operand?: Boolean expression to evaluate only if this Boolean object is true
+//
+// # Returns: true if this and operand? are true, false if not
+// # Examples:
+//   value1? and value2?   // operator form
+//   value1?.and(value2?)  // method form
+//
+// # Notes:
+//   this  | operand | result
+//   ------+---------+-------
+//   false | false*  | false
+//   false | true*   | false
+//   true  | false   | false
+//   true  | true    | true
+//
+//   * not even evaluated
+//---------------------------------------------------------------------------------------
+
+(operand?) Boolean
+

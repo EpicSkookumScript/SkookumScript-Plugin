@@ -1,0 +1,34 @@
+//---------------------------------------------------------------------------------------
+// Sets item_count items starting at index to the specified item.  Any existing items in
+// the range will be overwritten and the list will extend its total item count if the
+// range extends beyond its current item count.
+//
+// # Params:
+//   item: item to set multiple index positions to
+//
+//   index:
+//     index of current list to start setting/overwriting items. It must be an existing
+//     item or the end of the list - i.e. index <= current item count.
+//
+//   item_count:
+//     number of times item is to be stored in current list.  Note that item_count may
+//     specify a range beyond the current item count - the length will increased as
+//     needed.  By default the count specified will cover the existing items from index
+//     to the end of the list.
+//
+// # Returns: itself
+//
+// # Examples:
+//   {0 "one" 2.0}.items_set("item" 2 3)
+//   // changes list to {0, "one", "item", "item", "item"}
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( ItemClass_ item
+  Integer    index: 0
+  Integer    item_count: length_after(index)
+) ThisClass_
+
+
+

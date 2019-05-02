@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Description Inserts items in supplied list before the specified index position.
+// Examples    {0, "one", 2.0}.insert_list({"la", "dee", "da"}, 1)
+//               changes list to {0, "la", "dee", "da", "one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // Items to insert
+  List{ItemClass_} list,
+
+  // Index to insert
+  Integer index:  0
+)
+// Returns itself
+ThisClass_
+
+

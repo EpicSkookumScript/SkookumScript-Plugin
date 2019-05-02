@@ -1,0 +1,40 @@
+//---------------------------------------------------------------------------------------
+// 
+// The idea of this class is that you subclass from SkookumScriptBehaviorComponent to create your own custom :sk: components. 
+// You can also subclass from it in C++ (by deriving from USkookumScriptBehaviorComponent) to create your own
+// custom script-enabled C++ component. This component can be attached to an actor in UE4Editor but is also visible
+// from scripts as a :sk: class, and can be attached and detached via script. If you like, you can attach and detach 
+// your component several times with the object living on inbetween, potentially doing things even while detached. 
+// Attach as many components to an actor as you like. Mix between Blueprint created and script-attached SkookumScriptBehaviorComponents.
+// You can give your custom SkookumScriptBehaviorComponent any constructor you like that can take any number of arguments.
+// 
+// The SkookumScriptBehaviorComponent has the following methods to override with your own:
+// 
+// ! (constructor): IMPORTANT You need to call this constructor from the constructor in your derived class via SkookumScriptBehaviorComponent@!() - it does important low-level initialization.
+// on_attach(): Callback that is invoked just after the component has been attached to an actor. Override with your own implementation in your custom component.
+// on_detach(): Callback invoked just before this component is detached from its actor.
+// on_begin_play(): Callback invoked when the component is beginning play, called before its owner's BeginPlay on Actor BeginPlay or when the component is dynamically created if the Actor has already BegunPlay.
+// on_end_play(): Callback invoked when gameplay for the component ends.
+// There are also the two methods attach and detach that you can invoke to attach/detach your component to/from an actor.
+// 
+// A typical way to create and attach a component would be MyComponent!(my_argument1 my_argument2).attach(some_actor).
+// Find a SkookumScriptBehaviorComponent on an actor via
+// !my_component: some_actor.component_by_class(SkookumScriptBehaviorComponent.static_class)<>SkookumScriptBehaviorComponent.
+// Detach it via
+// my_component.detach. Or keep a reference to it around.
+//
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~
+
+// Create a separate binary file for this class and its subclasses so that they can be
+// loaded to / unloaded from from memory on demand.
+demand_load: false
+
+// Set object ID validation type and time:
+//   none:  accept none during compile [used to temporarily disable object ids]
+//   any:   accept any during compile
+//   parse: validate using list during compile
+//   defer: accept any during compile and validate using list in separate pass/run
+//   exist:
+//     validate using list during compile if it exists (parse) - otherwise accept
+//     any during compile and validate using list in separate pass/run (defer)

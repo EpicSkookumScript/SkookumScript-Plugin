@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Determines if this enumeration lies inclusively within the range of the supplied minimum
+// and maximum values.
+//
+// #Examples
+//   do_stuff(enum.between?(enum1 enum2))
+//   if num.between?(enum1 enum2)
+//     [ do_in_range_stuff ]
+//   else
+//     [ do_out_of_range_stuff ]
+//
+// #See Also    clamp()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // Minimum allowed value - inclusive
+  Integer min,
+  // Maximum allowed value - inclusive
+  Integer max
+  // true if it lies in the desired range or false if not
+) Boolean
+

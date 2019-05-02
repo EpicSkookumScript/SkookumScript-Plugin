@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// `Auto_` - generic/reflective class used when the actual type is to be inferred by use
+// of the parameter, return value, temporary, etc. - it is never actually used directly
+// as a class.  When a class type is omitted `Auto_` is used as a note to the parser to
+// try to determine the type. `Auto_` is used rather than `None` since `None` can be a
+// valid class in some circumstances.
+//
+// Its name has a trailing underscore `_` to indicate that it is generic/reflective and
+// to set it apart from other classes.
+//
+// See: ItemClass_, ThisClass_
+//
+// Author(s): Conan Reis
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~

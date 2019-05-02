@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Determines if this symbol is equal to the null/empty '' symbol.
+//
+// #Examples
+//   sym.null?
+//
+//   sym = ''  // Essentially equivalent to above
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

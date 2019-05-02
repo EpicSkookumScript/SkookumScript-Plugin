@@ -1,0 +1,412 @@
+// Interactive SkookumScript Tutorial
+// Read and run these examples to learn some basic concepts.
+// The tutorial file is read only so copy code over to the
+// Workbench (REPL) if you want to modify it.
+
+// This tutorial is also available in the online docs with
+// additional detail:
+//   http://skookumscript.com/docs/v3.0/ide/workbench/
+
+// See the online Primer for greater detail:
+//   http://skookumscript.com/docs/v3.0/
+
+
+// ========================================
+// === 1) Core SkookumScript Principles ===
+// ========================================
+
+//-----------------------------------------
+// Simple Math
+// Read more - https://skookumscript.com/docs/v3.0/#binary-and-unary-operator-calls
+
+// Select some code using the mouse or keyboard
+// (or just have the caret on the line) then press
+// F4 to evaluate the code on the game runtime.
+
+4 + 5
+
+// The result will be printed in the IDE log window.
+// Alt+Insert         - pastes the last result into the SkookumIDE
+// Alt+Control+Insert - copies the last result to the clipboard
+
+// Do the same with any of these:
+3.0 + 4.5
+6 < 4
+7 = 9  // equal to (not == such as with C++)
+7 ~= 8 // Not equal to (not != as in some languages)
+// Use [square] brackets to group sub-expressions.
+// SkookumScript has no operator precedence!
+[2 + 2] = 4
+
+
+//-----------------------------------------
+// Simple routine calls
+// Read more - https://skookumscript.com/docs/v3.0/#calling-routines-and-passing-arguments
+42.negate()          // returns -42
+42.negate            // brackets optional if no arguments
+42.between(-3, 100)  // true - call with arguments
+42.between(-3 100)   // comma between arguments optional
+
+
+//-----------------------------------------
+// Variables!
+// Read more - http://skookumscript.com/docs/v3.0/#variables
+
+// The exclamation mark ! indicates that something *new* is being
+// created. This creates variable 'bob' and binds it to the
+// Integer 9 and bob has the type Integer
+!bob : 9
+// Assigns the value 7 to bob and bob stays an Integer
+// (This is similar to = in some other languages)
+// [Needs the variable declaration above also selected.]
+bob := 7
+// re-binds bob to "Hello World!" - bob type is now a String!
+// [Needs the variable declaration above also selected.]
+bob : "Hello World!"  
+
+// Note that the `bob` variable above will only exist in a selected
+// code snippet that includes the `!bob` line. All local temporary
+// variables will be forgotten with each evaluation. So evaluate
+// the first line of code and press F4, then select the first two
+// lines of code then F4, then all 3 lines of code.
+
+
+//-----------------------------------------
+// Conditionals and randomness
+// Read more - http://skookumscript.com/docs/v3.0/lang/flow/conditionals/
+
+// Conditional
+if 6>9 [println("Six is greater than nine!")]
+// if statement can be used as an expression (so can everything)
+println(if 5>4 ["Correct"] else ["Not correct"])
+// "elseif" - no need to have multiple ifs
+!a: 8
+if a=7  [println("a is 7")]
+   a=8  [println("a is 8")]
+   else [println("a is neither 7 nor 8")]
+
+// @@random is a class data member that is always available   
+// to generate random values.
+
+// Randomly print "heads" or "tails"
+if @@random.coin_toss ["Heads!"] else ["Tails!"] 
+// when is another way of expressing a conditional    
+println("Tails!") when @@random.coin_toss 
+// unless = "when not"
+println("Heads!") unless @@random.coin_toss
+
+// See the Random class and its routines for more examples of generating
+// random numbers and distributions.
+
+
+//-----------------------------------------
+// Bounded iteration/loops
+
+// Repeat 10 times
+10.do[println("Hello World!")]
+
+// You can add line breaks and multiple expressions
+10.do
+  [
+  println("Hello World!")
+  // Integer.do() supplies an idx variable you can use
+  println("On iteration #" idx)
+  ]
+
+// Iterate over a list of numbers  
+{1 2 3 4}.do[println(item)]
+
+// Iterate in reverse
+{1 2 3 4}.do_reverse[println(item)]
+
+// See do routines in Integer and List for more info about bounded iteration
+
+
+//-----------------------------------------
+// Lists of stuff
+// Read more - http://skookumscript.com/docs/v3.0/#list
+
+{1 2 3 4 5}.reverse                // Reverses the order of this list's items
+{1 -2 3 -4}%negate                 // Applies the method 'negate' to all items of the list, returns the result
+{1 -2 3 -4}.do[item.negate]        // Runs some code - a 'closure' - on each item of the list
+{1 2 3}.do[item++ unless item = 2] // unless is short for 'if not'
+{3 4 5 8}.select[item.pow2?]       // Make new list based on a selection criteria (again that code in square brackets is a closure)
+{3 4 5 8}.reject[item.pow2?]       // Make new list by rejecting some items of the original list
+{"A" "B" "C" "D"}.any              // Select random item from list
+{3 4 5}.any?[item.pow2?]           // Test if _any_ item from list satisfies a condition
+{3 4 5}.all?[item.pow2?]           // Test if _all_ item from list satisfies a condition, false here
+{2 4 8}.all?[item.pow2?]           // Same, true in this case
+
+
+//-----------------------------------------
+// Coroutines!
+// These are the secret sauce of SkookumScript.
+
+// IMPORTANT: The IDE must be connected to the running
+// game for this to work when hitting F4. Check in the
+// top right corner to see that it says [Sk] Connected.
+
+// Waits 2 seconds then returns
+_wait(2)
+
+// Waits 1 second four times and prints "Tick!" after each wait
+4._do [_wait(1) println("Tick!")]
+
+// Wait random time between .1 and 2 seconds
+_wait(@@random.uniform_range(.1 2))
+
+// Wait one simulation frame
+_wait
+
+
+// ===============================
+// === 2) Vector Math Examples ===
+// ===============================
+
+//-----------------------------------------
+// SkookumScript comes with built-in vector math types.
+// Press Alt-G on when the SkookumIDE editor caret is on a class
+// to jump to the class in the Classes Widget.
+// Check out classes such as: Vector2, Vector3, Vector4, Rotation,
+// RotationAngles, Transform, Color
+
+// Creates a 3D vector with x=1,y=2,z=3
+Vector3!xyz(1 2 3)
+
+// Adds two vectors
+Vector3!xyz(1 2 3) + Vector3!xyz(2 3 4)
+
+// If the type is obvious it will be inferred
+// - you don't have to supply it
+Vector3!xyz(1 2 3) + !xyz(2 3 4)
+
+// A handy constructor of Vector3 creating a vector
+// facing up (positive z direction in UE4)
+Vector3!up
+
+// Creates a set of Euler angles to specify a rotation
+RotationAngles!yaw_pitch_roll(60 0 0)
+
+// A transform has a position, a rotation and a scale:
+// >> means convert to type
+Transform!translation_rotation_scale(
+  Vector3!xyz(1 2 3)
+  RotationAngles!yaw_pitch_roll(60 0 0)>>Rotation 
+  Vector3!xyz(1 1 1))
+
+// Types can be inferred for arguments  
+Transform!translation_rotation_scale(
+  !xyz(1 2 3)
+  RotationAngles!yaw_pitch_roll(60 0 0)>>
+  !xyz(1 1 1))
+  
+// We've got colors, too
+Color!yellow
+
+
+// ==============================
+// === 3) UE4 Engine Bindings ===
+// ==============================
+
+//-----------------------------------------
+// Ok now let's have some fun!
+// NOTE: Make sure you have the project SkookumDemo running!
+
+// Select the code below and hit F4 multiple times!!!
+// Gets list of all Pawns in the world, and runs the coroutine
+// _boom on them
+Pawn.instances%_boom
+
+// Click on the word _boom and hit Alt-G to see how it is
+// implemented! Use your mouse previous and next buttons or
+// Alt+<- Alt+-> to navigate back and fourth in the history.
+
+// The currently active game world (or nil if the game is not running)
+@@world
+
+// Is the game running?
+not @@world.nil?
+
+// List of levels of the game world
+@@world.@levels
+
+// Get the player pawn
+player_pawn
+
+// Instruct RoboChar1 to path towards the player
+Enemy@'RoboChar1'._path_to_actor(player_pawn)
+
+// Get an actor by name, and find something out about it
+// Note that if a class is not used before @ it assumes class Actor
+@'RoboChar1'.transform
+
+// Play explosion sound at a given actor location
+@'TargetPoint1'._play_sound("/Game/ScriptLoaded/Audio/Explosion01.Explosion01")
+
+// Draw text above player
+player_pawn._draw_text("Play me!")
+
+// Send random robot to player
+Enemy.instances.any._path_to_actor(player_pawn)
+
+// Play _boom effect on random enemy
+Enemy.instances.any._boom
+
+// Reset the robots to their corners
+robo_reset  
+
+
+// ====================================
+// === 4) Time flow and Concurrency ===
+// ====================================
+
+// The secret sauce of SkookumScript - elegantly and concisely
+// describe concurrent and sequential behavior
+
+//------------------------------------------
+// Time flow example 1: Sequential
+// Have each robot path to player one after the other
+// then have player go boom.
+// Select and run the next four lines
+Enemy@'RoboChar1'._path_to_actor(player_pawn)
+Enemy@'RoboChar2'._path_to_actor(player_pawn)
+Enemy@'RoboChar3'._path_to_actor(player_pawn)
+player_pawn._boom
+
+// Then select and reset when complete
+robo_reset
+
+  
+//------------------------------------------
+// Time flow example 2: Synchronize
+// Have each robot path to player simultaneously
+// then have player go boom after they *all* arrive.
+// Select and run the next seven lines
+sync
+  [
+  Enemy@'RoboChar1'._path_to_actor(player_pawn)
+  Enemy@'RoboChar2'._path_to_actor(player_pawn)
+  Enemy@'RoboChar3'._path_to_actor(player_pawn)
+  ]
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+//------------------------------------------
+// Time flow example 3: Race
+// Have each robot path to player simultaneously
+// then have player go boom when the *first* arrives.
+// Select and run the next eight lines
+race
+  [
+  Enemy@'RoboChar1'._path_to_actor(player_pawn)
+  Enemy@'RoboChar2'._path_to_actor(player_pawn)
+  Enemy@'RoboChar3'._path_to_actor(player_pawn)
+  ]
+Enemy.instances%path_stop // Stop movement of other robots
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+//------------------------------------------
+// Time flow example 4: Timeout
+// Have each robot path to player simultaneously then
+// have player go boom when the *first* arrives or when
+// 1.5 seconds elapses.
+// Select and run the next eight lines
+race
+  [
+  _wait(1.5)
+  Enemy@'RoboChar1'._path_to_actor(player_pawn)
+  Enemy@'RoboChar2'._path_to_actor(player_pawn)
+  Enemy@'RoboChar3'._path_to_actor(player_pawn)
+  ]
+Enemy.instances%path_stop // Stop movement of other robots
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+//------------------------------------------
+// Act on lists of objects using different timeflow
+
+// Sequential: all robots boom one after the other then go to
+// next line after the last completes
+Enemy.instances._do[item._boom]
+
+// Synchronize: All robots boom simultaneously then go to next
+// line when *all* completed
+Enemy.instances%_boom
+
+// Race: All robots boom simultaneously then go to next line
+// when *first* completed
+Enemy.instances%>_boom
+
+
+//------------------------------------------
+// So here are the previous path commands rewritten using lists
+// rather than specifying the robots individually.
+
+// All robots path to player one after the other
+// and boom player when last arrives
+Enemy.instances._do[item._path_to_actor(player_pawn)]
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+// All robots path to player simultaneously
+// and boom player when the all arrive
+Enemy.instances%_path_to_actor(player_pawn)
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+// Have each robot path to player simultaneously
+// and boom player when first arrives
+Enemy.instances%>_path_to_actor(player_pawn)
+player_pawn._boom
+
+robo_reset  // Reset the robots
+
+
+//------------------------------------------
+// Code from SkookumScript Intro video
+
+// All robots path to player simultaneously
+Enemy.instances%_path_to_actor(player_pawn)
+player_pawn._boom
+
+// Random robot goes boom
+Enemy.instances.any._boom
+
+robo_reset  // Reset the robots
+
+// Send robots on sentry duty
+_sentry_duty
+
+// Stop the sentry duty
+_sentry_duty(false)
+
+
+//------------------------------------------
+// More UE4 examples
+// Get averaged location of all enemies
+GameLib.actor_array_average_location(Enemy.instances)
+
+// Gets list of actors of class 'TargetPoint'
+!actors: Actor{}
+GameLib.all_actors_of_class(@@world TargetPoint.static_class actors)
+actors 
+
+
+// This just scratches the surface of what SkookumScript can do!
+// If you have questions, please ask away in our forum at
+// http://forum.skookumscript.com
+
+// Enjoy!!
+// Yours Skookumly,
+// The Mad Computer Scientists at Agog Labs

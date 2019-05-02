@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Determines if this class is the Actor class or a subclass of (derived
+//             from) the Actor class.
+// Returns     true if it is an Actor class, false if not
+// Examples    if Actor.is_class_actor [will_do_this] else [will_not_do_this]
+// See Also    is_class(), is_superclass(), is_subclass()
+// Notes       
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean

@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Actor
+
+//~~~~~~~~~~ Meta info for class ~~~~~~~~~~~
+
+// Allow object id look-up of named instances for this class.
+// Actors set this to true by default.
+//object_id_lookup: true
+
+// Set object id validation type and time:
+//   none:  accept none during compile [used to temporarily disable object ids]
+//   any:   accept any during compile
+//   parse: validate using list during compile
+//   defer: accept any during compile and validate using list in separate pass/run
+//   exist:
+//     validate using list during compile if it exists (parse) - otherwise accept
+//     any during compile and validate using list in separate pass/run (defer)
+// Actors set this to `any` by default.
+//object_id_validate: any

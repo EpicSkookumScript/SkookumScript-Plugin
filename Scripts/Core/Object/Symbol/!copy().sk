@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// #Examples
+//   !val1: 'SomeSymbol'
+//   !val2: val1!      // Recommended shortcut - same as code below
+//   !val3: val1!copy
+//   !val4: Symbol!copy(val1)
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol source)
+
+

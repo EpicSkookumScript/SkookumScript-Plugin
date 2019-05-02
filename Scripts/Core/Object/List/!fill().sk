@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------------------
+// Creates list populated with specified number of items using supplied item_gen closure
+// to successively generate the items.
+// 
+// Params:
+//   count: number of items to add
+//   item_gen: closure code to create new item
+//
+// Examples:
+//   // List with 10 random numbers from 0-99
+//   !objs: List!fill 10 [@@random.uniform_int(100)]
+//
+//   // Same but specify list item type as Integer
+//   !nums: List{Integer}!fill 10 [@@random.uniform_int(100)]
+//
+//   !squares: List{Integer}!fill 10 [idx * idx]
+//
+// See: appends()
+//---------------------------------------------------------------------------------------
+
+( Integer count
+  (Integer idx) ItemClass_ item_gen
+)
+  [
+  // Call internal constructor
+  List@!()
+  
+  count.do[append(item_gen(idx))]
+  ]

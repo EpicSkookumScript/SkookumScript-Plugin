@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determines if this class is a subclass/child/descendant of (derived from) the supplied
+// class 'subclass'
+// 
+// #Examples
+//  if class1.subclass_of?(class2) [do_class2_stuff]
+//
+// #See Also    class_of?(), superclass_of?(), class_actor?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // class to check
+  <Object> superclass
+  // true if subclass of 'superclass', false if not
+) Boolean

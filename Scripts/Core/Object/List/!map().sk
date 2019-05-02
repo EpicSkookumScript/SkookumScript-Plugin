@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Creates new list populated with supplied `item_gen` closure acting on items from
+// supplied `list`.
+// 
+// Params:
+//   list: list to map items from (its item type is not known so `Object` is assumed)
+//   item_gen: closure code to create new item
+//
+// Examples:
+//   !nums:     {12 4 743 23 67}
+//   !num_strs: List{String}!map nums [item>>String]
+//
+// See: !fill(), appends()
+//---------------------------------------------------------------------------------------
+
+( List list
+  (Object item) ItemClass_ item_gen
+)
+  [
+  // Call internal constructor
+  List@!()
+  
+  list.do[append(item_gen(item))]
+  ]

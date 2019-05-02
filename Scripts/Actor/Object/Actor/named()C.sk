@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Get the actor with the specified name by looking in this class (or any subclass) and
+// assert if no such actor is found.
+//
+// Params:
+//   name: name of the actor to search for
+//
+// Returns: Actor found (asserts if not found)
+//
+// Examples:
+//   ```
+//   // Same as Character@'Bob'
+//   !bob: Character.named('Bob')
+//
+//   bob.do_character_stuff
+//   ```
+//
+// Note:
+//   Essentially the same as object id - `ActorClass@'some_name'`
+//   `find_named()` is the same but returns nil if not found.
+//
+// See: find_named()
+//---------------------------------------------------------------------------------------
+
+(Symbol name) ThisClass_
+

@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Assignment - equivalent to operator :=
+// Returns     itself
+// Examples    num := 3  // or num.assign(3)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

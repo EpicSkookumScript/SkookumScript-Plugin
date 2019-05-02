@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Positive infinity.
+// Different than `!max()` which is the largest finite value that can be represented.
+// 
+// https://en.wikipedia.org/wiki/Floating-point_arithmetic#Infinities
+//
+// Examples:
+//   !invalid_num: Real!infinty
+//
+//   // If type known, Real can be omitted
+//   real_method(!infinty)
+//
+//   println(Real!infinty)  // prints "inf"
+//
+// See: infinity?(), finite?(), nan?(), !nan(), !max(), !min()
+//---------------------------------------------------------------------------------------
+
+() Real 

@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Determines if this number lies inclusively within the range of the supplied minimum
+// and maximum values.
+//
+//   min <= this <= max
+//
+// #Examples
+//   do_stuff(num.between?(.5 100))
+//   if num.between?(.5 100)
+//     [ do_in_range_stuff ]
+//   else
+//     [ do_out_of_range_stuff ]
+//
+// #See Also    clamp()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // Minimum allowed value - inclusive
+  Real min,
+  // Maximum allowed value - inclusive
+  Real max
+  // true if it lies in the desired range or false if not
+) Boolean
+

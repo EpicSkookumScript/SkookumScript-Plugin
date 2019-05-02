@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the number of expressions / tasks currently executing in parallel
+//             that the invoked object is waiting for a return value from.
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

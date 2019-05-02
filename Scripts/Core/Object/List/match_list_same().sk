@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Gets common items / intersection of items present in both this list and supplied
+// variable length group and returns them in a new list.  Items are tested to determine
+// if the exact same equivalent object `same?()` is present, not necessarily logically
+// equal (=) object.
+//
+// # Notes:
+//   intersecting_same(), intersection_same(), match_list_same() and matching_same() are
+//   all essentially the same method just with different names to cover common naming 
+//   conventions (and variable length groups and lists).
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ list)
+// Returns new list with common items
+ThisClass_
+
+

@@ -1,0 +1,8 @@
+//---------------------------------------------------------------------------------------
+// Real
+// Currently 32-bit - equivalent to float in C++
+// - may be changed to 64-bit in near future - equivalent to double in C++.
+//
+// See: Integer
+// Author(s): Conan Reis
+

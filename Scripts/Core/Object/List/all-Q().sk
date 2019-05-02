@@ -1,0 +1,51 @@
+//---------------------------------------------------------------------------------------
+// Iterates over each item in the list calling supplied immediate closure `test` with
+// each item as an argument and stops with first `test` that returns false.
+//
+// # Returns:
+//   `true` if test returns true for all items, otherwise `false` including when empty
+//
+// # Examples:
+//   {3 4 5}.all?[item.pow2?]  // false
+//   {2 4 8}.all?[item.pow2?]  // true
+//
+// # See:       do_*(), _do*(), any?()
+// # Notes:     Use _*() versions for durational iteration.
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+((ItemClass_ item) Boolean test) Boolean
+
+  // This is implemented in C++ for additional speed.
+  // Here is the equivalent script for reference:
+  /*
+  [
+  !count:   length
+  !result?: false
+  
+  if count > 0
+    [
+    !idx: 0
+    result?: true
+    count--
+    
+    loop
+      [
+      if not test(at(idx))
+          [
+          result?: false
+          exit
+          ]
+        idx >= count
+          [
+          exit
+          ]
+          
+      idx++
+      ]
+    ]
+
+  result?
+  ]
+  */
+  

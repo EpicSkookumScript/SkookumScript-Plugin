@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Determines if this entity class is a superclass/parent/ancestor of the supplied
+// `subclass` (and not the same class)
+// 
+// Returns: true if superclass of `subclass`, false if not
+//
+// Examples:
+//   if obj1.static_class.entity_superclass_of?(obj2.static_class)
+//     [my_class_stuff]
+//
+// See:
+//   entity_class_of?(), entity_subclass_of?(), class_of?(), subclass_of?(),
+//   superclass_of?(), class_actor?()
+//---------------------------------------------------------------------------------------
+
+(EntityClass subclass) Boolean
+  [
+  [this ~= subclass] and MathLib.class_is_child_of(subclass this)
+  ]

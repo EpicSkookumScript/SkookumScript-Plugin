@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description + Returns a new value that is the sum of itself and the supplied value.
+// Returns     new sum
+// Examples    num + 3.0  // or num.add(3.0)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

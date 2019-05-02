@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description /= Divides itself by supplied value
+// Returns     itself
+// Examples    num /= 3  // or num.divide_assign(3)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

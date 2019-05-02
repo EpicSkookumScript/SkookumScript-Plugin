@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Description Minimum - returns *reference* to either this enumerattion or enum if it is
+//             smaller.  The original enumeration remains unchanged.
+// Returns     *reference* to either this enumeration or enum if it is smaller
+// Arg         enum - enumeration to compare
+// Examples    do_stuff(enum1.min(enum2))
+//             enum3 := enum1.min(enum2)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ enum) ThisClass_
+  
+  // Equivalent to:
+  
+  //[
+  //if <= enum [this] else [enum]
+  //]

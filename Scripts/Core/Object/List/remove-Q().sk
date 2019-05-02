@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Iterates over the list calling supplied immediate closure `test` with each item as an
+// argument and removes the first item that returns true.
+//
+// # Returns: true if item removed removed else false
+//
+// # Examples:
+//   // removes 4 and returns true
+//   {3 4 5 8}.remove?[item.pow2?]
+//
+// # See: pop(), find?(), reject(), select()
+//---------------------------------------------------------------------------------------
+
+( (ItemClass_ item) Boolean test
+; Integer index
+) Boolean
+
+  [
+  !found?: find?(test; index)
+  
+  remove_at(index) when found?
+  found?  
+  ]

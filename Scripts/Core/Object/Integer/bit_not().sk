@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the bitwise compliment/not of this value.
+//             The original number remains unchanged.
+// Returns     bitwise compliment/not of this value.
+// Examples    do_stuff(num.bit_not)
+//             num := num.bit_not
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

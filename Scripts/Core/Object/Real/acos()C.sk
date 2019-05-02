@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Determines the arccosine of the supplied angle in radians.
+// Also sometimes called inverse cosine, arccos, cos^-1.
+//
+// https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+// http://mathworld.wolfram.com/InverseCosine.html
+//
+// #Params:
+//   rad: angle in radians from 0 (0 degrees) <= y <= pi (180 degrees)
+//
+// #Result: -1 <= x <= 1
+//
+// #Examples:
+//   !num: Real.acos(radian_angle)
+//   real_arg(Real.acos(radian_angle))
+//   real_arg(acos(radian_angle))       // Real. is inferred
+//
+// #See: asin(), atan2(), sin(), cos(), tan(), !deg_to_rad(), !rad_to_deg()
+//---------------------------------------------------------------------------------------
+
+(Real rad) Real

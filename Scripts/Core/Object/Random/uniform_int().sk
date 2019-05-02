@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Description Generates a psuedo-random number between 0 and limit-1 with a uniform
+//             distribution - i.e. each number in the range is just as likely as any
+//             other.
+// Returns     a psuedo-random number between 0 and (limit - 1)
+// Arg         limit - the upper range - 1 of the number to generate.  It must not
+//             exceed (2^16 - 1) = UINT16_MAX = 65535.  If a larger integer range is
+//             desired, use uniform_uint() which returns a random number up to
+//             UINT32_MAX or use one of the floating point generation routines and
+//             multiply the result by the desired range.
+// Examples    num: random.uniform(100)  // 0-99
+// See Also    operator(), uniform_uint(), triangle(), normal(), up_slope(),
+//             down_slope(), thorn(), nose(), and the float versions of the same methods
+// Notes       The uniform distribution generator is faster than the algorithms for
+//             other distributions.
+//             It has a distribution that looks like:
+//               |          |
+//               |__________|
+//               |          |
+//               |          |
+//               0       limit-1
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer limit) Integer
+

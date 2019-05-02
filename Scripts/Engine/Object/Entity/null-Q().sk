@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Checks if this instance is null (invalid), i.e. does not point to a valid Entity
+// A null Entity is different from nil:
+// nil is a different SkookumScript type (class None) 
+// a null Entity is still of type Entity but does not refer to a valid Entity
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

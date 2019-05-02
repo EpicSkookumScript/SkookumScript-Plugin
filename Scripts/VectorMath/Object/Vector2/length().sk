@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Returns the distance bewteen this vector and the origin (0, 0, 0) - also known as the
+// magnitude of the vector.
+//
+// # Returns: distance between this vector and the origin
+//
+// # Examples:
+//  !len: vec.length
+//
+// # See:       length_sq(), distance(), distance_sq()
+// # Notes:     This is a tiny bit slower than calling `length_sq()`
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

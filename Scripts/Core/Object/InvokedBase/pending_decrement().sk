@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Description Decrements the number of expressions / tasks currently executing in
+//             parallel that the invoked object is waiting for a return value from.
+//             If the number was greater than 0 (so the invoked object was suspended) and
+//             the pending number is reduced back to 0 then the invoked object will
+//             resume.
+// Arg         success - if the pending task was successful/completed then this should be
+//             set to true.  If the pending task was unsuccessful/incomplete/aborted then
+//             this can be set to false and the entire call stack leading up to this
+//             invoked object will be aborted and unwound.
+//             [*** Setting this to false should only be used in dire situations and
+//             could have all sorts of unanticipated knock-on effects with nearby
+//             dependant code being aborted.]
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Boolean success:  true)
+

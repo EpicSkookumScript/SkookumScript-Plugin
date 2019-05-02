@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Gets the name of this actor in string form.
+// *** This should only be used for debugging and not production code. ***
+// Use name() instead.
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+
+  [
+  Debug.sym_to_str(name)
+  ]
+  

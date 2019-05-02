@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// If condition is false, stop program execution and display an error message
+// If condition is true, do nothing
+// Display optional message if desired
+//---------------------------------------------------------------------------------------
+
+(Boolean condition, String message : "")

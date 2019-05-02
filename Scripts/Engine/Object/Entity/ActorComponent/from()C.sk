@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Gets a component of this class type from the specified actor object. It assumes that
+// there is at least one component of this type.
+// 
+// Params:
+//   owner: actor to get component from
+//
+// Returns: component of this type
+//
+// Examples:
+//  !capsule: CapsuleComponent.get_from(owner)
+//  println(capsule.component_velocity)
+//
+// See: from_tag(), list_from(), list_from_tag()
+//---------------------------------------------------------------------------------------
+
+(Actor owner) ThisClass_

@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// !!! Not Implemented !!!
+// Copy constructor
+//
+// #Examples
+//   !val1: ^[do_stuff()]
+//   !val2: val1!      // Recommended shortcut - same as code below
+//   !val3: val1!copy
+//   !val4: Closure!copy(val1)
+//
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ source)
+
+  /* !!! Not Implemented !!!
+     Closues use different memory sizes depending on the number of captured variables so
+     they need special handling to be instantiated.
+  */
+  

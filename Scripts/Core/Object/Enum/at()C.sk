@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Returns enumeration at specified index position based on their ordinal position.
+//
+// *** Since this is a class method it may only be used as a method `Enum.at(idx)` rather
+// than an operator `Enum{idx}` since the latter looks like a list of Enum objects to the
+// parser.
+//
+// # Params:
+//   index:
+//     0-based index position. If negative index is supplied, then it returns from the
+//     end of the enumerations. -1 is last enumeration, -2 is second to last enumeration, etc.
+//
+// # Returns: enumeration at specified index
+//
+// # Examples:
+//   // EAxis{none, x, y, z}
+//   println(EAxis.at(0))   // EAxis.@@none
+//   println(EAxis.at(1))   // EAxis.@@x
+//   println(EAxis.at(-1))  // EAxis.@@z
+//
+// # See: index(), first(), last()
+//---------------------------------------------------------------------------------------
+
+(Integer index) ThisClass_
+

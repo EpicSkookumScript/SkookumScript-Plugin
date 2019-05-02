@@ -1,0 +1,44 @@
+//---------------------------------------------------------------------------------------
+// Generates a unique actor name symbol based on supplied name root and ensuring that
+// there is no conflict/collision with actor objects that currently exist.
+//
+// #Examples
+//   !name_sym: Actor.generate_name_sym("Guy")
+//   
+//   Successively creates:
+//     'Guy1'
+//     'Guy2'
+//     'Guy3
+//     ... etc. wherever there is an open name slot/index
+//
+// #Notes
+//   The generated name is only reserved if an actor is created with it.
+//
+// #See Also  generate_name_str()
+// #Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String name_root: "Actor") Symbol
+
+// Written in C++ for greater speed though the script code below is essentially the same
+/*
+  [
+  !actor
+  !actor_count: 0
+  !new_name:    ""
+  !new_sym:     ''
+    
+  loop
+    [
+    actor_count++
+    new_name := name_root
+    new_name += actor_count>>String
+    new_sym: new_name.Symbol
+
+    if find_named(new_sym).is_nil
+      [ exit]
+    ]
+    
+  new_sym
+  ]
+*/

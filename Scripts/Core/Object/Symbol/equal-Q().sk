@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// [Same as = operator]
+// Returns true if both objects are logically the same - i.e. both strings have the same
+// characters though they may be different objects.  Character comparison is case sensitive.
+//
+// #Examples
+//   sym1 = sym2  // or sym1.equal?(sym2)
+//
+// #See Also
+//   ~=  not_equal?()
+//   >   greater?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol sym) Boolean
+

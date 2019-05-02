@@ -1,0 +1,55 @@
+//---------------------------------------------------------------------------------------
+// Finds specified instance of substring `str` searching from the end of the specified
+// index range to the beginning.
+// 
+// Params:
+//   str: substring to find
+//   instance: occurrence of substring to find.  It may not be less than 1.
+//   begin_idx: starting character index of search range.
+//   end_idx:
+//     Ending character index of search range.
+//     If `end_idx` is set to `@@length_remainder`, the entire length of the string (from
+//     the starting position) is searched (`end_idx = length - 1`).
+//   case?:
+//     If set to `true`, case is sensitive/important (q != Q), if set to `false`, case is
+//     not important (q = Q).
+//
+// Return Params:
+//   find_idx:
+//     Starting index of instance substring if found and -1 otherwise.
+//
+// Returns: `true` if found `false` if not
+//
+// Examples:
+//   ```
+//   !find_idx
+//   // Case sensitive search
+//   if (str.find_reverse?("substring"; find_idx)
+//     [
+//     do_stuff(find_idx)
+//     ]
+//
+//   // Case insensitive search
+//   if (str.find_reverse?("SubString" case#false; find_idx)
+//     [
+//     do_stuff(find_idx)
+//     ]
+//
+//   // Look for 3rd instance from end
+//   if (str.find_reverse?("substring" 3)
+//     [
+//     do_things()
+//     ]
+//   ```
+//
+// See: find?()
+//---------------------------------------------------------------------------------------
+
+( String  str
+  Integer instance:  1
+  Integer begin_idx: 0
+  Integer end_idx:   @@length_remainder
+  Boolean case?:     true
+  ;
+  Integer find_idx
+) Boolean

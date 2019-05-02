@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Attempts to loads an entity of the requested class
+// 
+// Params:
+//   name: Fully qualified name of the object 
+//
+// Returns: The loaded entity
+//---------------------------------------------------------------------------------------
+
+(String name) ThisClass_

@@ -1,0 +1,44 @@
+//---------------------------------------------------------------------------------------
+// Gets random item from list or `nil` if list is empty.
+//
+// # Params:
+//   rnd_gen: random number generator to use
+//
+// # Return Params:
+//   index_found: random index used or -1 if list empty
+//
+// # Returns: random item or `nil` if list is empty.
+//
+// # Examples:
+//   !letters: {"A" "B" "C" "D"}
+//   !letter:  letters.any_or_nil(; !idx)
+//   println("letter: " letter ", random idx: " idx)
+//
+//   // Tell random bad guy in list *that might be empty* to do something
+//   bad_guys.any_or_nil%_do_something
+//
+// # Notes:
+//   May need to cast away `None` class type when result is used.
+//   To cast `letter` from code above to `String` use `letter<>`.
+//   If list is never empty use `any()`.
+//
+// # See:       any(), at(), first(), last(), find?()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Random rnd_gen: @@random
+; Integer index_found  
+) <ItemClass_|None>
+
+  [
+  index_found: length
+  !item
+    
+  if filled?
+    [
+    index_found: rnd_gen.uniform_int(index_found)
+    item: at(index_found)
+    ]
+  
+  item  
+  ]  

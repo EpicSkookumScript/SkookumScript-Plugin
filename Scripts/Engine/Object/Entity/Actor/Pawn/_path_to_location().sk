@@ -1,0 +1,31 @@
+//---------------------------------------------------------------------------------------
+// Pathfinds to specified vector - updating as the actor moves - and stops when within
+// specified radius.
+// 
+// Params:
+//   location:          destination vector
+//   acceptance_radius: stops when distance within this radius of other actor
+//
+// # Examples:  pawn._path_to_location(vector)
+// # Author(s): Shadi Dadenji
+//---------------------------------------------------------------------------------------
+
+( Vector3 location
+  Real  acceptance_radius: Real.@@meter * 1.0
+) 
+  [  
+  if [not controller.null?] and [actor_location.distance(location) > acceptance_radius]
+    [
+    AIBlueprintHelperLibrary.simple_move_to_location(controller, location)
+    loop 
+      [ 
+      _wait
+      if actor_location.distance(location) < acceptance_radius 
+        [ 
+        controller.stop_movement
+        exit 
+        ]
+      ]
+    ]  
+  ]
+  

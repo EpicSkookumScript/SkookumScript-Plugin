@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Increments the number of expressions / tasks currently executing in
+//             parallel that the invoked object is waiting for a return value from.
+//             If the number was 0 and is increased then the invoked object will be
+//             suspended until the pending number is reduced back to 0 by calling
+//             pending_decrement().
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer increment:  1)
+

@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// - Description
+// Appends all items from list that are not already in this list.  Items are tested to
+// determine if the exact same / equivalent object (==) is present, not necessarily
+// logically equal (=) object.
+//
+// - Notes
+// append_absent_group_eqv(), union_eqv() and union_group_eqv() are all essentially the
+// same method just with different name to cover common naming conventions (and variable
+// length groups vs. lists).
+//
+// - Author(s) Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ list)
+// Returns itself
+ThisClass_
+
+

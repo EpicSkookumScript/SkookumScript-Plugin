@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Convert all or initial substring of this string to an Integer using octal / base 8
+// 
+// Returns: Integer value of entire string or a substring
+//
+// Examples:
+//   "52".int_octal  // returns 42
+//
+// See: Integer(), int_radix(), int_binary(), int_hex()
+//---------------------------------------------------------------------------------------
+
+() Integer
+
+  [
+  parse_int(, 8)
+  ]

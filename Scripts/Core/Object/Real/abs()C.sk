@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------
+// Returns the absolute value of the specified number.
+// The absolute value or modulus |num| is the non-negative value of num without regard to
+// its sign. Namely, |num| = num for a positive num, |num| = -num for a negative num (in
+// which case -num is positive), and |0| = 0.
+//
+// The absolute value of a number may be thought of as its distance from zero.
+//
+// https://en.wikipedia.org/wiki/Absolute_value
+// http://mathworld.wolfram.com/AbsoluteValue.html
+//
+// #Examples:
+//   !num:  Real.abs(-42)      // returns 42.0
+//   !num2: Real.abs(42)       // returns 42.0
+//   real_arg(Real.abs(num))
+//   real_arg(abs(num))       // If type known, Real. is inferred
+//   num := abs(num)          // modifies itself with result
+//
+// #See: clamp()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

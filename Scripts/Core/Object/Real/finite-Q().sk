@@ -1,0 +1,7 @@
+//---------------------------------------------------------------------------------------
+// Determines if this is neither positive or negative infinity nor Not a Number (NaN).
+// 
+// See: !nan(), !infinity(), !min(), !max(), nan?(), infinite?()
+//---------------------------------------------------------------------------------------
+
+() Boolean

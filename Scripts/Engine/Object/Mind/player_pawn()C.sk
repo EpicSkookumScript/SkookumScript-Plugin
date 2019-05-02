@@ -1,0 +1,13 @@
+// Returns the player pawn at the specified player index
+//
+// UE4 name of this method: GetPlayerPawn
+// Blueprint category: Game
+
+(Entity  world_context_object: @@world,
+ Integer player_index:         0
+) Pawn
+
+  [
+  GameLib.player_pawn(world_context_object player_index)
+  ]
+

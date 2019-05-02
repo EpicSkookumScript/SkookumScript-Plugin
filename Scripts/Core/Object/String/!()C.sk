@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Class constructor - called when the class is initialized
+//
+// Examples:  called by system - do not call yourself
+//---------------------------------------------------------------------------------------
+
+()
+
+  [
+  @@length_remainder: -1
+  ]
+

@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Returns string representation of itself
+//
+// Returns: itself as a string
+//
+// See: radix(), binary(), octal(), hex(), String@int_radix(), Object@as_code()
+//---------------------------------------------------------------------------------------
+
+() String
+

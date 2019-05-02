@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Description Maximum - returns *reference* to either this enumeration or enum if it is larger.
+//             The original enumeration remains unchanged.
+// Returns     *reference* to either this enumeration or enum if it is larger
+// Arg         enum - enumeration to compare
+// Examples    do_stuff(enum1.max(enum2))
+//             enum3 := enum1.max(enum2)
+//
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ enum) ThisClass_
+  
+  // Equivalent to:
+  
+  //[
+  //if >= enum [this] else [num]
+  //]

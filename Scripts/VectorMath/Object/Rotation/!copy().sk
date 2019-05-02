@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Copy constructor
+//
+// # Params:
+//   rot: rotation to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   !rot1: Rotation!
+//   !rot2: rot1!             // Recommended shortcut - same as code below
+//   !rot3: rot1!copy
+//   !rot4: Rotation!copy(rot1)
+//
+// # See:       Rotation!()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Rotation rot) Rotation
+

@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Determines if the specified hook is enabled or disabled.
+//
+// #See Also    enable_hook()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // name of hook to look for
+  Symbol hook_name
+) Boolean
+

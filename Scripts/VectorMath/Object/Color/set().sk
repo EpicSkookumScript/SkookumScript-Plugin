@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Sets the r, g, b, and a values to new values
+//
+// # Params:
+//   r: new red value
+//   g: new green value
+//   b: new blue value
+//   a: new alpha value
+//
+// # Returns: itself
+//
+// # Examples:
+//   col.rgba_set(1 2 3)
+//
+// #See Also
+//   r_set(), g_set(), b_set(), a_set(), r(), g(), b(), a(), black()
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real r, Real g, Real b, Real a: 1) Color
+

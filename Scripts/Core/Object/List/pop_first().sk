@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Removes item/element at first (zeroth) index position and returns it.
+// Examples    {0, "one", 2.0}.pop_first // returns 0 and the list becomes {"one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() ItemClass_
+
+

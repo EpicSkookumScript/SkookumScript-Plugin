@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Set scope/receiver actor name hook condition - only run hooks when
+//             scope/receiver is an actor with the specified name.
+//             [The enable state of the hook remains unchanged.]
+// Arg         hook_name - name of hook to modify condition
+// Arg         actor_name - name of actor to trigger on (or '' to clear this condition)
+// Examples    Debug.hook_condition_scope_actor('TraceRM', 'Player')
+// See Also    other hook_condition_*() methods
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol hook_name, Symbol actor_name)
+

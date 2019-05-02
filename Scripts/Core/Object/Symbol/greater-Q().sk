@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// [Same as > operator]
+// Returns true if the unique id value representing the the string of this object is
+// greater than the supplied object.
+// Characters are case sensitive when the unique id value is generated.
+//
+// #Examples
+//   sym1 > sym2  // or sym1.greater?(sym2)
+//
+// #See Also
+//   =   equal?()
+//   ~=  not_equal?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol sym) Boolean
+

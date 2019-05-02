@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Iterate over all the enumerations in this enum type.
+// 
+// # Examples:
+//   EAxis.do[println(enum)]
+//
+//   prints:
+//     EAxis.@@none
+//     EAxis.@@x
+//     EAxis.@@y
+//     EAxis.@@z
+//
+// # See:      at(), first(), last(), length() 
+//---------------------------------------------------------------------------------------
+
+((ThisClass_ enum) code)
+
+  [
+  length.do[code(at(idx))]
+  ]  

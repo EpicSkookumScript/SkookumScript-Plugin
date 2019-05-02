@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Teleport this actor to the location and rotation of the specified actor.
+// If the actor doesn't fit exactly, try to slightly move it out of walls and such.
+// 
+// Params:
+//   actor_or_name: actor or name of actor to teleport to
+//
+// Returns: true if the actor has been successfully moved, or false if it couldn't fit. 
+//
+// Examples:
+//   ```
+//   actor1.teleport_to(actor2)
+//   actor3.teleport_to("ActorName4")
+//   ```
+//
+// See: teleport_to()
+//---------------------------------------------------------------------------------------
+
+(<Actor|String> actor_or_name) Boolean
+
+  [
+  !actor: if actor_or_name.actor? [actor_or_name<>Actor] else [Actor.named(actor_or_name<>)]
+  
+  teleport_to(actor.actor_location actor.actor_rotation)
+  ]
+

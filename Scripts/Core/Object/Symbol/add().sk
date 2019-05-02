@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description + Returns a new symbol that is the concatenation of this string and the
+//             supplied string.
+// Returns     new symbol concatenation
+// Arg         str - string suffix to add to this symbol
+// Examples    sym + "_suffix"  // or str.add("_suffix")
+// Also See    append(), add_assign(), String@enumerate()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) Symbol
+

@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// -= Subtracts supplied value from itself
+//
+// # Params:
+//   col: color to subtract
+//
+// # Returns: itself
+//
+// # Examples:
+//   col1 -= col2
+//   col1.subtract_assign(col2)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Color col) Color
+

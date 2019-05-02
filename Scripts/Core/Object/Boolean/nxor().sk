@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Returns true if this and operand? are same value - same as equal?.
+// Note - this is not a short-circuit method: the operand will always be evaluated.
+//
+// # Params:
+//   operand?: Boolean object to compare
+//
+// # Returns: true if this and operand? are same value, else false
+// # Examples:
+//   value1? nxor value2?   // operator form
+//   value1?.nxor(value2?)  // method form
+//
+// # Notes:
+//   this  | operand | result
+//   ------+---------+-------
+//   false | false   | true
+//   false | true    | false
+//   true  | false   | false
+//   true  | true    | true
+//---------------------------------------------------------------------------------------
+
+(operand?) Boolean

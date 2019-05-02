@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the bitwise or of this value and the one supplied.
+//             The original number remains unchanged.
+// Returns     bitwise or of this value and the one supplied
+// Examples    do_stuff(num1.bit_or(num2))
+//             num1 := num1.bit_or(num2)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+

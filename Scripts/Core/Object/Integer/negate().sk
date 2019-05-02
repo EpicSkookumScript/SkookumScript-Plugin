@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Negates its value and returns itself - i.e. this := -this or this := 0 - this
+// The original number is changed.
+//
+// #Examples
+//   do_stuff(num!negate)
+//   num.negate
+//
+//   To create a new negated number without changing this number's value use:
+//     -num
+//     [or]
+//     num.negated
+//     [or]
+//     num!negate
+//
+// #See Also   negated() [also negation operator -num]
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

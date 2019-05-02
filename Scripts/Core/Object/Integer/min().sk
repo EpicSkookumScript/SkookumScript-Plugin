@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Description Minimum - returns *reference* to either this number or num if it is smaller.
+//             The original number remains unchanged.
+// Returns     *reference* to either this number or num if it is smaller
+// Arg         num - number to compare
+// Examples    do_stuff(num.min(100))
+//             num := num.min(100)
+//
+//             !num1:  3
+//             !num2:  42
+//             num1.min(num2)    // returns reference to num1/3
+//
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer num) Integer
+  
+  // Equivalent to:
+  
+  //[
+  //if <= num [this] else [num]
+  //]

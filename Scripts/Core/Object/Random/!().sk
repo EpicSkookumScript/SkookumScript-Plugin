@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Default constructor.  Sets seed value or uses default made from system
+//             time.  Any Random with the same seed will end up generating the same
+//             sequence of numbers.  This allows repeatable results with random numbers
+//             and a means to describe a "randomly generated" yet predictable object with
+//             just the seed value.
+// Returns     itself
+// Examples    rand:  Random!
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Random
+

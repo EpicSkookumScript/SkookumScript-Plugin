@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Assignment - equivalent to operator :=
+//
+// # Params:
+//   vec: vector to copy
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec1 := vec2
+//   vec1.assign(vec2)
+//
+// #See Also
+//   =   equal?()
+//   :                  - bind operator - changes the object to which the variable refers
+//       same?()        - tests if objects equivalent/same object in memory
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector4 vec) Vector4
+

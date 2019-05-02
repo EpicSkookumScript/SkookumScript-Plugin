@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determines if x, y, and z are zero.
+//
+// # Returns: true if x, y, and z are zero, false if not
+//
+// # Examples:
+//   if vec.zero? [do_stuff()]
+//   do_stuff() when vec.zero?
+//
+// # See:       zero(), transform_by
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

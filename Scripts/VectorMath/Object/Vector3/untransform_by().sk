@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// * Transform a position in parent space into local space
+//
+// # Params:
+//   xform: transform to inverse-apply
+//
+// # Returns:
+//   new vector which is this parent-space position transformed into local space
+//
+// # Examples:
+//   vec2: vec1.untransform_by(xform1)
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Transform xform) Vector3
+

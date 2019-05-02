@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Assignment - equivalent to operator :=
+// Returns     itself
+// Examples    num := 3.0  // or num.assign(3.0)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

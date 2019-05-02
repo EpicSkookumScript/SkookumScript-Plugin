@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Calculates the dot product between this vector and the one supplied.
+//
+// # Returns: the dot product
+// 
+// # Examples:
+//   !dot_val: vec1.dot(vec2)
+//
+// # See:       cross()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector3 vec) Real
+

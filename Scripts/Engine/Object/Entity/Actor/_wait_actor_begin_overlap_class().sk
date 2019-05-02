@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Wait for an `ActorBeginOverlap` event to occur on this actor 
+// with another actor of the given class (by default accepts any actor)
+// Set the return parameter `actor` to the overlapping other actor
+//
+// IMPORTANT: Do not use this coroutine if several of the events you are interested in
+// can potentially occur within the same frame!
+// In that case use _on_begin_overlap_do or _on_begin_overlap_do_until instead.
+//
+// See: _on_begin_overlap_do, _on_begin_overlap_do_until
+//---------------------------------------------------------------------------------------
+
+(<Actor> desired_class : Actor; Actor other_actor)
+  [
+  _on_actor_begin_overlap_do_until(^[other_actor.class_of?(desired_class)]; !this_actor other_actor)
+  ]

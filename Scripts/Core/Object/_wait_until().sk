@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Waits until the specified simulation time. The simulation time is the number of
+// seconds that have elapsed since the world started.
+//
+// # Params:
+//   sim_time:
+//     Simulation time in seconds of when to wake up.
+//
+// # Examples:
+//   actor.
+//     [
+//     _move_to_node('Waypoint5')
+//     _wait_until(25)  // Wait until 25 seconds since world start
+//     _move_to_node('Waypoint6')
+//     ]
+//
+// # Notes:
+//   This does not stop the object from running other coroutines, it just holds off
+//   calling the next routine(s) following the wait.
+//
+// # See:       _wait() 
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real sim_time)
+

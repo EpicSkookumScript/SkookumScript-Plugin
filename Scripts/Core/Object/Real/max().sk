@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------------------
+// Maximum - returns *reference* to either this number or num if it is larger.
+// The original number remains unchanged.
+//
+// Params:
+//   num: number to compare
+//
+// Returns: *reference* to either this number or num if it is larger
+//
+// Examples
+//   do_stuff(num.max(100.0))
+//   num := num.max(100.0)
+//
+//   !num1:  3.0
+//   !num2:  42.0
+//   num1.max(num2)    // returns reference to num2/42.0
+//
+// See: min(), class version of min() and max()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  
+  // Equivalent to:
+  
+  //[
+  //if >= num [this] else [num]
+  //]

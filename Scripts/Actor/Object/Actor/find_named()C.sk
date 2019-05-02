@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------------------
+// Find the actor with the specified name from the instances of this class (including any
+// subclasses).
+//
+// Params:
+//   name: name of the actor to search for
+//
+// Returns: Actor found - or nil if not found
+//
+// Examples:
+//   ```
+//   // Same as Character@?'Bob'
+//   !bob: Character.find_named('Bob')
+//
+//   if bob.nil?
+//     [
+//     println("Bob not found!")
+//     ]
+//   else
+//     [
+//     bob<>.do_character_stuff
+//     ]
+//
+//   // Or if you don't care if a routine gets called use apply operator '%'
+//   bob%do_character_nonpriority
+//   ```
+//
+// Note:
+//   Essentially the same as object id with a query - `ActorClass@?'some_name'`
+//   `named()` is the same but asserts if not found and always returns `ThisClass_` and
+//   so often does not need to be checked for `nil` or cast to the `ThisClass_` type
+//
+// See: named()
+//---------------------------------------------------------------------------------------
+
+(Symbol name) <ThisClass_|None>

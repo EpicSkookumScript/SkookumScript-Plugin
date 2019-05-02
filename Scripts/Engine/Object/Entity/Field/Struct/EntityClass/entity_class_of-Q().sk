@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Determines if this entity class is the same class or a subclass/child/descendant of
+// (derived from) the supplied `superclass`.
+// 
+// Returns: true if same class or subclass of `superclass`, false if not
+//
+// Examples:
+//   if obj1.static_class.entity_class_of?(obj2.static_class)
+//     [my_class_stuff]
+//
+// See:
+//   entity_subclass_of?(), entity_superclass_of?(), class_of?(), subclass_of?(),
+//   superclass_of?(), class_actor?()
+//---------------------------------------------------------------------------------------
+
+(EntityClass superclass) Boolean
+  [
+  MathLib.class_is_child_of(this superclass)
+  ]

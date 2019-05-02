@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Description Inserts the supplied item/element count times before the specified index
+//             position.
+// Examples    {0, "one", 2.0}.insert_items("insert", 1, 3)
+//               changes list to {0, "insert", "insert", "insert", "one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ItemClass_ item, Integer index, Integer count)
+// Returns itself
+ThisClass_
+
+

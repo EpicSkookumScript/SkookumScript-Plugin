@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description += Adds supplied value to itself
+// Returns     itself
+// Examples    num += 3.0  // or num.add_assign(3.0)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+

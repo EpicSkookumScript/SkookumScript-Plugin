@@ -1,0 +1,46 @@
+//---------------------------------------------------------------------------------------
+// Gets random item from list as long as it is not `excluding`.
+// Allows you to ensure previous item is not returned the next time.
+//
+// Params:
+//   excluding: item to exclude
+//   rnd_gen: random number generator to use
+//
+// Return Params:
+//   index_found: random index used
+//
+// Returns: random item
+//
+// Examples:
+//   ```
+//   // Tell random bad guy in list who wasn't selected
+//   // last time to do something.
+//   !guy 
+//   loop
+//     [
+//     guy: bad_guys.any_but(guy)._do_something
+//     ]
+//   ```
+//
+// Notes:     The list must not be empty - use `any_or_nil()` if list can be empty.
+// See:       any_or_nil(), at(), first(), last(), find?()
+// Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( <ItemClass_|None> excluding
+  Random rnd_gen: @@random
+; Integer index_found  
+) ItemClass_
+
+  [
+  !found
+  
+  loop
+    [
+    index_found: rnd_gen.uniform_int(length)
+    found: at(index_found)
+    if not found.same?(excluding) [exit]
+    ]
+    
+  found
+  ]  

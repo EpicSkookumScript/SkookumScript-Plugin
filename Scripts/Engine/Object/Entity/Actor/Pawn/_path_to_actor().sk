@@ -1,0 +1,32 @@
+//---------------------------------------------------------------------------------------
+// Pathfinds to specified actor - updating as the actor moves - and stops when within
+// specified radius.
+// 
+// Params:
+//   actor:             destination actor
+//   acceptance_radius: stops when distance within this radius of other actor
+//
+// # Examples:  pawn._path_to_actor(actor)
+// # See:       
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+( Actor actor
+  Real  acceptance_radius: Real.@@meter * 2.5
+) 
+  [  
+  if [not controller.null?] and [distance_to(actor) > acceptance_radius]
+    [
+    AIBlueprintHelperLibrary.simple_move_to_actor(controller, actor)
+    loop 
+      [ 
+      _wait
+      if distance_to(actor) < acceptance_radius 
+        [ 
+        controller.stop_movement
+        exit 
+        ]
+      ]
+    ]  
+  ]
+  

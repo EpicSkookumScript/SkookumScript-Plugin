@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Minimum possible non-negative value limit for Real
+// (Real is 32-bits - same as FLT_MIN in C++)
+// 
+// Examples:
+//   !small_num: Real!min
+//
+//   // If type known, Real can be omitted
+//   42.0 = !min
+//   42.0.max(!min)
+//
+// See: !max(), !meter(), !pi()
+//---------------------------------------------------------------------------------------
+
+() Real 
+  //[1.175494351e-38]

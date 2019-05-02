@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Callback invoked when the component is beginning play, called before its owner's BeginPlay on Actor BeginPlay 
+// or when the component is dynamically created if the Actor has already BegunPlay.
+// Meant to be overridden in your custom subclass
+//
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+()
+  [
+  ]

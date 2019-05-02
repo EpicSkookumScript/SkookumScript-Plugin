@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Returns the distance bewteen this vector and the vector supplied
+//
+// # Params:
+//   vec: vector to find the distance to
+//
+// # Returns: distance between the two vectors
+//
+// # Examples:
+//   !dist: vec1.distance(vec2)
+//
+// # Notes:     This is a bit slower than calling `distance_sq()`
+// # See:       distance_sq(), length(), length_sq()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector2 vec) Real
+

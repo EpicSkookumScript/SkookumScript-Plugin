@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------------------
+// Method call for negation prefix operator '-' - ex: -num
+// Returns the negated value of this number - i.e. -this or 0.0 - this
+// The original number remains unchanged.
+//
+// #Note
+//   Since this method is the alias for the negation prefix operator '-' it returns a new
+//   object rather than modifying the existing value.
+//   Methods often change the existing value/state of the object so that the instantiation
+//   operator ! or constructors can be used to create versions that return new objects.
+//   For that behaviour use negate() instead.
+//
+// #Examples
+//   do_stuff(-num)
+//   do_stuff(num.negated)
+//
+//   To negated the number itself by modifying the existing value use:
+//     num.negate
+//     [or]
+//     num := -num
+//     [or]
+//     num := num.negated
+//
+// #See Also   negate()
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

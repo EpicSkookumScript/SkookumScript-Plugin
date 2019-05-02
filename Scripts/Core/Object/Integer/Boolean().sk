@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Returns Boolean representation of itself - standard 0 is false and anything else is
+// true.
+//
+// #Examples
+//   num>>Boolean
+//
+// #See Also   Boolean.Integer()
+// #Notes      This is often done in other languages as an auto-coercion.
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

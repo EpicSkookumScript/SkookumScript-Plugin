@@ -1,0 +1,6 @@
+
+&raw("Rotation")    Rotation !@rotation
+&raw("Translation") Vector3  !@translation
+&raw("Scale")       Vector3  !@scale
+
+

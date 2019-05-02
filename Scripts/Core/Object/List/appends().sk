@@ -1,0 +1,37 @@
+//---------------------------------------------------------------------------------------
+// Appends specified number of items using supplied item_gen closure to successively
+// generate the items.
+// 
+// Params:
+//   count: number of items to add
+//   item_gen: closure code to create new item
+//
+// Returns: itself to allow stringization 
+//
+// Examples:
+//   !nums: List{Integer}!
+//   // Append 10 squares
+//   nums.appends 10 [idx * idx]
+//   // Append 10 random numbers from 0-99
+//   nums.appends 10 [@@random.uniform_int(100)]
+//
+// See: !fill()      
+//---------------------------------------------------------------------------------------
+
+( Integer count
+  (Integer idx) ItemClass_ item_gen
+) ThisClass_
+  [
+  !idx: length
+  !idx_last: idx + count
+  
+  loop
+    [
+    if idx >= idx_last [exit]
+    append(item_gen(idx))
+    idx++
+    ]
+  
+  // Return itself to allow stringization
+  this
+  ]

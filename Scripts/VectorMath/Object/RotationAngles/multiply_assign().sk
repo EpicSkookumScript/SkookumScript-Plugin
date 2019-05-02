@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// *= Multiplies itself by supplied value
+//
+// # Params:
+//   operand: amount to multiply each axis value by
+//
+// # Returns: itself
+//
+// # Examples:
+//   rot *= 3
+//   rot.multiply_assign(3)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(Real operand) RotationAngles
+

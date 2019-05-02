@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Determines if the items in this list and the one supplied are *not* the same/equivalent
+// objects - i.e. either a different number of items or different than exact same item
+// instances.
+//
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( // list to compare.  Note that a list with any class of items may be used.
+  List list
+) Boolean
+

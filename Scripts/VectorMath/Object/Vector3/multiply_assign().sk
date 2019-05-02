@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// *= Multiplies itself by supplied value
+//
+// # Params:
+//   operand: amount to multiply each axis value by
+//
+// # Returns: itself
+//
+// # Examples:
+//   vec *= 3
+//   vec.multiply_assign(3)
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real operand) Vector3
+

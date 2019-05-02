@@ -1,0 +1,37 @@
+//---------------------------------------------------------------------------------------
+// Waits until this Boolean is `false`.  If it is already `false` then it completes
+// immediately.
+//
+// # Params:
+//   poll_secs:
+//     Number of seconds that should be waited between each test of this Boolean's value.
+//     If it is 0.0 it will test every simulation update/frame. 
+//
+// # Example:
+//   !pause?: true
+//   
+//   // Wait until pause? is changed to false by some other thread - ex: pause? := false
+//   pause?._wait_false
+//   _do_after_wait
+//
+//   // Same as above with a 60 second timeout
+//   race
+//     [
+//     pause?._wait_false
+//     _wait(60)
+//     ]
+//   _do_after_wait
+//
+// # See: _wait_true()
+//---------------------------------------------------------------------------------------
+
+(Real poll_secs: 0.1)
+
+  [
+  loop
+    [
+    if not() [exit]
+    _wait(poll_secs)
+    ]
+  ]
+

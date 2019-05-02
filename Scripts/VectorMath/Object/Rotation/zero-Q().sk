@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determines if rotation is zero (identity).
+//
+// # Returns: true if rotation is zero, false if not
+//
+// # Examples:
+//   if rot.zero? [do_stuff()]
+//   do_stuff() when rot.zero?
+//
+// # See:       zero()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+() Boolean
+

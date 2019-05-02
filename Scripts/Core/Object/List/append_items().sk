@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// - Description Appends the supplied item/element count times.
+//
+// - Notes
+// This method allows duplicate items.
+//
+// - Examples
+// {0, "one", 2.0}.append("item", 3)
+//   changes list to {0, "one", 2.0, "item", "item", "item"}
+//
+// - Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ItemClass_ item, Integer count)
+// Returns itself
+ThisClass_
+
+

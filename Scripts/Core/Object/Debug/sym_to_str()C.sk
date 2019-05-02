@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description Converts the supplied Symbol to a String.  This should only be used for
+//             debugging purposes.  It should be preferred over the Symbol.String
+//             method since this method is permitted under a "strict" compile and
+//             Symbol.String is not.
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Symbol sym) String
+

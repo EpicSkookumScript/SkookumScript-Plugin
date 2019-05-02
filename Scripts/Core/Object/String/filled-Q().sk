@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Returns true if this string is has one or more characters.
+//
+// #Examples
+//   if str.filled? [do_stuff(str)]
+//
+//   do_stuff(str) when str.filled? 
+//
+// #See Also    empty?()
+// #Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+()
+  // true if filled, false if not
+  Boolean
+

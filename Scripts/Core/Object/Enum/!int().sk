@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------------------
+// Description Constructor from Integer.  This should only be used in special circumstances
+//             - ideally the class member enumerations of an Enum class should be used
+//             instead.  It is not validated to ensure that the number represents a valid
+//             enumeration.
+// Examples    !new_enum:  Enum!int(1)
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Integer enum_value)
+

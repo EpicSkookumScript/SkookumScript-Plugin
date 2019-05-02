@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Create symbol from pre-existing symbol id value.
+// If the supplied id does not exist then create a null/empty symbol.
+//
+// Params:
+//   id: unique hash value for pre-existing symbol
+//
+// Examples:
+//  Symbol!existing_id("984415e".int_hex)
+//
+// See: existing_str(), String@int_hex()
+//---------------------------------------------------------------------------------------
+
+(Integer id) 
+

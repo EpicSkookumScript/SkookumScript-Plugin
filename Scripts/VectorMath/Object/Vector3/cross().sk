@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Calculates the cross product between this vector and the one supplied
+//
+// # Returns: the vector cross product
+//
+// # Examples:
+//   !perp_vec: vec1.cross(vec2)
+//
+// # See:       dot()
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector3 vec) Vector3
+

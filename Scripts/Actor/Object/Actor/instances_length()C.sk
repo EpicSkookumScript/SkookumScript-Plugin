@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Get the number of instantiated actors derived from this class and all
+//             subclasses.
+// Returns     Number of all instances of this class
+// Examples    !actor_count:  Actor.named_count
+//
+// See Also    nameds(), named(), find_instance(), find_named()
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

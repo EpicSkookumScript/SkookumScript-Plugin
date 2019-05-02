@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------------------
+// Determines object is valid (true) and not invalid/stale (false)
+//
+// Note that nil *always* returns false.
+//
+// #Example
+//   // This allows you to simultaneously test for nil or whether this is a null entity.
+//   (<Entity|None> entity)
+//     [
+//     entity%do_stuff when entity.valid?
+//     ]
+//---------------------------------------------------------------------------------------
+
+() Boolean
+  // Same as
+  //[
+  //not null?
+  //]

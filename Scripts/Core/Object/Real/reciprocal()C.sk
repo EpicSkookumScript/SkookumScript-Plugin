@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Determines the reciprocal or muliplicative inverse of `num`
+//
+//   1/num  or  num^-1
+//
+// https://en.wikipedia.org/wiki/Multiplicative_inverse
+// 
+// Returns: reciprocal of num
+//
+// Examples:
+//   !num: Real.reciprocal(2.0)     // returns .5
+//   real_arg(Real.reciprocal(num))
+//   real_arg(reciprocal(num))      // Real. is inferred
+//   num := reciprocal(num)         // modifies itself with result
+//
+// See: pow()
+//---------------------------------------------------------------------------------------
+
+(Real num) Real
+  //[1.0/num]

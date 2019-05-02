@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Removes item/element at last index position.
+// Examples    {0, "one", 2.0}.pop_last  // list becomes {0, "one"}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+()
+// Returns itself
+ThisClass_
+
+
+

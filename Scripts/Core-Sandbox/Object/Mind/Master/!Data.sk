@@ -1,0 +1,10 @@
+// Boolean indicating whether _test() should continue to run or stop
+!@test?
+
+Integer !@num
+
+Real !@rnum
+
+InvokedCoroutine !@icoro
+
+Object !@obj

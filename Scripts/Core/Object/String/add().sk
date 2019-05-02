@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// Description + Returns a new string that is the concatenation of this string and the
+//             supplied string.
+// Returns     new string concatenation
+// Examples    str + "hello"  // or str.add("hello")
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(String str) String
+

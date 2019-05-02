@@ -1,0 +1,28 @@
+//---------------------------------------------------------------------------------------
+// Spawn an actor of this class type.
+// 
+// Params:
+//   xform: transform location to spawn actor
+//   owner: optional owner Actor
+//   world_context: optional world context
+//
+// Returns: an actor of this class type
+//
+// Examples:
+//   !bad_guy: Enemy.spawn_at_xform(location)
+//   bad_guy.spawn_default_controller
+//   bad_guy._path_to_actor(player_pawn)
+//
+// See: spawn_at_player()
+//---------------------------------------------------------------------------------------
+
+( Transform xform
+  Actor     owner: Actor!null
+  World     world_context: @@world
+) ThisClass_
+
+  [
+  !actor: GameLib.begin_spawning_actor_from_class(
+    world_context static_class xform false owner)
+  GameLib.finish_spawning_actor(actor xform)
+  ]

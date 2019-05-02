@@ -1,0 +1,120 @@
+//---------------------------------------------------------------------------------------
+// Test expressions
+//---------------------------------------------------------------------------------------
+
+( Real arg1: 42.0
+  (obj) code
+)
+
+  [
+  !str:       "hello".[append(" world") self]
+  !counter:   20
+  // Using string as name identifier
+  //!actor:     Actor.named("ActorName")
+  // Using symbol as name identifier
+  //!actor:     Actor.named('ActorName')
+  //!actor_ref: @'ActorName'
+  
+  test
+  test2
+  code(arg1)
+  
+  Debug.println(1 2.0 str.lowercase {1 2.0 str -counter} TestEnum.@@four_two)
+
+  counter._gradually_change_to(0 .5)
+  
+  if str = "hello"
+      [
+      this.test
+      ]
+    arg1 > 3
+      [
+      test2
+      test
+      ]
+    2r101010 = 16r2a // 42 = 42
+      [
+      test2
+      test
+      ]
+    else
+      [
+      test
+      test2
+      ]
+  
+  case str
+    "hello"
+      [
+      test
+      test2
+      ]
+    "HELLO"
+      [
+      test
+      test2
+      ]
+    else
+      [
+      test
+      test2
+      ]
+
+  loop outer
+    [
+    loop
+      [
+      test
+      test2
+      if str.empty? [exit]
+      ]
+
+    if str.filled? [exit outer]
+    ]
+
+  // Concurrent spawn threads and wait until all threads complete before
+  // running next expression.
+  sync
+    [
+      [
+      Debug.println("Thread-1a")
+      _wait(.2)
+      Debug.println("Thread-1b")
+      _wait(.3)
+      Debug.println("Thread-1c")
+      ]
+
+      [
+      Debug.println("Thread-2a")
+      _wait(.3)
+      Debug.println("Thread-2b")
+      _wait(.4)
+      Debug.println("Thread-2c")
+      ]
+
+      [
+      Debug.println("Thread-3a")
+      _wait(.1)
+      Debug.println("Thread-3b")
+      _wait(.3)
+      Debug.println("Thread-3c")
+      ]
+    ]
+
+  race
+    [
+    _test(1.1)
+    _test(2)
+    ]
+
+  branch
+    [
+    _test_sequence
+    ]
+
+  divert
+    [
+    _test(2)
+    _test(1.0 + .5)
+    ]
+  ] 

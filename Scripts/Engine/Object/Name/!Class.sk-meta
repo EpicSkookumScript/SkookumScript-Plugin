@@ -1,0 +1,10 @@
+//---------------------------------------------------------------------------------------
+// UE4 Public name/identifier, available to the world.
+// [Used with object ids - SkookumScript uses Symbol natively.]
+//
+// Names are stored as a combination of an index into a table of unique strings and an
+// instance number.
+//
+// Names are case-insensitive, but can be case-preserving in some C++ builds (such as
+// editor builds when WITH_CASE_PRESERVING_NAME is 1)
+

@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Description Retrieves count items starting at index and returns them in a new list.
+//             By default all items after and including index are retrieved.
+// Examples    {0, "one", 2.0, 3, "four"}.range(1, 3) returns {"one", 2.0, 3}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Integer index,
+  Integer count: length_after(index)
+) ThisClass_
+
+

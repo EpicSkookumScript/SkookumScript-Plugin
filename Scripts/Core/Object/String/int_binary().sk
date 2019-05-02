@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Convert all or initial substring of this string to an Integer using binary / base 2
+// 
+// Returns: Integer value of entire string or a substring
+//
+// Examples:
+//   "101010".int_binary  // returns 42
+//
+// See: Integer(), int_radix(), int_octal(), int_hex()
+//---------------------------------------------------------------------------------------
+
+() Integer
+
+  [
+  parse_int(, 2)
+  ]

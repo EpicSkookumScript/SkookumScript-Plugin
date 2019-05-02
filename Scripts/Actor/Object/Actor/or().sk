@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Randomly choose this actor or the other actor
+// 
+// # Returns: random of the two actors
+//
+// # Examples:  actor1 or actor2
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(ThisClass_ alternate) ThisClass_
+
+  [
+  if @@random.coin_toss [this] else [alternate]
+  ]
+

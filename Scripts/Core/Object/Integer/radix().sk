@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Convert to String using specified radix/base.
+// 
+// Params:
+//   base: radix to use - 2 binary, 16 hexadecimal, etc.
+//
+// Returns: string version of itself
+//
+// Examples
+//   42.radix(16)  // returns "2a"
+//
+// See: binary(), octal(), hex(), String(), String@int_radix()
+//---------------------------------------------------------------------------------------
+
+(Integer base) String
+

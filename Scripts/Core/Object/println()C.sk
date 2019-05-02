@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Converts all the objects passed as arguments into strings, concatenates them, adds a
+// newline (\n) and prints out the single concatenated string to the console.
+// [Prints in both Debug *and* Release builds.]
+//
+// #Examples
+//   print("The ultimate answer is: " 6 * 7)
+//
+// #See Also   print(), Debug@print(), Debug@println()
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+({Object} objs_as_strs)
+

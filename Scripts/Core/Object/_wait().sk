@@ -1,0 +1,31 @@
+//---------------------------------------------------------------------------------------
+// Waits the specified number of seconds.
+//
+// # Params:
+//   seconds:
+//     Number of seconds to wait. If seconds given is zero it will wait one frame and if
+//     it is less than zero (negative) it will return immediately which can be useful for
+//     testing.
+//
+// # Examples:
+//   // Wait single frame
+//   _wait
+//
+//   // Have actor wait between moves
+//   actor.
+//     [
+//     _move_to_node('Waypoint5')
+//     _wait(5)  // Wait 5 seconds
+//     _move_to_node('Waypoint6')
+//     ]
+//
+// # Notes:
+//   This does not stop the object from running other coroutines, it just holds off
+//   calling the next routine(s) following the wait.
+//
+// # See:       _wait_until() 
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Real seconds: 0.0)
+

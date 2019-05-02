@@ -1,0 +1,6 @@
+EObjectTypeQuery !@@object_type_world_static
+EObjectTypeQuery !@@object_type_world_dynamic
+EObjectTypeQuery !@@object_type_pawn
+EObjectTypeQuery !@@object_type_physics_body
+EObjectTypeQuery !@@object_type_vehicle
+EObjectTypeQuery !@@object_type_destructible

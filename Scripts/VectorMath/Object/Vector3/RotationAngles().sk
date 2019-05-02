@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// * Convert the vector to a rotation angle
+//
+// # Returns:
+//   new rotation angle
+//
+// # Examples:
+//   !rot : [vec1 - vec2].RotationAngles
+//   !rot : some_actor.actor_forward_vector.RotationAngles
+//   Vector3!xyz(0 1 1).RotationAngles
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+() RotationAngles
+

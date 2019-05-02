@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------------------
+// Returns the squared distance bewteen this vector and the origin (0, 0, 0) - also known
+// as the squared magnitude.
+//
+// # Returns: squared distance between this vector and the origin
+//
+// # Examples:
+//  !len_sq: vec.length_sq
+//
+// # See:       length(), distance(), distance_sq()
+// # Notes:     This is a tiny bit faster than calling `length()`
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Real
+

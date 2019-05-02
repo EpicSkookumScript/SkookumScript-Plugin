@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Returns string representation of itself
+//
+// #Notes
+//   This method is should generally only be used when a Symbol to String table is
+//   available.  It often isn't available in user final/ship builds.
+//   This method is not permitted when doing a "strict" compile.
+//
+// #See Also   id_str()
+// #Author(s)  Conan Reis
+//---------------------------------------------------------------------------------------
+
+() String
+

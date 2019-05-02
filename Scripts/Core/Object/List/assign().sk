@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description :=  Assignment - sets items of current list to the same ones in specified
+//             list.
+// Examples    list := {0, "one", 2.0}  // list is now {0, "one", 2.0}
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+(List{ItemClass_} list) ThisClass_
+

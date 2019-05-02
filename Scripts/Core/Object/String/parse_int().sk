@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Convert all or a substring of this string to an Integer
+// 
+// Params:
+//   start_idx: starting character position to begin parse
+//   radix: radix/base to use for conversion - 2 binary, 16 hexadecimal, etc.
+//
+// Return Params:
+//   stop_idx: character index position where parse stopped 
+//
+// Returns: Integer value of entire string or a substring
+//
+// See: Integer(), int_radix(), int_binary(), int_octal(), int_hex()
+//---------------------------------------------------------------------------------------
+
+( Integer start_idx: 0
+  Integer radix:     10
+; Integer stop_idx
+) Integer

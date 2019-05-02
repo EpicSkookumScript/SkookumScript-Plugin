@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Reverses the order of count items starting at index. By default all items after and
+// including index are reversed.
+//
+// # Returns: itself
+//
+// # Examples:
+//   {0 "one" 2.0 3 "four"}.reverse(1 3)
+//   // changes list to {0, 3, 2.0, "one", "four"}
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+( Integer index: 0
+  Integer count: length_after(index)
+) ThisClass_
+
+
+

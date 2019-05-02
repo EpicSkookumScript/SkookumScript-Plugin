@@ -1,0 +1,9 @@
+//---------------------------------------------------------------------------------------
+// Description Returns the 1 if number is positive (>= 0) and -1 if it is negative (< 0).
+//             The original number remains unchanged.
+// Returns     1 or -1
+// Author(s)   Conan Reis
+//---------------------------------------------------------------------------------------
+
+() Integer
+

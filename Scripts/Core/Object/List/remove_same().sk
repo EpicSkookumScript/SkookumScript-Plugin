@@ -1,0 +1,37 @@
+//---------------------------------------------------------------------------------------
+// Finds the first item in the list that is same / equivalent object `same?()` to the one
+// supplied and removes it if found.
+//
+// #Params
+//   item:  object to remove
+//   index:  Starting index to begin search.
+//   item_count:  Number of items to search
+//   index_found;  Index position where element was found or -1 if not found
+//
+// #Returns: true if found and removed and false if not found
+//
+// #Examples
+//
+//   ```
+//   !num:  4
+//   !list: {1 2 3 num 5}
+//   !idx
+//   !result: list.remove_same(4; idx)
+//   println("result1:" result " idx:" idx)
+//   result: list.remove_same(num; idx)
+//   println("result2:" result " idx:" idx)
+//   ```
+//
+//   Prints
+//   ```
+//   result1:false idx:None
+//   result2:true idx:3
+//   ```
+//
+// #Author(s): Conan Reis
+(
+  ItemClass_ item
+  Integer    index: 0
+  Integer    item_count: length_after(index)
+; Integer    index_found
+) Boolean

@@ -1,0 +1,28 @@
+//---------------------------------------------------------------------------------------
+// Logical equality - same as = operator. Returns true if both objects are logically the
+// same - though they may be different objects.
+//
+// # Params:
+//   vec: vector to compare
+//
+// # Returns: true if equal false if not
+//
+// # Examples:
+//   obj1 = obj2
+//   obj1.equal?(obj2)
+//
+// # See:
+//   ~=  not_equal?()
+//   >   greater?()
+//   >=  greater_or_equal?()
+//   <   less?()
+//   <=  less_or_equal?()
+//       same?()        - tests if objects equivalent/same object in memory
+//   :=  assign()       - copies contents of one object to another
+//   :                  - bind operator - changes the object to which the variable refers
+//
+// # Author(s): Conan Reis
+//---------------------------------------------------------------------------------------
+
+(Vector2 vec) Boolean
+

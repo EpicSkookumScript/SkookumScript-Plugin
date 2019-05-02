@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Constructor.  Initializes yaw, pitch, roll values to supplied values
+//
+// # Returns: itself
+//
+// # Examples:
+//   !angles: RotationAngles!yaw_pitch_roll(90 45 0)
+//
+// # See:       RotationAngles!(), RotationAngles!copy()
+// # Author(s): Markus Breyer
+//---------------------------------------------------------------------------------------
+
+(Real yaw, Real pitch, Real roll) RotationAngles
+

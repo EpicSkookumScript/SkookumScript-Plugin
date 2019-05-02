@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// -= Subtracts supplied value from itself
+//
+// # Params:
+//   rot: RotationAngles to subtract
+//
+// # Returns: itself
+//
+// # Examples:
+//   rot1 -= rot2
+//   rot1.subtract_assign(rot2)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(RotationAngles rot) RotationAngles
+
