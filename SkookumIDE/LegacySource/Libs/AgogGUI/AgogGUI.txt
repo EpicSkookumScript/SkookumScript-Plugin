@@ -1,0 +1,86 @@
+=========================================================================================
+Agog Labs C++ library.
+Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+=========================================================================================
+
+
+This is the AgogGUI library.
+
+It contains all the 2-dimensional classes - namely the custom graphical user interface
+objects.  [GUI objects that are built-in to the operating system are found in the
+AgogGUI_OS library.]  The implementation is only partially platform specific.
+
+
+=========================================================================================
+Library Dependencies
+=========================================================================================
+
+  AgogCore.lib   (LibC.lib or LibCMT.lib [depending on concurrency model])
+  AgogIO.lib  (WinMM.lib Kernel32.lib User32.lib Shell32.lib ShlWAPI.lib)
+  GDI32.lib
+
+
+=========================================================================================
+Preprocessor defines
+=========================================================================================
+
+Defines:
+ 
+  See "Build Targets" below.
+
+  Each of the libraries that this library is depandant on should have their doc files
+  examined to note any defines or other useful info.
+
+
+Platform Specific
+
+  Windows 32-bit specific:
+    _WIN32, _LIB, WIN32_LEAN_AND_MEAN, _WIN32_WINDOWS=0x410 or WINVER=0x0500,
+    _WIN32_WINDOWS=0x0500, _WIN32_WINNT=0x0500
+
+
+=========================================================================================
+Build Targets	[for all projects]
+=========================================================================================
+
+               Build Properties
+Target     Checked Optimized LowEnd  Use                                       Common Equivalent
+---------  ------- --------- ------  -----------------                         -----------------
+Coder         X                      General programming                       Debug
+Coder_Low     X                X     General programming for low end systems
+Dev           X        X             Most project developers [includes tools]
+User                   X             User final/shipping/gold version          Release
+User_Low               X       X     User final for low end systems
+
+  - Build Properties:
+     'Checked'   - Extra checking is performed and tool/editor hook ins are present
+     'Optimized' - Fully optimized compile and code is inlined (faster, but harder to debug)
+     'LowEnd'    - No fancy stuff like SSE for lower end systems
+  - Executables with different build types are appended with -TargetName to tell them apart.
+  - Debug info is included in all builds.  The binaries (exe, lib, and obj files) have no
+    extra info stored in them - all debug info is stored in separate .pdb files.  [The only
+    difference of a binary compiled without debug info is that a path to the .pdb file is
+    stored in the binary, though the binary will still work just fine without the .pdb file
+    present.]
+
+
+Defines that are present for the build properties:
+
+  Property   Defines if present    Defines if not present
+  ---------  ------------------    ----------------------
+  Debug      A_DEBUG_INFO
+  Checked    A_EXTRA_CHECK             
+  Optimized  NDEBUG                A_UNOPTIMIZED & _DEBUG
+  LowEnd     A_LOWEND & A_NO_SSE
+
+
+Defines that are present for the build targets:
+
+  Target     Defines
+  ---------  --------------
+  Coder      A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG
+  Coder_Low  A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG;A_LOWEND;A_NO_SSE
+  Dev        A_EXTRA_CHECK;NDEBUG
+  User       NDEBUG
+  User_Low   NDEBUG;A_LOWEND;A_NO_SSE
+

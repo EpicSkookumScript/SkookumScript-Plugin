@@ -1,0 +1,95 @@
+=========================================================================================
+Agog Labs C++ library.
+Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+=========================================================================================
+
+
+This is the SkookumScript Integrated Development Environment hook-in library.
+
+It consists primarily of the "console" for output and quick and dirty input and the
+"class browser" for editing the class hierarchy and the associated overlays/libraries.
+
+
+=========================================================================================
+Library Dependencies
+=========================================================================================
+
+Dependencies:
+  AgogCore.lib   (LibC.lib or LibCMT.lib [depending on concurrency model])
+  SkookumLib.lib
+  AgogIO.lib  (WinMM.lib Kernel32.lib User32.lib Shell32.lib ShlWAPI.lib)
+  AgogGUI.lib     (GDI32.lib)
+  AgogGUI_OS.lib  (ComCtl32.lib)
+
+
+=========================================================================================
+Preprocessor defines
+=========================================================================================
+
+Defines:
+ 
+  See "Build Targets" below.
+
+  Each of the libraries that this library is depandant on should have their doc files
+  examined to note any defines or other useful info.
+
+  In particular, examine SkookumLib.txt for info on the SKOOKUM define.
+  
+  
+  Defines to note in particular:
+
+	  SK_NO_RESOURCES - if defined, resources (like icons & bitmaps) are not embedded in
+	  the application.
+
+
+Platform Specific:
+
+  Windows specific:
+    _WIN32, WIN32_LEAN_AND_MEAN
+	WINVER=0x0500, _WIN32_WINDOWS=0x0500
+	_WIN32_WINNT=0x0500 [if for Windows 2000 and above]
+
+
+=========================================================================================
+Build Targets	[for all projects]
+=========================================================================================
+
+               Build Properties
+Target     Checked Optimized LowEnd  Use                                       Common Equivalent
+---------  ------- --------- ------  -----------------                         -----------------
+Coder         X                      General programming                       Debug
+Coder_Low     X                X     General programming for low end systems
+Dev           X        X             Most project developers [includes tools]
+User                   X             User final/shipping/gold version          Release
+User_Low               X       X     User final for low end systems
+
+  - Build Properties:
+     'Checked'   - Extra checking is performed and tool/editor hook ins are present
+     'Optimized' - Fully optimized compile and code is inlined (faster, but harder to debug)
+     'LowEnd'    - No fancy stuff like SSE for lower end systems
+  - Executables with different build types are appended with -TargetName to tell them apart.
+  - Debug info is included in all builds.  The binaries (exe, lib, and obj files) have no
+    extra info stored in them - all debug info is stored in separate .pdb files.  [The only
+    difference of a binary compiled without debug info is that a path to the .pdb file is
+    stored in the binary, though the binary will still work just fine without the .pdb file
+    present.]
+
+
+Defines that are present for the build properties:
+
+  Property   Defines if present    Defines if not present
+  ---------  ------------------    ----------------------
+  Checked    A_EXTRA_CHECK             
+  Optimized  NDEBUG                A_UNOPTIMIZED & _DEBUG
+  LowEnd     A_LOWEND & A_NO_SSE
+
+
+Defines that are present for the build targets:
+
+  Target     Defines
+  ---------  --------------
+  Coder      A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG
+  Coder_Low  A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG;A_LOWEND;A_NO_SSE
+  Dev        A_EXTRA_CHECK;NDEBUG
+  User       NDEBUG
+  User_Low   NDEBUG;A_LOWEND;A_NO_SSE

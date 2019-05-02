@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Coder|Win32">
+      <Configuration>Coder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Coder|x64">
+      <Configuration>Coder</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|Win32">
+      <Configuration>Dev</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|x64">
+      <Configuration>Dev</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|Win32">
+      <Configuration>User</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|x64">
+      <Configuration>User</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>LIB - AgogCore</ProjectName>
+    <ProjectGuid>{A3F44DCA-9256-418F-9ABA-B5590A483E0C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <PreprocessorDefinitions>A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <PreprocessorDefinitions>A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore.txt" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADatum.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMath.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARandom.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ANamed.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AString.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AStringRef.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbol.inl" />
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbolTable.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ABinaryParse.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AChecksum.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADatum.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFlagSet.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AList.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APArray.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APCompactArray.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APCompactArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APSizedArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APSorted.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADebug.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AException.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AExceptionBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompare.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompareBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompareMethod.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AConstructDestruct.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADeferFunc.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunction.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionArg.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionArgBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMethod.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMethodArg.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMemory.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AObjReusePool.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMath.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARandom.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARegion.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVArray.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVSizedArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactArray.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactArrayBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactSorted.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVec2i.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFreePtr.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AIdPtr.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AIndexPointer.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARefCount.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ANamed.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AString.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AStringRef.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbol.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbolTable.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AgogCore.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AChecksum.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADatum.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADebug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AException.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADeferFunc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AFunction.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AFunctionBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AMemory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AMath.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ARandom.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ARegion.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AVec2i.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ANamed.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AStringRef.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ASymbol.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ASymbolTable.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AgogCore.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

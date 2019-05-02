@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{d0b14c32-f9c8-4595-83bf-88287bf7a349}</UniqueIdentifier>
+      <Extensions>txt;doc</Extensions>
+    </Filter>
+    <Filter Include="_Resources">
+      <UniqueIdentifier>{b9eacefc-b684-4eff-8e2e-784cb18e9807}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SkookumScriptIDE.txt">
+      <Filter>_Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SkookumScriptIDE.rc">
+      <Filter>_Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SkookumScriptIDE_Res.h">
+      <Filter>_Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SkookumScriptIDE.cpp" />
+    <ClCompile Include="..\Libs\AgogIO\AgogIO\_AWinMain.cpp" />
+  </ItemGroup>
+</Project>

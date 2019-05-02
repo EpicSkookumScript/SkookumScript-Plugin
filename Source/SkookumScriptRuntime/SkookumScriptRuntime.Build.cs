@@ -47,7 +47,8 @@ namespace UnrealBuildTool.Rules
             "HTTP",
             "Networking",
             "NetworkReplayStreaming",
-            "Projects"
+            "Projects",
+            "SourceControl",
           }
         );
 

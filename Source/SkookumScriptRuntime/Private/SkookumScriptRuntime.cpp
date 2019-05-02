@@ -27,8 +27,6 @@
 #include "Engine/World.h"
 #include "Stats/Stats.h"
 
-#include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
-
 #if WITH_EDITORONLY_DATA
 #include "KismetCompiler.h"
 #include "KismetCompilerModule.h"
@@ -155,10 +153,9 @@ class FSkookumScriptRuntime : public ISkookumScriptRuntime
     // Overridden from IBlueprintCompiler
 
       virtual bool  CanCompile(const UBlueprint* Blueprint) override { return false; }
-      virtual void  Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results) override {}
+      virtual void  Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results, TArray<UObject*>* ObjLoaded) override {}
       virtual void  PreCompile(UBlueprint* Blueprint) override;
       virtual void  PostCompile(UBlueprint* Blueprint) override;
-
 
     // Overridden from ISkookumScriptRuntimeGeneratorInterface
 

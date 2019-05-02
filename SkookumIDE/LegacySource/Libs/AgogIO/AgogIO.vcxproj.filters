@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{07afea3c-9520-4231-b333-eaa456760593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ErrorHandling">
+      <UniqueIdentifier>{9ca63cbc-64ae-4c27-8fb1-8991b74e86c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileIO">
+      <UniqueIdentifier>{27152413-0618-4ca8-9ed1-2fab21d0ed56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{1465f806-52d4-40ad-9007-1789ebc3d7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Messaging">
+      <UniqueIdentifier>{b42344b9-d85b-4ce2-a8ec-7c669a892555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{cb62dc21-3b85-4577-a092-df90754b119f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication">
+      <UniqueIdentifier>{8e000bce-a2f1-49d4-b043-72bfa14658b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgogIO.txt">
+      <Filter>_Docs</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATime.inl">
+      <Filter>Time</Filter>
+    </None>
+    <None Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATimer.inl">
+      <Filter>Time</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ADebugOS.cpp">
+      <Filter>ErrorHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AErrPopUp.cpp">
+      <Filter>ErrorHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ADirectory.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AFile.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIni.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AClipboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AKeyboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIOCompletionPort.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AMessageTarget.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AMessageTargetClass.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASelfDestructBase.cpp">
+      <Filter>Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIPAddress.cpp">
+      <Filter>Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASocket.cpp">
+      <Filter>Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASocketServer.cpp">
+      <Filter>Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ATime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ATimer.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AApplication.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AgogIO.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ANamedPipe.cpp">
+      <Filter>Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AWeb.cpp">
+      <Filter>Communication</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ADebugOS.hpp">
+      <Filter>ErrorHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AErrPopUp.hpp">
+      <Filter>ErrorHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ADirectory.hpp">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AFile.hpp">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIni.hpp">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AClipboard.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AInputTypes.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AKeyboard.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIOCompletionPort.hpp">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AMessageTarget.hpp">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AMessageTargetClass.hpp">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASelfDestructBase.hpp">
+      <Filter>Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIPAddress.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASocket.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASocketServer.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATime.hpp">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATimer.hpp">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AApplication.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AgogIO.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AWinTypes.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ANamedPipe.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AWeb.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

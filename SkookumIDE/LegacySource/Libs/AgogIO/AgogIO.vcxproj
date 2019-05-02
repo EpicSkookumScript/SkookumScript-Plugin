@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Coder|Win32">
+      <Configuration>Coder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Coder|x64">
+      <Configuration>Coder</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|Win32">
+      <Configuration>Dev</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|x64">
+      <Configuration>Dev</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|Win32">
+      <Configuration>User</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|x64">
+      <Configuration>User</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>LIB - AgogIO</ProjectName>
+    <ProjectGuid>{87637C8F-C687-4E8E-8858-C025D0B96168}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public;..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private;..\AgogCore;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="AgogIO.txt" />
+    <None Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATime.inl" />
+    <None Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATimer.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ADebugOS.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AErrPopUp.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ADirectory.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AFile.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIni.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AClipboard.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AKeyboard.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIOCompletionPort.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AMessageTarget.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AMessageTargetClass.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ANamedPipe.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASelfDestructBase.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AIPAddress.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASocket.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ASocketServer.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ATime.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\ATimer.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AApplication.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AgogIO.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Private\AgogIO\AWeb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ADebugOS.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AErrPopUp.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ADirectory.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AFile.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIni.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AClipboard.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AInputTypes.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AKeyboard.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIOCompletionPort.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AMessageTarget.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AMessageTargetClass.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ANamedPipe.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASelfDestructBase.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AIPAddress.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASocket.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ASocketServer.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATime.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\ATimer.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AApplication.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AgogIO.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AWeb.hpp" />
+    <ClInclude Include="..\..\..\..\..\..\Source\Runtime\SkookumIDELibs\AgogIO\Public\AgogIO\AWinTypes.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

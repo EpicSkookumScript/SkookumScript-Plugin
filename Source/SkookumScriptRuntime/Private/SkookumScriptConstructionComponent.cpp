@@ -13,7 +13,6 @@
 #include "SkookumScriptConstructionComponent.h"
 #include "SkookumScriptClassDataComponent.h"
 #include "SkookumScriptInstanceProperty.h"
-#include "Bindings/SkUERuntime.hpp"
 #include "Bindings/Engine/SkUEActor.hpp"
 #include "SkUEEntity.generated.hpp"
 
@@ -82,10 +81,6 @@ void USkookumScriptConstructionComponent::InitializeComponent()
       if (instance_offset)
         {
         USkookumScriptInstanceProperty::construct_instance((uint8_t *)actor_p + instance_offset, actor_p, sk_class_p);
-
-        // Need to resolve raw data for packaged builds
-        SkUEClassBindingHelper::resolve_raw_data_static(sk_class_p);
-        SkUERuntime::get_singleton()->sync_all_reflected_to_ue(true);
         }
       }
     }

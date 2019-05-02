@@ -20,8 +20,6 @@ force-lib-build.txt
 /Binaries/TVOS/**
 /Binaries/Android/**
 /Binaries/Win64/**
-!/Binaries/Win64/SkookumScript*.dll
-!/Binaries/Win64/AgogCore*.dll
 /Intermediate/**
 /Agog/**
 /Saved/**
@@ -37,9 +35,6 @@ force-lib-build.txt
 /Source/SkookumScript/Lib/**/*Win32*.lib
 /Source/SkookumScript/Lib/**/VS2013/*
 /Source/SkookumLibs*.*
-/SkookumIDE/*.*
-!/SkookumIDE/Skookum.ini
-/SkookumIDE/Source/**
 /SkookumIDE/Scripts/workspace?.sk
 /SkookumIDE/Scripts/workbench*.sk
 /SkookumIDE/Engine/Saved/**

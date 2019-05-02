@@ -14,8 +14,6 @@ public class AgogCore : ModuleRules
 {
   public AgogCore(ReadOnlyTargetRules Target) : base(Target)
   {
-    bRequiresImplementModule = false;
-
     // Ignore warnings about hokey code in windows.h
     bEnableUndefinedIdentifierWarnings = false;
 

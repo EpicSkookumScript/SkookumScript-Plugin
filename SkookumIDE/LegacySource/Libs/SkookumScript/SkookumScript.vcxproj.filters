@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{3563f98d-bdc4-4eac-a134-5c9ba5dc5b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{98bc6228-73cd-454d-98af-0359907f8dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Expressions">
+      <UniqueIdentifier>{5a961e82-cbf0-4096-a7b4-f4177bc9ca41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Invokables">
+      <UniqueIdentifier>{5a2b8a39-48b6-4c5b-8dc2-fdafff6bad7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Invokables\Parameters">
+      <UniqueIdentifier>{db78a10a-9946-4067-9af4-ab5bcd0821c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{26736e62-d836-4e83-bb92-aa2e55425f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Invoked">
+      <UniqueIdentifier>{581798d0-e9bc-4db6-9d93-9e4939942809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Instance">
+      <UniqueIdentifier>{bdbd8498-0524-4c8e-a0c3-ba56bec11b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Naming">
+      <UniqueIdentifier>{769d854e-d2f4-449c-90f3-6ac6d903d828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsing">
+      <UniqueIdentifier>{4f87095e-e27f-4f24-86f8-5459655824e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Atomics">
+      <UniqueIdentifier>{82a46d43-8593-4e3f-ade3-ad3b3d335101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Instance\Class">
+      <UniqueIdentifier>{d149cefa-a52f-4fe5-a264-8585050c5c7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBrain.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\SkookumScript.txt">
+      <Filter>_Docs</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkExpressionBase.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvocation.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokableBase.inl">
+      <Filter>Invokables</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMethod.inl">
+      <Filter>Invokables</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutine.inl">
+      <Filter>Invokables</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutineCall.inl">
+      <Filter>Invokables</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.inl">
+      <Filter>Invokables\Parameters</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameters.inl">
+      <Filter>Invokables\Parameters</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.inl">
+      <Filter>Invokables\Parameters</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObjectBase.inl">
+      <Filter>Objects</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedBase.inl">
+      <Filter>Objects\Invoked</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedMethod.inl">
+      <Filter>Objects\Invoked</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedCoroutine.inl">
+      <Filter>Objects\Invoked</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActor.inl">
+      <Filter>Objects\Instance</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstance.inl">
+      <Filter>Objects\Instance</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkQualifier.inl">
+      <Filter>Naming</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTyped.inl">
+      <Filter>Naming</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMemberInfo.inl">
+      <Filter>Naming</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParser.inl">
+      <Filter>Parsing</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTypedContext.inl">
+      <Filter>Parsing</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActorClass.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassDescBase.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClass.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.inl">
+      <Filter>Objects\Instance\Class</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.inl">
+      <Filter>Expressions</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMind.inl">
+      <Filter>Objects\Instance</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDataInstance.inl">
+      <Filter>Objects\Instance</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.inl">
+      <Filter>Expressions</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\Sk.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRuntimeBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkBrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkEnum.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInteger.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkList.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRandom.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkReal.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkString.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkSymbol.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkDebug.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRemoteBase.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRemoteRuntimeBase.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkExpressionBase.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvocation.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteral.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableBase.cpp">
+      <Filter>Invokables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethod.cpp">
+      <Filter>Invokables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethodCall.cpp">
+      <Filter>Invokables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutine.cpp">
+      <Filter>Invokables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutineCall.cpp">
+      <Filter>Invokables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.cpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParameterBase.cpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParameters.cpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.cpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectBase.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedBase.cpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedMethod.cpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedCoroutine.cpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkActor.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkDataInstance.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInstance.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkQualifier.cpp">
+      <Filter>Naming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTyped.cpp">
+      <Filter>Naming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMemberInfo.cpp">
+      <Filter>Naming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParser.cpp">
+      <Filter>Parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedContext.cpp">
+      <Filter>Parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteralClosure.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkBoolean.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClosure.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkActorClass.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClassDescBase.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClass.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.cpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMind.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkNone.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObject.cpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInstanceList.cpp">
+      <Filter>Objects\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkSymbolDefs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.cpp">
+      <Filter>Expressions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\Sk.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRuntimeBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBrain.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkEnum.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInteger.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkList.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRandom.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkReal.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkString.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkSymbol.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDebug.hpp">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRemoteBase.hpp">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRemoteRuntimeBase.hpp">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkExpressionBase.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvocation.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteral.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokableBase.hpp">
+      <Filter>Invokables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMethod.hpp">
+      <Filter>Invokables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethodCall.hpp">
+      <Filter>Invokables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutine.hpp">
+      <Filter>Invokables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutineCall.hpp">
+      <Filter>Invokables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.hpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameterBase.hpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameters.hpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.hpp">
+      <Filter>Invokables\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObjectBase.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedBase.hpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedMethod.hpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedCoroutine.hpp">
+      <Filter>Objects\Invoked</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActor.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDataInstance.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstance.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkQualifier.hpp">
+      <Filter>Naming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTyped.hpp">
+      <Filter>Naming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMemberInfo.hpp">
+      <Filter>Naming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParser.hpp">
+      <Filter>Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTypedContext.hpp">
+      <Filter>Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteralClosure.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClosure.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBoolean.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActorClass.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassDescBase.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClass.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.hpp">
+      <Filter>Objects\Instance\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMind.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBinding.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBindingAbstract.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBindingBase.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstanceList.hpp">
+      <Filter>Objects\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkNone.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObject.hpp">
+      <Filter>Objects\Atomics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkNamed.hpp">
+      <Filter>Naming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.hpp">
+      <Filter>Expressions</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

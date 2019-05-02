@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{e06bf096-81c7-4a0b-a10e-8d77ab4702ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Resources">
+      <UniqueIdentifier>{089c1846-c5ba-443a-b149-6106a0eb326f}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Buttons">
+      <UniqueIdentifier>{4eb81210-e643-4d27-9dae-68a567d6b09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Edit Controls">
+      <UniqueIdentifier>{6396e876-9909-4b2c-8e4e-ac61552e7dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lists">
+      <UniqueIdentifier>{506b32af-9b26-47d6-a7e9-434cf9df4393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{3973f294-1cb1-4ed4-8626-e230270ab84e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Error Handling">
+      <UniqueIdentifier>{d2f8b996-1f33-4886-8e47-a721b2c293cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window Groups">
+      <UniqueIdentifier>{d23eff34-6466-41e4-8256-25834a1ca3bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgogGUI_OS.txt">
+      <Filter>_Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AgogGUI_OS\AButtonOS.cpp">
+      <Filter>Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\ACheckBoxOS.cpp">
+      <Filter>Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AEditLineOS.cpp">
+      <Filter>Edit Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AEditOS.cpp">
+      <Filter>Edit Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\ARichEditOS.cpp">
+      <Filter>Edit Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AErrorDialog.cpp">
+      <Filter>Error Handling</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AComboBoxOS.cpp">
+      <Filter>Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AListOS.cpp">
+      <Filter>Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AMenuOS.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\APopMenuOS.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\ADialogOS.cpp" />
+    <ClCompile Include="AgogGUI_OS\AgogGUI_OS.cpp" />
+    <ClCompile Include="AgogGUI_OS\AImageListOS.cpp" />
+    <ClCompile Include="AgogGUI_OS\ATreeOS.cpp" />
+    <ClCompile Include="AgogGUI_OS\ASplitterOS.cpp">
+      <Filter>Window Groups</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\ATabViewOS.cpp">
+      <Filter>Window Groups</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI_OS\AToolTipOS.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AgogGUI_OS\AButtonOS.hpp">
+      <Filter>Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\ACheckBoxOS.hpp">
+      <Filter>Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AEditLineOS.hpp">
+      <Filter>Edit Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AEditOS.hpp">
+      <Filter>Edit Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\ARichEditOS.hpp">
+      <Filter>Edit Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AErrorDialog.hpp">
+      <Filter>Error Handling</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AComboBoxOS.hpp">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AListOS.hpp">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AMenuOS.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\APopMenuOS.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\ADialogOS.hpp" />
+    <ClInclude Include="AgogGUI_OS\AgogGUI_OS.hpp" />
+    <ClInclude Include="AgogGUI_OS\AImageListOS.hpp" />
+    <ClInclude Include="AgogGUI_OS\ATreeOS.hpp" />
+    <ClInclude Include="AgogGUI_OS\ATabViewOS.hpp">
+      <Filter>Window Groups</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\ASplitterOS.hpp">
+      <Filter>Window Groups</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI_OS\AToolTipOS.hpp" />
+  </ItemGroup>
+</Project>

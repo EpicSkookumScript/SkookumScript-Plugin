@@ -34,21 +34,21 @@ inline AString FNameToAString(const FName & name)
   FString fstr;
   name.ToString(fstr);
 
-  return AString(TCHAR_TO_WCHAR(*fstr), fstr.Len());
+  return AString(*fstr, fstr.Len());
   }
 
 //---------------------------------------------------------------------------------------
 inline AString FStringToAString(const FString & str)
   {
   // $Revisit - CReis Look into StringCast<>  Engine\Source\Core\Public\Containers\StringConv.h
-  return AString(TCHAR_TO_WCHAR(*str), str.Len());
+  return AString(*str, str.Len());
   }
 
 //---------------------------------------------------------------------------------------
 inline ASymbol FStringToASymbol(const FString & str)
   {
   // $Revisit - CReis Look into StringCast<>
-  return ASymbol::create(AString(TCHAR_TO_WCHAR(*str), str.Len()));
+  return ASymbol::create(AString(*str, str.Len()));
   }
 
 //---------------------------------------------------------------------------------------

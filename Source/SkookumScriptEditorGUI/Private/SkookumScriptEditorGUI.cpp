@@ -20,7 +20,6 @@
 #include "Logging/LogMacros.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "Framework/Application/SlateApplication.h"
-#include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 
 DEFINE_LOG_CATEGORY_STATIC(LogSkookumScriptEditorGUI, Log, All);
 

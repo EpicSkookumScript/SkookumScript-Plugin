@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{bd6a2593-a7bc-4e04-baef-50b30c96f4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fonts">
+      <UniqueIdentifier>{3568fb3d-956a-4074-9186-2a4697530811}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgogGUI.txt">
+      <Filter>_Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AgogGUI\AFont.cpp">
+      <Filter>Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI\ATrueTypeFont.cpp">
+      <Filter>Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="AgogGUI\AColor.cpp" />
+    <ClCompile Include="AgogGUI\ADisplay.cpp" />
+    <ClCompile Include="AgogGUI\AgogGUI.cpp" />
+    <ClCompile Include="AgogGUI\AMouse.cpp" />
+    <ClCompile Include="AgogGUI\AWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AgogGUI\AFont.hpp">
+      <Filter>Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI\AFontSystemBase.hpp">
+      <Filter>Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI\ATrueTypeFont.hpp">
+      <Filter>Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="AgogGUI\AColor.hpp" />
+    <ClInclude Include="AgogGUI\ADisplay.hpp" />
+    <ClInclude Include="AgogGUI\AgogGUI.hpp" />
+    <ClInclude Include="AgogGUI\AMouse.hpp" />
+    <ClInclude Include="AgogGUI\AWindow.hpp" />
+  </ItemGroup>
+</Project>

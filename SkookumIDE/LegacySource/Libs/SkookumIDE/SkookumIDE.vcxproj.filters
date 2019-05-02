@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{fb017f35-b278-4a78-9c45-fb2955e9ac4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Browser">
+      <UniqueIdentifier>{8a401dcf-4b31-413f-b2a9-aad9b32cd1c4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SkookumScript.ico">
+      <Filter>_Resources</Filter>
+    </None>
+    <None Include="SkookumIDE.txt">
+      <Filter>_Docs</Filter>
+    </None>
+    <None Include="SkookumIDE\SkAutoComplete.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SkookumIDE\SkookumIDE_Res.h">
+      <Filter>_Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="SkookumIDE\SkookumIDE.hpp" />
+    <ClInclude Include="SkookumIDE\SkCompiler.hpp" />
+    <ClInclude Include="SkookumIDE\SkConsole.hpp" />
+    <ClInclude Include="SkookumIDE\SkRemoteIDE.hpp" />
+    <ClInclude Include="SkookumIDE\SkSearchDialog.hpp" />
+    <ClInclude Include="SkookumIDE\SkVersionText.hpp" />
+    <ClInclude Include="SkookumIDE\SkClassBrowser.hpp">
+      <Filter>Browser</Filter>
+    </ClInclude>
+    <ClInclude Include="SkookumIDE\SkNavigationView.hpp">
+      <Filter>Browser</Filter>
+    </ClInclude>
+    <ClInclude Include="SkookumIDE\SkMainWindowBase.hpp" />
+    <ClInclude Include="SkookumIDE\SkAutoComplete.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SkookumIDE\SkookumIDE.cpp" />
+    <ClCompile Include="SkookumIDE\SkCompiler.cpp" />
+    <ClCompile Include="SkookumIDE\SkConsole.cpp" />
+    <ClCompile Include="SkookumIDE\SkRemoteIDE.cpp" />
+    <ClCompile Include="SkookumIDE\SkSearchDialog.cpp" />
+    <ClCompile Include="SkookumIDE\SkClassBrowser.cpp">
+      <Filter>Browser</Filter>
+    </ClCompile>
+    <ClCompile Include="SkookumIDE\SkNavigationView.cpp">
+      <Filter>Browser</Filter>
+    </ClCompile>
+    <ClCompile Include="SkookumIDE\SkMainWindowsBase.cpp" />
+    <ClCompile Include="SkookumIDE\SkAutoComplete.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SkookumIDE.rc">
+      <Filter>_Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

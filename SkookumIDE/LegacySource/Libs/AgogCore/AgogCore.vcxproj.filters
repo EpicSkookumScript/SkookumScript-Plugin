@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="_Docs">
+      <UniqueIdentifier>{3e953fd7-9f42-4025-9613-ccf9039116ce}</UniqueIdentifier>
+      <Extensions>txt;doc</Extensions>
+    </Filter>
+    <Filter Include="Binary">
+      <UniqueIdentifier>{ad1b7dda-a989-46e2-8f23-b4a443a30a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collections">
+      <UniqueIdentifier>{8107eeae-5668-4cac-9d8e-17f48afe63c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ErrorHandling">
+      <UniqueIdentifier>{857dd2cb-62b3-40a0-96e1-fed3626ee816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FunctionObjects">
+      <UniqueIdentifier>{f7b71d5d-b742-4d34-9f9f-5bcbb0390ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{a289d431-0a88-46fa-875f-fc693dff3ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math1DScalar">
+      <UniqueIdentifier>{c7de1c1b-4945-4c33-80df-6f842b33fbc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math2D">
+      <UniqueIdentifier>{637d2683-99ac-484d-9027-fd6ce6f65fdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SmartPointers">
+      <UniqueIdentifier>{ff3bb3ef-c9b8-45c4-9be5-96ac08eb7cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{63ad2afe-ac09-43c3-a13d-6ce71657680b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore.txt">
+      <Filter>_Docs</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADatum.inl">
+      <Filter>Binary</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMath.inl">
+      <Filter>Math1DScalar</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARandom.inl">
+      <Filter>Math1DScalar</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ANamed.inl">
+      <Filter>Strings</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AString.inl">
+      <Filter>Strings</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AStringRef.inl">
+      <Filter>Strings</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbol.inl">
+      <Filter>Strings</Filter>
+    </None>
+    <None Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbolTable.inl">
+      <Filter>Strings</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ABinaryParse.hpp">
+      <Filter>Binary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AChecksum.hpp">
+      <Filter>Binary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADatum.hpp">
+      <Filter>Binary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AList.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APArray.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APCompactArray.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APCompactArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APSorted.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADebug.hpp">
+      <Filter>ErrorHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AException.hpp">
+      <Filter>ErrorHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AExceptionBase.hpp">
+      <Filter>ErrorHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompare.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompareBase.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ACompareMethod.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AConstructDestruct.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ADeferFunc.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunction.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionArg.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionArgBase.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFunctionBase.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMethod.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMethodArg.hpp">
+      <Filter>FunctionObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMemory.hpp">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AObjReusePool.hpp">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AMath.hpp">
+      <Filter>Math1DScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARandom.hpp">
+      <Filter>Math1DScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARegion.hpp">
+      <Filter>Math2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVec2i.hpp">
+      <Filter>Math2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFreePtr.hpp">
+      <Filter>SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AIdPtr.hpp">
+      <Filter>SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AIndexPointer.hpp">
+      <Filter>SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ARefCount.hpp">
+      <Filter>SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ANamed.hpp">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AString.hpp">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AStringRef.hpp">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbol.hpp">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\ASymbolTable.hpp">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AgogCore.hpp" />
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\APSizedArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVArray.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVSizedArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactArray.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactSorted.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AVCompactArrayBase.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AgogCore\Public\AgogCore\AFlagSet.hpp">
+      <Filter>Collections</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AChecksum.cpp">
+      <Filter>Binary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADatum.cpp">
+      <Filter>Binary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADebug.cpp">
+      <Filter>ErrorHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AException.cpp">
+      <Filter>ErrorHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ADeferFunc.cpp">
+      <Filter>FunctionObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AFunction.cpp">
+      <Filter>FunctionObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AFunctionBase.cpp">
+      <Filter>FunctionObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AMemory.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AMath.cpp">
+      <Filter>Math1DScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ARandom.cpp">
+      <Filter>Math1DScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ARegion.cpp">
+      <Filter>Math2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AVec2i.cpp">
+      <Filter>Math2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ANamed.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AString.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AStringRef.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ASymbol.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\ASymbolTable.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AgogCore\Private\AgogCore\AgogCore.cpp" />
+  </ItemGroup>
+</Project>

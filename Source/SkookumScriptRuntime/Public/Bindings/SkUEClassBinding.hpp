@@ -239,7 +239,7 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
 
 //---------------------------------------------------------------------------------------
 // Template specializations
-template<> inline SkInstance * SkUEClassBindingHelper::new_instance<SkString, FString>(const FString & value) { return SkString::new_instance(AString(TCHAR_TO_WCHAR(*value), value.Len())); }
+template<> inline SkInstance * SkUEClassBindingHelper::new_instance<SkString, FString>(const FString & value) { return SkString::new_instance(AString(*value, value.Len())); }
 template<> inline void         SkUEClassBindingHelper::set_from_instance<SkString, FString>(FString * out_value_p, SkInstance * instance_p) { *out_value_p = FString(instance_p->as<SkString>().as_cstr()); }
 
 //---------------------------------------------------------------------------------------

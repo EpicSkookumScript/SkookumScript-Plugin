@@ -1,0 +1,117 @@
+=========================================================================================
+Agog Labs C++ library.
+Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+=========================================================================================
+
+
+This is the AgogIO library.
+
+It contains all the core Operating System sub-system Input/Output wrappers including 
+events, files, timers and networking.  The implementation is very platform specific.
+
+
+=========================================================================================
+Library Dependencies
+=========================================================================================
+
+  AgogCore.lib  (LibC.lib or LibCMT.lib [depending on concurrency model])
+  WinMM.lib Kernel32.lib User32.lib Shell32.lib ShlWAPI.lib WS2_32.lib
+
+
+=========================================================================================
+Preprocessor defines
+=========================================================================================
+
+Defines:
+ 
+  See "Build Targets" below.
+
+  Each of the libraries that this library is depandant on should have their doc files
+  examined to note any defines or other useful info.
+
+  There are a number of useful defines, types, and structures in AgogIO.hpp so that
+  the windows header file (windows.h) does not always need to be included.  windows.h
+  is pretty bulky and can significantly slow down compile times so it should only be
+  included if absolutely necessary.
+
+
+Platform Specific
+
+  Windows 32-bit specific:
+    _WIN32, _LIB, WIN32_LEAN_AND_MEAN, _WIN32_WINDOWS=0x410 or WINVER=0x0500,
+    _WIN32_WINDOWS=0x0500, _WIN32_WINNT=0x0500
+
+
+=========================================================================================
+Build Targets	[for all projects]
+=========================================================================================
+
+               Build Properties
+Target     Checked Optimized LowEnd  Use                                       Common Equivalent
+---------  ------- --------- ------  -----------------                         -----------------
+Coder         X                      General programming                       Debug
+Coder_Low     X                X     General programming for low end systems
+Dev           X        X             Most project developers [includes tools]
+User                   X             User final/shipping/gold version          Release
+User_Low               X       X     User final for low end systems
+
+  - Build Properties:
+     'Checked'   - Extra checking is performed and tool/editor hook ins are present
+     'Optimized' - Fully optimized compile and code is inlined (faster, but harder to debug)
+     'LowEnd'    - No fancy stuff like SSE for lower end systems
+  - Executables with different build types are appended with -TargetName to tell them apart.
+  - Debug info is included in all builds.  The binaries (exe, lib, and obj files) have no
+    extra info stored in them - all debug info is stored in separate .pdb files.  [The only
+    difference of a binary compiled without debug info is that a path to the .pdb file is
+    stored in the binary, though the binary will still work just fine without the .pdb file
+    present.]
+
+
+Defines that are present for the build properties:
+
+  Property   Defines if present    Defines if not present
+  ---------  ------------------    ----------------------
+  Debug      A_DEBUG_INFO
+  Checked    A_EXTRA_CHECK             
+  Optimized  NDEBUG                A_UNOPTIMIZED & _DEBUG
+  LowEnd     A_LOWEND & A_NO_SSE
+
+
+Defines that are present for the build targets:
+
+  Target     Defines
+  ---------  --------------
+  Coder      A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG
+  Coder_Low  A_EXTRA_CHECK;A_UNOPTIMIZED;_DEBUG;A_LOWEND;A_NO_SSE
+  Dev        A_EXTRA_CHECK;NDEBUG
+  User       NDEBUG
+  User_Low   NDEBUG;A_LOWEND;A_NO_SSE
+
+
+=========================================================================================
+Code Comments & Documentation
+=========================================================================================
+
+These comment task list tokens are used to mark areas of the code that still need work
+or that contain certain gotchas or other information:
+
+  $Note	   - Used in areas of code that contain known gotchas that should be called to
+             the attention of programmers in that area, but that otherwise are working
+             and free of known bugs.
+  $Revisit - Code needs to be looked at again in the future.  Often used for code that
+             only partially meets requirements or that can possibly be rewritten more
+             efficiently or more elegantly.
+  $Vital   - Code needs to be modified as soon as possible.  Often used in areas that are
+             incomplete or have known errors.
+  $HACK	   - Temporary code that does not meet full requirements, is very inefficient or
+             has known bugs.  Code should be replaced as soon as possible
+
+The token should be followed by a dash and the initials or email of the author making the
+note - it shoud be consistent and different than what the author usually used to indicate
+authorship so that it can be easily searched.  I use "Conan Reis" to indicate authorship
+and "CReis" in comment task list tokens.
+
+For example:
+
+// $Revisit - CReis Put in auto-parse and ensure that all pointers to this code structure are updated
+

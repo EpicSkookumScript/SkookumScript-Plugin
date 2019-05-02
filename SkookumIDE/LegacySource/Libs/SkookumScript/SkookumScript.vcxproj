@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Coder|Win32">
+      <Configuration>Coder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Coder|x64">
+      <Configuration>Coder</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|Win32">
+      <Configuration>Dev</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dev|x64">
+      <Configuration>Dev</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|Win32">
+      <Configuration>User</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="User|x64">
+      <Configuration>User</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>LIB - SkookumScript</ProjectName>
+    <ProjectGuid>{13FA5E38-A8C5-4460-A42C-9EDF02ADDC99}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-User.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Dev.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_Configs\AgogLib-Coder.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|Win32'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='User|x64'">..\..\..\..\Intermediate\Build\$(PlatformName)\$(ProjectName)\VS2015\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Coder|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dev|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='User|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='User|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='User|x64'">$(ProjectName)-$(PlatformName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=31;A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Coder|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=31;A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=31;A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dev|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=31;A_MAD_CHECK=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=8;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='User|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\SkookumScript\Public;..\..\..\..\Source\SkookumScript\Private;..\..\..\..\Source\AgogCore\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SKOOKUM=8;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(TargetPath)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDataInstance.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMind.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\SkookumScript.txt" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassDescBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMemberInfo.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkExpressionBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvocation.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokableBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMethod.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutine.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutineCall.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameters.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTypedContext.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObjectBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedBase.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedMethod.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedCoroutine.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActor.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActorClass.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClass.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstance.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkQualifier.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTyped.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBrain.inl" />
+    <None Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParser.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRemoteBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRemoteRuntimeBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRuntimeBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\Sk.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkActor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkActorClass.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkBoolean.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkBrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClass.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClassDescBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkClosure.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutine.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCoroutineCall.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkDataInstance.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkDebug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkEnum.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkExpressionBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInstance.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInstanceList.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInteger.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedCoroutine.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokedMethod.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkList.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteral.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteralClosure.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMemberInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethod.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethodCall.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMind.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkNone.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObject.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParameterBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParameters.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkParser.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkQualifier.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRandom.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkReal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkString.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkSymbol.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkSymbolDefs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTyped.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedContext.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkRawMember.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkNamed.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRemoteBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRemoteRuntimeBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRuntimeBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\Sk.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActor.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkActorClass.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBoolean.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkBrain.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClass.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBinding.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBindingAbstract.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassBindingBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClassDescBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkClosure.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkCode.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkConditional.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkContextClassBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutine.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkCoroutineCall.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDataInstance.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkDebug.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkEnum.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkExpressionBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkGroupParam.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkIdentifier.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstance.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInstanceList.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInteger.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvocation.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokableBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokableClass.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkInvokeClosure.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedCoroutine.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkInvokedMethod.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkList.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteral.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkLiteralClosure.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMemberInfo.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMethod.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkMethodCall.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkMind.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkNone.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObject.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkObjectBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkObjectID.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameterBase.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParameters.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkParser.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkQualifier.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkRandom.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkReal.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkString.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkSymbol.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTyped.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkTypedClass.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Public\SkookumScript\SkTypedContext.hpp" />
+    <ClInclude Include="..\..\..\..\Source\SkookumScript\Private\SkookumScript\SkUnaryParam.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

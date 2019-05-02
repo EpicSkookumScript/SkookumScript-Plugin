@@ -7,7 +7,6 @@
 #include "ISkookumScriptGenerator.h"
 #include "CoreUObject.h"
 #include "Internationalization/Regex.h"
-#include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
 
 #include "SkookumScriptGeneratorBase.inl"

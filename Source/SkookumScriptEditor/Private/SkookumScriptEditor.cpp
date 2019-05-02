@@ -23,8 +23,6 @@
 #include "K2Node_CallFunction.h"
 #include "K2Node_Event.h"
 
-#include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
-
 #include "GraphEditor.h"
 
 #include "../../SkookumScriptGenerator/Private/SkookumScriptGeneratorBase.inl"
@@ -133,6 +131,7 @@ void FSkookumScriptEditor::StartupModule()
     m_on_map_opened_handle            = FEditorDelegates::OnMapOpened.AddRaw(this, &FSkookumScriptEditor::on_map_opened);
     m_on_new_asset_created_handle     = FEditorDelegates::OnNewAssetCreated.AddRaw(this, &FSkookumScriptEditor::on_new_asset_created);
     m_on_assets_deleted_handle        = FEditorDelegates::OnAssetsDeleted.AddRaw(this, &FSkookumScriptEditor::on_assets_deleted);
+    m_on_asset_post_import_handle     = FEditorDelegates::OnAssetPostImport.AddRaw(this, &FSkookumScriptEditor::on_asset_post_import);
 
     FAssetRegistryModule & asset_registry = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
     m_on_asset_added_handle             = asset_registry.Get().OnAssetAdded().AddRaw(this, &FSkookumScriptEditor::on_asset_added);
@@ -168,12 +167,7 @@ void FSkookumScriptEditor::ShutdownModule()
     FEditorDelegates::OnMapOpened.Remove(m_on_map_opened_handle);
     FEditorDelegates::OnNewAssetCreated.Remove(m_on_new_asset_created_handle);
     FEditorDelegates::OnAssetsDeleted.Remove(m_on_assets_deleted_handle);
-
-    if (GEditor)
-      {
-      GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetPostImport.Remove(m_on_asset_post_import_handle);
-      }
-    
+    FEditorDelegates::OnAssetPostImport.Remove(m_on_asset_post_import_handle);
 
     FAssetRegistryModule * asset_registry_p = FModuleManager::GetModulePtr<FAssetRegistryModule>(AssetRegistryConstants::ModuleName);
     if (asset_registry_p)
@@ -382,9 +376,6 @@ void FSkookumScriptEditor::PostChange(const UUserDefinedEnum * enum_p, FEnumEdit
 //
 void FSkookumScriptEditor::on_main_frame_loaded(TSharedPtr<SWindow> InRootWindow, bool bIsNewProjectWindow)
   {
-  // GEditor not valid until main frame loaded
-  m_on_asset_post_import_handle = GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetPostImport.AddRaw(this, &FSkookumScriptEditor::on_asset_post_import);
-
   // Instrument all already existing blueprints
   for (TObjectIterator<UBlueprint> blueprint_it; blueprint_it; ++blueprint_it)
     {
