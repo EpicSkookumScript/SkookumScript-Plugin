@@ -1,10 +1,6 @@
-Welcome to the SkookumScript UE4 Plugin!
+skookum-ide Branch
 ========================================
 
-[![SkookumScript UE4 Plugin Intro hood](https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F527429587_640.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png)](https://vimeo.com/133828708 "SkookumScript UE4 Plugin Intro - Click to Watch!")
+This branch is used to build the SkookumScript IDE. This branch is not intended to be used for building the SkookumScript plugin, for that you should be using a versioned branch e.g. 4.22.
 
-SkookumScript is the superpowered scripting solution and cutting-edge command console for UE4. It is powerful and feature-rich, yet simple and easy to learn. It has native game concepts and deep integration with UE4 Blueprints and C++. SkookumScript allows the live creation of sophisticated gameplay with surprisingly few lines of code. It has been lovingly crafted over more than a decade, [battle-tested on major game titles](http://skookumscript.com/about/#sleeping-dogs) and supports all platforms. SkookumScript is made for games.
-
-![SkookumScript IDE Screenshots](http://skookumscript.com/images/galleries/Screens.png)
-
-The [SkookumScript team’s](http://skookumscript.com/about/team/) mission is to make SkookumScript the no-brainer industry standard for every genre of video game, on every platform, everywhere.
+See the [README.md in the SkookumIDE repo](https://github.com/SkookumScript/SkookumIDE/blob/skookum-ide/README.md) for more details on building the SkookumScript IDE.
