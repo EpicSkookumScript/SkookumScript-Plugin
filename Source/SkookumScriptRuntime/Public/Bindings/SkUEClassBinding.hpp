@@ -32,19 +32,30 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
   {
   public:
 
+    // This data is used for stuffing the 64-bit tSkRawDataInfo which has the following bit layout:
+    // Bits 15 - 0  : Internal Offset  (16-bits)
+    // Bits 31 - 16 : Size             (16-bits)
+    // Bits 63 - 32 : Extra Data       (32-bits)
+
+    // Extra Data Layout is type dependent:
+    // Bit  32      : Integer sign bit  (1-bit)
+    // Bit  32      : Weak pointer flag (1-bit)
+    // Bits 39 - 32 : Boolean byte mask (8-bits)
+    // Bits 47 - 32 : List type info    (16-bits)
+    // Bits 63 - 48 : Unused            (16-bits)
     enum
       {
       Raw_data_info_offset_shift    = 0,      // Byte offset inside structure where this property is stored
       Raw_data_info_offset_mask     = 0xFFFF, // Stored as 16 bit
-      Raw_data_info_type_shift      = 16,     // See Raw_data_type_... below
-      Raw_data_info_type_mask       = 0xFFFF, // See Raw_data_type_... below
-      Raw_data_info_elem_type_shift = 32,
-      Raw_data_info_elem_type_mask  = 0xFFFF,
+      Raw_data_info_type_shift      = 16,     // Number of bits to reach the Size field
+      Raw_data_info_type_mask       = 0xFFFF, // Size field is 16-bits
+      Raw_data_info_elem_type_shift = 32,     // Number of bits to reach extra data from 0
+      Raw_data_info_elem_type_mask  = 0xFFFF, // 16-bits
 
-      Raw_data_type_size_shift  = 0,      // Size of this data type
-      Raw_data_type_size_mask   = 0x3FF,
-      Raw_data_type_extra_shift = 10,     // Extra type-specific information stored here
-      Raw_data_type_extra_mask  = 0x3F,
+      Raw_data_type_size_shift  = 0,      // Size is shifted 0 bits
+      Raw_data_type_size_mask   = 0xFFFF, // Size is 16-bits
+      Raw_data_type_extra_shift = 16,     // Number of bits beyond Raw_data_info_type_shift to reach the Extra data
+      Raw_data_type_extra_mask  = 0xFF,   // Extra data is max of 16-bits for List type info
       };
 
     static UWorld *        get_world(); // Get tha world
@@ -618,7 +629,7 @@ template<class _BindingClass>
 SkInstance * SkUEClassBindingHelper::access_raw_data_struct(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
   uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == sizeof(typename _BindingClass::tDataType), "Size of data type and data member must match!");
+  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == sizeof(typename _BindingClass::tDataType), "Size of data type and data member must match! UE4 UPROPERTY size may have changed, we expect it to be int32");
 
   typename _BindingClass::tDataType * data_p = (typename _BindingClass::tDataType *)((uint8_t*)obj_p + byte_offset);
 

@@ -364,6 +364,9 @@ bool SkUEClassBindingHelper::resolve_raw_data_funcs(SkClass * sk_class_p, UStruc
 
 tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_p)
   {
+  // Sanity check the data we're about to compute
+  SK_ASSERTX(sizeof(ue_var_p->GetOffset_ForInternal()) <= 0xFFFF, "Raw data info offset is > 16-bits, data offsets will need to be re-calculated");
+  SK_ASSERTX(sizeof(ue_var_p->GetSize()) <= 0xFFFF, "Raw data info size is > 16-bits, data offsets will need to be re-calculated");
   tSkRawDataInfo raw_data_info = (tSkRawDataInfo(ue_var_p->GetOffset_ForInternal()) << Raw_data_info_offset_shift) | (tSkRawDataInfo(ue_var_p->GetSize()) << (Raw_data_info_type_shift + Raw_data_type_size_shift)); // Set raw_data_info to generic value
 
   FSkookumScriptGeneratorHelper::eSkTypeID type_id = FSkookumScriptGeneratorHelper::get_skookum_property_type(ue_var_p, true);
