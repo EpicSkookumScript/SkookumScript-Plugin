@@ -2244,7 +2244,7 @@ FString FSkookumScriptGenerator::get_cpp_property_type_name(UProperty * property
     }
 
   if (with_const && property_p->HasAnyPropertyFlags(CPF_ConstParm)) property_type_name = TEXT("const ") + property_type_name;
-  if (with_ref && property_p->HasAnyPropertyFlags(CPF_ReferenceParm)) property_type_name += TEXT(" &");
+  if (with_ref && property_p->HasAnyPropertyFlags(CPF_ReferenceParm | CPF_OutParm)) property_type_name += TEXT(" &");
 
   return property_type_name;
   }
