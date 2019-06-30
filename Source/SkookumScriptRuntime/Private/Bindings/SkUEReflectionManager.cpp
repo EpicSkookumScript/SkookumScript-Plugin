@@ -792,6 +792,19 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
     // Something changed!
     success = true;
     }
+  else
+    {
+    // ZB
+    // If we found an existing instance property then we need to ensure that offset and size are properly calculated. I kept encountering
+    // a crash here where the USkookumScriptInstanceProperty existed in the class if I walked down the LinkedProperty chain but the class 
+    // was sized too small so that the USkookumScriptInstanceProperty offset existed beyond the bounds of the class size.
+    // I discovered that this was happening in cases where a base class was constructing a USkookumScriptInstanceProperty and then a child was
+    // inheriting it. Ultimately leading to an "instance offset out of range" crash. The odd thing is that the property is legitimately there
+    // it's just that the class hasn't been fixed up to recalculate sizes etc. 
+    // So here we force the class to perform static linking, the side-effect which will recalculate the size of the class as well as the
+    // internal offsets for all linked UPROPERTYs.
+    ue_class_p->StaticLink(true);
+    }
 
   // Remember offset in the object where the SkInstance pointer is stored
   sk_class_p->set_user_data_int_recursively(property_p->GetOffset_ForInternal());
