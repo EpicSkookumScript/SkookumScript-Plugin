@@ -30,7 +30,6 @@
       "LoadingPhase": "PreLoadingScreen",
       "WhitelistPlatforms": [
         "Win64",
-        "Win32",
         "Mac",
         "Linux",
         "IOS",
@@ -46,7 +45,6 @@
       "LoadingPhase": "None",
       "WhitelistPlatforms": [
         "Win64",
-        "Win32",
         "Mac",
         "Linux",
         "IOS",
@@ -62,7 +60,6 @@
       "LoadingPhase": "None",
       "WhitelistPlatforms": [
         "Win64",
-        "Win32",
         "Mac",
         "Linux",
         "IOS",

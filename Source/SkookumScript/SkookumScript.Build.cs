@@ -17,6 +17,8 @@ public class SkookumScript : ModuleRules
   {
     bRequiresImplementModule = false;
 
+    PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
     // Ignore warnings about hokey code in windows.h
     bEnableUndefinedIdentifierWarnings = false;
 
@@ -40,11 +42,10 @@ public class SkookumScript : ModuleRules
 
     switch (Target.Platform)
     {
-      case UnrealTargetPlatform.Win32:
       case UnrealTargetPlatform.Win64:
         bPlatformAllowed = true;
-        platformName = Target.Platform == UnrealTargetPlatform.Win64 ? "Win64" : "Win32";
-        platPathSuffixes.Add(Path.Combine(platformName, Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2015 || Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2017 ? "VS2015" : "VS2013"));
+        platformName = "Win64";
+        platPathSuffixes.Add(Path.Combine(platformName, Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2019 ? "VS2019" : "VS2017"));
         libNameExt = ".lib";
         libNamePrefix = "";
         break;
