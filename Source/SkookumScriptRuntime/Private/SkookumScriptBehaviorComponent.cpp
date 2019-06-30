@@ -237,7 +237,10 @@ void USkookumScriptBehaviorComponent::UninitializeComponent()
 
 void USkookumScriptBehaviorComponent::OnUnregister()
   {
-  SK_MAD_ASSERTX(m_component_instance_p.is_null(), "Instance should have been destroyed at this point.");
+  // This will get called as part of PreEditChange when editing live properties, e.g.: manually changing the transform of an object when in edit scene mode.
+  // So there is a use-case where it's completely normal for this to get called while m_component_instance_p is valid. In this use-case, this will always
+  // be followed up by a call to OnRegister.
+  //SK_MAD_ASSERTX(m_component_instance_p.is_null(), "Instance should have been destroyed at this point.");
 
   Super::OnUnregister();
   }
