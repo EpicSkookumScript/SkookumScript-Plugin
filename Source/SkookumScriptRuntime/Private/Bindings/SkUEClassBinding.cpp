@@ -366,7 +366,7 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
   {
   // Sanity check the data we're about to compute
   SK_ASSERTX(sizeof(ue_var_p->GetOffset_ForInternal()) <= 0xFFFF, "Raw data info offset is > 16-bits, data offsets will need to be re-calculated");
-  SK_ASSERTX(sizeof(ue_var_p->GetSize()) <= 0xFFFF, "Raw data info size is > 16-bits, data offsets will need to be re-calculated");
+  SK_ASSERTX(ue_var_p->GetSize() <= 0xFFFF, "Raw data info size is > 16-bits, data offsets will need to be re-calculated");
   tSkRawDataInfo raw_data_info = (tSkRawDataInfo(ue_var_p->GetOffset_ForInternal()) << Raw_data_info_offset_shift) | (tSkRawDataInfo(ue_var_p->GetSize()) << (Raw_data_info_type_shift + Raw_data_type_size_shift)); // Set raw_data_info to generic value
 
   FSkookumScriptGeneratorHelper::eSkTypeID type_id = FSkookumScriptGeneratorHelper::get_skookum_property_type(ue_var_p, true);
@@ -396,7 +396,13 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
     // If a list, store type information for elements as well
     const UArrayProperty * array_property_p = Cast<UArrayProperty>(ue_var_p);
     tSkRawDataInfo item_raw_data_info = compute_raw_data_info(array_property_p->Inner);
-    raw_data_info |= ((item_raw_data_info >> Raw_data_info_type_shift) & Raw_data_info_type_mask) << Raw_data_info_elem_type_shift;
+
+    // Massage item_raw_data_info to get rid of the 16 LSB's representing offset, and then shift that data into the far end of extra data
+    // We have the following, each block of [] represents 16-bits
+    // item_raw_data_info : [empty][type info][size][offset]
+    // and we want this   : [type info][size][empty][empty]
+    // Then we OR with raw_data_info for the final packaging
+    raw_data_info |= (item_raw_data_info >> Raw_data_info_type_shift) << Raw_data_info_elem_type_shift;
     }
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_UObjectWeakPtr)
     {
@@ -744,7 +750,11 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_list(void * obj_p, tSkRawDa
   HackedTArray *    data_p             = (HackedTArray *)((uint8_t*)obj_p + byte_offset);
   SkClassDescBase * item_type_p        = data_type_p->get_item_type();
   SkClass *         item_class_p       = item_type_p->get_key_class();
-  tSkRawDataInfo    item_raw_data_info = ((raw_data_info >> Raw_data_info_elem_type_shift) & Raw_data_info_elem_type_mask) << Raw_data_info_type_shift;
+
+  // For item_raw_data_info
+  // we have: [type info][size][don't care][don't care]
+  // we want: [empty][type info][size][empty]
+  tSkRawDataInfo    item_raw_data_info = (raw_data_info >> (Raw_data_info_elem_type_shift)) << Raw_data_info_type_shift;
   uint32_t          item_size          = (raw_data_info >> (Raw_data_info_elem_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
 
   // Set or get?
