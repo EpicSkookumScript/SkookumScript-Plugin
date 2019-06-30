@@ -151,8 +151,9 @@ int32 USkookumScriptInstanceProperty::GetMinAlignment() const
 void USkookumScriptInstanceProperty::InitializeValueInternal(void * data_p) const
   {
   UObject * owner_p = get_owner(data_p);
-  // Leave untouched on CDOs
-  if (!(owner_p->GetFlags() & RF_ClassDefaultObject))
+
+  // Leave untouched on CDOs and for temporary editor assets
+  if (!(owner_p->HasAnyFlags(RF_ClassDefaultObject | RF_Transient | RF_Transactional)))
     {
     // Clear SkInstance storage in object
     set_instance(data_p, nullptr);
