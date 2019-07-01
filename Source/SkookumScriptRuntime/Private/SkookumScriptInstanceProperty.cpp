@@ -152,8 +152,17 @@ void USkookumScriptInstanceProperty::InitializeValueInternal(void * data_p) cons
   {
   UObject * owner_p = get_owner(data_p);
 
-  // Leave untouched on CDOs and for temporary editor assets
-  if (!(owner_p->HasAnyFlags(RF_ClassDefaultObject | RF_Transient | RF_Transactional)))
+  // Leave untouched on CDOs
+  // When I was testing with the memory stomp allocator, I would consistently get exceptions when trying to modify data_p
+  // in the case of temporary blueprint types. For instance, dragging and dropping a BP in a map (not in play mode)
+  // or opening a blueprint in the editor. 
+  // I was able to resolve this, in an isolated case by skipping any UObject with flags RF_Transient | RF_Transactional. In
+  // broader tests, however, this proved unreliable and often skipped important classes such as blueprint-defined structs
+  // which are RF_Transactional and temporary BP variables which are often RF_Transient. This entire change was
+  // speculative and meant to be pro-active - it seems like an exception is bad and indicitave of using memory we don't own.
+  // However, with a void pointer and some of the shennagins we're doing, perhaps it's expected. So this code remains untouched
+  // with this explanation for future investigative work with -stompmalloc.
+  if (!(owner_p->HasAnyFlags(RF_ClassDefaultObject)))
     {
     // Clear SkInstance storage in object
     set_instance(data_p, nullptr);
