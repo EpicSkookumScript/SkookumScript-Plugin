@@ -444,7 +444,12 @@
   #endif
 
   #define A_NO_SSE
-  #define AGOG_LITTLE_ENDIAN_HOST  (!defined(__ARMEB__))
+  
+  #if !defined(__ARMEB__)
+    #define AGOG_LITTLE_ENDIAN_HOST 1
+  #else
+    #define AGOG_LITTLE_ENDIAN_HOST 0
+  #endif
 
   #define NO_AGOG_PLACEMENT_NEW
   #define A_NO_GLOBAL_EXCEPTION_CATCH
