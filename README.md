@@ -8,7 +8,7 @@ SkookumScript is the superpowered scripting solution and cutting-edge command co
 ## Build Instructions
 
 ### SkookumIDE (Required)
-To use the source version of SkookumScript, you will also need to build the SkookumIDE. In some cases, you can simply copy the SkookumIDE from an existing binary distribution of the SkookumScript plugin (from the marketplace). However in most cases you will need to build the IDE by following [these instructions](https://github.com/SkookumScript/SkookumIDE). Note that to access the SkookumIDE repo, you need to [have access to the Unreal Engine 4 repository](https://www.unrealengine.com/en-US/ue4-on-github).
+To use the source version of SkookumScript, you will also need he SkookumIDE binaries. The easiest way to acquire these is to download the [latest release](https://github.com/SkookumScript/SkookumScript-Plugin/releases) and overwrite the `SkookumIDE` folder in this repo with the one from the release. You can also build the IDE from source by following [these instructions](https://github.com/error454/UnrealEngine). Note that to access the SkookumIDE repo, you need to [have access to the Unreal Engine 4 repository](https://www.unrealengine.com/en-US/ue4-on-github).
 
 ### Clone the repo
 #### Binary Engine
@@ -19,6 +19,6 @@ You can choose whether to place the SkookumScript plugin into the engine's `Runt
 
 ### Build
 1. Build the SkookumIDE
-2. Copy the build SkookumIDE folder from the SkookumIDE project folder `Engine/Plugins/SkookumScript/SkookumIDE` to the SkookumScript Plugin folder `Plugins/SkookumScript`. Note that this will overwrite the existing `SkookumIDE` folder.
+2. Copy the built SkookumIDE folder from the SkookumIDE project folder `Engine/Plugins/SkookumScript/SkookumIDE` to the SkookumScript Plugin folder `Plugins/SkookumScript`. Note that this will overwrite the existing `SkookumIDE` folder.
 3. Regenerate project files. If you placed the plugin into the engine folder then run `GenerateProjectFiles.bat` otherwise right-click your `.uproject` and select *Generate Visual Studio Project Files*.
 4. Build your project/engine as usual.
