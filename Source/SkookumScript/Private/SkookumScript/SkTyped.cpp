@@ -107,7 +107,7 @@ void SkTypedName::assign_binary(const void ** binary_pp)
 
 SkTypedNameRaw::SkTypedNameRaw() 
   : m_bind_name(AString::ms_empty)
-  , m_raw_data_info(SkRawDataInfo_Invalid)
+  , m_raw_data_info()
   {
   }
 
@@ -116,7 +116,7 @@ SkTypedNameRaw::SkTypedNameRaw()
 SkTypedNameRaw::SkTypedNameRaw(const ASymbol & name, const SkClassDescBase * type_p, const AString & bind_name) 
   : SkTypedName(name, type_p)
   , m_bind_name(bind_name)
-  , m_raw_data_info(SkRawDataInfo_Invalid)
+  , m_raw_data_info()
   {
   }
 
@@ -127,7 +127,7 @@ SkTypedNameRaw::SkTypedNameRaw(const ASymbol & name, const SkClassDescBase * typ
 SkTypedNameRaw::SkTypedNameRaw(const void ** binary_pp)
   : SkTypedName(binary_pp)
   , m_bind_name(binary_pp)
-  , m_raw_data_info(SkRawDataInfo_Invalid)
+  , m_raw_data_info()
   {
   }
 
@@ -137,7 +137,6 @@ void SkTypedNameRaw::assign_binary(const void ** binary_pp)
   {
   SkTypedName::assign_binary(binary_pp);
   m_bind_name.assign_binary(binary_pp);
-  m_raw_data_info = SkRawDataInfo_Invalid;
   }
 
 #endif

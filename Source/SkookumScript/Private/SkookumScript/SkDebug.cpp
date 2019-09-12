@@ -1205,7 +1205,7 @@ void SkDebug::append_watch_members(APArray<SkWatch> * m_members_p, SkInstance * 
         data_p = data_type_p->get_key_class()->new_instance_from_raw_data(member_p, var_p->m_raw_data_info, data_type_p);
         }
       // For the var guid, we just xor the object address with the raw data info
-      m_members_p->append(*new SkWatch(SkWatch::Kind_instance_data, var_p->get_name(), current_class_p->get_name(), data_p, (uintptr_t)member_p ^ var_p->m_raw_data_info));
+      m_members_p->append(*new SkWatch(SkWatch::Kind_instance_data, var_p->get_name(), current_class_p->get_name(), data_p, (uintptr_t)member_p ^ (var_p->m_raw_data_info.InternalOffset + var_p->m_raw_data_info.Size)));
       data_p->dereference();
       }
     }

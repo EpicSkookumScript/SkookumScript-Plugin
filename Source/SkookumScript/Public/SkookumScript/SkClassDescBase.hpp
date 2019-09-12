@@ -47,10 +47,35 @@ enum eSkClassType
 // User data used by engine-native raw instance data members to remember
 // where in a data structure and how the raw data is stored
 // The content/layout of this type is entirely user-specific and not known or interpreted by SkookumScript
-typedef uint64_t tSkRawDataInfo;
 
-// Special value marking raw data field as invalid
-const tSkRawDataInfo SkRawDataInfo_Invalid = uint64_t(int64_t(-1));
+struct tSkRawDataInfo
+  {
+  tSkRawDataInfo() : 
+    InternalOffset(0),
+    Size(0),
+    bIsSigned(false),
+    bIsWeakPointer(false),
+    BoolByteMask(0),
+    ListTypeOffset(0),
+    ListTypeSize(0),
+    bListTypeIsWeakPointer(false)
+  {}
+
+  bool IsValid()
+    {
+    return Size != 0;
+    }
+
+  // Using int32 here to match up exactly what the engine gives us
+  int32_t InternalOffset;
+  int32_t Size;
+  bool bIsSigned;
+  bool bIsWeakPointer;
+  uint8_t BoolByteMask;
+  int32_t ListTypeOffset;
+  int32_t ListTypeSize;
+  bool bListTypeIsWeakPointer;
+  };
 
 //---------------------------------------------------------------------------------------
 // Notes      SkookumScript Class Abstract Base also known as a class descriptor

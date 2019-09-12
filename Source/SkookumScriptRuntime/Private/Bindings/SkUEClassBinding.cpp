@@ -226,7 +226,7 @@ void SkUEClassBindingHelper::resolve_raw_data(SkClass * sk_class_p, UStruct * ue
   for (auto var_p : raw_data)
     {
     // Skip variable if already resolved
-    if (var_p->m_raw_data_info != SkRawDataInfo_Invalid)
+    if (var_p->m_raw_data_info.IsValid())
       { 
       continue;
       }
@@ -364,10 +364,9 @@ bool SkUEClassBindingHelper::resolve_raw_data_funcs(SkClass * sk_class_p, UStruc
 
 tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_p)
   {
-  // Sanity check the data we're about to compute
-  SK_ASSERTX(sizeof(ue_var_p->GetOffset_ForInternal()) <= 0xFFFF, "Raw data info offset is > 16-bits, data offsets will need to be re-calculated");
-  SK_ASSERTX(ue_var_p->GetSize() <= 0xFFFF, "Raw data info size is > 16-bits, data offsets will need to be re-calculated");
-  tSkRawDataInfo raw_data_info = (tSkRawDataInfo(ue_var_p->GetOffset_ForInternal()) << Raw_data_info_offset_shift) | (tSkRawDataInfo(ue_var_p->GetSize()) << (Raw_data_info_type_shift + Raw_data_type_size_shift)); // Set raw_data_info to generic value
+  tSkRawDataInfo raw_data_info;
+  raw_data_info.InternalOffset = ue_var_p->GetOffset_ForInternal();
+  raw_data_info.Size = ue_var_p->GetSize();
 
   FSkookumScriptGeneratorHelper::eSkTypeID type_id = FSkookumScriptGeneratorHelper::get_skookum_property_type(ue_var_p, true);
   if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_Integer)
@@ -378,7 +377,7 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
      || ue_var_p->IsA<UInt16Property>()
      || ue_var_p->IsA<UInt8Property>())
       { // Mark as signed
-      raw_data_info |= tSkRawDataInfo(1) << (Raw_data_info_type_shift + Raw_data_type_extra_shift);
+      raw_data_info.bIsSigned = true;
       }
     }
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_Boolean)
@@ -387,27 +386,24 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
     static_assert(sizeof(HackedBoolProperty) == sizeof(UBoolProperty), "Must match so this hack will work.");
     HackedBoolProperty * bool_var_p = static_cast<HackedBoolProperty *>(ue_var_p);
     SK_ASSERTX(bool_var_p->FieldSize != 0, "BoolProperty must be initialized.");
-    raw_data_info = (tSkRawDataInfo(ue_var_p->GetOffset_ForInternal() + bool_var_p->ByteOffset) << Raw_data_info_offset_shift) // Add byte offset into member offset
-      | (tSkRawDataInfo(1) << (Raw_data_info_type_shift + Raw_data_type_size_shift)) // Size is always one byte
-      | (tSkRawDataInfo(a_ceil_log_2((uint)bool_var_p->ByteMask)) << (Raw_data_info_type_shift + Raw_data_type_extra_shift));
+    
+    raw_data_info.InternalOffset = ue_var_p->GetOffset_ForInternal() + bool_var_p->ByteOffset;
+    raw_data_info.Size = 1;
+    raw_data_info.BoolByteMask = a_ceil_log_2((uint)bool_var_p->ByteMask);
     }
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_List)
     {
     // If a list, store type information for elements as well
     const UArrayProperty * array_property_p = Cast<UArrayProperty>(ue_var_p);
     tSkRawDataInfo item_raw_data_info = compute_raw_data_info(array_property_p->Inner);
-
-    // Massage item_raw_data_info to get rid of the 16 LSB's representing offset, and then shift that data into the far end of extra data
-    // We have the following, each block of [] represents 16-bits
-    // item_raw_data_info : [empty][type info][size][offset]
-    // and we want this   : [type info][size][empty][empty]
-    // Then we OR with raw_data_info for the final packaging
-    raw_data_info |= (item_raw_data_info >> Raw_data_info_type_shift) << Raw_data_info_elem_type_shift;
+    
+    raw_data_info.ListTypeOffset = item_raw_data_info.InternalOffset;
+    raw_data_info.ListTypeSize = item_raw_data_info.Size;
+    raw_data_info.bListTypeIsWeakPointer = item_raw_data_info.bIsWeakPointer;
     }
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_UObjectWeakPtr)
     {
-    // If weak ptr, store extra bit to indicate that
-    raw_data_info |= tSkRawDataInfo(1) << (Raw_data_info_type_shift + Raw_data_type_extra_shift);
+    raw_data_info.bIsWeakPointer = true;
     }
 
   return raw_data_info;
@@ -447,15 +443,15 @@ void * SkUEClassBindingHelper::get_raw_pointer_null(SkInstance * obj_p)
 // Access an Entity/UObject reference
 SkInstance * SkUEClassBindingHelper::access_raw_data_entity(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == sizeof(UObject *), "Size of data type and data member must match!");
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  SK_ASSERTX(raw_data_info.Size == sizeof(UObject *), "Size of data type and data member must match!");
 
   // We know the data lives here
   uint8_t * data_p = (uint8_t*)obj_p + byte_offset;
 
   // Check special bit indicating it's stored as a weak pointer
   UObject * entity_p;
-  if (raw_data_info & (tSkRawDataInfo(1) << (Raw_data_info_type_shift + Raw_data_type_extra_shift)))
+  if (raw_data_info.bIsWeakPointer)
     {
     // Stored a weak pointer
     FWeakObjectPtr * weak_p = (FWeakObjectPtr *)data_p;
@@ -519,10 +515,10 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_entity(void * obj_p, tSkRaw
 // Access a Boolean
 SkInstance * SkUEClassBindingHelper::access_raw_data_boolean(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  uint32_t byte_size = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
-  uint32_t bit_shift = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_extra_shift)) & Raw_data_type_extra_mask;
-
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  int32_t byte_size = raw_data_info.Size;
+  uint8_t bit_shift = raw_data_info.BoolByteMask;
+  
   uint8_t * data_p = (uint8_t*)obj_p + byte_offset;
 
   // Set or get?
@@ -547,9 +543,9 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_boolean(void * obj_p, tSkRa
 // Access an Integer
 SkInstance * SkUEClassBindingHelper::access_raw_data_integer(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  uint32_t byte_size = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
-  uint32_t is_signed = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_extra_shift)) & Raw_data_type_extra_mask;
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  int32_t byte_size = raw_data_info.Size;
+  uint32_t is_signed = raw_data_info.bIsSigned;
   SK_ASSERTX(byte_size == 1 || byte_size == 2 || byte_size == 4 || byte_size == 8, "Integer must have proper size.");
 
   uint8_t * raw_data_p = (uint8_t*)obj_p + byte_offset;
@@ -661,8 +657,8 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_integer(void * obj_p, tSkRa
 // Access a String
 SkInstance * SkUEClassBindingHelper::access_raw_data_string(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == sizeof(FString), "Size of data type and data member must match!");
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  SK_ASSERTX(raw_data_info.Size == sizeof(FString), "Size of data type and data member must match!");
 
   FString * data_p = (FString *)((uint8_t*)obj_p + byte_offset);
 
@@ -682,8 +678,8 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_string(void * obj_p, tSkRaw
 // Access an Enum
 SkInstance * SkUEClassBindingHelper::access_raw_data_enum(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == 1, "Only byte enums supported at this point!");
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  SK_ASSERTX(raw_data_info.Size == 1, "Only byte enums supported at this point!");
 
   uint8_t * data_p = (uint8_t*)obj_p + byte_offset;
 
@@ -703,8 +699,8 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_enum(void * obj_p, tSkRawDa
 // Access a Color
 SkInstance * SkUEClassBindingHelper::access_raw_data_color(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  uint32_t byte_size = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
+  int32_t byte_offset = raw_data_info.InternalOffset;
+  int32_t byte_size = raw_data_info.Size;
   SK_ASSERTX(byte_size == sizeof(FColor) || byte_size == sizeof(FLinearColor), "Size of data type and data member must match!");
 
   // FColor or FLinearColor?
@@ -744,18 +740,16 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_color(void * obj_p, tSkRawD
 
 SkInstance * SkUEClassBindingHelper::access_raw_data_list(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
-  SK_ASSERTX(((raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask) == sizeof(TArray<void *>), "Size of data type and data member must match!");
+  SK_ASSERTX(raw_data_info.Size == sizeof(TArray<void *>), "Size of data type and data member must match!");
 
-  HackedTArray *    data_p             = (HackedTArray *)((uint8_t*)obj_p + byte_offset);
+  HackedTArray *    data_p             = (HackedTArray *)((uint8_t*)obj_p + raw_data_info.InternalOffset);
   SkClassDescBase * item_type_p        = data_type_p->get_item_type();
   SkClass *         item_class_p       = item_type_p->get_key_class();
 
-  // For item_raw_data_info
-  // we have: [type info][size][don't care][don't care]
-  // we want: [empty][type info][size][empty]
-  tSkRawDataInfo    item_raw_data_info = (raw_data_info >> (Raw_data_info_elem_type_shift)) << Raw_data_info_type_shift;
-  uint32_t          item_size          = (raw_data_info >> (Raw_data_info_elem_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
+  tSkRawDataInfo    item_raw_data_info;
+  item_raw_data_info.InternalOffset = raw_data_info.ListTypeOffset;
+  item_raw_data_info.Size = raw_data_info.ListTypeSize;
+  item_raw_data_info.bIsWeakPointer = raw_data_info.bListTypeIsWeakPointer;
 
   // Set or get?
   if (value_p)
@@ -764,12 +758,12 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_list(void * obj_p, tSkRawDa
     SkInstanceList & list = value_p->as<SkList>();
     APArray<SkInstance> & list_instances = list.get_instances();
     uint32_t num_elements = list_instances.get_length();
-    data_p->resize_uninitialized(num_elements, item_size);
+    data_p->resize_uninitialized(num_elements, item_raw_data_info.Size);
     uint8_t * item_array_p = (uint8_t *)data_p->GetData();
     for (uint32_t i = 0; i < num_elements; ++i)
       {
       item_class_p->assign_raw_data(item_array_p, item_raw_data_info, item_type_p, list_instances[i]);
-      item_array_p += item_size;
+      item_array_p += item_raw_data_info.Size;
       }
     return nullptr;
     }
@@ -782,7 +776,7 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_list(void * obj_p, tSkRawDa
   for (uint32_t i = data_p->Num(); i; --i)
     {
     list_instances.append(*item_class_p->new_instance_from_raw_data(item_array_p, item_raw_data_info, item_type_p));
-    item_array_p += item_size;
+    item_array_p += item_raw_data_info.Size;
     }
   return instance_p;
   }
@@ -791,8 +785,8 @@ SkInstance * SkUEClassBindingHelper::access_raw_data_list(void * obj_p, tSkRawDa
 
 SkInstance * SkUEClassBindingHelper::access_raw_data_user_struct(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
-  uint32_t byte_size = (raw_data_info >> (Raw_data_info_type_shift + Raw_data_type_size_shift)) & Raw_data_type_size_mask;
-  uint32_t byte_offset = (raw_data_info >> Raw_data_info_offset_shift) & Raw_data_info_offset_mask;
+  int32_t byte_size = raw_data_info.Size;
+  int32_t byte_offset = raw_data_info.InternalOffset;
   void * ue_data_p = (uint8_t*)obj_p + byte_offset;
 
   SK_ASSERTX(data_type_p->get_class_type() == SkClassType_class, a_str_format("Sk type of struct '%s' is not a class!", data_type_p->get_key_class_name().as_cstr()));

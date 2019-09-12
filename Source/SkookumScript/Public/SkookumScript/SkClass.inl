@@ -271,7 +271,7 @@ A_INLINE void SkClass::set_flag_load(
 A_INLINE SkInstance * SkClass::new_instance_from_raw_data(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p) const
   {
   #if (SKOOKUM & SK_DEBUG)
-    if (raw_data_info == SkRawDataInfo_Invalid)
+    if (!raw_data_info.IsValid())
       {
       // Report error unless we are already in the process of reporting an error (and likely are gathering a callstack)
       SK_ASSERTX(ADebug::is_nested_error(), a_str_format("Tried to access invalid raw data member of class '%s'", get_name_cstr_dbg()));
@@ -287,7 +287,7 @@ A_INLINE SkInstance * SkClass::new_instance_from_raw_data(void * obj_p, tSkRawDa
 A_INLINE void SkClass::assign_raw_data(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p) const
   {
   #if (SKOOKUM & SK_DEBUG)
-    if (raw_data_info == SkRawDataInfo_Invalid)
+    if (!raw_data_info.IsValid())
       {
       // Report error unless we are already in the process of reporting an error (and likely are gathering a callstack)
       SK_ASSERTX(ADebug::is_nested_error(), a_str_format("Tried to access invalid raw data member of class '%s'", get_name_cstr_dbg()));
