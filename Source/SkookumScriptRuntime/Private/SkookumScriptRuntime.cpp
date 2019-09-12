@@ -1471,6 +1471,17 @@ void FSkookumScriptRuntime::OnPreCompile()
         {
         on_new_asset(*blueprint_it);
         }
+      // In the case of multiple class inheritance we can often get into a situation where we're
+      // adding a BP variable to a Parent class followed by adding a BP variable to a Child class.
+      // In these cases, the child blueprint will crash during BP compilation (in serialization).
+      // Debugging this for quite a long time, my conclusion was that raw data needed to be resolved
+      // prior to compiling. Raw data resolution will occur in on_new_asset above, but only if we 
+      // haven't yet bound to OnCompiled. So below we force raw data resolution if a blueprint is
+      // about to be or is being compiled.
+      else if((*blueprint_it)->bBeingCompiled || (*blueprint_it)->bQueuedForCompilation)
+        {
+        on_class_added_or_modified(*blueprint_it);
+        }
       }
     }
   }
