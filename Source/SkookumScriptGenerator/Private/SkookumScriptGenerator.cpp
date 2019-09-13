@@ -1919,6 +1919,7 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
       "      dummy_class_p,\n"
       "      &UObject::StaticRegisterNativesUObject,\n"
       "      sizeof(UObject),\n"
+      "      alignof(UObject),\n"
       "      CLASS_Abstract|CLASS_NoExport,\n"
       "      CASTCLASS_None,\n"
       "      TEXT(\"Engine\"),\n"

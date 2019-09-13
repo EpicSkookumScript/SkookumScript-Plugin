@@ -30,49 +30,54 @@ public class SkookumScript : ModuleRules
     string platformName = "";
     bool useDebugCRT = Target.bDebugBuildsActuallyUseDebugCRT;
 
-    switch (Target.Platform)
+    if(Target.Platform == UnrealTargetPlatform.Win64)
     {
-      case UnrealTargetPlatform.Win64:
-        platformName = "Win64";
-        platPathSuffixes.Add(Path.Combine(platformName, Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2019 ? "VS2019" : "VS2017"));
-        break;
-      case UnrealTargetPlatform.Mac:
-        platformName = "Mac";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        break;
-      case UnrealTargetPlatform.Linux:
-        platformName = "Linux";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        //UEBuildConfiguration.bForceEnableExceptions = true;
-        break;
-      case UnrealTargetPlatform.IOS:
-        platformName = "IOS";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        break;
-      case UnrealTargetPlatform.TVOS:
-        platformName = "TVOS";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        break;
-      case UnrealTargetPlatform.Android:
-        platformName = "Android";
-        platPathSuffixes.Add(Path.Combine(platformName, "ARM"));
-        platPathSuffixes.Add(Path.Combine(platformName, "ARM64"));
-        platPathSuffixes.Add(Path.Combine(platformName, "x86"));
-        platPathSuffixes.Add(Path.Combine(platformName, "x64"));
-        useDebugCRT = true;
-        break;
-      case UnrealTargetPlatform.XboxOne:
-        platformName = "XONE";
-        platPathSuffixes.Add(platformName);
-        break;
-      case UnrealTargetPlatform.PS4:
-        platformName = "PS4";
-        platPathSuffixes.Add(platformName);
-        break;
+      platformName = "Win64";
+      platPathSuffixes.Add(Path.Combine(platformName, Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2019 ? "VS2019" : "VS2017"));
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Mac)
+    {
+      platformName = "Mac";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Linux)
+    {
+      platformName = "Linux";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+      //UEBuildConfiguration.bForceEnableExceptions = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.IOS)
+    {
+      platformName = "IOS";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.TVOS)
+    {
+      platformName = "TVOS";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Android)
+    {
+      platformName = "Android";
+      platPathSuffixes.Add(Path.Combine(platformName, "ARM"));
+      platPathSuffixes.Add(Path.Combine(platformName, "ARM64"));
+      platPathSuffixes.Add(Path.Combine(platformName, "x86"));
+      platPathSuffixes.Add(Path.Combine(platformName, "x64"));
+      useDebugCRT = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.XboxOne)
+    {
+      platformName = "XONE";
+      platPathSuffixes.Add(platformName);
+    }
+    else if(Target.Platform == UnrealTargetPlatform.PS4)
+    {
+      platformName = "PS4";
+      platPathSuffixes.Add(platformName);
     }
 
     // NOTE: All modules inside the SkookumScript plugin folder must use the exact same definitions!
@@ -105,7 +110,8 @@ public class SkookumScript : ModuleRules
     PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 
     // Public dependencies
-    PublicDependencyModuleNames.Add("AgogCore");
+    PublicDependencyModuleNames.AddRange(new string[] { "AgogCore", "Core" });
+    PrivateDependencyModuleNames.Add("Core");
 
     PrivateIncludePaths.Add(Path.Combine(ModuleDirectory, "Private"));
   }    

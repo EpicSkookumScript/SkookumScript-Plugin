@@ -2,7 +2,7 @@
   "FileVersion" : 3,
   "Version": 1,
   "VersionName": "3.0.5663",
-  "EngineVersion" : "4.22.0",
+  "EngineVersion" : "4.23.0",
   "FriendlyName" : "SkookumScript",
   "Description": "The superpowered scripting language and tool suite.",
   "Category": "Scripting",

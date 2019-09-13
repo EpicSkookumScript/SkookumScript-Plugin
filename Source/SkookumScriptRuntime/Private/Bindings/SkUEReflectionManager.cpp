@@ -786,7 +786,7 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
       classes_to_reinstance.Add(ue_class_p, ue_class_p);
       TGuardValue<bool> hotreload_guard(GIsHotReload, true); // Pretend it's hot reload to allow replacing the class with itself
       TGuardValue<bool> reinstancing_guard(GIsReinstancing, true);
-      FBlueprintCompileReinstancer::BatchReplaceInstancesOfClass(classes_to_reinstance, false);
+      FBlueprintCompileReinstancer::BatchReplaceInstancesOfClass(classes_to_reinstance);
     #endif
 
     // Something changed!

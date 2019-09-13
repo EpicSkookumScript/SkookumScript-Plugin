@@ -34,6 +34,16 @@ public class AgogCore : ModuleRules
 
     // Add user define if exists (Agog Labs internal)
     ExternalDependencies.Add("mad-define.txt");
+
+    PublicDependencyModuleNames.AddRange(
+      new string[]
+      {
+        "Core",
+        "CoreUObject",
+        "Engine",
+      }
+     );
+
     var userDefineFilePath = Path.Combine(ModuleDirectory, "mad-define.txt");
     if (File.Exists(userDefineFilePath))
     {
@@ -49,54 +59,59 @@ public class AgogCore : ModuleRules
     string platformName = "";
     bool useDebugCRT = Target.bDebugBuildsActuallyUseDebugCRT;
 
-    switch (Target.Platform)
+    if(Target.Platform == UnrealTargetPlatform.Win64)
     {
-      case UnrealTargetPlatform.Win64:
         platformName = "Win64";
         platPathSuffixes.Add(Path.Combine(platformName, Target.WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2019 ? "VS2019" : "VS2017"));
-        break;
-      case UnrealTargetPlatform.Mac:
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Mac)
+    {
         platformName = "Mac";
         platPathSuffixes.Add(platformName);
         useDebugCRT = true;
         PublicDefinitions.Add("A_PLAT_OSX");
-        break;
-      case UnrealTargetPlatform.Linux:
-        platformName = "Linux";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        PublicDefinitions.Add("A_PLAT_LINUX64");
-        //UEBuildConfiguration.bForceEnableExceptions = true;
-        break;
-      case UnrealTargetPlatform.IOS:
-        platformName = "IOS";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        PublicDefinitions.Add("A_PLAT_iOS");
-        break;
-      case UnrealTargetPlatform.TVOS:
-        platformName = "TVOS";
-        platPathSuffixes.Add(platformName);
-        useDebugCRT = true;
-        PublicDefinitions.Add("A_PLAT_tvOS");
-        break;
-      case UnrealTargetPlatform.Android:
-        platformName = "Android";
-        platPathSuffixes.Add(Path.Combine(platformName, "ARM"));
-        platPathSuffixes.Add(Path.Combine(platformName, "ARM64"));
-        platPathSuffixes.Add(Path.Combine(platformName, "x86"));
-        platPathSuffixes.Add(Path.Combine(platformName, "x64"));
-        useDebugCRT = true;
-        PublicDefinitions.Add("A_PLAT_ANDROID");
-        break;
-      case UnrealTargetPlatform.XboxOne:
-        platformName = "XONE";
-        PublicDefinitions.Add("A_PLAT_X_ONE");
-        break;
-      case UnrealTargetPlatform.PS4:
-        platformName = "PS4";
-        PublicDefinitions.Add("A_PLAT_PS4");
-        break;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Linux)
+    {
+      platformName = "Linux";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+      PublicDefinitions.Add("A_PLAT_LINUX64");
+      //UEBuildConfiguration.bForceEnableExceptions = true;
+    }
+    else if(Target.Platform == UnrealTargetPlatform.IOS)
+    {
+      platformName = "IOS";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+      PublicDefinitions.Add("A_PLAT_iOS");
+    }
+    else if(Target.Platform == UnrealTargetPlatform.TVOS)
+    {
+      platformName = "TVOS";
+      platPathSuffixes.Add(platformName);
+      useDebugCRT = true;
+      PublicDefinitions.Add("A_PLAT_tvOS");
+    }
+    else if(Target.Platform == UnrealTargetPlatform.Android)
+    {
+      platformName = "Android";
+      platPathSuffixes.Add(Path.Combine(platformName, "ARM"));
+      platPathSuffixes.Add(Path.Combine(platformName, "ARM64"));
+      platPathSuffixes.Add(Path.Combine(platformName, "x86"));
+      platPathSuffixes.Add(Path.Combine(platformName, "x64"));
+      useDebugCRT = true;
+      PublicDefinitions.Add("A_PLAT_ANDROID");
+    }
+    else if(Target.Platform == UnrealTargetPlatform.XboxOne)
+    {
+      platformName = "XONE";
+      PublicDefinitions.Add("A_PLAT_X_ONE");
+    }
+    else if(Target.Platform == UnrealTargetPlatform.PS4)
+    { 
+      platformName = "PS4";
+      PublicDefinitions.Add("A_PLAT_PS4");
     }
 
     // NOTE: All modules inside the SkookumScript plugin folder must use the exact same definitions!
