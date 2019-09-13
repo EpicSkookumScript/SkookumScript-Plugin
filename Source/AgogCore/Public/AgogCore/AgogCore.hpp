@@ -26,8 +26,7 @@
 #include <limits.h>  // integer minimums and maximums: INT_MAX, UINT_MAX
 #include <float.h>   // float minimums and maximums: FLT_DIG, FLT_MAX, FLT_EPSILON, DBL_DIG
 #include <stddef.h>  // size_t on OS X
-#include <new>       // alloca
-#include <memory.h>  // memcpy
+#include "HAL/UnrealMemory.h"
 
 // Additional includes at end of file
 
@@ -161,9 +160,6 @@
     #define A_FORCEINLINE __forceinline
 
   #endif  // _MSC_VER
-
-  #include <malloc.h>   // alloca
-
 #endif  // A_PLAT_PC
 
 
@@ -993,35 +989,25 @@ A_API AString a_str_format(const char * format_cstr_p, ...);
 //---------------------------------------------------------------------------------------
 inline void * operator new(size_t size, const char * desc_cstr_p)
   {
-  return AgogCore::get_app_info()->malloc(size, desc_cstr_p);
+  return FMemory::Malloc(size);
   }
     
 //---------------------------------------------------------------------------------------
 inline void * operator new[](size_t size, const char * desc_cstr_p)
   {
-  return AgogCore::get_app_info()->malloc(size, desc_cstr_p);
+  return FMemory::Malloc(size);
   }
 
 //---------------------------------------------------------------------------------------
 inline void operator delete(void * buffer_p, const char * desc_cstr_p)
   {
-  AAppInfoCore * app_info_p = AgogCore::get_app_info();
-  // To minimize users' inconvenience, we allow memory to leak unless A_FUSSY_CHECK is set (see AgogCore::get_app_info())
-  if (app_info_p)
-    {
-    app_info_p->free(buffer_p);
-    }
+    FMemory::Free(buffer_p);
   }
 
 //---------------------------------------------------------------------------------------
 inline void operator delete[](void * buffer_p, const char * desc_cstr_p)
   {
-  AAppInfoCore * app_info_p = AgogCore::get_app_info();
-  // To minimize users' inconvenience, we allow memory to leak unless A_FUSSY_CHECK is set (see AgogCore::get_app_info())
-  if (app_info_p)
-    {
-    app_info_p->free(buffer_p);
-    }
+  FMemory::Free(buffer_p);
   }
 
 // Define placement new

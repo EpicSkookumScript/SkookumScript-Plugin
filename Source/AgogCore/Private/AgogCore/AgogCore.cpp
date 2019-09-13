@@ -11,7 +11,6 @@
 //=======================================================================================
 // Includes
 //=======================================================================================
-
 #include <AgogCore/AgogCore.hpp> // Always include AgogCore first (as some builds require a designated precompiled header)
 #include <AgogCore/ADeferFunc.hpp>
 #include <AgogCore/ARandom.hpp>
@@ -364,14 +363,14 @@ AString a_str_format(const char * format_cstr_p, ...)
 
 void * AAppInfoCoreDefault::malloc(size_t size, const char * debug_name_p)
   {
-  return ::malloc(size);
+  return FMemory::Malloc(size);
   }
 
 //---------------------------------------------------------------------------------------
 
 void AAppInfoCoreDefault::free(void * mem_p)
   {
-  ::free(mem_p);
+  FMemory::Free(mem_p);
   }
 
 //---------------------------------------------------------------------------------------
