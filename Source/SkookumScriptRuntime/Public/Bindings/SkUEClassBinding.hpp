@@ -603,8 +603,6 @@ template<class _BindingClass>
 SkInstance * SkUEClassBindingHelper::access_raw_data_struct(void * obj_p, tSkRawDataInfo raw_data_info, SkClassDescBase * data_type_p, SkInstance * value_p)
   {
   uint32_t byte_offset = raw_data_info.InternalOffset;
-  SK_ASSERTX(raw_data_info.Size == sizeof(typename _BindingClass::tDataType), "Size of data type and data member must match! UE4 UPROPERTY size may have changed, we expect it to be int32");
-
   typename _BindingClass::tDataType * data_p = (typename _BindingClass::tDataType *)((uint8_t*)obj_p + byte_offset);
 
   // Set or get?
