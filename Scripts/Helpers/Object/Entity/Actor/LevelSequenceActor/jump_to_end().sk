@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Jumps to the final frame of the level sequence.
+// This is useful if you want to skip a cinematic but need to inherit the state
+// of actors (visibility and such) from the final frame.
+//---------------------------------------------------------------------------------------
+
+() 
+[
+  if @sequence_player.valid?
+  [
+    @sequence_player.jump_to_position(@sequence_player.length)
+  ]
+]

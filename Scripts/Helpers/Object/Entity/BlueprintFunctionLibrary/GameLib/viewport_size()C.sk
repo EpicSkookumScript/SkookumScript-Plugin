@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------------------
+// Returns the viewport size for the current player controller
+// 
+// Return Params:
+//   width, height of the viewport
+//
+// Notes:
+//   Will return 0 size if there isn't a valid player controller
+// Examples:  
+//   GameLib.viewport_size(;!w !h)
+//   println(w " " h)
+//---------------------------------------------------------------------------------------
+
+(PlayerController pc : GameLib.player_controller; Integer width Integer height)
+[
+  !x : 0
+  !y : 0
+  width : 0
+  height : 0
+  
+  if pc.valid?
+  [
+    pc.viewport_size(x y)
+    width := x
+    height := y
+  ]
+]

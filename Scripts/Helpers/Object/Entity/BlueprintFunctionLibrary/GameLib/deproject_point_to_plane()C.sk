@@ -1,0 +1,101 @@
+//---------------------------------------------------------------------------------------
+// Returns the coordinate of the ray-plane intersection in world space given a normalized
+// screen space coordinate and a plane origin lying in front of the camera.
+// 
+// Params:
+//              player : The player controller whose view should be used
+//    nscreen_position : The normalized screen coordinate where the ray should be cast from
+//   plane_origin_dist : The distance from the camera to the plane origin, imagine this as
+//                       a line going from the center of the camera straight into the scene.
+//                       It is at this distance that the plane intersection will be calculated.
+//        consider_ar? : True to adjust the ray cast if the view target in question is using
+//                       a constrained aspect ratio
+//            cam_comp : (Optional) An existing camera component to use, if valid will save
+//                       time searching for a valid camera. Use this is you're calling frequently
+//          viewport_w : (Optional) If known, you can input the viewport width here to avoid a lookup.
+//          viewport_h : (Optional) If known, you can input the viewport height here to avoid a lookup.
+//
+// Return Params:
+//   point : The point where the ray and plane intersect.
+//
+// Returns: 
+//   True if there was an intersection.
+//
+// Notes:     
+//   * The plane normal will be calculated to always be facing the camera.
+//   * Regarding the consider_ar? parameter, if you are trying to grab the edges of the viewport
+//     and the camera is using a constrained AR, then you need to set this to true, otherwise 
+//     if you actually *want* to get the black edges of the viewport set this to false.
+//   * If you're calling this every frame then you should suppply the optional prameters for speed.
+//
+// Examples:  
+//   // Find the world space location for the bottom left of the screen at loc
+//   GameLib.deproject_nscreen_at_distance(GameLib.player_controller, Vector2!xy(-1 1), loc; !bottom_left)
+//
+//  // Pre-compute camera component and viewport size to run a bunch of deprojections efficiently
+//  pc.active_camera(;!cam_comp)
+//  GameLib.viewport_size(;!w !h)
+//
+//  // Calculate the four corners of the screen at a distance dist and make it aspect ratio aware.
+//  // pass in the pre-calculated components to speed things up. For only 4 projections this is overkill
+//  // unless you're doing it every frame and can cache things away.
+//  !bottom_left : Vector2!xy(-1, 1)
+//  !top_left    : Vector2!xy(-1, -1)
+//  !top_right   : Vector2!xy(1, -1)
+//  !bottom_right: Vector2!xy(1, 1)
+//  GameLib.deproject_point_to_plane(pc, bottom_left, dist, true, camp_comp, w, h;!bl)
+//  GameLib.deproject_point_to_plane(pc, bottom_right, dist, true, camp_comp, w, h;!br)
+//  GameLib.deproject_point_to_plane(pc, top_right, dist, true, camp_comp, w, h;!tr)
+//  GameLib.deproject_point_to_plane(pc, top_left, dist, true, camp_comp, w, h;!tl)
+//
+//---------------------------------------------------------------------------------------
+(PlayerController player               : PlayerController!null
+ Vector2          nscreen_position     : Vector2!
+ Real             plane_origin_dist    : 1000.0
+ Boolean          consider_ar?         : true 
+ CameraComponent  cam_comp             : CameraComponent!null
+ Integer          viewport_w           : 0
+ Integer          viewport_h           : 0
+ ;Vector3         point
+) Boolean
+[
+  point : Vector3!
+  !pos : Vector3!
+  !dir : Vector3!
+  !result : false
+
+  if GameLib.deproject_nscreen_to_world(
+    player
+    nscreen_position
+    pos
+    dir
+    consider_ar?
+    cam_comp
+    viewport_w
+    viewport_h) and player.view_target.valid?
+  [
+    // Make sure that we intersect the plane
+    !end : pos + [dir * [plane_origin_dist * 2.0]]
+    
+    // Get the camera component only if it is invalid
+    player.active_camera(;cam_comp) when cam_comp.null?
+    
+    // Calculate plane origin and normal for the case where we have a camera and also for the no camera case
+    // (an actor with no camera being used as the view target).
+    !plane_norm : Vector3!
+    !plane_origin : Vector3!
+    
+    if cam_comp.valid?
+    [
+      plane_norm := -cam_comp.forward_vector
+      plane_origin := cam_comp.component_location + [cam_comp.forward_vector * plane_origin_dist]
+    ]
+    else
+    [
+      plane_norm := -player.view_target.actor_forward_vector
+      plane_origin := player.view_target.actor_location + [player.view_target.actor_forward_vector * plane_origin_dist]
+    ]
+    result := MathLib.line_plane_intersection_origin_normal(pos, end, plane_origin, plane_norm,, point)
+  ]
+  result
+]

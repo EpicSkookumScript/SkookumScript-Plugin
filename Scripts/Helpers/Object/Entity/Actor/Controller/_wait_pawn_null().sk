@@ -1,0 +1,22 @@
+//---------------------------------------------------------------------------------------
+// Waits until this controller's pawn is null
+//
+// Params:
+//   poll_secs: 
+//     Number of seconds that should be waited between each test 
+//     If it is 0.0 it will test every simulation update/frame.
+//
+// Examples:
+//    pc._wait_pawn_null
+//    stop_things
+//
+// See: _wait_pawn_valid
+//---------------------------------------------------------------------------------------
+(Real poll_secs : 0.1)   
+[
+  loop
+  [
+    [exit] when @pawn.null?
+    _wait(poll_secs)
+  ]
+]

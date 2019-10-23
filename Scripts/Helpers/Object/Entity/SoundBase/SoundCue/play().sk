@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Play a sound as a 1-shot
+//---------------------------------------------------------------------------------------
+
+(Entity           world_context_object : @@world
+ Real             volume_multiplier    : 1.0
+ Real             pitch_multiplier     : 1.0
+ Real             start_time           : 0.0
+ SoundConcurrency concurrency_settings : SoundConcurrency!null) 
+[
+  if valid?
+  [
+    GameLib.play_sound_2d(world_context_object
+      this
+      volume_multiplier
+      pitch_multiplier
+      start_time
+      concurrency_settings)
+  ]
+]

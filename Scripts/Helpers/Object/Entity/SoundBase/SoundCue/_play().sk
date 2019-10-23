@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------------------
+// Play a sound and wait until it has completed  
+//---------------------------------------------------------------------------------------
+
+(Entity           world_context_object : @@world
+ Real             volume_multiplier    : 1.0
+ Real             pitch_multiplier     : 1.0
+ Real             start_time           : 0.0
+ SoundConcurrency concurrency_settings : SoundConcurrency!null) 
+[
+  if valid?
+  [
+    play(world_context_object 
+      volume_multiplier
+      pitch_multiplier
+      start_time
+      concurrency_settings)
+    
+    _wait(@duration - start_time)
+  ]
+]

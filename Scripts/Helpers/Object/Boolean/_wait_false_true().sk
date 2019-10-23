@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Waits for a false-true transition to occur. Useful if you are in a true state and
+// want to trigger on the next true state that has gone through a full transition. For
+// instance when reading button inputs.
+// 
+// Params:
+//   poll_secs: 
+//     Number of seconds that should be waited between each test of this Boolean's value.
+//     If it is 0.0 it will test every simulation update/frame.
+//
+// Examples:
+//    race
+//    [
+//      _special_move
+//      @special_input._wait_false_true(0) // cancel special move by pressing again
+//    ]
+//
+// See: _wait_true_false
+//---------------------------------------------------------------------------------------
+
+(Real poll_secs: 0.1)
+[
+  _wait_false(poll_secs)
+  _wait_true(poll_secs)
+]

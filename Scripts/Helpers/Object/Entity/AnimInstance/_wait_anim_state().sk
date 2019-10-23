@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Wait for the specified animation state
+//---------------------------------------------------------------------------------------
+
+(Name state, Real seconds : 0.0) 
+[
+  loop
+  [
+    [exit] when current_state_name = state
+    _wait(seconds)
+  ]
+]

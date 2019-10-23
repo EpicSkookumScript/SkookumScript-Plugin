@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Map true/false values to specific Reals
+// 
+// Params:
+//   true_obj: The object to return if this boolean is true
+//  false_obj: The object to return if this boolean is false
+//
+// Returns: 
+//   Either true_real or false_real
+//
+// Examples:  
+//   !dir : Vector3!right * right?.as_reals(1.0, -1.0)
+//   !scale : [axis > 0.0].as_reals(1.1, 0.9)
+//---------------------------------------------------------------------------------------
+
+(Real true_real Real false_real) Real
+[
+  if this = true
+  [
+    true_real
+  ]
+  else
+  [
+    false_real
+  ]
+]

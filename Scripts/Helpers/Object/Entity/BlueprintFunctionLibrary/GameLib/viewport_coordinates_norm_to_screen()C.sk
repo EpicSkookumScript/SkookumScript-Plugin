@@ -1,0 +1,37 @@
+//---------------------------------------------------------------------------------------
+// Convert normalized screen coordinates to screen space coordinates.
+// 
+// Params:
+//   viewport_coordinates_norm : The normalized viewport coordinates [-1, 1]
+//                  viewport_w : (Optional) If known, you can input the viewport width here
+//                               to avoid a lookup.
+//                  viewport_h : (Optional) If known, you can input the viewport height here
+//                               to avoid a lookup.
+// Returns: 
+//   viewport coordinates in screen space [0, screen width/height]
+//
+// Notes:
+//   If either viewport_w or viewport_h are 0, a lookup will be performed.
+//
+// Examples: 
+//   GameLib.viewport_coordinates_norm_to_screen(Vector2!xy(0 0))  // Center
+//   GameLib.viewport_coordinates_norm_to_screen(Vector2!xy(-1 1)) // Bottom left
+//   GameLib.viewport_coordinates_norm_to_screen(Vector2!xy(1 -1), 960, 540) // Top Right with viewport size
+//---------------------------------------------------------------------------------------
+
+(Vector2 normalized_coordinates
+ Integer viewport_w : 0
+ Integer viewport_h : 0) Vector2 
+[
+  if [viewport_w = 0] or [viewport_h = 0]
+  [
+    GameLib.viewport_size(;viewport_w viewport_h)
+  ] 
+  
+  !w : viewport_w>>Real
+  !h : viewport_h>>Real
+  
+  Vector2!xy(
+    [[normalized_coordinates.@x * w] + w] * 0.5, 
+    [[normalized_coordinates.@y * h] + h] * 0.5)
+]
