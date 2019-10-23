@@ -1,0 +1,38 @@
+//---------------------------------------------------------------------------------------
+// Find the furthest actor in a certain direction from a list of actors
+// 
+// Params:
+//   actors: A list of actors to search through
+//      dir: The direction to check against
+//
+// Returns: 
+//   The actor that is furthest in the given direction or a null actor
+//
+// Notes:
+//   If multiple actors are at the same distance then 
+//  
+// Examples:
+//   !furthest : Actor.furthest_in_dir(BP_Invader.instances, Vector3!right)
+//   if furthest.valid?[do_something]
+//   
+//---------------------------------------------------------------------------------------
+
+(List{Actor} actors Vector3 dir) Actor
+[
+  !furthest : Actor!null
+  !dist : -Real!max
+  
+  actors.do
+  [
+    if item.valid?
+    [
+      !dot : MathLib.dot_vector_vector(item.actor_location, dir)
+      if dot > dist
+      [
+        dist := dot
+        furthest := item
+      ]
+    ]
+  ]
+  furthest
+]

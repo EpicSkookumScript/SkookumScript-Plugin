@@ -1,0 +1,32 @@
+//---------------------------------------------------------------------------------------
+// A wrapper for SystemLib.print_string that writes to the screen.
+// Params:
+//   objs_as_strs: 
+//     The list of objects to print as strings
+//
+//   duration:
+//     How long to leave the text on the screen, 0.0 will result in a single frame
+//
+//   text_color:
+//     The color of the text
+// Notes:
+//     Just a wrapper around SystemLib.print_string
+//
+// Examples:
+//    SystemLib.print_screen("Easy for printing in a loop")
+//    SystemLib.print_screen("Print a one-shot and leave it on for 5-seconds", 5.0)
+//    SystemLib.print_screen("I just really need green", 5.0, Color!green)  
+//---------------------------------------------------------------------------------------
+
+({Object} objs_as_strs
+ Real    duration             : 0.0
+ Color   text_color           : Color!rgba(0.0,0.66,1.0,1.0)
+ ) 
+[
+  !result : String!
+  objs_as_strs.do
+  [
+    result += item>>
+  ]
+  SystemLib.print_string(@@world, result, true, false, text_color, duration)
+]

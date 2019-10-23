@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------------------
+// Map true/false values to specific Vector3's.
+// 
+// Params:
+//   true_vec: The Vector3 to return if this boolean is true
+//  false_vec: The Vector3 to return if this boolean is false
+//
+// Returns: 
+//   Either true_vec or false_vec
+//
+// Examples:  
+//   !dir1 : right?.as_vec3s(Vector3!right, -Vector3!right)
+//---------------------------------------------------------------------------------------
+
+(Vector3 true_vec Vector3 false_vec) Vector3
+[
+  if this = true
+  [
+    true_vec
+  ]
+  else
+  [
+    false_vec
+  ]
+]

@@ -25,6 +25,8 @@
 #include <stdarg.h>     // Uses:  va_start, va_end
 #include <wchar.h>      // Uses:  wcslen
 
+#include "Containers/StringConv.h" // For TCHAR conversions
+
 #ifdef A_PLAT_PC
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
   #include "windows.h"    // Uses:  WideCharToMultiByte()
@@ -573,72 +575,37 @@ AString AString::ctor_float64(
 //  memcpy(m_str_ref_p->m_cstr_p, strm.str(), size_t(m_str_ref_p->m_length + 1));  // copy characters from stream
 //  }
 
-
 //---------------------------------------------------------------------------------------
 // Converter / constructor from wide character (Unicode) C-String.
 // 
 // Params:  
-//   wcstr_p: wide character (unicode) string to convert.
+//   tchar_p: UE4 TCHAR
+//   length: number of characters - not bytes - in tchar_p - this is ignored and discovered by hand but is left here
+//           to satisfy calls that pass in the length.
 //   
-// Author(s):   Conan Reis
-AString::AString(const wchar_t * wcstr_p)
+// Author(s):   Zachary Burke
+AString::AString(
+  const TCHAR * tchar_p,
+  uint32_t        length
+  )
   {
-  // $Vital - CReis Test this and switch to UTF-8 as soon as possible.
-  if (wcstr_p)
+  if (tchar_p)
     {
-    uint32_t length = uint32_t(::wcslen(wcstr_p));
+    FTCHARToUTF8 Convert(tchar_p);
 
+    length = Convert.Length(); // Excludes null terminator
+    
     if (length)
       {
-      uint32_t size   = AStringRef::request_char_count(length);
+      uint32_t size   = AStringRef::request_char_count(length); // adds space for null terminator
       char *   cstr_p = AStringRef::alloc_buffer(size);
 
-      #ifdef A_PLAT_PC
-        WideCharToMultiByte(CP_ACP, 0, wcstr_p, length, cstr_p, size, NULL, NULL);
-      #else
-        ::wcstombs(cstr_p, wcstr_p, size_t(length + 1u));
-      #endif
+      memcpy(cstr_p, Convert.Get(), length + 1); // Convert.Get() includes null terminator
 
-      cstr_p[length] = '\0';  // Put in null-terminator
       m_str_ref_p    = AStringRef::pool_new(cstr_p, length, size, 1u, true, false);
 
       return;
       }
-    }
-
-  m_str_ref_p = AStringRef::get_empty();
-  m_str_ref_p->m_ref_count++;
-  }
-
-//---------------------------------------------------------------------------------------
-// Converter / constructor from wide character (Unicode) C-String.
-// 
-// Params:  
-//   wcstr_p: wide character (unicode) string to convert.
-//   length: number of characters - not bytes - in wcstr_p
-//   
-// Author(s):   Conan Reis
-AString::AString(
-  const wchar_t * wcstr_p,
-  uint32_t        length
-  )
-  {
-  // $Vital - CReis Test this and switch to UTF-8 as soon as possible.
-  if (wcstr_p && length)
-    {
-    uint32_t size   = AStringRef::request_char_count(length);
-    char *   cstr_p = AStringRef::alloc_buffer(size);
-
-    #ifdef A_PLAT_PC
-      WideCharToMultiByte(CP_ACP, 0, wcstr_p, length, cstr_p, size, NULL, NULL);
-    #else
-      ::wcstombs(cstr_p, wcstr_p, size_t(length + 1u));
-    #endif
-
-    cstr_p[length] = '\0';  // Put in null-terminator
-    m_str_ref_p    = AStringRef::pool_new(cstr_p, length, size, 1u, true, false);
-
-    return;
     }
 
   m_str_ref_p = AStringRef::get_empty();

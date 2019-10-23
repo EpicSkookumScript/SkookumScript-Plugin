@@ -1,0 +1,45 @@
+//---------------------------------------------------------------------------------------
+// The result of the active camera can be 4 things for a given player controller.
+// 1. A CameraActor, this is just a camera kicking it out in the world somewhere
+// 2. A CameraComponent that is part of an actor, most likely your Pawn
+// 3. GetActorEyesViewPoint, basically your actor's location and rotation when it doesn't
+//    contain a camera component
+// 4. null, there are no cameras
+// This function returns an active CameraComponent or null, this covers
+// cases 1, 2 and 4.
+//
+// Return Params:
+//  camera_component : The active camera component if there was one
+//
+// Returns: 
+//   True if a valid camera component was found.
+//---------------------------------------------------------------------------------------
+
+(;CameraComponent camera_component) Boolean
+[
+  !result : false
+  camera_component : CameraComponent!null
+  
+  // Do we have a view target?
+  if view_target.valid?
+  [    
+    // Are we lucky enough that it is a CameraActor?
+    if view_target.class_of?(CameraActor)
+    [
+      // yay, we're done!
+      camera_component := view_target<>CameraActor.@camera_component
+      result := true
+    ]
+    view_target.class_actor? or view_target.class_of?(Pawn)
+    [
+      // Ok, we're an actor/pawn, let's troll through all of the CameraComponents and find the first active one
+      !comps : view_target.components_by_class(CameraComponent.static_class).select[item.is_active?]
+      if comps.length > 0
+      [
+        camera_component := comps.first<>CameraComponent
+        result := true
+      ]
+    ]
+  ]
+  result
+]

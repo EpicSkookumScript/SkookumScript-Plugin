@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Ramp time dilation smoothly from current value to the target value.
+//---------------------------------------------------------------------------------------
+
+(Real target, Real speed : 0.1) 
+[
+  loop
+  [
+    !new : MathLib.finterp_to_constant(GameLib.global_time_dilation, target, GameLib.world_delta_seconds, speed)
+    GameLib.global_time_dilation_set(this, new)
+    [exit] when new = target
+    _wait
+  ]
+]

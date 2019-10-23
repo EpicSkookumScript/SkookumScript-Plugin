@@ -1,0 +1,32 @@
+//---------------------------------------------------------------------------------------
+// Constructor for easily creating a fake HitResult from a limited set of data
+// 
+// Params:
+//   hit_actor: The actor that has been hit
+//   hit_comp: The component that has been hit
+//   hit_loc: The location of the impact
+//   hit_norm: The normal of the impact
+//
+// Returns: 
+//   The faked HitResult
+//
+// Examples:  
+//   Easily testing damage routines: 
+//   GameLib.apply_point_damage(some_actor, 1.0,, HitResult!fake(,,some_actor.actor_location))
+//---------------------------------------------------------------------------------------
+
+(Actor hit_actor : Actor!null, 
+  PrimitiveComponent hit_comp : PrimitiveComponent!null, 
+  Vector3 hit_loc : Vector3!, 
+  Vector3 hit_norm : Vector3!) HitResult
+[
+  HitResult@!()
+  
+  @location := hit_loc
+  @impact_point := hit_loc
+  @normal := hit_norm
+  @impact_normal := hit_norm
+  @actor := hit_actor
+  @component := hit_comp
+  self
+]

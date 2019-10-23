@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------------------
+// Returns true if transform a is nearly equal to this 
+//
+// Params:
+// @param location_tolerance        How close position of transforms need to be to be considered equal
+// @param rotation_tolerance        How close rotations of transforms need to be to be considered equal
+// @param scale_3dtolerance         How close scale of transforms need to be to be considered equal
+//
+// Examples: do_something when actor_transform.near?(other_transform) 
+//---------------------------------------------------------------------------------------
+
+(Transform a                  : Transform!
+ Real      location_tolerance : 0.0001
+ Real      rotation_tolerance : 0.0001
+ Real      scale_3dtolerance  : 0.0001
+) Boolean
+[
+  MathLib.nearly_equal_transform_transform(this, a, location_tolerance, rotation_tolerance, scale_3dtolerance)
+]

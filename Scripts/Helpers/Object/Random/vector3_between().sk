@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Generate a random Vector3 that is between the 2 vectors
+// 
+// Params:
+//   v1: The first vector
+//   v2: The second vector
+//
+// Returns: 
+//   A vector between v1 and v2
+//
+// Examples:  
+//   @@random.vector3_between(v1, v2)
+//---------------------------------------------------------------------------------------
+
+(Vector3 v1 Vector3 v2) Vector3
+[
+  !dir : [v1 - v2]
+  !length : dir.length
+  v2 + [MathLib.normal(dir) * @@random.uniform_range(0, length)]
+]

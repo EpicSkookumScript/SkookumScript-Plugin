@@ -1,0 +1,14 @@
+//---------------------------------------------------------------------------------------
+// Waits for the specified number of frames/ticks. Useful when you want to wait based on
+// ticks instead of time.
+// 
+// Params:
+//   frames: The number of frames to wait for.
+//
+// Examples:  
+// _wait_frames(3) // wait for 3 frames
+//---------------------------------------------------------------------------------------
+(Integer frames : 2)
+[
+  frames._do[_wait]
+]

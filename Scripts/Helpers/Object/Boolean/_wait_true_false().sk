@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// Waits for a true-false transition to occur. Useful if you are already in a false state
+// and want to trigger on the next false state that has gone through a full transition.
+// 
+// Params:
+//   poll_secs: 
+//     Number of seconds that should be waited between each test of this Boolean's value.
+//     If it is 0.0 it will test every simulation update/frame. //
+//
+// Examples:
+//    race
+//    [
+//      _sniper_aim
+//      @use_aim?._wait_true_false // cancel the sniper aim after player presses/releases button
+//    ]
+//   
+// See: _wait_false_true
+//---------------------------------------------------------------------------------------
+
+(Real poll_secs: 0.1)
+[
+  _wait_true(poll_secs)
+  _wait_false(poll_secs)
+]

@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------------------
+// Waits for the next rising edge of the boolean, when detected, sets out_var to value.
+// 
+// Params:
+//   poll_secs: 
+//     Number of seconds that should be waited between each test of this Boolean's value.
+//     If it is 0.0 it will test every simulation update/frame. 
+//
+//   out_var:
+//     The output variable that should be written to on success
+//
+//   value:
+//     The value to write to out_var on success
+// Notes:
+//     Designed to determine which coroutine won a race.
+//
+// Examples:
+//    !result : -1
+//    race
+//    [
+//      @test0?._wait_cycle_return_value(0.0, result, 0)
+//      @test1?._wait_cycle_return_value(0.0, result, 1)
+//      @test2?._wait_cycle_return_value(0.0, result, 2)
+//      @test3?._wait_cycle_return_value(0.0, result, 3)
+//      @test4?._wait_cycle_return_value(0.0, result, 4)
+//    ]
+//    do_something(result)
+//   
+//---------------------------------------------------------------------------------------
+
+(Real poll_secs: 0.1, Integer out_var, Integer value)
+[
+  _wait_false(poll_secs)
+  _wait_true(poll_secs)
+  out_var := value
+]

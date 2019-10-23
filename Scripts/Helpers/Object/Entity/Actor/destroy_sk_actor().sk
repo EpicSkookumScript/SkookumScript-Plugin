@@ -1,0 +1,31 @@
+//---------------------------------------------------------------------------------------
+// Destroy an actor and then immediately abort coroutines on it. Use this to prevent your 
+// coroutines from occasionally ticking for 1 more frame after you destroy your actor.
+// 
+// Params:
+//   consider_successful?:  Indicates whether the aborted coroutines should be considered
+//                          a successful completion or an error condition.
+//
+// Notes: Using this everywhere in place of destroy_actor prevents you from having to
+//        constantly check if your actor is valid/not-null in your coroutines.
+//
+// Examples: 
+//   _doing_something_for_a_long_time
+//   destroy_sk_actor
+//---------------------------------------------------------------------------------------
+
+(Boolean consider_successful? : true) 
+[
+  // Logic says maybe you'd want to do this in the opposite order. But what I experienced
+  // is that aborting coroutines would sometimes cause .this to become null and trap the
+  // actor in some quasi-destroyed state. This may have been due to improper detection
+  // and addition of the SkDataComponent (a bug).
+  //
+  // Regardless of the cause, destruction is latent anyways and using this order works
+  // reliably.
+  destroy_actor when valid?
+ 
+  // This gets called as a natural consequence of destroy_actor but often not until the
+  // next frame.
+  abort_coroutines_on_this(consider_successful?)
+]

@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Returns true if the given color is nearly equal
+// 
+// Params:
+//   b: The color to compare to
+//   tolerance: How close the values need to be together to be considered equal
+//
+// Returns: 
+//   True if colors are equal
+//
+// Examples: [exit] when Color!black.near?(my_color)
+//---------------------------------------------------------------------------------------
+
+(Color b, Real tolerance : 0.0001) Boolean
+[
+  [MathLib.abs(@r - b.@r) <= tolerance]
+  and [MathLib.abs(@g - b.@g) <= tolerance]
+  and [MathLib.abs(@b - b.@b) <= tolerance]
+  and [MathLib.abs(@a - b.@a) <= tolerance]
+]

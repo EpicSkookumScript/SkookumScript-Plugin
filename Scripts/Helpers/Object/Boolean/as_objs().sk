@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------------------
+// Map true/false values to specific objects.
+// 
+// Params:
+//   true_obj: The object to return if this boolean is true
+//  false_obj: The object to return if this boolean is false
+//
+// Returns: 
+//   Either true_obj or false_obj
+//
+// Notes: You will need to use a class cast on the returned object in most cases.
+//
+// Examples:  
+//   !dir1 : right?.map(Vector3!right, -Vector3!right)<>Vector3
+//   !dir2 : Vector3!right * right?.map(1.0, -1.0)>>Real
+//   !weapon : use_missiles?.map(missile_actor, gun_actor)<>Actor
+//---------------------------------------------------------------------------------------
+
+(Object true_obj Object false_obj) Object
+[
+  if this = true
+  [
+    true_obj
+  ]
+  else
+  [
+    false_obj
+  ]
+]

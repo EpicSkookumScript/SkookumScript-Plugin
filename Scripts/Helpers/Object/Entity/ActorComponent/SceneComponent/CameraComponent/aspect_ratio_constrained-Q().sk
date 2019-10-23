@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------------------
+// Gets whether or not the AR is constrained on this camera component
+// 
+// Returns: 
+//   True if AR is constrained
+//
+// Examples:  
+//   if aspect_ratio_constrained?[println("constrained")]
+//
+//---------------------------------------------------------------------------------------
+
+() Boolean
+[
+  !view_info : MinimalViewInfo!
+  camera_view(GameLib.world_delta_seconds, view_info)
+  view_info.@constrain_aspect_ratio?
+]

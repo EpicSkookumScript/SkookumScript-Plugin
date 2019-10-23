@@ -1,0 +1,133 @@
+//-----------------------------------------------------------------------------------------
+// A wrapper for deproject_screen_to_world that takes normalized screen coordinates [-1, 1] 
+// left to right, top to bottom. It also allows taking into consideration the aspect ratio
+// of the camera and adjusting the deprojection so that it fires into the scene instead of
+// the blackness of the constrained viewport, so that (1, 1) *really is* the bottom right
+// the screen and not the bottom right of the constrained viewport.
+// 
+// Params:
+//          player : Deproject using this player's view.
+// screen_position : 2D normalized screen space to deproject. Normalized coordinates 
+//                   go from [-1 1] left to right, top to bottom. Where (0,0) is screen center.
+//                          
+//  world_position : (out) Corresponding 3D position in world space.
+// world_direction : (out) World space direction vector away from the camera at the 
+//                   given 2d point.
+//    consider_ar? : True to adjust the cast if the view target in question is using a
+//                   locked aspect ratio.
+//        cam_comp : (Optional) An existing camera component to use, if valid will save
+//                   time searching for a valid camera. Use this is you're calling frequently
+//      viewport_w : (Optional) If known, you can input the viewport width here to avoid a lookup.
+//      viewport_h : (Optional) If known, you can input the viewport height here to avoid a lookup.
+//
+// Returns: 
+//   Boolean indicating success
+//
+// Examples:
+//   // Center of the screen
+//   GameLib.deproject_nscreen_to_world(pc, Vector2!, loc, dir)
+//
+//   // Deproject bottom right of screen, account for AR and pass in the known viewport size
+//   GameLib.deproject_nscreen_to_world(pc, Vector2!xy(1 1), dir, true,,960,580)
+//-----------------------------------------------------------------------------------------
+
+(PlayerController player               : PlayerController!null
+ Vector2          screen_position_norm : Vector2!
+ Vector3          world_position       : Vector3!
+ Vector3          world_direction      : Vector3!
+ Boolean          consider_ar?         : false
+ CameraComponent  cam_comp             : CameraComponent!null
+ Integer          viewport_w           : 0
+ Integer          viewport_h           : 0
+) Boolean
+[
+  if [viewport_w = 0] or [viewport_h = 0]
+  [
+    GameLib.viewport_size(;viewport_w viewport_h)
+  ] 
+  
+  !w : viewport_w>>Real
+  !h : viewport_h>>Real
+  
+  !screen_position : Vector2!
+  !ar_adjusted? : false
+  
+  if consider_ar?
+  [
+    // If considering AR then we need to re-calculate our screen position to account for 
+    // a camera whose aspect ratio is constrained. First we need to find the active camera
+    // and see if it is AR constrained.
+    player.valid?
+    [
+      if cam_comp.valid? or player.active_camera(;cam_comp)
+      [
+        // Get the view info to see if AR is locked
+        if cam_comp.aspect_ratio_constrained?
+        [
+          !viewport_ar : w / h
+          !ar : cam_comp.@aspect_ratio
+            
+          if viewport_ar < ar
+          [
+            // fitting width, so update the viewport height
+            // ar = w / h 
+            // => h = w / ar
+            !viewable_h : w / ar
+            !y1 : 0.5 * [h - viewable_h]
+            h := MathLib.map_range_unclamped(h, 0, h, y1, y1 + viewable_h)
+      
+            // Now we convert X from normalized coordinates to screen space coordinates
+            // And Y gets converted from normalized coordinates to screen space coordinates
+            // with the caveat that we want to map it within the bounds of our viewable 
+            // constrained height.
+            // According to the diagram below, this viewable height is the Y range [y1, y1 + viewable_h]
+            // Where y1 is [h - viewable_h] / 2
+            // -----------------------------------------
+            // |                               /\      |  /\
+            // |                               y1      |  |
+            // |                               \/      |  |      
+            // |---------------------------------------|  |
+            // |                  /\                   |  |
+            // |                  |                    |  |
+            // |             viewable_h                |  h
+            // |                  |                    |  |
+            // |                 \/                    |  |
+            // |---------------------------------------|  |            
+            // |                               /\      |  |            
+            // |                               y1      |  |      
+            // |                               \/      | \/
+            // -----------------------------------------
+            screen_position := Vector2!xy(
+              [[screen_position_norm.@x * w] + w] * 0.5, 
+              MathLib.map_range_unclamped(screen_position_norm.@y, -1, 1, y1, y1 + viewable_h))
+          ]
+          else
+          [
+            // fitting height, so update width
+            // ar = w / h 
+            // => w = h * ar
+            !viewable_w : h * ar
+            !x1 : 0.5 * [w - viewable_w]
+            w := MathLib.map_range_unclamped(w, 0, w, x1, x1 + viewable_w)
+      
+            // Same thing as the diagram above, but for X this time
+            screen_position := Vector2!xy(
+              MathLib.map_range_unclamped(screen_position_norm.@x, -1, 1, x1, x1 + viewable_w),
+              [[screen_position_norm.@y * h] + h] * 0.5)
+          ]
+          ar_adjusted? := true
+        ] // if cam_comp.aspect_ratio_constrained?
+      ] // if cam_comp.valid? or player.active_camera(;cam_comp)
+    ]
+  ]
+  
+  // Just in case we WERE considering AR but the camera wasn't set to constrain AR, or the case
+  // where we weren't considering AR, calculate screen coordinates.
+  if ar_adjusted?.not
+  [
+    // Convert from normalized coordinates to screen coordinates
+    screen_position := GameLib.viewport_coordinates_norm_to_screen(screen_position_norm, viewport_w, viewport_h)
+  ]
+  
+  GameLib.deproject_screen_to_world(player screen_position world_position world_direction)
+]

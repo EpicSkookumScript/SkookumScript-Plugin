@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------
+// Determine if an Integer is even.
+//
+// Returns: True if this integer is even.
+// 
+// Examples:  
+// if @some_int.even?[do_even_thing]
+//
+// See: odd?
+//---------------------------------------------------------------------------------------
+
+() Boolean
+[
+  this.mod(2) = 0
+]

@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------
+// A wrapper for SystemLib.print_string that writes to the output log.
+// Params:
+//   objs_as_strs: 
+//     The list of objects to print as strings
+//
+// Notes:
+//     Just a wrapper around SystemLib.print_string
+//
+// Examples:
+//    SystemLib.print_log("This goes to the log")
+//    SystemLib.print_log("Velocity: ", velocity)
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+
+({Object} objs_as_strs) 
+[
+  !result : String!
+  objs_as_strs.do
+  [
+    result += item>>
+  ]
+  SystemLib.print_string(@@world, result, false, true)
+]

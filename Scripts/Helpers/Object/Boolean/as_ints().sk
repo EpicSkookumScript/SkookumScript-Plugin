@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------------------
+// Map true/false values to specific Integers
+// 
+// Params:
+//   true_int: The Integer to return if this boolean is true
+//  false_int: The Integer to return if this boolean is false
+//
+// Returns: 
+//   Either true_int or false_int
+//
+// Examples:  
+//   !new_index : current_index + inc?.as_ints(1, -1)
+//   
+//---------------------------------------------------------------------------------------
+
+(Integer true_int Integer false_int) Integer
+[
+  if this = true
+  [
+    true_int
+  ]
+  else
+  [
+    false_int
+  ]
+]
