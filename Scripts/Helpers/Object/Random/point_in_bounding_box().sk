@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------------------
+// Get a random point inside of a bounding box
+// 
+// Params:
+//   origin: The center point of the box
+//  extents: The box extents
+//
+// Returns: A random point inside of the box    
+//---------------------------------------------------------------------------------------
+
+(Vector3 origin, Vector3 extents) Vector3
+[
+  !min : origin - extents
+  !max : origin + extents
+  
+  Vector3!xyz(
+    uniform_range(min.@x, max.@x)
+    uniform_range(min.@y, max.@y)
+    uniform_range(min.@z, max.@z))
+]
