@@ -294,8 +294,7 @@ class A_API AString
     AString(const char * cstr_p, bool persistent);
     AString(const char * cstr_p, uint32_t length, bool persistent = true);
     AString(const char * buffer_p, uint32_t size, uint32_t length, bool deallocate = false);
-    AString(const wchar_t * wcstr_p);
-    AString(const wchar_t * wcstr_p, uint32_t length);
+    AString(const TCHAR * tchar_p, uint32_t length = 0);
     AString(AStringRef * str_ref_p);
     AString(char ch);
     AString(char ch, uint32_t char_count);
