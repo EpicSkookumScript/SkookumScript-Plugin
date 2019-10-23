@@ -676,7 +676,7 @@ void SkUERemote::get_project_info(SkProjectInfo * out_project_info_p)
   out_project_info_p->m_engine_id.format("UE%d.%d.%d-%s", ENGINE_MAJOR_VERSION, ENGINE_MINOR_VERSION, ENGINE_PATCH_VERSION, *built_from);
 
   // Get game name
-  out_project_info_p->m_project_name = FStringToAString(FApp::GetGameName());
+  out_project_info_p->m_project_name = FStringToAString(FApp::GetProjectName());
 
   // Get project paths if any
   FString project_path;
@@ -709,7 +709,7 @@ void SkUERemote::get_project_info(SkProjectInfo * out_project_info_p)
         // Can't get any good intelligence - improvise:
 
         // Is there an Sk project file in the usual location?
-        project_path = FPaths::GameDir() / TEXT("Scripts") / TEXT("Skookum-project.ini");
+        project_path = FPaths::ProjectDir() / TEXT("Scripts") / TEXT("Skookum-project.ini");
         if (FPaths::FileExists(project_path))
           {
           project_path = FPaths::ConvertRelativePathToFull(project_path);

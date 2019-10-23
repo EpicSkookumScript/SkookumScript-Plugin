@@ -845,7 +845,7 @@ const FString & FSkookumScriptRuntime::get_ini_file_path() const
   static FString _ini_file_path;
   if (_ini_file_path.IsEmpty())
     {
-    const FString ini_file_dir = FPaths::GameSavedDir() + TEXT("Config/");
+    const FString ini_file_dir = FPaths::ProjectSavedDir() + TEXT("Config/");
     FConfigCacheIni::LoadGlobalIniFile(_ini_file_path, TEXT("SkookumScriptRuntime"), NULL, false, false, true, *ini_file_dir);
     }
   return _ini_file_path;

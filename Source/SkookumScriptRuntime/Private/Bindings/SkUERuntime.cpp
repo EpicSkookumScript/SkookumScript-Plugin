@@ -294,7 +294,7 @@ bool SkUERuntime::content_file_exists(const TCHAR * file_name_p, FString * folde
   FString folder_path;
 
   // Check if we got a game
-  FString game_name(FApp::GetGameName());
+  FString game_name(FApp::GetProjectName());
   if (game_name.IsEmpty())
     {
     // No game, look for default project binaries
@@ -307,7 +307,7 @@ bool SkUERuntime::content_file_exists(const TCHAR * file_name_p, FString * folde
   else
     {
     // We have a game, so first check if it exists in the game content folder
-    folder_path = FPaths::GameContentDir() / TEXT("SkookumScript") /*TEXT(SK_BITS_ID)*/;
+    folder_path = FPaths::ProjectContentDir() / TEXT("SkookumScript") /*TEXT(SK_BITS_ID)*/;
     if (!FPaths::FileExists(folder_path / file_name_p))
       {
       #if WITH_EDITORONLY_DATA
