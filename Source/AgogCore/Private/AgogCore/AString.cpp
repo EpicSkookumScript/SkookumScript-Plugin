@@ -580,8 +580,7 @@ AString AString::ctor_float64(
 // 
 // Params:  
 //   tchar_p: UE4 TCHAR
-//   length: number of characters - not bytes - in tchar_p - this is ignored and discovered by hand but is left here
-//           to satisfy calls that pass in the length.
+//   length: number of characters to copy from the input string in tchar_p (not bytes). If 0, will copy whole string.
 //   
 // Author(s):   Zachary Burke
 AString::AString(
@@ -592,16 +591,29 @@ AString::AString(
   if (tchar_p)
     {
     FTCHARToUTF8 Convert(tchar_p);
+    const char * Converted = Convert.Get(); // Adds a null-terminator to the output
 
-    length = Convert.Length(); // Excludes null terminator
-    
-    if (length)
+    if (length == 0)
+      {
+      // Since we were called with a zero length, we should set the length to that 
+      // of the entire string. This method gets # characters in string excluding 
+      // any null terminator.
+      length = Convert.Length();
+      }
+
+    if (Converted && length)
       {
       uint32_t size   = AStringRef::request_char_count(length); // adds space for null terminator
       char *   cstr_p = AStringRef::alloc_buffer(size);
 
-      memcpy(cstr_p, Convert.Get(), length + 1); // Convert.Get() includes null terminator
+      // Copy the desired length from the converted string to our destination pointer.
+      memcpy(cstr_p, Converted, length);
 
+      // Always add a null terminator as last char. We could have copied it above from 
+      // Converted for the length == 0 case, but this way the logic is smaller.
+      cstr_p[length] = '\0';
+
+      // pool_new expects length to be the string length excluding the null terminator
       m_str_ref_p    = AStringRef::pool_new(cstr_p, length, size, 1u, true, false);
 
       return;

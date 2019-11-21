@@ -8,7 +8,7 @@ SkookumScript is the superpowered scripting solution and cutting-edge command co
 ## Build Instructions
 
 ### SkookumIDE (Required)
-To use the source version of SkookumScript, you will also need he SkookumIDE binaries. The easiest way to acquire these is to download the [latest release](https://github.com/SkookumScript/SkookumScript-Plugin/releases) and overwrite the `SkookumIDE` folder in this repo with the one from the release. You can also build the IDE from source by following [these instructions](https://github.com/error454/UnrealEngine). Note that to access the SkookumIDE repo, you need to [have access to the Unreal Engine 4 repository](https://www.unrealengine.com/en-US/ue4-on-github).
+To use the source version of SkookumScript, you will also need he SkookumIDE binaries. The easiest way to acquire these is to download the [latest release](https://github.com/EpicSkookumScript/SkookumScript-Plugin/releases) and overwrite the `SkookumIDE` folder in this repo with the one from the release. You can also build the IDE from source by following [these instructions](https://github.com/EpicSkookumScript/SkookumIDE). Note that to access the SkookumIDE repo, you need to [have access to the Unreal Engine 4 repository](https://www.unrealengine.com/en-US/ue4-on-github).
 
 ### Clone the repo
 #### Binary Engine
