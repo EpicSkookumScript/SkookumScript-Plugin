@@ -194,7 +194,7 @@ FString FSkookumScriptRuntimeGenerator::make_project_editable()
           if (load_text_file(editable_project_file_path, proj_ini))
             {
             proj_ini = proj_ini.Replace(ms_editable_ini_settings_p, TEXT("")); // Remove editable settings
-            proj_ini += TEXT("Overlay8=Project|Project\n"); // Create Project overlay definition
+            proj_ini += TEXT("Overlay9=Project|Project\n"); // Create Project overlay definition
             save_text_file(editable_project_file_path, proj_ini);
             }
 

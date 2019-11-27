@@ -603,11 +603,11 @@ FString FSkookumScriptGeneratorBase::get_or_create_project_file(const FString & 
       // $Revisit MBreyer - read ini file from default_project_path and patch it up to carry over customizations
       FString proj_ini = FString::Printf(TEXT("[Project]\nProjectName=%s\nStrictParse=true\nUseBuiltinActor=false\nCustomActorClass=Actor\nStartupMind=Master\n%s"), project_name_p, ms_editable_ini_settings_p);
       proj_ini += TEXT("[Output]\nCompileManifest=false\nCompileTo=../Content/SkookumScript/Classes.sk-bin\n");
-      proj_ini += TEXT("[Script Overlays]\nOverlay1=*Core|Core\nOverlay2=-*Core-Sandbox|Core-Sandbox\nOverlay3=*VectorMath|VectorMath\nOverlay4=*Engine-Generated|Engine-Generated|A\nOverlay5=*Engine|Engine\nOverlay6=*");
+      proj_ini += TEXT("[Script Overlays]\nOverlay1=*Core|Core\nOverlay2=*Helpers|Helpers\nOverlay3=-*Core-Sandbox|Core-Sandbox\nOverlay4=*VectorMath|VectorMath\nOverlay5=*Engine-Generated|Engine-Generated|A\nOverlay6=*Engine|Engine\nOverlay7=*");
       proj_ini += ms_overlay_name_bp_p;
       proj_ini += TEXT("|");
       proj_ini += ms_overlay_name_bp_p;
-      proj_ini += TEXT("|C\nOverlay7=*");
+      proj_ini += TEXT("|C\nOverlay8=*");
       proj_ini += ms_overlay_name_cpp_p;
       proj_ini += TEXT("|");
       proj_ini += ms_overlay_name_cpp_p;
