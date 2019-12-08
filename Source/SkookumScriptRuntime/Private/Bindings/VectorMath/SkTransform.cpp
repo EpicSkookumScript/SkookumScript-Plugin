@@ -98,15 +98,42 @@ namespace SkTransform_Impl
     }
 
   //---------------------------------------------------------------------------------------
+  // # Skookum:   Transform@relative_transform() Transform
+  // # Author(s): Zachary Burke
+  static void mthd_relative_transform(SkInvokedMethod* scope_p, SkInstance** result_pp)
+  {
+    if (result_pp)
+      {
+      const FTransform & t  = scope_p->this_as<SkTransform>();
+      const FTransform & other = scope_p->get_arg<SkTransform>(SkArg_1);
+      *result_pp = SkTransform::new_instance(t.GetRelativeTransform(other));
+      }
+  }
+
+  //---------------------------------------------------------------------------------------
+  // # Skookum:   Transform@relative_transform_reverse() Transform
+  // # Author(s): Zachary Burke
+  static void mthd_relative_transform_reverse(SkInvokedMethod* scope_p, SkInstance** result_pp)
+  {
+    if (result_pp)
+      {
+      const FTransform & t = scope_p->this_as<SkTransform>();
+      const FTransform & other = scope_p->get_arg<SkTransform>(SkArg_1);
+      *result_pp = SkTransform::new_instance(t.GetRelativeTransformReverse(other));
+      }
+  }
+  //---------------------------------------------------------------------------------------
 
   // Instance method array
   static const SkClass::MethodInitializerFunc methods_i[] =
     {
-      { "String",        mthd_String },
-      { "identity",      mthd_identity },
-      { "unit_axis_x",   mthd_unit_axis_x },
-      { "unit_axis_y",   mthd_unit_axis_y },
-      { "unit_axis_z",   mthd_unit_axis_z },
+      { "String",                       mthd_String },
+      { "identity",                     mthd_identity },
+      { "unit_axis_x",                  mthd_unit_axis_x },
+      { "unit_axis_y",                  mthd_unit_axis_y },
+      { "unit_axis_z",                  mthd_unit_axis_z },
+      { "relative_transform",           mthd_relative_transform },
+      { "relative_transform_reverse",   mthd_relative_transform_reverse },
     };
 
   } // namespace

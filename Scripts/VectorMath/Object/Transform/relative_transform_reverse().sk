@@ -1,0 +1,12 @@
+//---------------------------------------------------------------------------------------
+// Get reverse relative transform between this and other transform
+//
+// # Returns: this(-1)*Other, and parameter is Other
+//
+// # Examples:
+//   !t : some_transform.relative_transform_reverse(other_transform)
+//
+// # Author(s): Zachary Burke
+//---------------------------------------------------------------------------------------
+
+(Transform other) Transform
