@@ -5,7 +5,6 @@
 //=======================================================================================
 
 #include "ISkookumScriptEditor.h"
-#include "CoreUObject.h"
 #include "Engine.h"
 #include "UnrealEd.h"
 #include "SlateBasics.h"

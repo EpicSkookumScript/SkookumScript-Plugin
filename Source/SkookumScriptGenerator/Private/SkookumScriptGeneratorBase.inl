@@ -6,7 +6,7 @@
 
 #include "SkookumScriptGeneratorBase.h"
 
-#include "CoreUObject.h"
+#include "Misc/FeedbackContext.h"
 
 #if WITH_EDITOR
   #include "Engine/Blueprint.h"

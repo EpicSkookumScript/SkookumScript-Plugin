@@ -15,7 +15,10 @@
 #include "ISkookumScriptRuntime.h"
 
 #include "Interfaces/IPluginManager.h"
-#include "Networking.h"
+#include "IPAddress.h"
+#include "Sockets.h"
+#include "SocketSubsystem.h"
+#include "Common/TcpSocketBuilder.h"
 
 #include <AgogCore/ADatum.hpp>
 #include <AgogCore/AMath.hpp>

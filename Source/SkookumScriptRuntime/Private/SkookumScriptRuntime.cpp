@@ -36,6 +36,10 @@
 #include "Engine/UserDefinedEnum.h"
 #endif
 
+#if WITH_EDITOR
+#include "Misc/OutputDeviceConsole.h"
+#endif
+
 #if PLATFORM_WINDOWS
 #include "Windows/WindowsHWrapper.h"
 #endif
