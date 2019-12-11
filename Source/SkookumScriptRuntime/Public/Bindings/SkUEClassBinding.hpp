@@ -242,7 +242,7 @@ class SkUEWeakObjectPtr
     operator _UObjectType * () const    { return m_ptr.Get(); } // Cast myself to UObject pointer so it can be directly assigned to UObject pointer
     _UObjectType * operator -> () const { return m_ptr.Get(); }
 
-    void operator = (const _UObjectType * obj_p)                    { m_ptr = obj_p; }
+    void operator = (_UObjectType * obj_p)                    { m_ptr = obj_p; }
     void operator = (const SkUEWeakObjectPtr<_UObjectType> & other) { m_ptr = other.m_ptr; }
 
   protected:

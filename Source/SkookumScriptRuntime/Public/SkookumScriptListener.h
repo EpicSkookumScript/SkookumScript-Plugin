@@ -101,8 +101,7 @@ class SKOOKUMSCRIPTRUNTIME_API USkookumScriptListener : public UObject
 class FSkookumScriptListenerAutoPtr : public TWeakObjectPtr<USkookumScriptListener>
   {
   public:
-
-    FSkookumScriptListenerAutoPtr(const USkookumScriptListener * delegate_obj_p) : TWeakObjectPtr<USkookumScriptListener>(delegate_obj_p) {}
+    FSkookumScriptListenerAutoPtr(USkookumScriptListener * delegate_obj_p) : TWeakObjectPtr<USkookumScriptListener>(delegate_obj_p) {}
     ~FSkookumScriptListenerAutoPtr();
   };
 
