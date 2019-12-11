@@ -5,7 +5,11 @@
 //=======================================================================================
 
 #include "ISkookumScriptGenerator.h"
-#include "CoreUObject.h"
+#include "UObject/EnumProperty.h"
+#include "UObject/ErrorException.h"
+#include "UObject/Package.h"
+#include "UObject/UnrealType.h"
+#include "UObject/UObjectIterator.h"
 #include "Internationalization/Regex.h"
 #include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
