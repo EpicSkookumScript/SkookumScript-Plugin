@@ -95,12 +95,12 @@ namespace SkUEActor_Impl
   static void assert_actor_has_overlap_events_enabled(AActor * actor_p)
     {
     // Check that events will properly fire
-    TArray<UActorComponent *> components = actor_p->GetComponentsByClass(UPrimitiveComponent::StaticClass());
+    TInlineComponentArray<UPrimitiveComponent*> components(actor_p);
     SK_ASSERTX(components.Num() > 0, a_cstr_format("Trying to receive overlap events on actor '%S' but it has no primitive (collision) component.", *actor_p->GetName()));
     bool found_enabled_overlap_event = false;
-    for (UActorComponent * component_p : components)
+    for (UPrimitiveComponent* component_p : components)
       {
-      if (Cast<UPrimitiveComponent>(component_p)->GetGenerateOverlapEvents())
+      if (component_p->GetGenerateOverlapEvents())
         {
         found_enabled_overlap_event = true;
         break;
