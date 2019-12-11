@@ -37,12 +37,5 @@ force-lib-build.txt
 /Source/SkookumScript/Lib/**/*Win32*.lib
 /Source/SkookumScript/Lib/**/VS2013/*
 /Source/SkookumLibs*.*
-/SkookumIDE/*.*
-!/SkookumIDE/Skookum.ini
-/SkookumIDE/Source/**
-/SkookumIDE/Scripts/workspace?.sk
-/SkookumIDE/Scripts/workbench*.sk
-/SkookumIDE/Engine/Saved/**
-/SkookumIDE/Engine/Programs/*/Intermediate/**
-/SkookumIDE/Engine/Programs/*/Saved/**
+/SkookumIDE/**
 /hooks/**
