@@ -19,7 +19,7 @@ namespace UnrealBuildTool.Rules
 
       // SkUEBindings.cpp takes a long time to compile due to auto-generated engine bindings
       // Set to true when actively working on this plugin, false otherwise
-      bFasterWithoutUnity = false;
+      bUseUnity = false;
 
       // Tell build system we're not using PCHs
       PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
