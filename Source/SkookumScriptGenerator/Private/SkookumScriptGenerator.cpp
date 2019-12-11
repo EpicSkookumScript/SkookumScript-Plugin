@@ -285,8 +285,8 @@ void FSkookumScriptGenerator::ShutdownModule()
 // IScriptGeneratorPluginInterface implementation
 //=======================================================================================
 
-const TCHAR * FSkookumScriptGenerator::ms_event_coro_fmts_pp[EventCoro__count] = { TEXT("_on_%s_do"), TEXT("_on_%s_do_until"), TEXT("_wait_%s") };
-const TCHAR * FSkookumScriptGenerator::ms_event_coro_impl_fmts_pp[EventCoro__count] = { TEXT("coro_on_event_do(scope_p, %s, false)"), TEXT("coro_on_event_do(scope_p, %s, true)"), TEXT("coro_wait_event(scope_p, %s)") };
+const TCHAR * FSkookumScriptGenerator::ms_event_coro_fmts_pp[EventCoro__count] = { TEXT("_on_{0}_do"), TEXT("_on_{0}_do_until"), TEXT("_wait_{0}") };
+const TCHAR * FSkookumScriptGenerator::ms_event_coro_impl_fmts_pp[EventCoro__count] = { TEXT("coro_on_event_do(scope_p, {0}, false)"), TEXT("coro_on_event_do(scope_p, {0}, true)"), TEXT("coro_wait_event(scope_p, {0})") };
 
 const FName FSkookumScriptGenerator::ms_meta_data_key_custom_structure_param(TEXT("CustomStructureParam"));
 const FName FSkookumScriptGenerator::ms_meta_data_key_array_parm(TEXT("ArrayParm"));
@@ -695,7 +695,9 @@ FString FSkookumScriptGenerator::generate_class_binding_file_body(UStruct * stru
         {
         for (int32 i = 0; i < EventCoro__count; ++i)
           {
-          FString coro_name = FString::Printf(ms_event_coro_fmts_pp[i], *event.m_script_name_base);
+          TArray<FStringFormatArg> Arguments;
+          Arguments.Add(FStringFormatArg(*event.m_script_name_base));
+          FString coro_name = FString::Format(ms_event_coro_fmts_pp[i], Arguments);
           generated_code += FString::Printf(TEXT("      { 0x%08x, coro%s },\n"), get_skookum_symbol_id(*coro_name), *coro_name);
           }
         }
@@ -1030,37 +1032,44 @@ FString FSkookumScriptGenerator::generate_method_binding_code_body_via_event(con
 FString FSkookumScriptGenerator::generate_event_script_file_body(eEventCoro which, UMulticastDelegateProperty * delegate_property_p, const FString & script_base_name, FString * out_coro_name_p)
   {
   // Determine name
-  *out_coro_name_p = FString::Printf(ms_event_coro_fmts_pp[which], *script_base_name);
+  TArray<FStringFormatArg> CoroNameArguments;
+  CoroNameArguments.Add(FStringFormatArg(*script_base_name));
+  *out_coro_name_p = FString::Format(ms_event_coro_fmts_pp[which], CoroNameArguments);
 
   // Determine comment
   static TCHAR const * const s_comment_formats_pp[EventCoro__count] =
     {
     TEXT(
       "//---------------------------------------------------------------------------------------\n"
-      "// Whenever a `%s` event occurs on this `%s`, run `code` on it.\n"
+      "// Whenever a '{0}' event occurs on this '{1}', run 'code' on it.\n"
       "// This coroutine never finishes by itself and can only be terminated externally.\n"
       "//---------------------------------------------------------------------------------------\n"
       "//\n"),
     TEXT(
       "//---------------------------------------------------------------------------------------\n"
-      "// Whenever a `%s` event occurs on this `%s`, run `code` on it.\n"
-      "// If `code` returns `false`, continue waiting for next event,\n"
+      "// Whenever a '{0}' event occurs on this '{1}', run 'code' on it.\n"
+      "// If 'code' returns 'false', continue waiting for next event,\n"
       "// otherwise, exit and return the event parameters\n"
       "//---------------------------------------------------------------------------------------\n"
       "//\n"),
     TEXT(
       "//---------------------------------------------------------------------------------------\n"
-      "// Wait for a `%s` event to occur on this `%s`.\n"
+      "// Wait for a '{0}' event to occur on this '{1}'.\n"
       "//\n"
       "// IMPORTANT: Do not use this coroutine if several of the events can potentially\n"
       "// occur within the same frame, as only the first one will be seen!\n"
-      "// In that case use `_on_%s_do` or `_on_%s_do_until` instead.\n"
+      "// In that case use '_on_{2}_do' or '_on_{2}_do_until' instead.\n"
       "//---------------------------------------------------------------------------------------\n"
       "//\n")
     };
 
   // Generate coroutine content
-  FString coro_body = FString::Printf(s_comment_formats_pp[which], *delegate_property_p->GetName(), *delegate_property_p->GetOwnerClass()->GetName(), *script_base_name, *script_base_name);
+  TArray<FStringFormatArg> CoroBodyArguments;
+  CoroBodyArguments.Add(FStringFormatArg(delegate_property_p->GetName()));
+  CoroBodyArguments.Add(FStringFormatArg(delegate_property_p->GetOwnerClass()->GetName()));
+  CoroBodyArguments.Add(FStringFormatArg(*script_base_name));
+  
+  FString coro_body = FString::Format(s_comment_formats_pp[which], CoroBodyArguments);
   coro_body += get_comment_block(delegate_property_p);
 
   // Generate parameter list
@@ -1209,13 +1218,18 @@ FString FSkookumScriptGenerator::generate_event_binding_code(const FString & cla
   FString install_args = FString::Printf(TEXT("&USkookumScriptListener_%s::install, &USkookumScriptListener_%s::uninstall"), *binding.m_property_p->GetName(), *binding.m_property_p->GetName());
   for (int32 i = 0; i < EventCoro__count; ++i)
     {
+    TArray<FStringFormatArg> Arguments1;
+    TArray<FStringFormatArg> Arguments2;
+    Arguments1.Add(FStringFormatArg(*binding.m_script_name_base));
+    Arguments2.Add(FStringFormatArg(*install_args));
+
     generated_code += FString::Printf(TEXT(
       "  static bool coro%s(SkInvokedCoroutine * scope_p)\n"
       "    {\n"
       "    return USkookumScriptListener::%s;\n"
       "    }\n"), 
-      *FString::Printf(ms_event_coro_fmts_pp[i], *binding.m_script_name_base),
-      *FString::Printf(ms_event_coro_impl_fmts_pp[i], *install_args)
+      *FString::Format(ms_event_coro_fmts_pp[i], Arguments1),
+      *FString::Format(ms_event_coro_impl_fmts_pp[i], Arguments2)
       );
     }
 
@@ -1272,14 +1286,14 @@ FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunct
     case SkTypeID_Delegate:
     case SkTypeID_MulticastDelegate:
     case SkTypeID_UObject:
-    case SkTypeID_UObjectWeakPtr:  fmt = FString::Printf(TEXT("scope_p->get_arg<%s>(SkArg_%%d) = %%s"), *get_skookum_property_binding_class_name(param_p)); break;
-    case SkTypeID_String:          fmt = TEXT("scope_p->get_arg<SkString>(SkArg_%d) = AString(*%s, %s.Len())"); break; // $revisit MBreyer - Avoid copy here
-    case SkTypeID_Enum:            fmt = TEXT("scope_p->get_arg<SkEnum>(SkArg_%d) = (tSkEnum)%s"); break;
+    case SkTypeID_UObjectWeakPtr:  fmt = FString::Printf(TEXT("scope_p->get_arg<%s>(SkArg_{0}) = {1}"), *get_skookum_property_binding_class_name(param_p)); break;
+    case SkTypeID_String:          fmt = TEXT("scope_p->get_arg<SkString>(SkArg_{0}) = AString(*{1}, {1}.Len())"); break; // $revisit MBreyer - Avoid copy here
+    case SkTypeID_Enum:            fmt = TEXT("scope_p->get_arg<SkEnum>(SkArg_{0}) = (tSkEnum){1}"); break;
     case SkTypeID_List:
       {
       const UArrayProperty * array_property_p = Cast<UArrayProperty>(param_p);
       UProperty * element_property_p = array_property_p->Inner;
-      fmt = FString::Printf(TEXT("SkUEClassBindingHelper::initialize_list_from_array<%s,%s>(&scope_p->get_arg<SkList>(SkArg_%%d), %%s)"),
+      fmt = FString::Printf(TEXT("SkUEClassBindingHelper::initialize_list_from_array<%s,%s>(&scope_p->get_arg<SkList>(SkArg_{0}), {1})"),
         *get_skookum_property_binding_class_name(element_property_p),
         *get_cpp_property_type_name(element_property_p, true));
       }
@@ -1287,7 +1301,11 @@ FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunct
     default:  FError::Throwf(TEXT("Unsupported return param type: %s"), *param_p->GetClass()->GetName()); break;
     }
 
-  return FString::Printf(*fmt, param_index + 1, *param_name, *param_name);
+  TArray<FStringFormatArg> Arguments;
+  Arguments.Add(FStringFormatArg(param_index + 1));
+  Arguments.Add(FStringFormatArg(*param_name));
+
+  return FString::Format(*fmt, Arguments);
   }
 
 //---------------------------------------------------------------------------------------
@@ -1427,13 +1445,13 @@ FString FSkookumScriptGenerator::generate_var_to_instance_expression(UProperty *
     case SkTypeID_Delegate:
     case SkTypeID_MulticastDelegate:
     case SkTypeID_UObject:
-    case SkTypeID_UObjectWeakPtr:  fmt = FString::Printf(TEXT("%s::new_instance(%%s)"), *get_skookum_property_binding_class_name(var_p)); break;
-    case SkTypeID_String:          fmt = TEXT("SkString::new_instance(AString(*(%s), %s.Len()))"); break; // $revisit MBreyer - Avoid copy here
+    case SkTypeID_UObjectWeakPtr:  fmt = FString::Printf(TEXT("%s::new_instance({0})"), *get_skookum_property_binding_class_name(var_p)); break;
+    case SkTypeID_String:          fmt = TEXT("SkString::new_instance(AString(*({0}), {0}.Len()))"); break; // $revisit MBreyer - Avoid copy here
     case SkTypeID_List:
     {
     const UArrayProperty * array_property_p = Cast<UArrayProperty>(var_p);
     UProperty * element_property_p = array_property_p->Inner;
-    fmt = FString::Printf(TEXT("SkUEClassBindingHelper::list_from_array<%s,%s>(%%s)"),
+    fmt = FString::Printf(TEXT("SkUEClassBindingHelper::list_from_array<%s,%s>({0})"),
       *get_skookum_property_binding_class_name(element_property_p),
       *get_cpp_property_type_name(element_property_p, true));
     }
@@ -1441,7 +1459,9 @@ FString FSkookumScriptGenerator::generate_var_to_instance_expression(UProperty *
     default:  FError::Throwf(TEXT("Unsupported return param type: %s"), *var_p->GetClass()->GetName()); break;
     }
 
-  return FString::Printf(*fmt, *var_name, *var_name);
+  TArray<FStringFormatArg> Arguments;
+  Arguments.Add(FStringFormatArg(*var_name));
+  return FString::Format(*fmt, Arguments);
   }
 
 //---------------------------------------------------------------------------------------
