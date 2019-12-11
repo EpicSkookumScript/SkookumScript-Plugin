@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------
+// Empty constructor for an InvokedCoroutine
+// 
+// Returns: InvokeCoroutine
+//  
+// Examples:  
+//  @my_co : InvokeCoroutine! // Initial binding of an InvokedCoroutine
+//---------------------------------------------------------------------------------------
+
+() 
+[
+  branch _wait(-1)
+]
