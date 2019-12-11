@@ -15,14 +15,13 @@
 #include "Components/ActorComponent.h"
 
 #include <AgogCore/AIdPtr.hpp>
-
+#include <SkookumScript/SkInstance.hpp>
 #include "SkookumScriptMindComponent.generated.h"
 
 //=======================================================================================
 // Global Defines / Macros
 //=======================================================================================
 
-class SkInstance;
 
 //=======================================================================================
 // Global Structures

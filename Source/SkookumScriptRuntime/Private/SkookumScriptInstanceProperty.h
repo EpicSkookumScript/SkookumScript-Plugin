@@ -15,6 +15,7 @@
 #include "UObject/UnrealType.h"
 
 #include <AgogCore/AIdPtr.hpp>
+#include <SkookumScript/SkInstance.hpp>
 
 #include "SkookumScriptInstanceProperty.generated.h"
 
@@ -22,7 +23,6 @@
 // Global Defines / Macros
 //=======================================================================================
 
-class SkInstance;
 class SkClass;
 
 //=======================================================================================

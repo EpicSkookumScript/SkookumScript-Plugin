@@ -20,6 +20,9 @@
 #include "Logging/LogMacros.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "Framework/Application/SlateApplication.h"
+#include "UnrealEd/Public/Subsystems/AssetEditorSubsystem.h"
+#include "UnrealEd/Public/Editor.h"
+#include "UnrealEd/Classes/Editor/EditorEngine.h"
 #include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 
 DEFINE_LOG_CATEGORY_STATIC(LogSkookumScriptEditorGUI, Log, All);
@@ -228,7 +231,7 @@ void FSkookumScriptEditorGUI::on_skookum_button_clicked()
   FString focus_ue_member_name;
 
   // There must be a better way of finding the active editor...
-  TArray<UObject*> obj_array = FAssetEditorManager::Get().GetAllEditedAssets();
+  TArray<UObject*> obj_array = GEditor->GetEditorSubsystem<UAssetEditorSubsystem>()->GetAllEditedAssets();
   double latest_activation_time = 0.0;
   IAssetEditorInstance * active_editor_p = nullptr;
   if (obj_array.Num() > 0)
@@ -239,7 +242,7 @@ void FSkookumScriptEditorGUI::on_skookum_button_clicked()
       UBlueprint * blueprint_p = Cast<UBlueprint>(*obj_iter);
       if (blueprint_p)
         {
-        IAssetEditorInstance * editor_p = FAssetEditorManager::Get().FindEditorForAsset(blueprint_p, false);
+        IAssetEditorInstance * editor_p = GEditor->GetEditorSubsystem<UAssetEditorSubsystem>()->FindEditorForAsset(blueprint_p, false);
         if (editor_p->GetLastActivationTime() > latest_activation_time)
           {
           latest_activation_time = editor_p->GetLastActivationTime();

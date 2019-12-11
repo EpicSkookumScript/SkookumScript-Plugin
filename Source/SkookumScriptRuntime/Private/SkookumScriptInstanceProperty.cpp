@@ -17,8 +17,6 @@
 #include "Bindings/SkUEClassBinding.hpp"
 #include "SkUEEntity.generated.hpp"
 
-#include <SkookumScript/SkInstance.hpp>
-
 #include "Engine/World.h"
 #include "UObject/PropertyPortFlags.h"
 
