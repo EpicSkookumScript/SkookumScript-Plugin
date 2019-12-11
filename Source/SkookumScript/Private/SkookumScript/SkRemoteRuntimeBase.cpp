@@ -28,7 +28,11 @@
 
 #ifdef A_PLAT_PC
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
-  #include <windows.h>
+  #include "Windows/AllowWindowsPlatformTypes.h"
+  #include "Windows/PreWindowsApi.h"
+    #include <windows.h> // AllowSetForegroundWindow
+  #include "Windows/PostWindowsApi.h"
+  #include "Windows/HideWindowsPlatformTypes.h"
 #endif
 
 //=======================================================================================

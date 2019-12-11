@@ -15,7 +15,11 @@
 #include <AgogCore/ARegion.hpp>
 #if defined(A_PLAT_PC)
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
-  #include <windows.h>  // For definition of RECT
+  #include "Windows/AllowWindowsPlatformTypes.h"
+  #include "Windows/PreWindowsApi.h"
+    #include <windows.h>  // For definition of RECT
+  #include "Windows/PostWindowsApi.h"
+  #include "Windows/HideWindowsPlatformTypes.h"
 #endif
 
 

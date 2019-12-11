@@ -21,7 +21,11 @@
 
 #if defined(A_PLAT_PC) && defined(A_EXTRA_CHECK)
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
-  #include <windows.h>  // Uses: IsDebuggerPresent(), OutputDebugStringA()
+  #include "Windows/AllowWindowsPlatformTypes.h"
+  #include "Windows/PreWindowsApi.h"
+    #include <windows.h> // Uses: IsDebuggerPresent(), OutputDebugStringA()
+  #include "Windows/PostWindowsApi.h"
+  #include "Windows/HideWindowsPlatformTypes.h"
 #endif
 #if defined(A_PLAT_OSX) && defined(A_EXTRA_CHECK)
   #include <sys/types.h>

@@ -35,7 +35,6 @@
 
 #if defined(A_PLAT_PC) && defined(A_EXTRA_CHECK)
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
-  #include <windows.h> // OutputDebugStringA
 #endif
 
 //=======================================================================================

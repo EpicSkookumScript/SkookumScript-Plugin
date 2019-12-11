@@ -29,7 +29,6 @@
 
 #ifdef A_PLAT_PC
   #define WIN32_LEAN_AND_MEAN // Keep this define out of public header files
-  #include "windows.h"    // Uses:  WideCharToMultiByte()
 #endif
 
 #ifdef __clang__
