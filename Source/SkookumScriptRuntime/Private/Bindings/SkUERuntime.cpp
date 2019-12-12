@@ -22,6 +22,7 @@
 #include "UObject/UObjectIterator.h"
 #include "Engine/Blueprint.h"
 #include "Engine/UserDefinedStruct.h"
+#include "HAL/FileManager.h"
 #include <chrono>
 
 #include <AgogCore/AMethodArg.hpp>

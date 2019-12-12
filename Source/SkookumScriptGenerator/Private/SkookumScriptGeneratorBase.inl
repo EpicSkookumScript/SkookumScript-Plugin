@@ -6,6 +6,7 @@
 
 #include "SkookumScriptGeneratorBase.h"
 
+#include "UObject/EnumProperty.h"
 #include "Misc/FeedbackContext.h"
 
 #if WITH_EDITOR

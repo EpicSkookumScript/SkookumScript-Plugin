@@ -5,9 +5,6 @@
 //=======================================================================================
 
 #include "ISkookumScriptEditor.h"
-#include "Engine.h"
-#include "UnrealEd.h"
-#include "SlateBasics.h"
 #include "Slate/SlateGameResources.h" 
 #include "Interfaces/IMainFrameModule.h"
 #include "Interfaces/IPluginManager.h"

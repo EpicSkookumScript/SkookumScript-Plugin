@@ -22,10 +22,6 @@
   #include <AgogCore/_AgogExtHook.hpp>
 //#endif
 
-#include <stdint.h>  // For sized integer types, minimums and maximums: int##_t, uint##_t, INT##_MAX, UINT##_MAX
-#include <limits.h>  // integer minimums and maximums: INT_MAX, UINT_MAX
-#include <float.h>   // float minimums and maximums: FLT_DIG, FLT_MAX, FLT_EPSILON, DBL_DIG
-#include <stddef.h>  // size_t on OS X
 #include "HAL/UnrealMemory.h"
 
 // Additional includes at end of file

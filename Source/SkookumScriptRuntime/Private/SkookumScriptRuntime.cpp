@@ -25,6 +25,7 @@
 #include "Runtime/Launch/Resources/Version.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Stats/Stats.h"
 
 #include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE

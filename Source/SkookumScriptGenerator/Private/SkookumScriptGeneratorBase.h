@@ -8,6 +8,7 @@
 
 #include "Misc/FileHelper.h"
 #include "UObject/NameTypes.h"
+#include "UObject/UnrealType.h"
 #include "Containers/Map.h"
 #include "Containers/UnrealString.h"
 
