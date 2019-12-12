@@ -11,6 +11,8 @@ BuildCommand = [
     BuildParams.RunUAT,
     r"BuildPlugin",
     r"-Plugin=" + BuildParams.SkPlugin,
+    r"-iwyu",
+    r"-noubtmakefiles",
     r"-Package=" + BuildParams.OutFolder,
     r"-CreateSubFolder",
     r"-TargetPlatforms=Android+Win64",
