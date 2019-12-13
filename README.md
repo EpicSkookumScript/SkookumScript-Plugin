@@ -5,6 +5,89 @@ SkookumScript is the superpowered scripting solution and cutting-edge command co
 
 ![SkookumScript IDE Screenshots](http://skookumscript.com/images/galleries/Screens.png)
 
+## C++ Project Instructions
+If you'd like to have SkookumScript see your C++ defined `UFUNCTION`s and `UPROPERTY`s then follow the steps below. Be sure to replace any instances of `YourProjectNameHere` with the name of your project as defined in your project's implementation of the primary game module. For instance, in the `CExample.cpp` below we can see that the project name is `CExample`, yours will differ:
+
+```
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, CExample, "CExample" );
+```
+
+1. In `YourProjectNameHere.cpp`, add the include:
+
+```c++
+#include <SkUEProjectGeneratedBindings.generated.inl>
+```
+
+1. In `YourProjectNameHere.Build.cs` add the 3 code sections delimited in the example below, you don't need to change any names for this one, just copy/paste the sections that are marked as `Add this` to the appropriate place:
+
+```C#
+using UnrealBuildTool;
+
+/***** Add this *****/
+using System.IO;
+using System.Collections.Generic;
+using Tools.DotNETCommon;
+/*********************/
+
+public class CExample : ModuleRules
+{
+	public CExample(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+	
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
+
+    /***** Add this *****/
+    // Load SkookumScript.ini and add any ScriptSupportedModules specified to the list of PrivateDependencyModuleNames
+    PrivateDependencyModuleNames.AddRange(GetSkookumScriptModuleNames(Path.Combine(ModuleDirectory, "../..")));
+    /********************/
+  }
+
+  /***** Add this *****/
+  // Load SkookumScript.ini and return any ScriptSupportedModules specified
+  public static List<string> GetSkookumScriptModuleNames(string PluginOrProjectRootDirectory, bool AddSkookumScriptRuntime = true)
+  {
+      List<string> moduleList = null;
+
+      // Load SkookumScript.ini and get ScriptSupportedModules
+      string iniFilePath = Path.Combine(PluginOrProjectRootDirectory, "Config/SkookumScript.ini");
+      if (File.Exists(iniFilePath))
+      {
+          ConfigFile iniFile = new ConfigFile(new FileReference(iniFilePath), ConfigLineAction.Add);
+          var skookumConfig = new ConfigHierarchy(new ConfigFile[] { iniFile });
+          skookumConfig.GetArray("CommonSettings", "ScriptSupportedModules", out moduleList);
+      }
+
+      if (moduleList == null)
+      {
+          moduleList = new List<string>();
+      }
+
+      // Add additional modules needed for SkookumScript to function
+      moduleList.Add("AgogCore");
+      moduleList.Add("SkookumScript");
+      if (AddSkookumScriptRuntime)
+      {
+          moduleList.Add("SkookumScriptRuntime");
+      }
+
+      return moduleList;
+  }
+  /*********************************************/
+}
+```
+
+3. In your project's `Config` folder, create the file `SkookumScript.ini` and set the contents as below, be sure to replace the name of your project:
+
+```
+[CommonSettings]
++ScriptSupportedModules=YourProjectNameHere
+```
+
+4. Clean your Game project in VS and build. You should now see all your functions and properties.
+
 ## Build Instructions
 
 ### SkookumIDE (Required)
