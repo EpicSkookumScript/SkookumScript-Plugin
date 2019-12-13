@@ -31,13 +31,13 @@ using Tools.DotNETCommon;
 
 public class CExample : ModuleRules
 {
-	public CExample(ReadOnlyTargetRules Target) : base(Target)
-	{
-		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+  public CExample(ReadOnlyTargetRules Target) : base(Target)
+  {
+    PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+    PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+
+    PrivateDependencyModuleNames.AddRange(new string[] {  });
 
     /***** Add this *****/
     // Load SkookumScript.ini and add any ScriptSupportedModules specified to the list of PrivateDependencyModuleNames
@@ -49,31 +49,31 @@ public class CExample : ModuleRules
   // Load SkookumScript.ini and return any ScriptSupportedModules specified
   public static List<string> GetSkookumScriptModuleNames(string PluginOrProjectRootDirectory, bool AddSkookumScriptRuntime = true)
   {
-      List<string> moduleList = null;
+    List<string> moduleList = null;
 
-      // Load SkookumScript.ini and get ScriptSupportedModules
-      string iniFilePath = Path.Combine(PluginOrProjectRootDirectory, "Config/SkookumScript.ini");
-      if (File.Exists(iniFilePath))
-      {
-          ConfigFile iniFile = new ConfigFile(new FileReference(iniFilePath), ConfigLineAction.Add);
-          var skookumConfig = new ConfigHierarchy(new ConfigFile[] { iniFile });
-          skookumConfig.GetArray("CommonSettings", "ScriptSupportedModules", out moduleList);
-      }
+    // Load SkookumScript.ini and get ScriptSupportedModules
+    string iniFilePath = Path.Combine(PluginOrProjectRootDirectory, "Config/SkookumScript.ini");
+    if (File.Exists(iniFilePath))
+    {
+      ConfigFile iniFile = new ConfigFile(new FileReference(iniFilePath), ConfigLineAction.Add);
+      var skookumConfig = new ConfigHierarchy(new ConfigFile[] { iniFile });
+      skookumConfig.GetArray("CommonSettings", "ScriptSupportedModules", out moduleList);
+    }
 
-      if (moduleList == null)
-      {
-          moduleList = new List<string>();
-      }
+    if (moduleList == null)
+    {
+      moduleList = new List<string>();
+    }
 
-      // Add additional modules needed for SkookumScript to function
-      moduleList.Add("AgogCore");
-      moduleList.Add("SkookumScript");
-      if (AddSkookumScriptRuntime)
-      {
-          moduleList.Add("SkookumScriptRuntime");
-      }
+    // Add additional modules needed for SkookumScript to function
+    moduleList.Add("AgogCore");
+    moduleList.Add("SkookumScript");
+    if (AddSkookumScriptRuntime)
+    {
+      moduleList.Add("SkookumScriptRuntime");
+    }
 
-      return moduleList;
+    return moduleList;
   }
   /*********************************************/
 }
