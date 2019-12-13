@@ -1734,7 +1734,7 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
 
   FString header_code = TEXT(
     "#pragma once\n\n"
-    "#include \"SkUEBindingsInterface.hpp\"\n"
+    "#include \"Bindings/SkUEBindingsInterface.hpp\"\n"
     "\n");
 
   // Declaration of the SkUEGeneratedBindings class
@@ -1762,7 +1762,7 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
       {
       FString class_header_code = TEXT(
         "#pragma once\n\n"
-        "#include \"SkUEClassBinding.hpp\"\n");
+        "#include \"Bindings/SkUEClassBinding.hpp\"\n");
 
       if (generated_type.m_type_p->IsA<UEnum>())
         {
@@ -1821,17 +1821,17 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
     "#include \"SkookumScript/SkString.hpp\"\n"
     "#include \"SkookumScript/SkList.hpp\"\n"
     "\n"
-    "#include \"VectorMath/SkVector2.hpp\"\n"
-    "#include \"VectorMath/SkVector3.hpp\"\n"
-    "#include \"VectorMath/SkVector4.hpp\"\n"
-    "#include \"VectorMath/SkRotation.hpp\"\n"
-    "#include \"VectorMath/SkRotationAngles.hpp\"\n"
-    "#include \"VectorMath/SkTransform.hpp\"\n"
-    "#include \"VectorMath/SkColor.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkVector2.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkVector3.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkVector4.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkRotation.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkRotationAngles.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkTransform.hpp\"\n"
+    "#include \"Bindings/VectorMath/SkColor.hpp\"\n"
     "\n"
-    "#include \"Engine/SkUEName.hpp\"\n"
-    "#include \"Engine/SkUEDelegate.hpp\"\n"
-    "#include \"Engine/SkUEMulticastDelegate.hpp\"\n"
+    "#include \"Bindings/Engine/SkUEName.hpp\"\n"
+    "#include \"Bindings/Engine/SkUEDelegate.hpp\"\n"
+    "#include \"Bindings/Engine/SkUEMulticastDelegate.hpp\"\n"
     "\n"
     "#include \"ISkookumScriptRuntime.h\"\n"
     "#include \"SkookumScriptListener.h\"\n"
@@ -1870,6 +1870,8 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
           }
         else if (!dont_include)
           {
+          include_file_path.RemoveFromStart("Classes/");
+          include_file_path.RemoveFromStart("Public/");
           binding_code += FString::Printf(TEXT("#include \"%s\"\n"), *include_file_path);
           }
         }
