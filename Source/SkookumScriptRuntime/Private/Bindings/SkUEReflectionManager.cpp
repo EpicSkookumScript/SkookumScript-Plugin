@@ -1565,6 +1565,10 @@ UFunction * SkUEReflectionManager::build_ue_function(UClass * ue_class_p, SkInvo
   // Make sure parameter list is properly linked and offsets are set
   ue_function_p->StaticLink(true);
 
+  // From 4.21 on, we need to add all functions to the root set. Failure to do this here will result
+  // in sk functions getting GC'd in packaged builds.
+  ue_function_p->AddToRoot(); 
+  
   return ue_function_p;
   }
 
