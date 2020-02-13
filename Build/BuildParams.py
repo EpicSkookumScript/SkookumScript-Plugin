@@ -2,16 +2,17 @@ import os
 
 # Where the build will be copied when it is completed, make sure this is
 # outside of the UE4 project.
-OutFolder = r"e:\SkookumScript"
+OutFolder = r"e:\SkBuilds\FinalBuild"
 
 # The full path to the binary UE4 installation that this will be built for
 BinaryUE4 = r"e:\Epic\UE_4.24"
 
 # The full path to the source UE4 installation that we will build with
-SourceUE4 = r"c:\Epic Games\4.24"
+SourceUE4 = r"C:\UE4Github"
 
-# The full path to the SkookumScript plugin
-SkPluginPath = r"C:\Epic Games\4.24\Engine\Plugins\Runtime\SkookumScript"
+# The full path to the SkookumScript plugin, this should not be placed inside
+# the engine folder.
+SkPluginPath = r"e:\SkBuilds\SkookumScript"
 
 ###
 ### Don't edit below this line

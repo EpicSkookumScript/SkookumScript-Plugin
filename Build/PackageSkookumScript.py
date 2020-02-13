@@ -37,7 +37,8 @@ def SetSourceBuildID(file):
 
 def GetCommitSHAStr():
   repo = Repo(BuildParams.SkPluginPath)
-  commits = list(repo.iter_commits('master', max_count=1))
+  print "Building for active branch: " + str(repo.active_branch) + " from " + BuildParams.SkPluginPath
+  commits = list(repo.iter_commits(max_count=1))
   for commit in commits:
     return str(commit.hexsha[:7])
 
@@ -72,12 +73,38 @@ def Zip():
   ver_name = GetUE4VerStr() + "-" + GetCommitSHAStr()
   subprocess.call(ZipCommand)
 
+def CheckSkPluginsExist():
+  exists_in_binary = os.path.isdir(os.path.join(BuildParams.SourceUE4, "Engine", "Plugins", "Runtime", "SkookumScript")) or \
+                   os.path.isdir(os.path.join(BuildParams.SourceUE4, "Engine", "Plugins", "SkookumScript"))
+  exists_in_source = os.path.isdir(os.path.join(BuildParams.BinaryUE4, "Engine", "Plugins", "Runtime", "SkookumScript")) or \
+                   os.path.isdir(os.path.join(BuildParams.BinaryUE4, "Engine", "Plugins", "SkookumScript"))
+  return exists_in_binary or exists_in_source
+
+def CheckIniFileExists():
+  return os.path.isfile(os.path.join(BuildParams.SkPluginPath, "SkookumIDE", "SkookumIDE-user.ini"))
+
+def CheckIDEMissing():
+  return not os.path.isdir(os.path.join(BuildParams.SkPluginPath, "SkookumIDE", "Engine"))
+
 def Build():
+  if CheckSkPluginsExist():
+    print "Build Failed: SkookumScript plugin already exists in Binary and/or Source engine. Remove it before building."
+    return -1
+
+  if CheckIniFileExists():
+    print "Build Failed: SkookumIDE-user.ini file exists in SkookumIDE folder."
+    return -1
+
+  if CheckIDEMissing():
+    print "Build Failed: SkookumIDE/Engine folder is missing"
+    return -1
+
   print subprocess.list2cmdline(BuildCommand)
   buildStatus = subprocess.call(BuildCommand, cwd=BuildParams.UE4CWD)
       
   if buildStatus > 0:
       print "Build Failed"
+      return -1
   else:
     print "Setting BuildId..."
     SetSourceBuildID("UE4Editor.modules")
@@ -90,5 +117,6 @@ def Build():
     Zip()
 
     print "Build Success"
+    return 0
 
 Build()
