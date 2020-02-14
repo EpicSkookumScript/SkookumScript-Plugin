@@ -5,6 +5,9 @@ SkookumScript is the superpowered scripting solution and cutting-edge command co
 
 ![SkookumScript IDE Screenshots](http://skookumscript.com/images/galleries/Screens.png)
 
+## Learning Resources
+Please see the [Wiki](https://github.com/EpicSkookumScript/SkookumScript-Plugin/wiki) for a list of learning resources for SkookumScript.
+
 ## C++ Project Instructions
 If you'd like to have SkookumScript see your C++ defined `UFUNCTION`s and `UPROPERTY`s then follow the steps below. Be sure to replace any instances of `YourProjectNameHere` with the name of your project as defined in your project's implementation of the primary game module. For instance, in the `CExample.cpp` below we can see that the project name is `CExample`, yours will differ:
 
