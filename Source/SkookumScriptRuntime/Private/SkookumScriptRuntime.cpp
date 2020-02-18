@@ -1303,7 +1303,7 @@ void FSkookumScriptRuntime::on_class_added_or_modified(UBlueprint * blueprint_p)
   if (ue_class_p && !is_dormant())
     {
     // Generate script files for the new/changed class
-    m_generator.update_class_script_file(ue_class_p, false, true);
+    m_generator.update_class_script_file(ue_class_p, true, true);
     m_generator.update_used_class_script_files(true);
 
     // Find associated SkClass if any
