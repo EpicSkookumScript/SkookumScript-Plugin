@@ -677,13 +677,20 @@ void FSkookumScriptRuntimeGenerator::update_class_script_file(UField * type_p, b
     FString sk_class_name = get_skookum_class_name(type_p);
     FString sk_super_name = get_skookum_parent_name(type_p, 0, 0);
 
+    // Don't process any classes that are marked as skipped or any classes with a superclass marked as skip
+    if (m_targets[ClassScope_project].is_type_skipped(type_p->GetFName())
+      || m_targets[ClassScope_engine].is_type_skipped(type_p->GetFName()))
+    {
+      return;
+    }
+
     // Create body of class archive file
     // First, meta body
     FString body = generate_class_meta_file_body(type_p) + TEXT("\n");
 
     // Then, members, but only for BP types
     bool is_bp_type = type_p->IsA<UBlueprintGeneratedClass>() || type_p->IsA<UUserDefinedStruct>() || type_p->IsA<UUserDefinedEnum>();
-    if (is_bp_type && allow_members && !m_targets[ClassScope_project].is_type_skipped(type_p->GetFName()))
+    if (is_bp_type && allow_members )
       {
       // Is it a class or struct?
       UStruct * struct_or_class_p = Cast<UStruct>(type_p);

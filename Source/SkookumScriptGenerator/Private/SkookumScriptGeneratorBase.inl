@@ -1852,7 +1852,11 @@ FString FSkookumScriptGeneratorBase::GenerationTargetBase::get_ini_file_path() c
 
 bool FSkookumScriptGeneratorBase::GenerationTargetBase::is_type_skipped(FName type_name) const
   {
-  return m_skip_classes.Contains(type_name); // Don't export classes that set to skip in config file
+  // Don't export any classes that are set to skip in the config file. Some BP types will be passed to this
+  // from SkookumScriptRuntimeGenerator with names like MyClass_C. Remove the _C before checking the class.
+  FString type_string = *type_name.ToString();
+  type_string.RemoveFromEnd(TEXT("_C"));
+  return m_skip_classes.Contains(FName(*type_string));
   }
 
 

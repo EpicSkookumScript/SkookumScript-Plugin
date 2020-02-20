@@ -537,7 +537,9 @@ int32 FSkookumScriptGenerator::generate_class(UStruct * struct_or_class_p, int32
   // Determine if it's just a stub (i.e. Sk built-in struct like Vector3, Transform, SkookumScriptBehaviorComponent etc.)
   eSkTypeID type_id = get_skookum_struct_type(struct_or_class_p);
   bool has_built_in_name = struct_or_class_p->GetName() == TEXT("SkookumScriptBehaviorComponent");
-  generated_class.m_is_hierarchy_stub = (type_id != SkTypeID_UStruct && type_id != SkTypeID_UClass) || has_built_in_name || m_targets[class_scope].is_type_skipped(struct_or_class_p->GetFName()); // || !module_p;
+  
+  const bool bTypeSkipped = m_targets[class_scope].is_type_skipped(struct_or_class_p->GetFName());
+  generated_class.m_is_hierarchy_stub = (type_id != SkTypeID_UStruct && type_id != SkTypeID_UClass) || has_built_in_name || bTypeSkipped;
 
   // Generate meta file
   generated_class.m_sk_meta_file_body = generate_class_meta_file_body(struct_or_class_p);
@@ -2172,8 +2174,8 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
   if (UStructProperty * struct_prop_p = Cast<UStructProperty>(property_p))
     {
     FName struct_name = struct_prop_p->Struct->GetFName();
-    if (m_targets[ClassScope_engine].m_skip_classes.Contains(struct_name)
-     || m_targets[ClassScope_project].m_skip_classes.Contains(struct_name))
+    if (m_targets[ClassScope_engine].is_type_skipped(struct_name)
+     || m_targets[ClassScope_project].is_type_skipped(struct_name))
       {
       return false;
       }
