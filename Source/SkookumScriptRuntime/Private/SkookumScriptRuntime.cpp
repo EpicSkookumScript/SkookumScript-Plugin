@@ -1144,7 +1144,7 @@ void FSkookumScriptRuntime::on_struct_added_or_modified(UUserDefinedStruct * ue_
   if (!is_dormant())
     {
     // Generate script files for the new/changed class
-    m_generator.update_class_script_file(ue_struct_p, false, true);
+    m_generator.update_class_script_file(ue_struct_p, true, true);
     // Also generate parent class "UStruct"
     m_generator.create_root_class_script_file(TEXT("UStruct"));
 
@@ -1188,7 +1188,7 @@ void FSkookumScriptRuntime::on_enum_added_or_modified(UUserDefinedEnum * ue_enum
   if (!is_dormant())
     {
     // Generate script files for the new/changed enum
-    m_generator.update_class_script_file(ue_enum_p, false, true);
+    m_generator.update_class_script_file(ue_enum_p, true, true);
     // Also generate parent class "Enum"
     m_generator.create_root_class_script_file(TEXT("Enum"));
     }

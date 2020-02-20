@@ -616,20 +616,20 @@ void FSkookumScriptRuntimeGenerator::update_all_class_script_files(bool allow_me
     UClass * ue_class_p = blueprint_it->GeneratedClass;
     if (ue_class_p)
       {
-      update_class_script_file(ue_class_p, false, allow_members);
+      update_class_script_file(ue_class_p, true, allow_members);
       }
     }
 
   // Re-generate classes for all user defined structs
   for (TObjectIterator<UUserDefinedStruct> struct_it; struct_it; ++struct_it)
     {
-    update_class_script_file(*struct_it, false, allow_members);
+    update_class_script_file(*struct_it, true, allow_members);
     }
 
   // Re-generate classes for all user defined enums
   for (TObjectIterator<UUserDefinedEnum> enum_it; enum_it; ++enum_it)
     {
-    update_class_script_file(*enum_it, false, allow_members);
+    update_class_script_file(*enum_it, true, allow_members);
     }
 
   // Re-generate the ECollisionChannel enum class in the Project-generated overlay as it gets customized by the game project
