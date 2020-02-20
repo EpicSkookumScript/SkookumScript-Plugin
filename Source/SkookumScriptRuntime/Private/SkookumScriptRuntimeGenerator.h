@@ -64,6 +64,8 @@ class FSkookumScriptRuntimeGenerator : public FSkookumScriptGeneratorBase
     void           delete_all_class_script_files();
     void           update_all_class_script_files(bool allow_members);
 
+    GenerationTargetBase* get_target(eClassScope scope) { return &m_targets[scope]; }
+
     void           update_class_script_file(UField * type_p, bool allow_non_game_classes, bool allow_members);
     void           rename_class_script_file(UObject * type_p, const FString & old_ue_class_name);
     void           delete_class_script_file(UObject * type_p);

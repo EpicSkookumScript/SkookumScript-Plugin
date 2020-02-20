@@ -18,6 +18,7 @@ class UBlueprintGeneratedClass;
 class UUserDefinedStruct;
 class UUserDefinedEnum;
 class SkUEBindingsInterface;
+class FSkookumScriptRuntimeGenerator;
 
 SKOOKUMSCRIPTRUNTIME_API DECLARE_LOG_CATEGORY_EXTERN(LogSkookum, Log, All);
 
@@ -81,6 +82,8 @@ class ISkookumScriptRuntime : public IModuleInterface
       virtual void  on_enum_deleted(UUserDefinedEnum * ue_enum_p) = 0;
 
       virtual void  on_new_asset(UObject * obj_p) = 0;
+
+      virtual FSkookumScriptRuntimeGenerator* get_runtime_generator() = 0;
 
     #endif
 

@@ -1342,6 +1342,11 @@ void FSkookumScriptRuntime::on_class_scripts_changed_by_generator(const FString 
   #endif
   }
 
+FSkookumScriptRuntimeGenerator* FSkookumScriptRuntime::get_runtime_generator()
+  {
+  return &m_generator;
+  }
+
 #endif // WITH_EDITORONLY_DATA
 
 //#pragma optimize("g", on)
