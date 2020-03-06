@@ -1775,29 +1775,39 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
         class_header_code += TEXT("#include \"SkookumScript/SkEnum.hpp\"\n");
         }
       
-      // In 4.21, include paths changed a little. Previously, we wanted include paths that looked like:
-      // Classes/GameFramework/Actor.h
-      // Public/UObject/NoExportTypes.h
-      //
-      // 4.21 expects the includes to lose the prefixes, so these become:
-      // GameFramework/Actor.h
-      // UObject/NoExportTypes.h
-      // 
-      // Some subset of generated types have a valid include path already, module_include_path below.
-      // For other types, module_include_path will be empty, in which case we need to do fix up the prefixes by hand.
+      // module_include_path is sometimes empty, be aware of that
       const FString relative_file_path = generated_type.m_type_p->GetMetaData(ms_meta_data_key_module_relative_path);
       const FString module_include_path = generated_type.m_type_p->GetMetaData(ms_meta_data_key_module_include_path);
       
-      FString include_file_path = module_include_path;
-
-      // If the module include path wasn't good then we need to fix up the prefixes by hand.
-      if (include_file_path.IsEmpty())
+      FString include_file_path;
+      if (class_scope == FSkookumScriptGeneratorBase::ClassScope_project)
         {
+        // For files in the project, we want to preserve the relative path. e.g.:
+        // Public/MyActor.h
         include_file_path = relative_file_path;
-        include_file_path.RemoveFromStart("Classes/");
-        include_file_path.RemoveFromStart("Public/");
+        }
+      else
+        {
+        // 4.21 modified how include paths work. Previously, we wanted include paths that looked like:
+        // Classes/GameFramework/Actor.h
+        // Public/UObject/NoExportTypes.h
+        //
+        // Now we want these to be:
+        // GameFramework/Actor.h
+        // UObject/NoExportTypes.h
+        //
+        // So for files in the engine, if include_file_path (which is just the filename) is empty,
+        // we need to use relative_file_path and remove the extra prefixes: Classes, Public
+        include_file_path = module_include_path;
+        if (include_file_path.IsEmpty())
+          {
+          include_file_path = relative_file_path;
+          include_file_path.RemoveFromStart("Classes/");
+          include_file_path.RemoveFromStart("Public/");
+          }
         }
 
+      // Clang is picky about include paths for auto-generated files.
       if (class_scope == ClassScope_project && ProjectModule != nullptr)
         {
         for (UClass* C : ProjectModule->m_classes_to_export)
