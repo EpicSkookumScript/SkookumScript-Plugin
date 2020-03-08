@@ -752,6 +752,31 @@ void SkRemoteRuntimeBase::cmd_break_expression(const SkMemberExpression & expr_i
   on_cmd_send(datum);
   }
 
+void SkRemoteRuntimeBase::cmd_project()
+  {
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Get update project info
+  SkProjectInfo project_info;
+  SkRemoteRuntimeBase::ms_client_p->get_project_info(&project_info);
+
+  // Command + project info
+  uint32_t data_length = 4u + project_info.as_binary_length();
+  ADatum   datum(data_length);
+  void *   data_p = datum.get_data_writable();
+  void **  data_pp = &data_p;
+
+  uint32_t cmd = Command_project;
+
+  A_BYTE_STREAM_OUT32(data_pp, &cmd);
+
+  // Transmit project info
+  project_info.as_binary((void**)data_pp);
+
+  SkDebug::print("Skookum RT: Sending project info to IDE.\n", SkLocale_local);
+
+  on_cmd_send(datum);
+  }
+
 //---------------------------------------------------------------------------------------
 void SkRemoteRuntimeBase::on_cmd_authenticate()
   {

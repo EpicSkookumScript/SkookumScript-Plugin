@@ -96,6 +96,7 @@ class SK_API SkRemoteRuntimeBase : public SkRemoteBase
     void cmd_ready_to_debug();
     void cmd_breakpoint_hit(const SkBreakPoint & bp, const SkCallStack * callstack_p);
     void cmd_break_expression(const SkMemberExpression & expr_info, const SkCallStack * callstack_p);
+    void cmd_project();
 
   protected:
 
