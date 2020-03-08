@@ -12,6 +12,7 @@
 #include "VectorMath/SkVector4.hpp"
 #include "VectorMath/SkRotationAngles.hpp"
 #include "VectorMath/SkTransform.hpp"
+#include "SkUEName.hpp"
 #include "Engine/SkUEEntity.hpp"
 #include "Engine/SkUEActor.hpp"
 #include "SkUEUtils.hpp"
@@ -112,6 +113,7 @@ SkUEReflectionManager::ReflectedAccessors const SkUEReflectionManager::ms_access
 SkUEReflectionManager::ReflectedAccessors const SkUEReflectionManager::ms_accessors_entity          = { &fetch_k2_param_entity         , &fetch_k2_value_entity         , &assign_k2_value_entity         , &store_sk_value_entity          };
 SkUEReflectionManager::ReflectedAccessors const SkUEReflectionManager::ms_accessors_enum            = { &fetch_k2_param_enum           , &fetch_k2_value_enum           , &assign_k2_value_enum           , &store_sk_value_enum            };
 SkUEReflectionManager::ReflectedAccessors const SkUEReflectionManager::ms_accessors_array           = { &fetch_k2_param_array          , nullptr                        , &assign_k2_value_array          , &store_sk_value_array           };
+SkUEReflectionManager::ReflectedAccessors const SkUEReflectionManager::ms_accessors_name            = { &fetch_k2_param_name           , &fetch_k2_value_name           , &assign_k2_value_name          ,  &store_sk_value_name            };
 
 UScriptStruct * SkUEReflectionManager::ms_struct_vector2_p;
 UScriptStruct * SkUEReflectionManager::ms_struct_vector3_p;
@@ -1398,6 +1400,10 @@ bool SkUEReflectionManager::reflect_ue_property(UProperty * ue_property_p, Refle
     {
     accessors_p = &ms_accessors_string;
     }
+  else if (ue_item_property_p->IsA<UNameProperty>())
+    {
+    accessors_p = &ms_accessors_name;
+    }
   else if (ue_item_property_p->IsA<UStructProperty>())
     {
     UScriptStruct * struct_p = static_cast<UStructProperty *>(ue_item_property_p)->Struct;
@@ -1962,6 +1968,13 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_array(FFrame & stack, const R
   return instance_p;
   }
 
+SkInstance * SkUEReflectionManager::fetch_k2_param_name(FFrame & stack, const ReflectedCallParam & value_type)
+  {
+  UNameProperty::TCppType value = UNameProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<UNameProperty>(&value);
+  return SkUEName::new_instance(value);
+  }
+
 //---------------------------------------------------------------------------------------
 
 SkInstance * SkUEReflectionManager::fetch_k2_value_boolean(const void * value_p, const TypedName & value_type)
@@ -2089,6 +2102,11 @@ SkInstance * SkUEReflectionManager::fetch_k2_value_enum(const void * value_p, co
   SkInstance * instance_p = value_type.m_sk_class_p->new_instance();
   instance_p->construct<SkEnum>(tSkEnum(*(const UByteProperty::TCppType *)value_p));
   return instance_p;
+  }
+
+SkInstance * SkUEReflectionManager::fetch_k2_value_name(const void * value_p, const TypedName & value_type)
+  {
+  return SkUEName::new_instance(*(const FName *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
@@ -2224,6 +2242,11 @@ void SkUEReflectionManager::assign_k2_value_array(SkInstance * dest_p, const voi
     list_instances.append(*(*fetcher_p)(item_array_p, value_type));
     item_array_p += item_size;
     }
+  }
+
+void SkUEReflectionManager::assign_k2_value_name(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
+  {
+  dest_p->as<SkUEName>() = *(const FName *)value_p;
   }
 
 //---------------------------------------------------------------------------------------
@@ -2376,5 +2399,11 @@ uint32_t SkUEReflectionManager::store_sk_value_array(void * dest_p, SkInstance *
     item_array_p += item_size;
     }
   return sizeof(UArrayProperty::TCppType);
+  }
+
+uint32_t SkUEReflectionManager::store_sk_value_name(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
+  {
+  new (dest_p) FName(value_p->as<SkUEName>());
+  return sizeof(FName);
   }
 

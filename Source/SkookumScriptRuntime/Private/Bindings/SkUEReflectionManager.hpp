@@ -317,6 +317,7 @@ class SkUEReflectionManager
     static SkInstance * fetch_k2_param_entity          (FFrame & stack, const ReflectedCallParam & value_type);
     static SkInstance * fetch_k2_param_enum            (FFrame & stack, const ReflectedCallParam & value_type);
     static SkInstance * fetch_k2_param_array           (FFrame & stack, const ReflectedCallParam & value_type);
+    static SkInstance * fetch_k2_param_name            (FFrame & stack, const ReflectedCallParam & value_type);
 
     static SkInstance * fetch_k2_value_boolean         (const void * value_p, const TypedName & value_type);
     static SkInstance * fetch_k2_value_integer         (const void * value_p, const TypedName & value_type);
@@ -331,6 +332,7 @@ class SkUEReflectionManager
     static SkInstance * fetch_k2_value_struct_ref      (const void * value_p, const TypedName & value_type);
     static SkInstance * fetch_k2_value_entity          (const void * value_p, const TypedName & value_type);
     static SkInstance * fetch_k2_value_enum            (const void * value_p, const TypedName & value_type);
+    static SkInstance * fetch_k2_value_name            (const void * value_p, const TypedName & value_type);
 
     static void         assign_k2_value_boolean         (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
     static void         assign_k2_value_integer         (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
@@ -346,6 +348,7 @@ class SkUEReflectionManager
     static void         assign_k2_value_entity          (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
     static void         assign_k2_value_enum            (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
     static void         assign_k2_value_array           (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
+    static void         assign_k2_value_name            (SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type);
 
     static uint32_t     store_sk_value_boolean         (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
     static uint32_t     store_sk_value_integer         (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
@@ -361,6 +364,7 @@ class SkUEReflectionManager
     static uint32_t     store_sk_value_entity          (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
     static uint32_t     store_sk_value_enum            (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
     static uint32_t     store_sk_value_array           (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
+    static uint32_t     store_sk_value_name            (void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type);
 
     static const ReflectedAccessors ms_accessors_boolean;
     static const ReflectedAccessors ms_accessors_integer;
@@ -376,6 +380,7 @@ class SkUEReflectionManager
     static const ReflectedAccessors ms_accessors_entity;
     static const ReflectedAccessors ms_accessors_enum;
     static const ReflectedAccessors ms_accessors_array;
+    static const ReflectedAccessors ms_accessors_name;
 
     tReflectedFunctions   m_reflected_functions;
     tReflectedClasses     m_reflected_classes;
