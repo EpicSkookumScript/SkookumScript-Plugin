@@ -783,6 +783,7 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
           {
           // Inform the IDE about the version we got
           m_remote_client.cmd_incremental_update_reply(true, SkBrain::ms_session_guid, SkBrain::ms_revision);
+
           }
         else
           {
@@ -803,6 +804,10 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
       bool success_b = m_runtime.load_compiled_scripts();
       SK_ASSERTX(success_b, AErrMsg("Unable to load SkookumScript compiled binaries!", AErrLevel_notify));
       }
+
+     // Give the IDE the updated project info so that it can load the correct overlays for remote runtimes
+     // the data required in SkBrain isn't loaded until after load_compiled_scripts has completed.
+     m_remote_client.cmd_project();
   }
 
 //---------------------------------------------------------------------------------------

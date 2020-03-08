@@ -700,14 +700,14 @@ void SkUERemote::get_project_info(SkProjectInfo * out_project_info_p)
           out_project_info_p->m_project_name = SkBrain::ms_project_name;
           }
         // It might be that we opened the compiled binary on a different host
-        // where the path to the project is not valid
-        if (!FPaths::FileExists(project_path)) goto GuessProjectPath;
+        // where the path to the project is not valid. Or we are running remotely
+        // and trying to connect back to the IDE in which case the path from the brain
+        // is the correct path.
         }
-      else
-        {
-      GuessProjectPath:
-        // Can't get any good intelligence - improvise:
 
+      if(project_path.IsEmpty())
+        {
+        // Can't get any good intelligence - improvise:
         // Is there an Sk project file in the usual location?
         project_path = FPaths::ProjectDir() / TEXT("Scripts") / TEXT("Skookum-project.ini");
         if (FPaths::FileExists(project_path))
