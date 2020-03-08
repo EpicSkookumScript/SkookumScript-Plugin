@@ -117,6 +117,8 @@ class SK_API SkRemoteBase
         Command_authenticate,            // I->R cmd_authenticate()
         Command_preferences,             // I->R cmd_preferences()
 
+        Command_project,                 // R->I cmd_project() - Update project info
+
         Command_ping_test,               // R->I cmd_ping_test() - One-way connection test
 
         Command_print,                   // C->C cmd_print()
