@@ -1705,9 +1705,6 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
   //---------------------------------------------------------------------------------------
   // 1) Determine output path
 
-  // Store the project module so we can query it later
-  const ModuleInfo* ProjectModule = nullptr;
-
   FString binding_code_directory_path;
   if (class_scope == ClassScope_project)
     {
@@ -1718,7 +1715,6 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
         {
         // Found it, use its generated_include_folder path
         binding_code_directory_path = module.m_generated_include_folder;
-        ProjectModule = &module;
         break;
         }
       }
@@ -1778,13 +1774,24 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
       // module_include_path is sometimes empty, be aware of that
       const FString relative_file_path = generated_type.m_type_p->GetMetaData(ms_meta_data_key_module_relative_path);
       const FString module_include_path = generated_type.m_type_p->GetMetaData(ms_meta_data_key_module_include_path);
-      
+      const ModuleInfo * module_p = m_targets[generated_type.m_class_scope].get_module(generated_type.m_type_p);
+
       FString include_file_path;
-      if (class_scope == FSkookumScriptGeneratorBase::ClassScope_project)
+      if (generated_type.m_class_scope == ClassScope_project)
         {
         // For files in the project, we want to preserve the relative path. e.g.:
         // Public/MyActor.h
         include_file_path = relative_file_path;
+
+        // If this class has a valid module associated with it, append the module name to the include.
+        // Clang (Android) does not have very resilient extra include paths defined and will be unable 
+        // to find these includes otherwise.
+        // This covers the main project module as well as any plugins that are in the project and
+        // included with +ScriptSupportedModules.
+        if (module_p)
+          {
+          include_file_path = module_p->m_name + TEXT("/") + include_file_path;
+          }
         }
       else
         {
@@ -1804,26 +1811,6 @@ void FSkookumScriptGenerator::save_generated_cpp_files(eClassScope class_scope)
           include_file_path = relative_file_path;
           include_file_path.RemoveFromStart("Classes/");
           include_file_path.RemoveFromStart("Public/");
-          }
-        }
-
-      // Clang is picky about include paths for auto-generated files.
-      if (class_scope == ClassScope_project && ProjectModule != nullptr)
-        {
-        for (UClass* C : ProjectModule->m_classes_to_export)
-          {
-          // If the include file matches a class name that our project module exports, e.g:
-          // HardwareConnection == Components/HardwareConnection.h
-          // Then prefix the include with our module name so it becomes:
-          // ModuleName/Components/HardwareConnection.h
-          // Clang (Android) does not have very resilient extra include paths defined or something and will
-          // be unable to find these includes otherwise.
-          const FString BaseFileName = FPaths::GetBaseFilename(include_file_path);
-          if (C->GetName() == *BaseFileName)
-            {
-            include_file_path = m_current_target_p->m_project_name + TEXT("/") + include_file_path;
-            break;
-            }
           }
         }
 
