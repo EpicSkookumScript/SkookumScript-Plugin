@@ -538,7 +538,21 @@ int32 FSkookumScriptGenerator::generate_class(UStruct * struct_or_class_p, int32
   eSkTypeID type_id = get_skookum_struct_type(struct_or_class_p);
   bool has_built_in_name = struct_or_class_p->GetName() == TEXT("SkookumScriptBehaviorComponent");
   
-  const bool bTypeSkipped = m_targets[class_scope].is_type_skipped(struct_or_class_p->GetFName());
+  // Check all super structs to see if we need to skip any in the chain
+  bool bTypeSkipped = false;
+  UStruct* current_struct_p = struct_or_class_p;
+  while (current_struct_p)
+    {
+    const FName struct_name = current_struct_p->GetFName();
+    const bool bTypeSkippedE = m_targets[eClassScope::ClassScope_engine].is_type_skipped(struct_name);
+    const bool bTypeSkippedP = m_targets[eClassScope::ClassScope_project].is_type_skipped(struct_name);
+    if (bTypeSkippedE || bTypeSkippedP)
+      {
+      bTypeSkipped = true;
+      break;
+      }
+    current_struct_p = current_struct_p->GetSuperStruct();
+    }
   generated_class.m_is_hierarchy_stub = (type_id != SkTypeID_UStruct && type_id != SkTypeID_UClass) || has_built_in_name || bTypeSkipped;
 
   // Generate meta file
@@ -2167,14 +2181,19 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
     return false;
     }
 
-  // Exclude any structs with types to skip
+  // Exclude any structs with types to skip or whose parent is skipped
   if (UStructProperty * struct_prop_p = Cast<UStructProperty>(property_p))
     {
-    FName struct_name = struct_prop_p->Struct->GetFName();
-    if (m_targets[ClassScope_engine].is_type_skipped(struct_name)
-     || m_targets[ClassScope_project].is_type_skipped(struct_name))
+    UStruct* current_struct_p = struct_prop_p->Struct;
+    while (current_struct_p)
       {
-      return false;
+      const FName struct_name = current_struct_p->GetFName();
+      if (m_targets[ClassScope_engine].is_type_skipped(struct_name)
+        || m_targets[ClassScope_project].is_type_skipped(struct_name))
+        {
+        return false;
+        }
+      current_struct_p = current_struct_p->GetSuperStruct();
       }
     }
 

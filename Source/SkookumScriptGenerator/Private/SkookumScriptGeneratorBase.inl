@@ -1554,7 +1554,7 @@ FString FSkookumScriptGeneratorBase::generate_class_instance_data_file_body(UStr
       }
     else if (var_p->GetFName() != ms_skookum_script_instance_property_name) // Completely hide SkookumScriptInstanceProperties
       {
-      data_body += FString::Printf(TEXT("/* %s // Currently unsupported */\n"), *data_definition);
+      data_body += FString::Printf(TEXT("/* %s // Unsupported, Skipped in config or marked EDITOR_ONLY */\n"), *data_definition);
       }
     }
 
