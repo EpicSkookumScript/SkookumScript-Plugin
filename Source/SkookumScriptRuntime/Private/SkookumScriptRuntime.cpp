@@ -805,9 +805,11 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
       SK_ASSERTX(success_b, AErrMsg("Unable to load SkookumScript compiled binaries!", AErrLevel_notify));
       }
 
-     // Give the IDE the updated project info so that it can load the correct overlays for remote runtimes
-     // the data required in SkBrain isn't loaded until after load_compiled_scripts has completed.
-     m_remote_client.cmd_project();
+     #if defined(SKOOKUM_REMOTE_UNREAL) && WITH_EDITOR
+       // Give the IDE the updated project info so that it can load the correct overlays for remote runtimes
+       // the data required in SkBrain isn't loaded until after load_compiled_scripts has completed.
+       m_remote_client.cmd_project();
+     #endif
   }
 
 //---------------------------------------------------------------------------------------
