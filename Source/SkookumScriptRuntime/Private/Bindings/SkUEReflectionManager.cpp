@@ -1669,6 +1669,11 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
     static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_transform_p;
     accessors_p = &ms_accessors_transform;
     }
+  else if (sk_type_p == SkUEName::get_class())
+    {
+    ue_property_p = NewObject<UNameProperty>(ue_outer_p, ue_name, RF_Public);
+    accessors_p = &ms_accessors_name;
+    }
   else if (sk_type_p->get_key_class()->is_class(*SkEnum::get_class()))
     {
     UEnum * ue_enum_p = FindObject<UEnum>(ANY_PACKAGE, *FString(sk_type_p->get_key_class_name().as_cstr()));
