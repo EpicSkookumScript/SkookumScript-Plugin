@@ -251,7 +251,7 @@ class SkParameterBase;
 class SkTypedClass;
 class SkUnaryParam;
 
-#if defined (A_PLAT_PS3) || defined(A_PLAT_PS4) || defined(A_PLAT_LINUX64) || defined(A_PLAT_ANDROID) || defined(A_PLAT_OSX) || defined(A_PLAT_iOS) || defined(A_PLAT_tvOS)
+#if defined (A_PLAT_PS3) || defined(A_PLAT_PS4) || defined(A_PLAT_LINUX64) || defined(A_PLAT_ANDROID) || defined(A_PLAT_OSX) || defined(A_PLAT_iOS) || defined(A_PLAT_tvOS) || defined(A_PLAT_SWITCH)
   #include <AgogCore/APArray.hpp>
 #else
   template<class _ElementType, class _KeyType = _ElementType, class _CompareClass = ACompareAddress<_KeyType> > class APArray;

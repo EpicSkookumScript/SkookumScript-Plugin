@@ -79,7 +79,12 @@ public class SkookumScript : ModuleRules
       platformName = "PS4";
       platPathSuffixes.Add(platformName);
     }
-
+    else if (Target.Platform == UnrealTargetPlatform.Switch)
+    {
+      platformName = "SWITCH";
+      platPathSuffixes.Add(platformName);
+    }
+    
     // NOTE: All modules inside the SkookumScript plugin folder must use the exact same definitions!
     switch (Target.Configuration)
     {

@@ -113,6 +113,11 @@ public class AgogCore : ModuleRules
       platformName = "PS4";
       PublicDefinitions.Add("A_PLAT_PS4");
     }
+    else if (Target.Platform == UnrealTargetPlatform.Switch)
+    {
+      platformName = "SWITCH";
+      PublicDefinitions.Add("A_PLAT_SWITCH");
+    }
 
     // NOTE: All modules inside the SkookumScript plugin folder must use the exact same definitions!
     switch (Target.Configuration)

@@ -58,7 +58,7 @@
 #if !defined(A_PLAT_PC32) && !defined(A_PLAT_PC64) \
   && !defined(A_PLAT_X360) && !defined(A_PLAT_X_ONE) \
   && !defined(A_PLAT_PS3) && !defined(A_PLAT_PS4) \
-  && !defined(A_PLAT_WIIU) \
+  && !defined(A_PLAT_WIIU) && !defined(A_PLAT_SWITCH) \
   && !defined(A_PLAT_iOS) && !defined(A_PLAT_tvOS) && !defined(A_PLAT_OSX) \
   && !defined(A_PLAT_ANDROID) && !defined(A_PLAT_LINUX64)
   #ifdef _WIN32
@@ -71,7 +71,7 @@
       #define A_PLAT_PC32
     #endif
   #else
-    #error No known platform type is defined (A_PLAT_PC32, A_PLAT_PC64, A_PLAT_PS3, A_PLAT_PS4, A_PLAT_X360, A_PLAT_X_ONE, A_PLAT_WIIU, A_PLAT_iOS, A_PLAT_tvOS, A_PLAT_OSX or A_PLAT_LINUX64)!
+    #error No known platform type is defined (A_PLAT_PC32, A_PLAT_PC64, A_PLAT_PS3, A_PLAT_PS4, A_PLAT_X360, A_PLAT_X_ONE, A_PLAT_WIIU, A_PLAT_SWITCH, A_PLAT_iOS, A_PLAT_tvOS, A_PLAT_OSX or A_PLAT_LINUX64)!
   #endif
 #else
 #endif
@@ -486,6 +486,50 @@
   #define A_DLLIMPORT
   #define A_DLLEXPORT
   #define A_FORCEINLINE inline
+
+#endif
+
+
+//---------------------------------------------------------------------------------------
+// Nintendo Switch platform
+#ifdef A_PLAT_SWITCH
+
+#define A_PLAT_STR_ID   "SWITCH"
+#define A_PLAT_STR_DESC "Nintendo Switch"
+
+#define A_BITS64
+#define A_NO_SSE
+
+#if !defined(__ARMEB__)
+#define AGOG_LITTLE_ENDIAN_HOST 1
+#else
+#define AGOG_LITTLE_ENDIAN_HOST 0
+#endif
+
+#define NO_AGOG_PLACEMENT_NEW
+#define A_NO_GLOBAL_EXCEPTION_CATCH
+
+#define __FUNCSIG__ __PRETTY_FUNCTION__
+
+#define A_BREAK()   __builtin_trap()
+
+// Use old POSIX call convention rather than new ISO convention
+#define _gcvt       gcvt
+#define _stricmp    strcasecmp
+#define _strnicmp   strncasecmp
+#define _snprintf   snprintf
+#define _vsnprintf  vsnprintf
+
+// Load given memory location into L1 cache
+#define a_prefetch(ptr) __builtin_prefetch(ptr)
+
+// Indicate that _itoa(), _ultoa(), and _gcvt() are not defined
+#define A_NO_NUM2STR_FUNCS
+
+// DLL linkage specification
+#define A_DLLEXPORT __attribute__((visibility("default")))
+#define A_DLLIMPORT __attribute__((visibility("default")))
+#define A_FORCEINLINE inline __attribute__ ((always_inline))
 
 #endif
 
