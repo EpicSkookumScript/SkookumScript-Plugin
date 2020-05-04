@@ -1197,16 +1197,22 @@ void SkDebug::append_watch_members(APArray<SkWatch> * m_members_p, SkInstance * 
     for (SkTypedNameRaw * var_p : current_class_p->get_instance_data_raw())
       {
       SkClassDescBase * data_type_p = var_p->m_type_p; // Type of the data member itself
-      // Ask the owner class and data class to fetch the raw data member for us
-      SkInstance * data_p = SkBrain::ms_nil_p;
-      void * member_p = class_p->get_raw_pointer(obj_p); // Pointer to raw memory of the object containing the data member
-      if (member_p)
+
+      // Skip MulticastDelegates
+      if(!data_type_p->get_key_class_name().as_string().is_equal("MulticastDelegate"))
         {
-        data_p = data_type_p->get_key_class()->new_instance_from_raw_data(member_p, var_p->m_raw_data_info, data_type_p);
+        // Ask the owner class and data class to fetch the raw data member for us
+        SkInstance * data_p = SkBrain::ms_nil_p;
+        void * member_p = class_p->get_raw_pointer(obj_p); // Pointer to raw memory of the object containing the data member
+        if (member_p)
+          {
+          data_type_p->get_key_class()->resolve_raw_data_recurse();
+          data_p = data_type_p->get_key_class()->new_instance_from_raw_data(member_p, var_p->m_raw_data_info, data_type_p);
+          }
+        // For the var guid, we just xor the object address with the raw data info
+        m_members_p->append(*new SkWatch(SkWatch::Kind_instance_data, var_p->get_name(), current_class_p->get_name(), data_p, (uintptr_t)member_p ^ (var_p->m_raw_data_info.InternalOffset + var_p->m_raw_data_info.Size)));
+        data_p->dereference();
         }
-      // For the var guid, we just xor the object address with the raw data info
-      m_members_p->append(*new SkWatch(SkWatch::Kind_instance_data, var_p->get_name(), current_class_p->get_name(), data_p, (uintptr_t)member_p ^ (var_p->m_raw_data_info.InternalOffset + var_p->m_raw_data_info.Size)));
-      data_p->dereference();
       }
     }
 
@@ -2333,8 +2339,10 @@ void SkDebug::step(eStep step_type)
   SkInvokedContextBase * next_icontext_p = next_invoked_p ? next_invoked_p->get_caller_context() : nullptr;
 
   SK_MAD_ASSERTX(ms_step_icontext_p.is_valid(), "ms_step_icontext_p must be set at this point.");
-
-  ms_step_topmost_caller_p = ms_step_icontext_p->get_topmost_caller();
+  if (ms_step_icontext_p)
+    {
+    ms_step_topmost_caller_p = ms_step_icontext_p->get_topmost_caller();
+    }
   
   switch (step_type)
     {
@@ -2689,8 +2697,15 @@ void SkDebug::hook_expression(
           if (step_icontext_p)
             {
             // Check if scope matches desired icontext, or if the current caller is a caller of the icontext (i.e. we stepped out)
-            hit_step_break = (step_icontext_p == scope_p
-              || step_icontext_p->is_caller(branch_caller_p ? branch_caller_p : (hook_context == HookContext_current ? caller_p : caller_p->get_caller())));
+            if (branch_caller_p || caller_p)
+              {
+              hit_step_break = (step_icontext_p == scope_p
+                || step_icontext_p->is_caller(branch_caller_p ? branch_caller_p : (hook_context == HookContext_current ? caller_p : caller_p->get_caller())));
+              }
+            else
+              {
+              hit_step_break = false;
+              }
             }
           else
             {
@@ -2699,7 +2714,14 @@ void SkDebug::hook_expression(
             if (top_most_caller_p)
               {
               // Check if top caller matches up
-              hit_step_break = (top_most_caller_p == (branch_caller_p ? branch_caller_p : caller_p)->get_topmost_caller());
+              if (branch_caller_p || caller_p)
+                {
+                hit_step_break = (top_most_caller_p == (branch_caller_p ? branch_caller_p : caller_p)->get_topmost_caller());
+                }
+              else
+                {
+                hit_step_break = false;
+                }
               }
             else
               {
@@ -2729,9 +2751,12 @@ void SkDebug::hook_expression(
           #endif
 
           // Set context for next step
-          ms_step_icontext_p = branch_caller_p
-            ? branch_caller_p->get_caller_context()
-            : ((hook_context == HookContext_current ? caller_p : caller_p->get_caller())->get_caller_context());
+            if (branch_caller_p || caller_p)
+              {
+              ms_step_icontext_p = branch_caller_p
+                ? branch_caller_p->get_caller_context()
+                : ((hook_context == HookContext_current ? caller_p : caller_p->get_caller())->get_caller_context());
+              }
 
           // Have runtime communicate to IDE that it is at a break
           SkRemoteRuntimeBase::ms_client_p->on_break_expression(ms_next_expr, callstack_p);
