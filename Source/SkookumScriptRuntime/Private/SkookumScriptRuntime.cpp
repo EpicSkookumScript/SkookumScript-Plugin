@@ -13,6 +13,7 @@
 #include "SkookumScriptMindComponent.h"
 #include "SkookumScriptInstanceProperty.h"
 
+#include "Misc/CoreDelegates.h" // For FCoreDelegates
 #include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 
 #if WITH_EDITOR
@@ -387,6 +388,10 @@ void FSkookumScriptRuntime::StartupModule()
   m_on_world_init_post_handle   = FWorldDelegates::OnPostWorldInitialization.AddRaw(this, &FSkookumScriptRuntime::on_world_init_post);
   m_on_world_cleanup_handle     = FWorldDelegates::OnWorldCleanup.AddRaw(this, &FSkookumScriptRuntime::on_world_cleanup);
 
+#if !WITH_EDITORONLY_DATA
+  m_on_packages_fully_loaded    = FCoreDelegates::OnPackagesFullyLoaded.AddRaw(this, &FSkookumScriptRuntime::on_packages_fully_loaded);
+#endif
+
   #if WITH_EDITORONLY_DATA
     // Install this class as a "compiler" so we know when a Blueprint is about to be compiled
     IKismetCompilerInterface & kismet_compiler = FModuleManager::LoadModuleChecked<IKismetCompilerInterface>(KISMET_COMPILER_MODULENAME);
@@ -461,14 +466,6 @@ void FSkookumScriptRuntime::on_world_init_pre(UWorld * world_p, const UWorld::In
 //---------------------------------------------------------------------------------------
 void FSkookumScriptRuntime::on_world_init_post(UWorld * world_p, const UWorld::InitializationValues init_vals)
   {
-  //A_DPRINT("on_world_init_post: %S %p\n", *world_p->GetName(), world_p);
-
-  #if !WITH_EDITORONLY_DATA
-    // Resolve raw data for all classes if a callback function is given
-    // $Revisit MBreyer this gets called several times (so in cooked builds everything gets resolved) - fix so it's called only once
-    SkBrain::ms_object_class_p->resolve_raw_data_recurse();
-  #endif
-
   #ifdef SKOOKUM_REMOTE_UNREAL
     if (world_p->IsGameWorld() && !IsRunningCommandlet() && allow_auto_connect_to_ide())
       {
@@ -527,6 +524,14 @@ void FSkookumScriptRuntime::on_world_cleanup(UWorld * world_p, bool session_ende
 #endif
   }
 
+void FSkookumScriptRuntime::on_packages_fully_loaded()
+{
+  UE_LOG(LogSkookum, Display, TEXT("SkookumScript Runtime: on_packages_fully_loaded"));
+  tSkUEOnFunctionUpdatedFunc * on_function_updated_f = nullptr;
+  SkBrain::ms_object_class_p->resolve_raw_data_recurse();
+  SkUEReflectionManager::get()->sync_all_to_ue(on_function_updated_f, true);
+}
+
 //---------------------------------------------------------------------------------------
 // Called before the module has been unloaded
 /*
@@ -564,6 +569,10 @@ void FSkookumScriptRuntime::ShutdownModule()
   FWorldDelegates::OnPreWorldInitialization.Remove(m_on_world_init_pre_handle);
   FWorldDelegates::OnPostWorldInitialization.Remove(m_on_world_init_post_handle);
   FWorldDelegates::OnWorldCleanup.Remove(m_on_world_cleanup_handle);
+
+#if !WITH_EDITORONLY_DATA
+  FCoreDelegates::OnPackagesFullyLoaded.Remove(m_on_packages_fully_loaded);
+#endif
 
   #if WITH_EDITORONLY_DATA
     IKismetCompilerInterface * kismet_compiler_p = FModuleManager::GetModulePtr<IKismetCompilerInterface>(KISMET_COMPILER_MODULENAME);

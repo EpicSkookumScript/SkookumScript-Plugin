@@ -175,6 +175,7 @@ protected:
   void            on_world_init_pre(UWorld * world_p, const UWorld::InitializationValues init_vals);
   void            on_world_init_post(UWorld * world_p, const UWorld::InitializationValues init_vals);
   void            on_world_cleanup(UWorld * world_p, bool session_ended_b, bool cleanup_resources_b);
+  void            on_packages_fully_loaded();
 
   // Data Members
 
@@ -201,6 +202,7 @@ protected:
   FDelegateHandle         m_on_world_init_pre_handle;
   FDelegateHandle         m_on_world_init_post_handle;
   FDelegateHandle         m_on_world_cleanup_handle;
+  FDelegateHandle         m_on_packages_fully_loaded;
 
 #if WITH_EDITORONLY_DATA
   FDelegateHandle       m_on_pre_compile_handle;
