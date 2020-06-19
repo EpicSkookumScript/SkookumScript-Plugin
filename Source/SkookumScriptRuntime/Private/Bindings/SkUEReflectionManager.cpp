@@ -1055,7 +1055,12 @@ void SkUEReflectionManager::mthd_invoke_k2_event(SkInvokedMethod * scope_p, SkIn
         SK_ASSERTX(ue_function_p, a_str_format("Cannot find UE counterpart of method %s@%s!", reflected_event_p->m_sk_invokable_p->get_scope()->get_name_cstr(), reflected_event_p->m_sk_invokable_p->get_name_cstr()));
         }
 
-      ue_function_p = actor_p->FindFunctionChecked(*ue_function_p->GetName());
+      // Starting in 4.24, I occasionally see function names in the format:
+      // "SomeFunction"_1
+      // In this case, the actual function name is SomeFunction, I'm not sure if the _1 is some kind of reinstancing
+      // that's occuring or what. So using the FName call that ommits trailing numbers.
+      const FString func_name = ue_function_p->GetFName().GetPlainNameString();
+      ue_function_p = actor_p->FindFunctionChecked(FName(*func_name));
       reflected_event_p->m_ue_function_to_invoke_p = ue_function_p;
       reflected_event_p->m_ue_params_size = ue_function_p->ParmsSize;
       reflected_event_p->m_has_out_params = ue_function_p->HasAllFunctionFlags(FUNC_HasOutParms);
