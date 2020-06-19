@@ -50,9 +50,7 @@ namespace SkUEName_Impl
     if (result_pp)
       {
       const FName & name = scope_p->this_as<SkUEName>();
-      ANSICHAR string_name[NAME_SIZE];
-      name.GetPlainANSIString(string_name);
-      *result_pp = SkString::new_instance(AString(string_name));
+      *result_pp = SkString::new_instance(AString(*name.GetPlainNameString()));
       }
     }
 

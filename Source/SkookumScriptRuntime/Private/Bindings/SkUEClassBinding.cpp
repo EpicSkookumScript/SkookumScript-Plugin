@@ -1073,7 +1073,9 @@ UScriptStruct * SkUEClassBindingHelper::find_ue_struct_from_sk_class(SkClass * s
 
 SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_class(UClass * ue_class_p)
   {
-  bool is_temp_ue_class = false;
+  if (!ue_class_p) { return nullptr; }
+
+  bool is_temp_ue_class = false; 
   // Convert class name to its Sk equivalent
   FName ue_class_name = ue_class_p->GetFName();
   ASymbol sk_class_name;
@@ -1091,29 +1093,22 @@ SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_class(UClass * ue_class_
     }
   else
     {
-    ANSICHAR buffer[260];
-    ANSICHAR ansi_class_name[NAME_SIZE];
-    ue_class_name.GetPlainANSIString(ansi_class_name);
-
-    const ANSICHAR * ue_class_name_p = ansi_class_name;
+    FString ue_name_string = ue_class_name.GetPlainNameString();
     if (ue_class_p->UObject::IsA<UBlueprintGeneratedClass>())
       {
       // It's a Blueprint generated class
-      // Remove prefix if present
-      if (FPlatformString::Strncmp(ue_class_name_p, "REINST_", 7) == 0)
+      // Remove REINST_ prefix and _C postfix if present
+      if (ue_name_string.StartsWith(TEXT("REINST_"), ESearchCase::CaseSensitive))
         {
-        ue_class_name_p += 7;
-        is_temp_ue_class = true;
+        ue_name_string = ue_name_string.RightChop(7);
         }
-      // And remove "_C" from the name
-      uint32_t name_length = FPlatformString::Strlen(ue_class_name_p);
-      SK_ASSERTX(name_length < sizeof(buffer), "Class name does not fit into buffer!");
-      if (name_length < 3 || name_length >= sizeof(buffer)) return nullptr;
-      FPlatformString::Strncpy(buffer, ue_class_name_p, name_length - 1);
-      buffer[name_length - 2] = 0;
-      ue_class_name_p = buffer;
+      if (ue_name_string.EndsWith(TEXT("_C"), ESearchCase::CaseSensitive))
+        {
+        ue_name_string = ue_name_string.LeftChop(2);
+        }
       }
-    sk_class_name = ASymbol::create_existing(ue_class_name_p);
+    
+    sk_class_name = ASymbol::create_existing(*ue_name_string);
     }
 
   // Now look up the class
@@ -1181,9 +1176,7 @@ SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_struct(UStruct * ue_stru
     }
   else
     {
-    ANSICHAR ansi_struct_name[NAME_SIZE];
-    ue_struct_name.GetPlainANSIString(ansi_struct_name);
-    sk_class_name = ASymbol::create_existing(ansi_struct_name);
+    sk_class_name = ASymbol::create_existing(*ue_struct_name.GetPlainNameString());
     }
 
   // Now look up the struct's class
@@ -1204,9 +1197,7 @@ SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_struct(UStruct * ue_stru
 SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_enum(UEnum * ue_enum_p)
   {
   // Convert enum name to its Sk equivalent
-  ANSICHAR ansi_enum_name[NAME_SIZE];
-  ue_enum_p->GetFName().GetPlainANSIString(ansi_enum_name);
-  ASymbol sk_enum_name = ASymbol::create_existing(ansi_enum_name);
+  ASymbol sk_enum_name = ASymbol::create_existing(*ue_enum_p->GetFName().GetPlainNameString());
 
   // Now lookup the class
   SkClass * sk_class_p = SkBrain::get_classes().get(sk_enum_name);

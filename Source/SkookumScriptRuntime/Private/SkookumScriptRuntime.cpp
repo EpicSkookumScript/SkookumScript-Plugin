@@ -294,21 +294,20 @@ void FAppInfo::bind_name_assign(SkBindName * bind_name_p, const AString & value)
 AString FAppInfo::bind_name_as_string(const SkBindName & bind_name) const
   {
   const FName & name = reinterpret_cast<const FName &>(bind_name);
-  ANSICHAR ansi_string[NAME_SIZE];
-  name.GetPlainANSIString(ansi_string);
-  const ANSICHAR * plain_string_p = ansi_string;
+
+  FString ue_name_string = name.GetPlainNameString();
 
   // If no number, quickly make a string from the plain text
   if (name.GetNumber() == NAME_NO_NUMBER_INTERNAL)
     {
     // Make sure we allocate memory for the string
-    return AString(plain_string_p, false);
+    return AString(*ue_name_string, false);
     }
 
   // Has a number, append it separated by _
-  AString bind_name_string;
-  bind_name_string.ensure_size(FCStringAnsi::Strlen(plain_string_p) + 11);
-  bind_name_string.append_format("%s_%d", plain_string_p, NAME_INTERNAL_TO_EXTERNAL(name.GetNumber()));
+  ue_name_string += FString::Printf(TEXT("_%d"), NAME_INTERNAL_TO_EXTERNAL(name.GetNumber()));
+  
+  AString bind_name_string(FStringToAString(ue_name_string));
   return bind_name_string;
   }
 
@@ -783,7 +782,6 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
           {
           // Inform the IDE about the version we got
           m_remote_client.cmd_incremental_update_reply(true, SkBrain::ms_session_guid, SkBrain::ms_revision);
-
           }
         else
           {
