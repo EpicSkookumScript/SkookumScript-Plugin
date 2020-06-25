@@ -53,7 +53,7 @@ class SkUEReflectionManager
     static bool  does_class_need_instance_property(SkClass * sk_class_p);
     static bool  add_instance_property_to_class(UClass * ue_class_p, SkClass * sk_class_p);
 
-    static bool  can_ue_property_be_reflected(UProperty * ue_property_p);
+    static bool  can_ue_property_be_reflected(FProperty * ue_property_p);
 
     static bool  is_skookum_reflected_call(UFunction * function_p);
     static bool  is_skookum_reflected_event(UFunction * function_p);
@@ -84,7 +84,7 @@ class SkUEReflectionManager
 
       TypedName(const ASymbol & name, SkClassDescBase * sk_type_p);
 
-      void set_byte_size(UProperty * ue_property_p);
+      void set_byte_size(FProperty * ue_property_p);
       };
 
     struct ReflectedCallParam;
@@ -231,10 +231,10 @@ class SkUEReflectionManager
       tSkValueStorer   m_sk_value_storer_p;
       };
 
-    // An Sk parameter or raw instance data member reflected to UE4 as UProperty
+    // An Sk parameter or raw instance data member reflected to UE4 as FProperty
     struct ReflectedProperty : ANamed
       {
-      UProperty *                 m_ue_property_p;
+      FProperty *                 m_ue_property_p;
       const ReflectedAccessors *  m_outer_p; // Always set
       const ReflectedAccessors *  m_inner_p; // Only set if this property is a container (e.g. an array)
 
@@ -290,10 +290,10 @@ class SkUEReflectionManager
     static UFunction *  find_ue_function(SkInvokableBase * sk_invokable_p);
     static UFunction *  reflect_ue_function(SkInvokableBase * sk_invokable_p, ReflectedProperty * out_param_info_array_p);
     static bool         reflect_ue_params(const SkParameters & sk_params, UFunction * ue_function_p, ReflectedProperty * out_param_info_array_p);
-    static bool         reflect_ue_property(UProperty * ue_property_p, ReflectedProperty * out_info_p = nullptr);
+    static bool         reflect_ue_property(FProperty * ue_property_p, ReflectedProperty * out_info_p = nullptr);
     UFunction *         build_ue_function(UClass * ue_class_p, SkInvokableBase * sk_invokable_p, eReflectedFunctionType binding_type, uint32_t binding_index, ReflectedProperty * out_param_info_array_p, bool is_final);
-    UProperty *         build_ue_param(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UFunction * ue_function_p, ReflectedProperty * out_info_p, bool is_final);
-    UProperty *         build_ue_property(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UObject * ue_outer_p, ReflectedProperty * out_info_p, bool is_final);
+    FProperty *         build_ue_param(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UFunction * ue_function_p, ReflectedProperty * out_info_p, bool is_final);
+    FProperty *         build_ue_property(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UObject * ue_outer_p, ReflectedProperty * out_info_p, bool is_final);
     static void         bind_event_method(SkMethodBase * sk_method_p);
     void                on_unknown_type(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UObject * ue_outer_p);
     

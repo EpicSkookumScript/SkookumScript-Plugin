@@ -314,7 +314,7 @@ bool SkUERuntime::content_file_exists(const TCHAR * file_name_p, FString * folde
       #if WITH_EDITORONLY_DATA
         // If not found in game, check in temp location
         // We don't use FPaths::GameIntermediateDir() here as that might point to the %APPDATA% folder
-        folder_path = FPaths::GameDir() / TEXT("Intermediate/SkookumScript/Content/SkookumScript");
+        folder_path = FPaths::ProjectDir() / TEXT("Intermediate/SkookumScript/Content/SkookumScript");
         if (!FPaths::FileExists(folder_path / file_name_p))
           {
           return false;

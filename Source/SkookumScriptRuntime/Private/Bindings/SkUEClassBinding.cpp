@@ -128,7 +128,7 @@ SkInstance * SkUEClassBindingHelper::get_embedded_instance(UObject * obj_p, SkCl
           }
       #endif
 
-      SkInstance * instance_p = USkookumScriptInstanceProperty::get_instance((uint8_t *)obj_p + instance_offset);
+      SkInstance * instance_p = FSkookumScriptInstanceProperty::get_instance((uint8_t *)obj_p + instance_offset);
       if (instance_p)
         {
         return instance_p;
@@ -181,7 +181,7 @@ SkInstance * SkUEClassBindingHelper::get_embedded_instance(AActor * actor_p, SkC
           }
       #endif
 
-      SkInstance * instance_p = USkookumScriptInstanceProperty::get_instance((uint8_t *)actor_p + instance_offset);
+      SkInstance * instance_p = FSkookumScriptInstanceProperty::get_instance((uint8_t *)actor_p + instance_offset);
       if (instance_p)
         {
         return instance_p;
@@ -219,8 +219,8 @@ void SkUEClassBindingHelper::resolve_raw_data(SkClass * sk_class_p, UStruct * ue
   // This loop assumes that the data members of the Sk class were created from this very UE4 class
   // I.e. that therefore, except for unsupported properties, they must be in the same order
   // So all we should have to do is loop forward and skip the occasional non-exported UE4 property
-  UProperty * ue_var_p = nullptr;
-  TFieldIterator<UProperty> property_it(ue_struct_or_class_p, EFieldIteratorFlags::ExcludeSuper);
+  FProperty * ue_var_p = nullptr;
+  TFieldIterator<FProperty> property_it(ue_struct_or_class_p, EFieldIteratorFlags::ExcludeSuper);
   tSkTypedNameRawArray & raw_data = sk_class_p->get_instance_data_raw_for_resolving();
   bool is_all_resolved = true;
   for (auto var_p : raw_data)
@@ -362,7 +362,7 @@ bool SkUEClassBindingHelper::resolve_raw_data_funcs(SkClass * sk_class_p, UStruc
 
 //---------------------------------------------------------------------------------------
 
-tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_p)
+tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(FProperty * ue_var_p)
   {
   tSkRawDataInfo raw_data_info;
   raw_data_info.InternalOffset = ue_var_p->GetOffset_ForInternal();
@@ -372,10 +372,10 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
   if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_Integer)
     {
     // If integer, specify sign bit
-    if (ue_var_p->IsA<UInt64Property>()
-     || ue_var_p->IsA<UIntProperty>()
-     || ue_var_p->IsA<UInt16Property>()
-     || ue_var_p->IsA<UInt8Property>())
+    if (ue_var_p->IsA<FInt64Property>()
+     || ue_var_p->IsA<FIntProperty>()
+     || ue_var_p->IsA<FInt16Property>()
+     || ue_var_p->IsA<FInt8Property>())
       { // Mark as signed
       raw_data_info.bIsSigned = true;
       }
@@ -383,7 +383,7 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_Boolean)
     {
     // If boolean, store bit shift as well
-    static_assert(sizeof(HackedBoolProperty) == sizeof(UBoolProperty), "Must match so this hack will work.");
+    static_assert(sizeof(HackedBoolProperty) == sizeof(FBoolProperty), "Must match so this hack will work.");
     HackedBoolProperty * bool_var_p = static_cast<HackedBoolProperty *>(ue_var_p);
     SK_ASSERTX(bool_var_p->FieldSize != 0, "BoolProperty must be initialized.");
     
@@ -394,7 +394,7 @@ tSkRawDataInfo SkUEClassBindingHelper::compute_raw_data_info(UProperty * ue_var_
   else if (type_id == FSkookumScriptGeneratorHelper::SkTypeID_List)
     {
     // If a list, store type information for elements as well
-    const UArrayProperty * array_property_p = Cast<UArrayProperty>(ue_var_p);
+    const FArrayProperty * array_property_p = Cast<FArrayProperty>(ue_var_p);
     tSkRawDataInfo item_raw_data_info = compute_raw_data_info(array_property_p->Inner);
     
     raw_data_info.ListTypeOffset = item_raw_data_info.InternalOffset;
@@ -1075,7 +1075,7 @@ SkClass * SkUEClassBindingHelper::find_sk_class_from_ue_class(UClass * ue_class_
   {
   if (!ue_class_p) { return nullptr; }
 
-  bool is_temp_ue_class = false; 
+  bool is_temp_ue_class = false;
   // Convert class name to its Sk equivalent
   FName ue_class_name = ue_class_p->GetFName();
   ASymbol sk_class_name;

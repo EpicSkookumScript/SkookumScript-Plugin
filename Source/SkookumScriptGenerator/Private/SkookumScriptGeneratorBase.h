@@ -66,16 +66,16 @@ class FSkookumScriptGeneratorHelper
     //---------------------------------------------------------------------------------------
     // Methods
 
-    static eSkTypeID      get_skookum_property_type(UProperty * property_p, bool allow_all);
+    static eSkTypeID      get_skookum_property_type(FProperty * property_p, bool allow_all);
     static eSkTypeID      get_skookum_struct_type(UStruct * struct_p);
-    static bool           is_property_type_supported(UProperty * property_p);
+    static bool           is_property_type_supported(FProperty * property_p);
     static bool           is_struct_type_supported(UStruct * struct_p);
     static bool           is_pod(UStruct * struct_p);
     static bool           does_class_have_static_class(UClass * class_p);
-    static UEnum *        get_enum(UField * field_p); // Returns the Enum if it is an enum, nullptr otherwise
+    static UEnum *        get_enum(FField * field_p); // Returns the Enum if it is an enum, nullptr otherwise
 
     static FString        skookify_param_name(const FString & name, bool append_question_mark);
-    static FString        skookify_method_name(const FString & name, UProperty * return_property_p = nullptr);
+    static FString        skookify_method_name(const FString & name, FProperty * return_property_p = nullptr);
     static FString        skookify_data_name_basic(const FString & name, bool append_question_mark, eDataScope scope);
     static FString        skookify_class_name_basic(const FString & name);
     static bool           compare_var_name_skookified(const TCHAR * ue_var_name_p, const ANSICHAR * sk_var_name_p);
@@ -186,7 +186,7 @@ class FSkookumScriptGeneratorBase : public FSkookumScriptGeneratorHelper
       Referenced_as_binding_class = 1 << 2,
       };
 
-    virtual bool          can_export_property(UProperty * property_p, int32 include_priority, uint32 referenced_flags) = 0;
+    virtual bool          can_export_property(FProperty * property_p, int32 include_priority, uint32 referenced_flags) = 0;
     virtual void          on_type_referenced(UField * type_p, int32 include_priority, uint32 referenced_flags) = 0;
     virtual void          report_error(const FString & message) const = 0;
     virtual bool          source_control_checkout_or_add(const FString & file_path) const { return true; }
@@ -209,15 +209,19 @@ class FSkookumScriptGeneratorBase : public FSkookumScriptGeneratorHelper
     FString               get_skookified_enum_val_name_by_index(UEnum * enum_p, int32 index);
     FString               get_skookified_default_enum_val_name_by_id(UEnum * enum_p, const FString & id);
 
+    FString               get_skookum_class_name(FField * type_p);
     FString               get_skookum_class_name(UObject * type_p);
-    FString               get_skookum_data_name(UProperty * property_p);
-    FString               get_skookum_parent_name(UObject * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp = nullptr);
+    FString               get_skookum_data_name(FProperty * property_p);
+    FString               get_skookum_parent_name(FField * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp = nullptr);
+    FString               get_skookum_parent_name(UField * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp = nullptr);
     FString               get_skookum_class_path(UObject * type_p, int32 include_priority, uint32 referenced_flags, FString * out_class_name_p = nullptr);
     FString               get_skookum_method_file_name(const FString & script_function_name, bool is_static);
-    FString               get_skookum_property_type_name(UProperty * property_p, bool include_invokable_signature = false, int32 * out_first_line_length_p = nullptr, int32 * out_max_line_length_p = nullptr);
-    FString               get_skookum_default_initializer(UFunction * function_p, UProperty * param_p);
+    FString               get_skookum_property_type_name(FProperty * property_p, bool include_invokable_signature = false, int32 * out_first_line_length_p = nullptr, int32 * out_max_line_length_p = nullptr);
+    FString               get_skookum_default_initializer(UFunction * function_p, FProperty * param_p);
     static uint32         get_skookum_symbol_id(const FString & string);
     static FString        get_comment_block(UObject * type_p);
+    static FString        get_comment_block(FField * type_p);
+    static void           build_comment_block(FString& comment_block, const FString& ue_name_comment);
 
     static UField *       get_field(UObject * type_p); // Find its UField if type is not a UField
 

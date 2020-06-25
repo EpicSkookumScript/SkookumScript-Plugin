@@ -12,6 +12,7 @@
 #include "SkookumScriptClassDataComponent.h"
 #include "SkookumScriptMindComponent.h"
 #include "SkookumScriptInstanceProperty.h"
+#include "SkookumScriptInstancePropertyOld.h"
 
 #include "Modules/ModuleManager.h" // For IMPLEMENT_MODULE
 
@@ -348,6 +349,10 @@ FSkookumScriptRuntime::FSkookumScriptRuntime()
   , m_editor_world_p(nullptr)
   , m_num_game_worlds(0)
   {
+  // Call SkookumScriptInstanceProperty static class so that IMPLEMENT_CLASS is called to register 
+  // our FProperty with the new FProperty system.
+  FSkookumScriptInstanceProperty::StaticClass();
+  USkookumScriptInstanceProperty::StaticClass();
   }
 
 //---------------------------------------------------------------------------------------
@@ -417,7 +422,7 @@ void FSkookumScriptRuntime::PostLoadCallback()
 //---------------------------------------------------------------------------------------
 void FSkookumScriptRuntime::on_world_init_pre(UWorld * world_p, const UWorld::InitializationValues init_vals)
   {
-  //A_DPRINT("on_world_init_pre: %S %p\n", *world_p->GetName(), world_p);
+  A_DPRINT("on_world_init_pre: %S %p\n", *world_p->GetName(), world_p);
 
   if (world_p->IsGameWorld())
     {
@@ -461,7 +466,7 @@ void FSkookumScriptRuntime::on_world_init_pre(UWorld * world_p, const UWorld::In
 //---------------------------------------------------------------------------------------
 void FSkookumScriptRuntime::on_world_init_post(UWorld * world_p, const UWorld::InitializationValues init_vals)
   {
-  //A_DPRINT("on_world_init_post: %S %p\n", *world_p->GetName(), world_p);
+  A_DPRINT("on_world_init_post: %S %p\n", *world_p->GetName(), world_p);
 
   #if !WITH_EDITORONLY_DATA
     // Resolve raw data for all classes if a callback function is given
@@ -1000,8 +1005,8 @@ void FSkookumScriptRuntime::show_ide(const FString & focus_ue_class_name, const 
     int32 at_pos = 0;
     if (focus_ue_member_name.FindChar('@', at_pos))
       {
-      focus_sk_class_name = focus_ue_member_name.Left(at_pos).TrimTrailing();
-      focus_sk_member_name = focus_ue_member_name.Mid(at_pos + 1).Trim();
+      focus_sk_class_name = focus_ue_member_name.Left(at_pos).TrimEnd();
+      focus_sk_member_name = focus_ue_member_name.Mid(at_pos + 1).TrimStart();
       }
     else
       {
@@ -1233,7 +1238,9 @@ void FSkookumScriptRuntime::on_new_asset(UObject * obj_p)
       blueprint_p->OnCompiled().AddRaw(this, &FSkookumScriptRuntime::on_blueprint_compiled);
 
       // If the callback is already installed then on_blueprint_compiled will call the below
+      SkUEClassBindingHelper::find_sk_class_from_ue_class(blueprint_p->GeneratedClass);
       on_class_added_or_modified(blueprint_p);
+
       }
     }
 
@@ -1258,29 +1265,32 @@ void FSkookumScriptRuntime::on_new_asset(UObject * obj_p)
 
 void FSkookumScriptRuntime::OnPreCompile()
   {
+  for (TObjectIterator<UBlueprint> blueprint_it; blueprint_it; ++blueprint_it)
+  {
+    // Make sure that all UE4 classes are mapped to the SK type
+    SkUEClassBindingHelper::find_sk_class_from_ue_class(*blueprint_it->GeneratedClass);
+  }
+
   // Last minute attempt to resolve yet unresolved bindings
   m_runtime.sync_all_reflected_to_ue(true);
 
   // Make sure all Blueprints are instrumented at this point
-  //if (!GIsEditor) // Only necessary in standalone mode
+  for (TObjectIterator<UBlueprint> blueprint_it; blueprint_it; ++blueprint_it)
     {
-    for (TObjectIterator<UBlueprint> blueprint_it; blueprint_it; ++blueprint_it)
+    if (!blueprint_it->OnCompiled().IsBoundToObject(this))
       {
-      if (!blueprint_it->OnCompiled().IsBoundToObject(this))
-        {
-        on_new_asset(*blueprint_it);
-        }
-      // In the case of multiple class inheritance we can often get into a situation where we're
-      // adding a BP variable to a Parent class followed by adding a BP variable to a Child class.
-      // In these cases, the child blueprint will crash during BP compilation (in serialization).
-      // Debugging this for quite a long time, my conclusion was that raw data needed to be resolved
-      // prior to compiling. Raw data resolution will occur in on_new_asset above, but only if we 
-      // haven't yet bound to OnCompiled. So below we force raw data resolution if a blueprint is
-      // about to be or is being compiled.
-      else if((*blueprint_it)->bBeingCompiled || (*blueprint_it)->bQueuedForCompilation)
-        {
-        on_class_added_or_modified(*blueprint_it);
-        }
+      on_new_asset(*blueprint_it);
+      }
+    // In the case of multiple class inheritance we can often get into a situation where we're
+    // adding a BP variable to a Parent class followed by adding a BP variable to a Child class.
+    // In these cases, the child blueprint will crash during BP compilation (in serialization).
+    // Debugging this for quite a long time, my conclusion was that raw data needed to be resolved
+    // prior to compiling. Raw data resolution will occur in on_new_asset above, but only if we 
+    // haven't yet bound to OnCompiled. So below we force raw data resolution if a blueprint is
+    // about to be or is being compiled.
+    else if((*blueprint_it)->bBeingCompiled || (*blueprint_it)->bQueuedForCompilation)
+      {
+      on_class_added_or_modified(*blueprint_it);
       }
     }
   }

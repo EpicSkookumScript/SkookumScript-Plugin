@@ -170,9 +170,9 @@ class FSkookumScriptGenerator : public ISkookumScriptGenerator, public FSkookumS
   // To keep track of delegate bindings generated for a particular class
   struct EventBinding
     {
-    void make_event(UMulticastDelegateProperty * property_p); // create names for an event
+    void make_event(FMulticastDelegateProperty * property_p); // create names for an event
 
-    UMulticastDelegateProperty *  m_property_p;
+    FMulticastDelegateProperty *  m_property_p;
     FString                       m_script_name_base;  // Sk name base (without the `on_`)
     };
 
@@ -231,17 +231,17 @@ class FSkookumScriptGenerator : public ISkookumScriptGenerator, public FSkookumS
   FString               generate_method_binding_code_body_via_call(const FString & class_name_cpp, UClass * class_p, const MethodBinding & binding); // Generate binding code for a method
   FString               generate_method_binding_code_body_via_event(const FString & class_name_cpp, UClass * class_p, const MethodBinding & binding); // Generate binding code for a method
 
-  FString               generate_event_script_file_body(eEventCoro which, UMulticastDelegateProperty * delegate_property_p, const FString & script_base_name, FString * out_coro_name_p); // Generate script file for an event coroutine
+  FString               generate_event_script_file_body(eEventCoro which, FMulticastDelegateProperty * delegate_property_p, const FString & script_base_name, FString * out_coro_name_p); // Generate script file for an event coroutine
   FString               generate_event_binding_code(const FString & class_name_cpp, UClass * class_p, const EventBinding & binding); // Generate binding code for a method  
 
   FString               generate_method_binding_declaration(const FString & function_name, bool is_static); // Generate declaration of method binding function
   FString               generate_this_pointer_initialization(const FString & class_name_cpp, UStruct * struct_or_class_p, bool is_static); // Generate code that obtains the 'this' pointer from scope_p
-  FString               generate_method_parameter_assignment(UProperty * param_p, int32 param_index, FString assignee_name);
-  FString               generate_method_out_parameter_expression(UFunction * function_p, UProperty * param_p, int32 param_index, const FString & param_name);
-  FString               generate_property_default_ctor_argument(UProperty * param_p);
+  FString               generate_method_parameter_assignment(FProperty * param_p, int32 param_index, FString assignee_name);
+  FString               generate_method_out_parameter_expression(UFunction * function_p, FProperty * param_p, int32 param_index, const FString & param_name);
+  FString               generate_property_default_ctor_argument(FProperty * param_p);
 
-  FString               generate_return_value_passing(UProperty * return_value_p, const FString & return_value_name); // Generate code that passes back the return value
-  FString               generate_var_to_instance_expression(UProperty * var_p, const FString & var_name); // Generate code that creates an SkInstance from a property
+  FString               generate_return_value_passing(FProperty * return_value_p, const FString & return_value_name); // Generate code that passes back the return value
+  FString               generate_var_to_instance_expression(FProperty * var_p, const FString & var_name); // Generate code that creates an SkInstance from a property
 
   void                  save_generated_cpp_files(eClassScope class_scope);
   bool                  save_generated_script_files(eClassScope class_scope);
@@ -249,17 +249,17 @@ class FSkookumScriptGenerator : public ISkookumScriptGenerator, public FSkookumS
   bool                  can_export_enum(UEnum * enum_p);
   bool                  can_export_method(UFunction * function_p, int32 include_priority, uint32 referenced_flags, bool allow_delegate = false);
 
-  FString               get_skookum_property_binding_class_name(UProperty * property_p);
+  FString               get_skookum_property_binding_class_name(FProperty * property_p);
   static FString        get_cpp_class_name(UStruct * struct_or_class_p);
-  static FString        get_cpp_property_type_name(UProperty * property_p, bool is_array_element = false, bool with_const = false, bool with_ref = false);
-  static FString        get_cpp_property_cast_name(UProperty * property_p); // Returns the type to be used to cast an assignment before assigning
+  static FString        get_cpp_property_type_name(FProperty * property_p, bool is_array_element = false, bool with_const = false, bool with_ref = false);
+  static FString        get_cpp_property_cast_name(FProperty * property_p); // Returns the type to be used to cast an assignment before assigning
 
-  void                  on_property_referenced(UProperty * prop_p, int32 include_priority, uint32 referenced_flags); // Generate script and binding files for a class from property
+  void                  on_property_referenced(FProperty * prop_p, int32 include_priority, uint32 referenced_flags); // Generate script and binding files for a class from property
   void                  request_generate_type(UField * type_p, int32 include_priority, uint32 referenced_flags);
 
   // FSkookumScriptGeneratorBase interface implementation
 
-  virtual bool          can_export_property(UProperty * property_p, int32 include_priority, uint32 referenced_flags) override final;
+  virtual bool          can_export_property(FProperty * property_p, int32 include_priority, uint32 referenced_flags) override final;
   virtual void          on_type_referenced(UField * type_p, int32 include_priority, uint32 referenced_flags) override final;
   virtual void          report_error(const FString & message) const override final;
 
@@ -599,9 +599,9 @@ int32 FSkookumScriptGenerator::generate_class(UStruct * struct_or_class_p, int32
         }
 
       EventBinding event;
-      for (TFieldIterator<UProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
+      for (TFieldIterator<FMulticastDelegateProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
         {
-        UMulticastDelegateProperty * delegate_property_p = Cast<UMulticastDelegateProperty>(*property_it);
+        FMulticastDelegateProperty * delegate_property_p = *property_it;
         if (delegate_property_p 
          && delegate_property_p->HasAnyPropertyFlags(CPF_NativeAccessSpecifierPublic)
          && !delegate_property_p->HasAnyPropertyFlags(CPF_EditorOnly)
@@ -875,19 +875,19 @@ FString FSkookumScriptGenerator::generate_method_binding_code_body_via_call(cons
     }
 
   FString out_params;
-  UProperty * return_value_p = nullptr;
-  const bool has_params_or_return_value = (binding.m_function_p->Children != NULL);
+  FProperty * return_value_p = nullptr;
+  const bool has_params_or_return_value = (binding.m_function_p->ChildProperties != NULL);
   if (has_params_or_return_value)
     {
-    for (TFieldIterator<UProperty> param_it(binding.m_function_p); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(binding.m_function_p); param_it; ++param_it)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
       function_body += FString::Printf(TEXT("    %s %s;\n"), *get_cpp_property_type_name(param_p), *param_p->GetName());
       }
     int32 param_index = 0;
-    for (TFieldIterator<UProperty> param_it(binding.m_function_p); param_it; ++param_it, ++param_index)
+    for (TFieldIterator<FProperty> param_it(binding.m_function_p); param_it; ++param_it, ++param_index)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
 
       // Static methods always succeed returning the return value
       if (!is_static || !(param_p->GetPropertyFlags() & CPF_ReturnParm))
@@ -933,9 +933,9 @@ FString FSkookumScriptGenerator::generate_method_binding_code_body_via_call(cons
     function_body += indent + FString::Printf(TEXT("    %s("), *function_invocation);
     }
   bool is_first = true;
-  for (TFieldIterator<UProperty> param_it(binding.m_function_p); param_it; ++param_it)
+  for (TFieldIterator<FProperty> param_it(binding.m_function_p); param_it; ++param_it)
     {
-    UProperty * param_p = *param_it;
+    FProperty * param_p = *param_it;
     if (!(param_p->GetPropertyFlags() & CPF_ReturnParm))
       {
       if (!is_first)
@@ -974,23 +974,23 @@ FString FSkookumScriptGenerator::generate_method_binding_code_body_via_event(con
 
   FString params;
   FString out_params;
-  UProperty * return_value_p = nullptr;
+  FProperty * return_value_p = nullptr;
 
-  const bool has_params_or_return_value = (binding.m_function_p->Children != NULL);
+  const bool has_params_or_return_value = (binding.m_function_p->ChildProperties != NULL);
   if (has_params_or_return_value)
     {
     params += TEXT("    struct FDispatchParams\n      {\n");
 
-    for (TFieldIterator<UProperty> param_it(binding.m_function_p); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(binding.m_function_p); param_it; ++param_it)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
       params += FString::Printf(TEXT("      %s %s;\n"), *get_cpp_property_type_name(param_p), *param_p->GetName());
       }
     params += TEXT("      } params;\n");
     int32 param_index = 0;
-    for (TFieldIterator<UProperty> param_it(binding.m_function_p); param_it; ++param_it, ++param_index)
+    for (TFieldIterator<FProperty> param_it(binding.m_function_p); param_it; ++param_it, ++param_index)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
 
       // Static methods always succeed returning the return value
       if (!is_static || !(param_p->GetPropertyFlags() & CPF_ReturnParm))
@@ -1049,7 +1049,7 @@ FString FSkookumScriptGenerator::generate_method_binding_code_body_via_event(con
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_event_script_file_body(eEventCoro which, UMulticastDelegateProperty * delegate_property_p, const FString & script_base_name, FString * out_coro_name_p)
+FString FSkookumScriptGenerator::generate_event_script_file_body(eEventCoro which, FMulticastDelegateProperty * delegate_property_p, const FString & script_base_name, FString * out_coro_name_p)
   {
   // Determine name
   TArray<FStringFormatArg> CoroNameArguments;
@@ -1129,9 +1129,9 @@ FString FSkookumScriptGenerator::generate_event_binding_code(const FString & cla
   // The callback function
   generated_code += FString::Printf(TEXT("      void %s("), *binding.m_property_p->GetName());
   const TCHAR * separator_p = TEXT("");
-  for (TFieldIterator<UProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
+  for (TFieldIterator<FProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
     {
-    UProperty * param_p = *param_it;
+    FProperty * param_p = *param_it;
     generated_code += FString::Printf(TEXT("%s%s %s"), separator_p, *get_cpp_property_type_name(param_p, false, true, true), *param_p->GetName());
     separator_p = TEXT(", ");
     }
@@ -1140,11 +1140,11 @@ FString FSkookumScriptGenerator::generate_event_binding_code(const FString & cla
     "        {\n"
     "        EventInfo * event_p = alloc_event();\n");
   int32 param_index = 0;
-  if (binding.m_property_p->SignatureFunction->Children)
+  if (binding.m_property_p->SignatureFunction->ChildProperties)
     {
-    for (TFieldIterator<UProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
       bool use_const_cast = false;
       if (param_p->HasAnyPropertyFlags(CPF_ConstParm))
         {
@@ -1165,9 +1165,9 @@ FString FSkookumScriptGenerator::generate_event_binding_code(const FString & cla
   generated_code += TEXT("        {\n");
   FString param_list; // For invoking the actual callback function
   separator_p = TEXT("");
-  for (TFieldIterator<UProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
+  for (TFieldIterator<FProperty> param_it(binding.m_property_p->SignatureFunction); param_it; ++param_it)
     {
-    UProperty * param_p = *param_it;
+    FProperty * param_p = *param_it;
     FString eval_base_text = TEXT("P_GET_");
     FString type_text;
     if (param_p->ArrayDim > 1)
@@ -1283,7 +1283,7 @@ FString FSkookumScriptGenerator::generate_this_pointer_initialization(const FStr
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunction * function_p, UProperty * param_p, int32 param_index, const FString & param_name)
+FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunction * function_p, FProperty * param_p, int32 param_index, const FString & param_name)
   {
   FString fmt;
 
@@ -1311,8 +1311,8 @@ FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunct
     case SkTypeID_Enum:            fmt = TEXT("scope_p->get_arg<SkEnum>(SkArg_{0}) = (tSkEnum){1}"); break;
     case SkTypeID_List:
       {
-      const UArrayProperty * array_property_p = Cast<UArrayProperty>(param_p);
-      UProperty * element_property_p = array_property_p->Inner;
+      const FArrayProperty * array_property_p = CastField<FArrayProperty>(param_p);
+      FProperty * element_property_p = array_property_p->Inner;
       fmt = FString::Printf(TEXT("SkUEClassBindingHelper::initialize_list_from_array<%s,%s>(&scope_p->get_arg<SkList>(SkArg_{0}), {1})"),
         *get_skookum_property_binding_class_name(element_property_p),
         *get_cpp_property_type_name(element_property_p, true));
@@ -1330,7 +1330,7 @@ FString FSkookumScriptGenerator::generate_method_out_parameter_expression(UFunct
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_method_parameter_assignment(UProperty * param_p, int32 param_index, FString assignee_name)
+FString FSkookumScriptGenerator::generate_method_parameter_assignment(FProperty * param_p, int32 param_index, FString assignee_name)
   {
   // We assume a parameter goes out only if it is either the return value (of course)
   // or if it is marked CPF_OutParm _and_ its name begins with "Out"
@@ -1365,14 +1365,14 @@ FString FSkookumScriptGenerator::generate_method_parameter_assignment(UProperty 
       case SkTypeID_Color:
         {
         static FName name_Color("Color");
-        bool is_color8 = CastChecked<UStructProperty>(param_p)->Struct->GetFName() == name_Color;
+        bool is_color8 = CastFieldChecked<FStructProperty>(param_p)->Struct->GetFName() == name_Color;
         generated_code = FString::Printf(TEXT("%s = scope_p->get_arg<SkColor>(SkArg_%d)%s;"), *assignee_name, param_index + 1, is_color8 ? TEXT(".ToFColor(true)") : TEXT(""));
         }
         break;
       case SkTypeID_List:
         {
-        const UArrayProperty * array_property_p = Cast<UArrayProperty>(param_p);
-        UProperty * element_property_p = array_property_p->Inner;
+        const FArrayProperty * array_property_p = CastField<FArrayProperty>(param_p);
+        FProperty * element_property_p = array_property_p->Inner;
         generated_code = FString::Printf(TEXT("SkUEClassBindingHelper::initialize_array_from_list<%s,%s,%s>(&%s, scope_p->get_arg<SkList>(SkArg_%d));"),
           *get_skookum_property_binding_class_name(element_property_p),
           *get_cpp_property_type_name(element_property_p, true),
@@ -1396,7 +1396,7 @@ FString FSkookumScriptGenerator::generate_method_parameter_assignment(UProperty 
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_property_default_ctor_argument(UProperty * param_p)
+FString FSkookumScriptGenerator::generate_property_default_ctor_argument(FProperty * param_p)
   {
   eSkTypeID type_id = get_skookum_property_type(param_p, true);
   switch (type_id)
@@ -1427,7 +1427,7 @@ FString FSkookumScriptGenerator::generate_property_default_ctor_argument(UProper
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_return_value_passing(UProperty * return_value_p, const FString & return_value_name)
+FString FSkookumScriptGenerator::generate_return_value_passing(FProperty * return_value_p, const FString & return_value_name)
   {
   if (return_value_p)
     {
@@ -1441,7 +1441,7 @@ FString FSkookumScriptGenerator::generate_return_value_passing(UProperty * retur
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::generate_var_to_instance_expression(UProperty * var_p, const FString & var_name)
+FString FSkookumScriptGenerator::generate_var_to_instance_expression(FProperty * var_p, const FString & var_name)
   {
   FString fmt;
 
@@ -1469,8 +1469,8 @@ FString FSkookumScriptGenerator::generate_var_to_instance_expression(UProperty *
     case SkTypeID_String:          fmt = TEXT("SkString::new_instance(AString(*({0}), {0}.Len()))"); break; // $revisit MBreyer - Avoid copy here
     case SkTypeID_List:
     {
-    const UArrayProperty * array_property_p = Cast<UArrayProperty>(var_p);
-    UProperty * element_property_p = array_property_p->Inner;
+    const FArrayProperty * array_property_p = CastField<FArrayProperty>(var_p);
+    FProperty * element_property_p = array_property_p->Inner;
     fmt = FString::Printf(TEXT("SkUEClassBindingHelper::list_from_array<%s,%s>({0})"),
       *get_skookum_property_binding_class_name(element_property_p),
       *get_cpp_property_type_name(element_property_p, true));
@@ -2158,12 +2158,12 @@ bool FSkookumScriptGenerator::can_export_method(UFunction * function_p, int32 in
     }
 
   // Reject if any of the parameter types is unsupported yet
-  for (TFieldIterator<UProperty> param_it(function_p); param_it; ++param_it)
+  for (TFieldIterator<FProperty> param_it(function_p); param_it; ++param_it)
     {
-    UProperty * param_p = *param_it;
-
+    FProperty * param_p = *param_it;
     if (!can_export_property(param_p, include_priority, referenced_flags))
       {
+      UE_LOG(LogSkookumScriptGenerator, Log, TEXT("Skipping export of method %s because property %s of type %s is unsupported"), *function_p->GetName(), *param_p->GetName(), *param_p->GetCPPType());
       return false;
       }
     }
@@ -2173,7 +2173,7 @@ bool FSkookumScriptGenerator::can_export_method(UFunction * function_p, int32 in
 
 //---------------------------------------------------------------------------------------
 
-bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 include_priority, uint32 referenced_flags)
+bool FSkookumScriptGenerator::can_export_property(FProperty * property_p, int32 include_priority, uint32 referenced_flags)
   {
   // Check if property type is supported
   if (!is_property_type_supported(property_p))
@@ -2182,7 +2182,7 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
     }
 
   // Exclude any structs with types to skip or whose parent is skipped
-  if (UStructProperty * struct_prop_p = Cast<UStructProperty>(property_p))
+  if (FStructProperty * struct_prop_p = CastField<FStructProperty>(property_p))
     {
     UStruct* current_struct_p = struct_prop_p->Struct;
     while (current_struct_p)
@@ -2198,7 +2198,7 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
     }
 
   // Exclude any arrays of unsupported types as well
-  if (UArrayProperty * array_property_p = Cast<UArrayProperty>(property_p))
+  if (FArrayProperty * array_property_p = CastField<FArrayProperty>(property_p))
     {
     if (!can_export_property(array_property_p->Inner, include_priority + 1, referenced_flags))
       {
@@ -2208,12 +2208,12 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
 
   // Accept delegates as long as their signatures have acceptable parameters
   UFunction * signature_function_p = nullptr;
-  UDelegateProperty * delegate_p = Cast<UDelegateProperty>(property_p);
+  FDelegateProperty * delegate_p = CastField<FDelegateProperty>(property_p);
   if (delegate_p)
     {
     signature_function_p = delegate_p->SignatureFunction;
     }
-  UMulticastDelegateProperty * multicast_delegate_p = Cast<UMulticastDelegateProperty>(property_p);
+  FMulticastDelegateProperty * multicast_delegate_p = CastField<FMulticastDelegateProperty>(property_p);
   if (multicast_delegate_p)
     {
     signature_function_p = multicast_delegate_p->SignatureFunction;
@@ -2230,7 +2230,6 @@ bool FSkookumScriptGenerator::can_export_property(UProperty * property_p, int32 
   }
 
 //---------------------------------------------------------------------------------------
-
 void FSkookumScriptGenerator::on_type_referenced(UField * type_p, int32 include_priority, uint32 referenced_flags)
   {
   request_generate_type(type_p, include_priority, referenced_flags);
@@ -2245,7 +2244,7 @@ void FSkookumScriptGenerator::report_error(const FString & message) const
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::get_skookum_property_binding_class_name(UProperty * property_p)
+FString FSkookumScriptGenerator::get_skookum_property_binding_class_name(FProperty * property_p)
   {
   eSkTypeID type_id = get_skookum_property_type(property_p, true);
 
@@ -2266,15 +2265,43 @@ FString FSkookumScriptGenerator::get_skookum_property_binding_class_name(UProper
   }
 
 //---------------------------------------------------------------------------------------
-
 FString FSkookumScriptGenerator::get_cpp_class_name(UStruct * struct_or_class_p)
   {
-  return FString::Printf(TEXT("%s%s"), struct_or_class_p->GetPrefixCPP(), *struct_or_class_p->GetName());
+  FString CppPrefix = FString(struct_or_class_p->GetPrefixCPP());
+  FString CppName = FString(struct_or_class_p->GetName());
+
+  // Deal with new 4.25 class split
+  if(CppName.Compare(TEXT("Property")) == 0
+    || CppName.Compare(TEXT("ArrayProperty")) == 0
+    || CppName.Compare(TEXT("BoolProperty")) == 0
+    || CppName.Compare(TEXT("ByteProperty")) == 0
+    || CppName.Compare(TEXT("ClassProperty")) == 0
+    || CppName.Compare(TEXT("ClassProperty")) == 0
+    || CppName.Compare(TEXT("DelegateProperty")) == 0
+    || CppName.Compare(TEXT("FloatProperty")) == 0
+    || CppName.Compare(TEXT("Int16Property")) == 0
+    || CppName.Compare(TEXT("IntProperty")) == 0
+    || CppName.Compare(TEXT("Int8Property")) == 0
+    || CppName.Compare(TEXT("Int64Property")) == 0
+    || CppName.Compare(TEXT("LazyObjectProperty")) == 0
+    || CppName.Compare(TEXT("MulticastDelegateProperty")) == 0
+    || CppName.Compare(TEXT("NameProperty")) == 0
+    || CppName.Compare(TEXT("NumericProperty")) == 0
+    || CppName.Compare(TEXT("ObjectPropertyBase")) == 0
+    || CppName.Compare(TEXT("SoftClassProperty")) == 0
+    || CppName.Compare(TEXT("SoftObjectProperty")) == 0
+    || CppName.Compare(TEXT("StrProperty")) == 0
+    || CppName.Compare(TEXT("StructProperty")) == 0)
+  {
+    CppPrefix = TEXT("F");
+  }
+
+  return FString::Printf(TEXT("%s%s"), *CppPrefix, *CppName);
   }
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::get_cpp_property_type_name(UProperty * property_p, bool is_array_element, bool with_const, bool with_ref)
+FString FSkookumScriptGenerator::get_cpp_property_type_name(FProperty * property_p, bool is_array_element, bool with_const, bool with_ref)
   {
   static FString decl_Enum(TEXT("enum "));
   static FString decl_Struct(TEXT("struct "));
@@ -2285,10 +2312,10 @@ FString FSkookumScriptGenerator::get_cpp_property_type_name(UProperty * property
   static FString decl_TArray(TEXT("TArray"));
 
   FString property_type_name = property_p->GetCPPType(NULL, CPPF_ArgumentOrReturnValue);
-
+  
   // Check for enum
   UEnum * enum_p = get_enum(property_p);
-  if (enum_p && (is_array_element || property_p->GetName() == TEXT("PathEvent"))) // HACK MJB I see no proper way to detect this from the UProperty
+  if (enum_p && (is_array_element || property_p->GetName() == TEXT("PathEvent"))) // HACK MJB I see no proper way to detect this from the FProperty
     {
     property_type_name = TEXT("TEnumAsByte<") + property_type_name + TEXT(">");
     }
@@ -2306,8 +2333,8 @@ FString FSkookumScriptGenerator::get_cpp_property_type_name(UProperty * property
     }
   else if (property_type_name.StartsWith(decl_TArray))
     {
-    const UArrayProperty * array_property_p = Cast<UArrayProperty>(property_p);
-    UProperty * element_property_p = array_property_p->Inner;
+    const FArrayProperty * array_property_p = CastField<FArrayProperty>(property_p);
+    FProperty * element_property_p = array_property_p->Inner;
     property_type_name = FString::Printf(TEXT("TArray<%s>"), *get_cpp_property_type_name(element_property_p, true));
     }
 
@@ -2319,7 +2346,7 @@ FString FSkookumScriptGenerator::get_cpp_property_type_name(UProperty * property
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGenerator::get_cpp_property_cast_name(UProperty * property_p)
+FString FSkookumScriptGenerator::get_cpp_property_cast_name(FProperty * property_p)
   {
   static FString decl_TEnumAsByte_Prefix(TEXT("TEnumAsByte<"));
   static FString decl_TEnumAsByte_Suffix(TEXT(">"));
@@ -2345,7 +2372,7 @@ FString FSkookumScriptGenerator::get_cpp_property_cast_name(UProperty * property
 
 //---------------------------------------------------------------------------------------
 
-void FSkookumScriptGenerator::on_property_referenced(UProperty * prop_p, int32 include_priority, uint32 referenced_flags)
+void FSkookumScriptGenerator::on_property_referenced(FProperty * prop_p, int32 include_priority, uint32 referenced_flags)
   {
   eSkTypeID type_id = get_skookum_property_type(prop_p, true);
   if (type_id == SkTypeID_Enum)
@@ -2358,7 +2385,7 @@ void FSkookumScriptGenerator::on_property_referenced(UProperty * prop_p, int32 i
     }
   else if (type_id == SkTypeID_UStruct)
     {
-    UStruct * struct_p = Cast<UStructProperty>(prop_p)->Struct;
+    UStruct * struct_p = CastField<FStructProperty>(prop_p)->Struct;
     if (struct_p)
       {
       request_generate_type(struct_p, include_priority + 1, referenced_flags);
@@ -2370,7 +2397,7 @@ void FSkookumScriptGenerator::on_property_referenced(UProperty * prop_p, int32 i
     }
   else if (type_id == SkTypeID_UObject || type_id == SkTypeID_UObjectWeakPtr)
     {
-    UClass * class_p = Cast<UObjectPropertyBase>(prop_p)->PropertyClass;
+    UClass * class_p = CastField<FObjectPropertyBase>(prop_p)->PropertyClass;
     if (class_p)
       {
       request_generate_type(class_p, include_priority + 1, referenced_flags);
@@ -2378,12 +2405,11 @@ void FSkookumScriptGenerator::on_property_referenced(UProperty * prop_p, int32 i
     }
   else if (type_id == SkTypeID_List)
     {
-    on_property_referenced(CastChecked<UArrayProperty>(prop_p)->Inner, include_priority + 1, referenced_flags);
+    on_property_referenced(CastFieldChecked<FArrayProperty>(prop_p)->Inner, include_priority + 1, referenced_flags);
     }
   }
 
 //---------------------------------------------------------------------------------------
-
 void FSkookumScriptGenerator::request_generate_type(UField * type_p, int32 include_priority, uint32 referenced_flags)
   {
   // Add it or consolidate include path
@@ -2407,14 +2433,14 @@ void FSkookumScriptGenerator::request_generate_type(UField * type_p, int32 inclu
     type_to_generate_p->m_generated_type_index = -1;
     }
 
-  // Also request/update all parent structs
+  // Also request/update all parent fields
   UStruct * struct_p = Cast<UStruct>(type_p);
   if (struct_p)
     {
     struct_p = struct_p->GetSuperStruct();
     if (struct_p)
       {
-      // Parent has to be included before child, so must have higher priority
+     // Parent has to be included before child, so must have higher priority
       request_generate_type(struct_p, include_priority + 1, referenced_flags & ~Referenced_as_binding_class);
       }
     }
@@ -2545,7 +2571,7 @@ void FSkookumScriptGenerator::MethodBinding::make_method(UFunction * function_p)
 
 //---------------------------------------------------------------------------------------
 
-void FSkookumScriptGenerator::EventBinding::make_event(UMulticastDelegateProperty * property_p)
+void FSkookumScriptGenerator::EventBinding::make_event(FMulticastDelegateProperty * property_p)
   {
   m_property_p = property_p;
   m_script_name_base = skookify_method_name(property_p->GetName());

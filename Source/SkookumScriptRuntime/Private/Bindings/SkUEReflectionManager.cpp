@@ -82,11 +82,11 @@ SkUEReflectionManager::TypedName::TypedName(const ASymbol & name, SkClassDescBas
 
 //---------------------------------------------------------------------------------------
 
-void SkUEReflectionManager::TypedName::set_byte_size(UProperty * ue_property_p)
+void SkUEReflectionManager::TypedName::set_byte_size(FProperty * ue_property_p)
   {
   if (ue_property_p)
     {
-    UArrayProperty * array_property_p = Cast<UArrayProperty>(ue_property_p);
+    FArrayProperty * array_property_p = Cast<FArrayProperty>(ue_property_p);
     m_byte_size = array_property_p ? array_property_p->Inner->GetSize() : ue_property_p->GetSize();
     }
   }
@@ -711,7 +711,10 @@ bool SkUEReflectionManager::sync_all_to_ue(tSkUEOnFunctionUpdatedFunc * on_funct
         UClass * ue_class_p = SkUEClassBindingHelper::get_ue_class_from_sk_class(sk_class_p);
         if (ue_class_p)
           {
-          reflected_class_p->m_ue_static_class_p = SkUEClassBindingHelper::get_static_ue_class_from_sk_class_super(sk_class_p);
+          if (!reflected_class_p->m_ue_static_class_p.IsValid())
+            {
+            reflected_class_p->m_ue_static_class_p = SkUEClassBindingHelper::get_static_ue_class_from_sk_class_super(sk_class_p);
+            }
           anything_changed |= add_instance_property_to_class(ue_class_p, sk_class_p);
           }
         }
@@ -758,10 +761,10 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
   bool success = false;
 
   // Name it like the class for simplicity
-  FName property_name = USkookumScriptInstanceProperty::StaticClass()->GetFName();
+  FName property_name = FSkookumScriptInstanceProperty::StaticClass()->GetFName();
 
   // Is it already present (in this class or any of its superclasses) ?
-  UProperty * property_p = ue_class_p->FindPropertyByName(property_name);
+  FProperty * property_p = ue_class_p->FindPropertyByName(property_name);
   if (!property_p)
     {
     // No objects of this class except the CDO must exist yet
@@ -772,11 +775,12 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
     #endif
 
     // Attach new property
-    property_p = NewObject<USkookumScriptInstanceProperty>(ue_class_p, property_name);
+    property_p = new FSkookumScriptInstanceProperty(ue_class_p, property_name, EObjectFlags::RF_NoFlags);
+
     // Note: The CDO was already created and _does not_ have this property!
     // So: Append to the end of the children's chain where it won't shift other properties around in memory
     // And, to prevent problems with the smaller CDO, all code in USkookumScriptInstanceProperty interacting with CDOs simply does nothing
-    UField ** prev_pp = &ue_class_p->Children;
+    FField ** prev_pp = &ue_class_p->ChildProperties;
     while (*prev_pp) { prev_pp = &(*prev_pp)->Next; }
     *prev_pp = property_p;
     // Relink special pointers
@@ -804,7 +808,7 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
     // inheriting it. Ultimately leading to an "instance offset out of range" crash. The odd thing is that the property is legitimately there
     // it's just that the class hasn't been fixed up to recalculate sizes etc. 
     // So here we force the class to perform static linking, the side-effect which will recalculate the size of the class as well as the
-    // internal offsets for all linked UPROPERTYs.
+    // internal offsets for all linked FPropertys.
     ue_class_p->StaticLink(true);
     }
 
@@ -816,7 +820,7 @@ bool SkUEReflectionManager::add_instance_property_to_class(UClass * ue_class_p, 
 
 //---------------------------------------------------------------------------------------
 
-bool SkUEReflectionManager::can_ue_property_be_reflected(UProperty * ue_property_p)
+bool SkUEReflectionManager::can_ue_property_be_reflected(FProperty * ue_property_p)
   {
   return reflect_ue_property(ue_property_p);
   }
@@ -1272,6 +1276,7 @@ void SkUEReflectionManager::delete_reflected_function(uint32_t function_index)
       UClass * ue_class_p = ue_function_p->GetOwnerClass();
       // Unlink from its owner class
       ue_class_p->RemoveFunctionFromFunctionMap(ue_function_p);
+      
       // Unlink from the Children list as well
       UField ** prev_field_pp = &ue_class_p->Children;
       for (UField * field_p = *prev_field_pp; field_p; prev_field_pp = &field_p->Next, field_p = *prev_field_pp)
@@ -1345,9 +1350,9 @@ bool SkUEReflectionManager::reflect_ue_params(const SkParameters & sk_params, UF
   {
   const tSkParamList & param_list = sk_params.get_param_list();
   uint32_t num_parameters = 0;
-  for (TFieldIterator<UProperty> param_it(ue_function_p); param_it; ++param_it)
+  for (TFieldIterator<FProperty> param_it(ue_function_p); param_it; ++param_it)
     {
-    UProperty * param_p = *param_it;
+    FProperty * param_p = *param_it;
     if ((param_p->GetPropertyFlags() & (CPF_ReturnParm|CPF_Parm)) == CPF_Parm)
       {
       // Too many parameters?
@@ -1375,43 +1380,43 @@ bool SkUEReflectionManager::reflect_ue_params(const SkParameters & sk_params, UF
 
 //---------------------------------------------------------------------------------------
 
-bool SkUEReflectionManager::reflect_ue_property(UProperty * ue_property_p, ReflectedProperty * out_info_p)
+bool SkUEReflectionManager::reflect_ue_property(FProperty * ue_property_p, ReflectedProperty * out_info_p)
   {
-  // Based on Sk type, figure out the matching UProperty as well as fetcher and setter methods
+  // Based on Sk type, figure out the matching FProperty as well as fetcher and setter methods
   const ReflectedAccessors * container_accessors_p = nullptr;
-  UProperty * ue_item_property_p = ue_property_p;
+  FProperty * ue_item_property_p = ue_property_p;
 
   // Is it an array? If so, remember that and look at item type instead
-  if (ue_property_p->IsA<UArrayProperty>())
+  if (ue_property_p->IsA<FArrayProperty>())
     {
     container_accessors_p = &ms_accessors_array;
-    ue_item_property_p = static_cast<UArrayProperty *>(ue_property_p)->Inner;
+    ue_item_property_p = static_cast<FArrayProperty *>(ue_property_p)->Inner;
     }
 
   const ReflectedAccessors * accessors_p = nullptr;
-  if (ue_item_property_p->IsA<UBoolProperty>())
+  if (ue_item_property_p->IsA<FBoolProperty>())
     {
     accessors_p = &ms_accessors_boolean;
     }
-  else if (ue_item_property_p->IsA<UIntProperty>())
+  else if (ue_item_property_p->IsA<FIntProperty>())
     {
     accessors_p = &ms_accessors_integer;
     }
-  else if (ue_item_property_p->IsA<UFloatProperty>())
+  else if (ue_item_property_p->IsA<FFloatProperty>())
     {
     accessors_p = &ms_accessors_real;
     }
-  else if (ue_item_property_p->IsA<UStrProperty>())
+  else if (ue_item_property_p->IsA<FStrProperty>())
     {
     accessors_p = &ms_accessors_string;
     }
-  else if (ue_item_property_p->IsA<UNameProperty>())
+  else if (ue_item_property_p->IsA<FNameProperty>())
     {
     accessors_p = &ms_accessors_name;
     }
-  else if (ue_item_property_p->IsA<UStructProperty>())
+  else if (ue_item_property_p->IsA<FStructProperty>())
     {
-    UScriptStruct * struct_p = static_cast<UStructProperty *>(ue_item_property_p)->Struct;
+    UScriptStruct * struct_p = static_cast<FStructProperty *>(ue_item_property_p)->Struct;
     if (struct_p->GetFName() == ms_struct_vector2_p->GetFName())
       {
       accessors_p = &ms_accessors_vector2;
@@ -1444,11 +1449,11 @@ bool SkUEReflectionManager::reflect_ue_property(UProperty * ue_property_p, Refle
         }
       }
     }
-  else if (ue_item_property_p->IsA<UByteProperty>() && static_cast<UByteProperty *>(ue_item_property_p)->Enum)
+  else if (ue_item_property_p->IsA<FByteProperty>() && static_cast<FByteProperty *>(ue_item_property_p)->Enum)
     {
     accessors_p = &ms_accessors_enum;
     }
-  else if (ue_item_property_p->IsA<UObjectProperty>())
+  else if (ue_item_property_p->IsA<FObjectProperty>())
     {
     accessors_p = &ms_accessors_entity;
     }
@@ -1456,7 +1461,7 @@ bool SkUEReflectionManager::reflect_ue_property(UProperty * ue_property_p, Refle
   // Set result
   if (accessors_p && out_info_p)
     {
-    FString var_name = FSkookumScriptGeneratorHelper::skookify_param_name(ue_property_p->GetName(), ue_property_p->IsA<UBoolProperty>());
+    FString var_name = FSkookumScriptGeneratorHelper::skookify_param_name(ue_property_p->GetName(), ue_property_p->IsA<FBoolProperty>());
     out_info_p->set_name(ASymbol::create(FStringToAString(var_name)));
     out_info_p->m_ue_property_p = ue_property_p;
     if (container_accessors_p)
@@ -1545,7 +1550,7 @@ UFunction * SkUEReflectionManager::build_ue_function(UClass * ue_class_p, SkInvo
   // Handle return value if any
   if (params.get_result_class() && params.get_result_class() != SkBrain::ms_object_class_p)
     {
-    UProperty * result_param_p = build_ue_param(m_result_name, params.get_result_class(), ue_function_p, out_param_info_array_p ? out_param_info_array_p + num_params : nullptr, is_final);
+    FProperty * result_param_p = build_ue_param(m_result_name, params.get_result_class(), ue_function_p, out_param_info_array_p ? out_param_info_array_p + num_params : nullptr, is_final);
     if (!result_param_p)
       {
       // If any parameters can not be mapped, skip building this entire function
@@ -1585,28 +1590,27 @@ UFunction * SkUEReflectionManager::build_ue_function(UClass * ue_class_p, SkInvo
 
 //---------------------------------------------------------------------------------------
 
-UProperty * SkUEReflectionManager::build_ue_param(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UFunction * ue_function_p, ReflectedProperty * out_info_p, bool is_final)
+FProperty * SkUEReflectionManager::build_ue_param(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UFunction * ue_function_p, ReflectedProperty * out_info_p, bool is_final)
   {
   // Build property
-  UProperty * property_p = build_ue_property(sk_name, sk_type_p, ue_function_p, out_info_p, is_final);
+  FProperty * property_p = build_ue_property(sk_name, sk_type_p, ue_function_p, out_info_p, is_final);
 
   // Add flags and attach to function
   if (property_p)
     {
     property_p->PropertyFlags |= CPF_Parm;
-    property_p->Next = ue_function_p->Children;
-    ue_function_p->Children = property_p;
+    property_p->Next = ue_function_p->ChildProperties;
+    ue_function_p->ChildProperties = property_p;
     }
 
   return property_p;
   }
 
 //---------------------------------------------------------------------------------------
-
-UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UObject * ue_outer_p, ReflectedProperty * out_info_p, bool is_final)
+FProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, SkClassDescBase * sk_type_p, UObject * ue_outer_p, ReflectedProperty * out_info_p, bool is_final)
   {
-  // Based on Sk type, figure out the matching UProperty as well as fetcher and setter methods
-  UProperty * ue_property_p = nullptr;
+  // Based on Sk type, figure out the matching FProperty as well as fetcher and setter methods
+  FProperty * ue_property_p = nullptr;
 
   FName ue_name_outer(sk_name.as_cstr());
 
@@ -1626,57 +1630,57 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
   const ReflectedAccessors * accessors_p = nullptr;
   if (sk_type_p == SkBoolean::get_class())
     {
-    ue_property_p = NewObject<UBoolProperty>(ue_outer_p, ue_name, RF_Public);
+    ue_property_p = new FBoolProperty(ue_outer_p, ue_name, RF_Public);
     accessors_p = &ms_accessors_boolean;
     }
   else if (sk_type_p == SkInteger::get_class())
     {
-    ue_property_p = NewObject<UIntProperty>(ue_outer_p, ue_name, RF_Public);
+    ue_property_p = new FIntProperty(ue_outer_p, ue_name, RF_Public);
     accessors_p = &ms_accessors_integer;
     }
   else if (sk_type_p == SkReal::get_class())
     {
-    ue_property_p = NewObject<UFloatProperty>(ue_outer_p, ue_name, RF_Public);
+    ue_property_p = new FFloatProperty(ue_outer_p, ue_name, RF_Public);
     accessors_p = &ms_accessors_real;
     }
   else if (sk_type_p == SkString::get_class())
     {
-    ue_property_p = NewObject<UStrProperty>(ue_outer_p, ue_name, RF_Public);
+    ue_property_p = new FStrProperty(ue_outer_p, ue_name, RF_Public);
     accessors_p = &ms_accessors_string;
     }
   else if (sk_type_p == SkVector2::get_class())
     {
-    ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-    static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_vector2_p;
+    ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+    static_cast<FStructProperty *>(ue_property_p)->Struct = ms_struct_vector2_p;
     accessors_p = &ms_accessors_vector2;
     }
   else if (sk_type_p == SkVector3::get_class())
     {
-    ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-    static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_vector3_p;
+    ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+    static_cast<FStructProperty *>(ue_property_p)->Struct = ms_struct_vector3_p;
     accessors_p = &ms_accessors_vector3;
     }
   else if (sk_type_p == SkVector4::get_class())
     {
-    ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-    static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_vector4_p;
+    ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+    static_cast<FStructProperty *>(ue_property_p)->Struct = ms_struct_vector4_p;
     accessors_p = &ms_accessors_vector4;
     }
   else if (sk_type_p == SkRotationAngles::get_class())
     {
-    ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-    static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_rotation_angles_p;
+    ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+    static_cast<FStructProperty *>(ue_property_p)->Struct = ms_struct_rotation_angles_p;
     accessors_p = &ms_accessors_rotation_angles;
     }
   else if (sk_type_p == SkTransform::get_class())
     {
-    ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-    static_cast<UStructProperty *>(ue_property_p)->Struct = ms_struct_transform_p;
+    ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+    static_cast<FStructProperty *>(ue_property_p)->Struct = ms_struct_transform_p;
     accessors_p = &ms_accessors_transform;
     }
   else if (sk_type_p == SkUEName::get_class())
     {
-    ue_property_p = NewObject<UNameProperty>(ue_outer_p, ue_name, RF_Public);
+    ue_property_p = new FNameProperty(ue_outer_p, ue_name, RF_Public);
     accessors_p = &ms_accessors_name;
     }
   else if (sk_type_p->get_key_class()->is_class(*SkEnum::get_class()))
@@ -1684,8 +1688,8 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
     UEnum * ue_enum_p = FindObject<UEnum>(ANY_PACKAGE, *FString(sk_type_p->get_key_class_name().as_cstr()));
     if (ue_enum_p)
       {
-      ue_property_p = NewObject<UByteProperty>(ue_outer_p, ue_name);
-      static_cast<UByteProperty *>(ue_property_p)->Enum = ue_enum_p;
+      ue_property_p = new FByteProperty(ue_outer_p, ue_name, RF_NoFlags);
+      static_cast<FByteProperty *>(ue_property_p)->Enum = ue_enum_p;
       accessors_p = &ms_accessors_enum;
       }
     else if (is_final)
@@ -1698,8 +1702,8 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
     UClass * ue_class_p = SkUEClassBindingHelper::get_ue_class_from_sk_class(sk_type_p->get_key_class());
     if (ue_class_p)
       {
-      ue_property_p = NewObject<UObjectProperty>(ue_outer_p, ue_name, RF_Public);
-      static_cast<UObjectProperty *>(ue_property_p)->PropertyClass = ue_class_p;
+      ue_property_p = new FObjectProperty(ue_outer_p, ue_name, RF_Public);
+      static_cast<FObjectProperty *>(ue_property_p)->PropertyClass = ue_class_p;
       accessors_p = &ms_accessors_entity;
       }
     else if (is_final)
@@ -1712,8 +1716,8 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
     UStruct * ue_struct_p = SkUEClassBindingHelper::get_ue_struct_from_sk_class(sk_type_p->get_key_class());
     if (ue_struct_p)
       {
-      ue_property_p = NewObject<UStructProperty>(ue_outer_p, ue_name);
-      static_cast<UStructProperty *>(ue_property_p)->Struct = CastChecked<UScriptStruct>(ue_struct_p);
+      ue_property_p = new FStructProperty(ue_outer_p, ue_name, RF_NoFlags);
+      static_cast<FStructProperty *>(ue_property_p)->Struct = CastChecked<UScriptStruct>(ue_struct_p);
       if (SkInstance::is_data_stored_by_val(ue_struct_p->GetStructureSize()))
         {
         accessors_p = &ms_accessors_struct_val;
@@ -1732,7 +1736,7 @@ UProperty * SkUEReflectionManager::build_ue_property(const ASymbol & sk_name, Sk
   // Create container property if desired
   if (ue_property_p && container_type == ContainerType_array)
     {
-    UArrayProperty * array_property_p = NewObject<UArrayProperty>(ue_outer_p, ue_name_outer);
+    FArrayProperty * array_property_p = new FArrayProperty(ue_outer_p, ue_name_outer, RF_NoFlags);
     array_property_p->Inner = ue_property_p;
     ue_property_p = array_property_p;
     }
@@ -1805,8 +1809,8 @@ void SkUEReflectionManager::on_unknown_type(const ASymbol & sk_name, SkClassDesc
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_boolean(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UBoolProperty::TCppType value = UBoolProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UBoolProperty>(&value);
+  FBoolProperty::TCppType value = FBoolProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FBoolProperty>(&value);
   return SkBoolean::new_instance(value);
   }
 
@@ -1814,8 +1818,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_boolean(FFrame & stack, const
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_integer(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UIntProperty::TCppType value = UIntProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UIntProperty>(&value);
+  FIntProperty::TCppType value = FIntProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FIntProperty>(&value);
   return SkInteger::new_instance(value);
   }
 
@@ -1823,8 +1827,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_integer(FFrame & stack, const
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_real(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UFloatProperty::TCppType value = UFloatProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UFloatProperty>(&value);
+  FFloatProperty::TCppType value = FFloatProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FFloatProperty>(&value);
   return SkReal::new_instance(value);
   }
 
@@ -1832,8 +1836,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_real(FFrame & stack, const Re
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_string(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UStrProperty::TCppType value = UStrProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UStrProperty>(&value);
+  FStrProperty::TCppType value = FStrProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FStrProperty>(&value);
   return SkString::new_instance(FStringToAString(value));
   }
 
@@ -1842,7 +1846,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_string(FFrame & stack, const 
 SkInstance * SkUEReflectionManager::fetch_k2_param_vector2(FFrame & stack, const ReflectedCallParam & value_type)
   {
   FVector2D value(ForceInitToZero);
-  stack.StepCompiledIn<UStructProperty>(&value);
+  stack.StepCompiledIn<FStructProperty>(&value);
   return SkVector2::new_instance(value);
   }
 
@@ -1851,7 +1855,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_vector2(FFrame & stack, const
 SkInstance * SkUEReflectionManager::fetch_k2_param_vector3(FFrame & stack, const ReflectedCallParam & value_type)
   {
   FVector value(ForceInitToZero);
-  stack.StepCompiledIn<UStructProperty>(&value);
+  stack.StepCompiledIn<FStructProperty>(&value);
   return SkVector3::new_instance(value);
   }
 
@@ -1860,7 +1864,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_vector3(FFrame & stack, const
 SkInstance * SkUEReflectionManager::fetch_k2_param_vector4(FFrame & stack, const ReflectedCallParam & value_type)
   {
   FVector4 value(ForceInitToZero);
-  stack.StepCompiledIn<UStructProperty>(&value);
+  stack.StepCompiledIn<FStructProperty>(&value);
   return SkVector4::new_instance(value);
   }
 
@@ -1869,7 +1873,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_vector4(FFrame & stack, const
 SkInstance * SkUEReflectionManager::fetch_k2_param_rotation_angles(FFrame & stack, const ReflectedCallParam & value_type)
   {
   FRotator value(ForceInitToZero);
-  stack.StepCompiledIn<UStructProperty>(&value);
+  stack.StepCompiledIn<FStructProperty>(&value);
   return SkRotationAngles::new_instance(value);
   }
 
@@ -1878,7 +1882,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_rotation_angles(FFrame & stac
 SkInstance * SkUEReflectionManager::fetch_k2_param_transform(FFrame & stack, const ReflectedCallParam & value_type)
   {
   FTransform value;
-  stack.StepCompiledIn<UStructProperty>(&value);
+  stack.StepCompiledIn<FStructProperty>(&value);
   return SkTransform::new_instance(value);
   }
 
@@ -1906,7 +1910,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_struct_val(FFrame & stack, co
       }
 
   // Then, gather value from stack
-  stack.StepCompiledIn<UStructProperty>(dest_p);
+  stack.StepCompiledIn<FStructProperty>(dest_p);
   return instance_p;
   }
 
@@ -1934,7 +1938,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_struct_ref(FFrame & stack, co
       }
 
   // Then, gather value from stack
-  stack.StepCompiledIn<UStructProperty>(dest_p);
+  stack.StepCompiledIn<FStructProperty>(dest_p);
   return instance_p;
   }
 
@@ -1943,7 +1947,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_struct_ref(FFrame & stack, co
 SkInstance * SkUEReflectionManager::fetch_k2_param_entity(FFrame & stack, const ReflectedCallParam & value_type)
   {
   UObject * obj_p = nullptr;
-  stack.StepCompiledIn<UObjectPropertyBase>(&obj_p);
+  stack.StepCompiledIn<FObjectPropertyBase>(&obj_p);
   return SkUEEntity::new_instance(obj_p);
   }
 
@@ -1951,8 +1955,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_entity(FFrame & stack, const 
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_enum(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UByteProperty::TCppType value = UByteProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UByteProperty>(&value);
+  FByteProperty::TCppType value = FByteProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FByteProperty>(&value);
   SkInstance * instance_p = value_type.m_sk_class_p->new_instance();
   instance_p->construct<SkEnum>(tSkEnum(value));  
   return instance_p;
@@ -1962,8 +1966,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_enum(FFrame & stack, const Re
 // The parameter is an array of the type value_type
 SkInstance * SkUEReflectionManager::fetch_k2_param_array(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UArrayProperty::TCppType array; // = FScriptArray
-  stack.StepCompiledIn<UArrayProperty>(&array);
+  FArrayProperty::TCppType array; // = FScriptArray
+  stack.StepCompiledIn<FArrayProperty>(&array);
   SkInstance * instance_p = SkList::new_instance(array.Num());
   SkInstanceList & list = instance_p->as<SkList>();
   APArray<SkInstance> & list_instances = list.get_instances();
@@ -1980,8 +1984,8 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_array(FFrame & stack, const R
 
 SkInstance * SkUEReflectionManager::fetch_k2_param_name(FFrame & stack, const ReflectedCallParam & value_type)
   {
-  UNameProperty::TCppType value = UNameProperty::GetDefaultPropertyValue();
-  stack.StepCompiledIn<UNameProperty>(&value);
+  FNameProperty::TCppType value = FNameProperty::GetDefaultPropertyValue();
+  stack.StepCompiledIn<FNameProperty>(&value);
   return SkUEName::new_instance(value);
   }
 
@@ -1989,28 +1993,28 @@ SkInstance * SkUEReflectionManager::fetch_k2_param_name(FFrame & stack, const Re
 
 SkInstance * SkUEReflectionManager::fetch_k2_value_boolean(const void * value_p, const TypedName & value_type)
   {
-  return SkBoolean::new_instance(*(const UBoolProperty::TCppType *)value_p);
+  return SkBoolean::new_instance(*(const FBoolProperty::TCppType *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
 
 SkInstance * SkUEReflectionManager::fetch_k2_value_integer(const void * value_p, const TypedName & value_type)
   {
-  return SkInteger::new_instance(*(const UIntProperty::TCppType *)value_p);
+  return SkInteger::new_instance(*(const FIntProperty::TCppType *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
 
 SkInstance * SkUEReflectionManager::fetch_k2_value_real(const void * value_p, const TypedName & value_type)
   {
-  return SkReal::new_instance(*(const UFloatProperty::TCppType *)value_p);
+  return SkReal::new_instance(*(const FFloatProperty::TCppType *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
 
 SkInstance * SkUEReflectionManager::fetch_k2_value_string(const void * value_p, const TypedName & value_type)
   {
-  return SkString::new_instance(FStringToAString(*(const UStrProperty::TCppType *)value_p));
+  return SkString::new_instance(FStringToAString(*(const FStrProperty::TCppType *)value_p));
   }
 
 //---------------------------------------------------------------------------------------
@@ -2110,7 +2114,7 @@ SkInstance * SkUEReflectionManager::fetch_k2_value_entity(const void * value_p, 
 SkInstance * SkUEReflectionManager::fetch_k2_value_enum(const void * value_p, const TypedName & value_type)
   {
   SkInstance * instance_p = value_type.m_sk_class_p->new_instance();
-  instance_p->construct<SkEnum>(tSkEnum(*(const UByteProperty::TCppType *)value_p));
+  instance_p->construct<SkEnum>(tSkEnum(*(const FByteProperty::TCppType *)value_p));
   return instance_p;
   }
 
@@ -2123,28 +2127,28 @@ SkInstance * SkUEReflectionManager::fetch_k2_value_name(const void * value_p, co
 
 void SkUEReflectionManager::assign_k2_value_boolean(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  dest_p->as<SkBoolean>() = *(const UBoolProperty::TCppType *)value_p;
+  dest_p->as<SkBoolean>() = *(const FBoolProperty::TCppType *)value_p;
   }
 
 //---------------------------------------------------------------------------------------
 
 void SkUEReflectionManager::assign_k2_value_integer(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  dest_p->as<SkInteger>() = *(const UIntProperty::TCppType *)value_p;
+  dest_p->as<SkInteger>() = *(const FIntProperty::TCppType *)value_p;
   }
 
 //---------------------------------------------------------------------------------------
 
 void SkUEReflectionManager::assign_k2_value_real(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  dest_p->as<SkReal>() = *(const UFloatProperty::TCppType *)value_p;
+  dest_p->as<SkReal>() = *(const FFloatProperty::TCppType *)value_p;
   }
 
 //---------------------------------------------------------------------------------------
 
 void SkUEReflectionManager::assign_k2_value_string(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  dest_p->as<SkString>() = FStringToAString(*(const UStrProperty::TCppType *)value_p);
+  dest_p->as<SkString>() = FStringToAString(*(const FStrProperty::TCppType *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
@@ -2233,14 +2237,14 @@ void SkUEReflectionManager::assign_k2_value_entity(SkInstance * dest_p, const vo
 
 void SkUEReflectionManager::assign_k2_value_enum(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  dest_p->as<SkEnum>() = tSkEnum(*(const UByteProperty::TCppType *)value_p);
+  dest_p->as<SkEnum>() = tSkEnum(*(const FByteProperty::TCppType *)value_p);
   }
 
 //---------------------------------------------------------------------------------------
 
 void SkUEReflectionManager::assign_k2_value_array(SkInstance * dest_p, const void * value_p, const ReflectedEventParam & value_type)
   {
-  const UArrayProperty::TCppType * array_p = (const UArrayProperty::TCppType *)value_p; // = FScriptArray
+  const FArrayProperty::TCppType * array_p = (const FArrayProperty::TCppType *)value_p; // = FScriptArray
   SkInstanceList & list = dest_p->as<SkList>();
   list.ensure_size_empty(array_p->Num()); // For now, delete and repopulate array
   APArray<SkInstance> & list_instances = list.get_instances();
@@ -2263,32 +2267,32 @@ void SkUEReflectionManager::assign_k2_value_name(SkInstance * dest_p, const void
 
 uint32_t SkUEReflectionManager::store_sk_value_boolean(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
   {
-  *((UBoolProperty::TCppType *)dest_p) = value_p->as<SkBoolean>();
-  return sizeof(UBoolProperty::TCppType);
+  *((FBoolProperty::TCppType *)dest_p) = value_p->as<SkBoolean>();
+  return sizeof(FBoolProperty::TCppType);
   }
 
 //---------------------------------------------------------------------------------------
 
 uint32_t SkUEReflectionManager::store_sk_value_integer(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
   {
-  *((UIntProperty::TCppType *)dest_p) = value_p->as<SkInteger>();
-  return sizeof(UIntProperty::TCppType);
+  *((FIntProperty::TCppType *)dest_p) = value_p->as<SkInteger>();
+  return sizeof(FIntProperty::TCppType);
   }
 
 //---------------------------------------------------------------------------------------
 
 uint32_t SkUEReflectionManager::store_sk_value_real(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
   {
-  *((UFloatProperty::TCppType *)dest_p) = value_p->as<SkReal>();
-  return sizeof(UFloatProperty::TCppType);
+  *((FFloatProperty::TCppType *)dest_p) = value_p->as<SkReal>();
+  return sizeof(FFloatProperty::TCppType);
   }
 
 //---------------------------------------------------------------------------------------
 
 uint32_t SkUEReflectionManager::store_sk_value_string(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
   {
-  new (dest_p) UStrProperty::TCppType(value_p->as<SkString>().as_cstr());
-  return sizeof(UStrProperty::TCppType);
+  new (dest_p) FStrProperty::TCppType(value_p->as<SkString>().as_cstr());
+  return sizeof(FStrProperty::TCppType);
   }
 
 //---------------------------------------------------------------------------------------
@@ -2387,8 +2391,8 @@ uint32_t SkUEReflectionManager::store_sk_value_entity(void * dest_p, SkInstance 
 
 uint32_t SkUEReflectionManager::store_sk_value_enum(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)
   {
-  *((UByteProperty::TCppType *)dest_p) = (UByteProperty::TCppType)value_p->as<SkEnum>();
-  return sizeof(UByteProperty::TCppType);
+  *((FByteProperty::TCppType *)dest_p) = (FByteProperty::TCppType)value_p->as<SkEnum>();
+  return sizeof(FByteProperty::TCppType);
   }
 
 //---------------------------------------------------------------------------------------
@@ -2399,7 +2403,7 @@ uint32_t SkUEReflectionManager::store_sk_value_array(void * dest_p, SkInstance *
   APArray<SkInstance> & list_instances = list.get_instances();
   uint32_t num_items = list_instances.get_length();
   uint32_t item_size = value_type.m_byte_size;
-  UArrayProperty::TCppType * array_p = new (dest_p) UArrayProperty::TCppType; // = FScriptArray
+  FArrayProperty::TCppType * array_p = new (dest_p) FArrayProperty::TCppType; // = FScriptArray
   array_p->Add(num_items, item_size);
   uint8_t * item_array_p = (uint8_t *)array_p->GetData();
   tSkValueStorer storer_p = value_type.m_inner_storer_p;
@@ -2408,7 +2412,7 @@ uint32_t SkUEReflectionManager::store_sk_value_array(void * dest_p, SkInstance *
     (*storer_p)(item_array_p, list_instances[i], value_type);
     item_array_p += item_size;
     }
-  return sizeof(UArrayProperty::TCppType);
+  return sizeof(FArrayProperty::TCppType);
   }
 
 uint32_t SkUEReflectionManager::store_sk_value_name(void * dest_p, SkInstance * value_p, const ReflectedParamStorer & value_type)

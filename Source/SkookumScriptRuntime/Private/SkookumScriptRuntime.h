@@ -123,6 +123,7 @@ protected:
   virtual void  on_enum_renamed(UUserDefinedEnum * ue_enum_p, const FString & old_ue_enum_name) override;
   virtual void  on_enum_deleted(UUserDefinedEnum * ue_enum_p) override;
 
+  // UObject Callbacks
   virtual void  on_new_asset(UObject * obj_p) override;
 
 #endif
@@ -132,10 +133,10 @@ protected:
   void OnPreCompile();
   void OnPostCompile();
 
+  // This callback is installed for each blueprint to be called when they are compiled
   void on_blueprint_compiled(UBlueprint * blueprint_p);
 
   // Overridden from IBlueprintCompiler
-
   virtual bool  CanCompile(const UBlueprint* Blueprint) override { return false; }
   virtual void  Compile(UBlueprint* Blueprint, const FKismetCompilerOptions& CompileOptions, FCompilerResultsLog& Results) override {}
   virtual void  PreCompile(UBlueprint* Blueprint) override;

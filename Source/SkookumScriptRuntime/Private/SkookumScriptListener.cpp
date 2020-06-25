@@ -253,7 +253,7 @@ void USkookumScriptListener::add_dynamic_function(FName callback_name, UClass * 
     // Duplicate the signature function object
 
     // Find callback event object on owner class
-    UMulticastDelegateProperty * event_property_p = CastChecked<UMulticastDelegateProperty>(callback_owner_class_p->FindPropertyByName(callback_name));
+    FMulticastDelegateProperty * event_property_p = CastChecked<FMulticastDelegateProperty>(callback_owner_class_p->FindPropertyByName(callback_name));
 
     // Duplicate it
     function_p = DuplicateObject<UFunction>(event_property_p->SignatureFunction, StaticClass(), callback_name);
@@ -263,7 +263,7 @@ void USkookumScriptListener::add_dynamic_function(FName callback_name, UClass * 
     function_p->SetNativeFunc(exec_p);
     function_p->StaticLink(true);
     function_p->AddToRoot(); // Since 4.21, classes and their functions are expected to be permanent objects in cooked builds
-    for (TFieldIterator<UProperty> param_it(function_p); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(function_p); param_it; ++param_it)
       {
       // Callback parameters are always inputs
       (*param_it)->PropertyFlags &= ~CPF_OutParm;

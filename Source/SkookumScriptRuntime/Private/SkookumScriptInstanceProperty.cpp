@@ -16,7 +16,7 @@
 #include "SkookumScriptConstructionComponent.h"
 #include "Bindings/SkUEClassBinding.hpp"
 #include "SkUEEntity.generated.hpp"
-
+#include "SkookumScriptInstancePropertyOld.h"
 #include "Engine/World.h"
 #include "UObject/PropertyPortFlags.h"
 
@@ -25,28 +25,38 @@
 //=======================================================================================
 
 //---------------------------------------------------------------------------------------
+IMPLEMENT_FIELD(FSkookumScriptInstanceProperty)
 
-USkookumScriptInstanceProperty::USkookumScriptInstanceProperty(const FObjectInitializer & object_initializer)
-  : Super(object_initializer)
-  {
-  PropertyFlags |= CPF_SkipSerialization;
+FSkookumScriptInstanceProperty::FSkookumScriptInstanceProperty(FFieldVariant InOwner, const FName& InName, EObjectFlags InObjectFlags)
+  : FProperty(InOwner, InName, InObjectFlags)
+{
   ArrayDim = 1;
-  #if WITH_EDITORONLY_DATA
-    ElementSize = sizeof(AIdPtr<SkInstance>);
-  #else
-    ElementSize = sizeof(SkInstance *);
-  #endif
-  }
+#if WITH_EDITORONLY_DATA
+  ElementSize = sizeof(AIdPtr<SkInstance>);
+#else
+  ElementSize = sizeof(SkInstance *);
+#endif
+}
 
 //---------------------------------------------------------------------------------------
 
-USkookumScriptInstanceProperty::~USkookumScriptInstanceProperty()
+FSkookumScriptInstanceProperty::~FSkookumScriptInstanceProperty()
   {
   }
+
+#if WITH_EDITORONLY_DATA
+FSkookumScriptInstanceProperty::FSkookumScriptInstanceProperty(UField* InField)
+  : FProperty(InField)
+{
+  USkookumScriptInstanceProperty* SourceProperty = CastChecked<USkookumScriptInstanceProperty>(InField);
+  ArrayDim = SourceProperty->ArrayDim;
+  ElementSize = SourceProperty->ElementSize;
+}
+#endif // WITH_EDITORONLY_DATA
 
 //---------------------------------------------------------------------------------------
 // Create an SkInstance and call its default constructor
-SkInstance * USkookumScriptInstanceProperty::construct_instance(void * data_p, UObject * obj_p, SkClass * sk_class_p)
+SkInstance * FSkookumScriptInstanceProperty::construct_instance(void * data_p, UObject * obj_p, SkClass * sk_class_p)
   {
   SkInstance * instance_p = sk_class_p->new_instance(); // SkInstance or SkDataInstance
   instance_p->construct<SkUEEntity>(obj_p);             // SkInstance points back to the owner object
@@ -58,7 +68,7 @@ SkInstance * USkookumScriptInstanceProperty::construct_instance(void * data_p, U
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::destroy_instance(void * data_p)
+void FSkookumScriptInstanceProperty::destroy_instance(void * data_p)
   {
   SkInstance * instance_p = get_instance(data_p); // Get SkInstance from object
   if (instance_p)
@@ -72,23 +82,28 @@ void USkookumScriptInstanceProperty::destroy_instance(void * data_p)
     }
   }
 
+void FSkookumScriptInstanceProperty::PostDuplicate(const FField& InField)
+{
+  Super::PostDuplicate(InField);
+}
+
 //---------------------------------------------------------------------------------------
 
-FORCEINLINE UObject * USkookumScriptInstanceProperty::get_owner(const void * data_p) const
+FORCEINLINE UObject * FSkookumScriptInstanceProperty::get_owner(const void * data_p) const
   {
   return (UObject *)((uint8_t *)data_p - GetOffset_ForInternal());
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::LinkInternal(FArchive & ar)
+void FSkookumScriptInstanceProperty::LinkInternal(FArchive & ar)
   {
   // Nothing to do here, but function must exist
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::Serialize(FArchive & ar)
+void FSkookumScriptInstanceProperty::Serialize(FArchive & ar)
   {
   // For now, we're not storing any additional data when we are serialized
   Super::Serialize(ar);
@@ -96,7 +111,7 @@ void USkookumScriptInstanceProperty::Serialize(FArchive & ar)
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::SerializeItem(FStructuredArchive::FSlot Slot, void* Value, void const* Defaults) const
+void FSkookumScriptInstanceProperty::SerializeItem(FStructuredArchive::FSlot Slot, void* Value, void const* Defaults) const
   {
   // https://udn.unrealengine.com/questions/467186/view.html
   Slot.EnterStream();
@@ -104,7 +119,7 @@ void USkookumScriptInstanceProperty::SerializeItem(FStructuredArchive::FSlot Slo
 
 //---------------------------------------------------------------------------------------
 
-FString USkookumScriptInstanceProperty::GetCPPType(FString * extended_type_text_p, uint32 cpp_export_flags) const
+FString FSkookumScriptInstanceProperty::GetCPPType(FString * extended_type_text_p, uint32 cpp_export_flags) const
   {
   // This property reserves storage - return dummy place holders
   #if WITH_EDITORONLY_DATA
@@ -113,10 +128,21 @@ FString USkookumScriptInstanceProperty::GetCPPType(FString * extended_type_text_
     return TEXT("void *");
   #endif
   }
+FString FSkookumScriptInstanceProperty::GetCPPMacroType(FString& ExtendedTypeText) const
+{
+  ExtendedTypeText = TEXT("F");
+  ExtendedTypeText += GetClass()->GetName();
+  return TEXT("SKINSTANCEPROPERTY");
+}
+
+bool FSkookumScriptInstanceProperty::PassCPPArgsByRef() const
+{
+  return false;
+}
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::ExportTextItem(FString & value_str, const void * data_p, const void * default_data_p, UObject * owner_p, int32 port_flags, UObject * export_root_scope_p) const
+void FSkookumScriptInstanceProperty::ExportTextItem(FString & value_str, const void * data_p, const void * default_data_p, UObject * owner_p, int32 port_flags, UObject * export_root_scope_p) const
   {
   // This property merely reserves storage but doesn't store any actual data
   // So return nullptr just to return something
@@ -125,11 +151,11 @@ void USkookumScriptInstanceProperty::ExportTextItem(FString & value_str, const v
 
 //---------------------------------------------------------------------------------------
 
-const TCHAR * USkookumScriptInstanceProperty::ImportText_Internal(const TCHAR * buffer_p, void * data_p, int32 port_flags, UObject * owner_p, FOutputDevice * error_text_p) const
+const TCHAR * FSkookumScriptInstanceProperty::ImportText_Internal(const TCHAR * buffer_p, void * data_p, int32 port_flags, UObject * owner_p, FOutputDevice * error_text_p) const
   {
   // Consume the identifier that we stored ("NULL")
   FString temp; 
-  buffer_p = UPropertyHelpers::ReadToken(buffer_p, temp);
+  buffer_p = FPropertyHelpers::ReadToken(buffer_p, temp);
 
   // Initialize value
   InitializeValueInternal(data_p);
@@ -139,14 +165,14 @@ const TCHAR * USkookumScriptInstanceProperty::ImportText_Internal(const TCHAR * 
 
 //---------------------------------------------------------------------------------------
 
-int32 USkookumScriptInstanceProperty::GetMinAlignment() const
+int32 FSkookumScriptInstanceProperty::GetMinAlignment() const
   {
   return alignof(uintptr_t);
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::InitializeValueInternal(void * data_p) const
+void FSkookumScriptInstanceProperty::InitializeValueInternal(void * data_p) const
   {
   UObject * owner_p = get_owner(data_p);
 
@@ -189,27 +215,27 @@ void USkookumScriptInstanceProperty::InitializeValueInternal(void * data_p) cons
       // Construct right here
       SkClass * sk_class_p = SkUEClassBindingHelper::get_sk_class_from_ue_class(owner_p->GetClass());
       sk_class_p->resolve_raw_data(); // In case it wasn't resolved before, in packaged builds we need to resolve this here to avoid errors accessing raw data in the constructor.
-      USkookumScriptInstanceProperty::construct_instance(data_p, owner_p, sk_class_p);
+      FSkookumScriptInstanceProperty::construct_instance(data_p, owner_p, sk_class_p);
       }
     }
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::InstanceSubobjects(void * data_p, void const * default_data_p, UObject * owner_p, struct FObjectInstancingGraph * instance_graph_p)
+void FSkookumScriptInstanceProperty::InstanceSubobjects(void * data_p, void const * default_data_p, UObject * owner_p, struct FObjectInstancingGraph * instance_graph_p)
   {
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::ClearValueInternal(void * data_p) const
+void FSkookumScriptInstanceProperty::ClearValueInternal(void * data_p) const
   {
   // This property merely reserves storage but doesn't store any actual data
   }
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::DestroyValueInternal(void * data_p) const
+void FSkookumScriptInstanceProperty::DestroyValueInternal(void * data_p) const
   {
   UObject * owner_p = get_owner(data_p);
   // Leave untouched on CDOs
@@ -227,21 +253,14 @@ void USkookumScriptInstanceProperty::DestroyValueInternal(void * data_p) const
 
 //---------------------------------------------------------------------------------------
 
-void USkookumScriptInstanceProperty::CopyValuesInternal(void * dst_p, void const * src_p, int32 count) const
+void FSkookumScriptInstanceProperty::CopyValuesInternal(void * dst_p, void const * src_p, int32 count) const
   {
   // Copying instances between objects makes no sense, so we simply don't do anything here
   }
 
 //---------------------------------------------------------------------------------------
 
-bool USkookumScriptInstanceProperty::SameType(const UProperty * other_p) const
-  {
-  return Super::SameType(other_p);
-  }
-
-//---------------------------------------------------------------------------------------
-
-bool USkookumScriptInstanceProperty::Identical(const void * ldata_p, const void * rdata_p, uint32 port_flags) const
+bool FSkookumScriptInstanceProperty::Identical(const void * ldata_p, const void * rdata_p, uint32 port_flags) const
   {
   // By definition, no object should use the same SkInstance as another object
   return false;

@@ -61,7 +61,7 @@ void USkookumScriptConstructionComponent::InitializeComponent()
       if (!instance_offset)
         {
         // If offset has not been computed yet, compute it now
-        UProperty * property_p = actor_p->GetClass()->FindPropertyByName(USkookumScriptInstanceProperty::StaticClass()->GetFName());
+        FProperty * property_p = actor_p->GetClass()->FindPropertyByName(FSkookumScriptInstanceProperty::StaticClass()->GetFName());
         SK_ASSERTX(property_p, a_str_format("Class '%s' has no USkookumScriptInstanceProperty needed for actor '%S'!", sk_class_p->get_name_cstr(), *actor_p->GetName()));
         if (property_p)
           {
@@ -81,7 +81,7 @@ void USkookumScriptConstructionComponent::InitializeComponent()
       SK_ASSERTX(instance_offset, a_str_format("Class '%s' has no embedded instance offset to create an SkInstance for actor '%S'!", sk_class_p->get_name_cstr(), *actor_p->GetName()));
       if (instance_offset)
         {
-        USkookumScriptInstanceProperty::construct_instance((uint8_t *)actor_p + instance_offset, actor_p, sk_class_p);
+        FSkookumScriptInstanceProperty::construct_instance((uint8_t *)actor_p + instance_offset, actor_p, sk_class_p);
 
         // Need to resolve raw data for packaged builds
         SkUEClassBindingHelper::resolve_raw_data_static(sk_class_p);
@@ -123,7 +123,7 @@ void USkookumScriptConstructionComponent::UninitializeComponent()
 
       if (instance_offset)
         {
-        USkookumScriptInstanceProperty::destroy_instance((uint8_t *)actor_p + instance_offset);
+        FSkookumScriptInstanceProperty::destroy_instance((uint8_t *)actor_p + instance_offset);
         }
       }
     }
