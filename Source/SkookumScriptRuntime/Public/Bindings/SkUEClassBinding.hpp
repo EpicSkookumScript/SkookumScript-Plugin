@@ -58,6 +58,7 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
     static SkClass *       get_sk_class_from_ue_class(UClass * ue_class_p);
     static UClass *        get_ue_class_from_sk_class(SkClass * sk_class_p);
     static SkClass *       get_sk_class_from_ue_struct(UScriptStruct * ue_struct_p);
+    static SkClass *       find_sk_class_from_ue_class(UClass * ue_class_p);
     static UScriptStruct * get_ue_struct_from_sk_class(SkClass * sk_class_p);
     static UStruct *       get_ue_struct_or_class_from_sk_class(SkClass * sk_class_p);
     static UClass *        get_static_ue_class_from_sk_class_super(SkClassDescBase * sk_class_p);
@@ -70,7 +71,7 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
 
     static FString         get_ue_class_name_sans_c(UClass * ue_class_p);
 
-    static tSkRawDataInfo  compute_raw_data_info(UProperty * ue_var_p);
+    static tSkRawDataInfo  compute_raw_data_info(FProperty * ue_var_p);
     static bool            resolve_raw_data_static(SkClass * sk_class_p);
     static void            resolve_raw_data(SkClass * sk_class_p, UStruct * ue_struct_or_class_p);
     static void            resolve_raw_data_struct(SkClass * sk_class_p, const TCHAR * ue_struct_name_p);
@@ -126,7 +127,7 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
     static const FName NAME_Entity;
 
     // Copy of bool property with public members so we can extract its private data
-    struct HackedBoolProperty : UProperty
+    struct HackedBoolProperty : FProperty
       {
       /** Size of the bitfield/bool property. Equal to ElementSize but used to check if the property has been properly initialized (0-8, where 0 means uninitialized). */
       uint8 FieldSize;
@@ -191,7 +192,6 @@ class SKOOKUMSCRIPTRUNTIME_API SkUEClassBindingHelper
 
   static UClass *        find_ue_class_from_sk_class(SkClass * sk_class_p);
   static UScriptStruct * find_ue_struct_from_sk_class(SkClass * sk_class_p);
-  static SkClass *       find_sk_class_from_ue_class(UClass * ue_class_p);
   static SkClass *       find_sk_class_from_ue_struct(UStruct * ue_struct_p);
   static SkClass *       find_sk_class_from_ue_enum(UEnum * ue_enum_p);
   static uint32_t        get_sk_class_idx_from_ue_class(UClass * ue_class_p);

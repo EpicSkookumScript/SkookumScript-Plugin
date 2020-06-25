@@ -53,7 +53,7 @@ protected:
   virtual void  on_function_removed_from_class(UClass * ue_class_p) override;
 
   //---------------------------------------------------------------------------------------
-  // FStructureEditorManager::ListenerType implementation
+  // UStructureEditorManager::ListenerType implementation
 
   virtual void PreChange(const UUserDefinedStruct * struct_p, FStructureEditorUtils::EStructureEditorChangeInfo change_type) override;
   virtual void PostChange(const UUserDefinedStruct * struct_p, FStructureEditorUtils::EStructureEditorChangeInfo change_type) override;
@@ -337,7 +337,7 @@ void FSkookumScriptEditor::on_function_removed_from_class(UClass * ue_class_p)
   }
 
 //=======================================================================================
-// FStructureEditorManager::ListenerType implementation
+// UStructureEditorManager::ListenerType implementation
 //=======================================================================================
 
 //---------------------------------------------------------------------------------------

@@ -150,7 +150,7 @@ void SkTransform::register_bindings()
 
   // Handle special case here - in UE4, the scale variable is called "Scale3D" while in Sk, we decided to call it just "scale"
   UStruct * ue_struct_p = FindObjectChecked<UScriptStruct>(UObject::StaticClass()->GetOutermost(), TEXT("Transform"), false);
-  UProperty * ue_scale_var_p = FindObjectChecked<UProperty>(ue_struct_p, TEXT("Scale3D"), false);
+  FProperty * ue_scale_var_p = FindFProperty<FProperty>(ue_struct_p, TEXT("Scale3D"));  
   ms_class_p->resolve_raw_data("@scale", SkUEClassBindingHelper::compute_raw_data_info(ue_scale_var_p));
   SkUEClassBindingHelper::resolve_raw_data(ms_class_p, ue_struct_p); // Resolve the remaining raw data members as usual
   }

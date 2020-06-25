@@ -115,7 +115,7 @@ void USkookumScriptClassDataComponent::create_sk_instance()
     #endif
 
     // If this object stores its own instance, create it here
-    instance_p = USkookumScriptInstanceProperty::construct_instance((uint8_t *)actor_p + instance_offset, actor_p, sk_class_p);
+    instance_p = FSkookumScriptInstanceProperty::construct_instance((uint8_t *)actor_p + instance_offset, actor_p, sk_class_p);
     #if WITH_EDITOR
       // Check if this component's class could be also just auto-generated
       SkClass * sk_actor_class_p = SkUEClassBindingHelper::get_sk_class_from_ue_class(actor_p->GetClass());

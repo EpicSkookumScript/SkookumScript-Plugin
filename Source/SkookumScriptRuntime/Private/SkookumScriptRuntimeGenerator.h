@@ -76,7 +76,7 @@ class FSkookumScriptRuntimeGenerator : public FSkookumScriptGeneratorBase
 
     // FSkookumScriptGeneratorBase interface implementation
 
-    virtual bool   can_export_property(UProperty * property_p, int32 include_priority, uint32 referenced_flags) override final;
+    virtual bool   can_export_property(FProperty * property_p, int32 include_priority, uint32 referenced_flags) override final;
     virtual void   on_type_referenced(UField * type_p, int32 include_priority, uint32 referenced_flags) override final;
     virtual void   report_error(const FString & message) const override final;
     virtual bool   source_control_checkout_or_add(const FString & file_path) const override final;

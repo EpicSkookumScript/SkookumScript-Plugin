@@ -86,48 +86,41 @@ const FName FSkookumScriptGeneratorHelper::ms_skookum_script_instance_property_n
 
 //---------------------------------------------------------------------------------------
 
-FSkookumScriptGeneratorHelper::eSkTypeID FSkookumScriptGeneratorHelper::get_skookum_property_type(UProperty * property_p, bool allow_all)
+FSkookumScriptGeneratorHelper::eSkTypeID FSkookumScriptGeneratorHelper::get_skookum_property_type(FProperty * property_p, bool allow_all)
   {
   // Check for simple types first
-  if (property_p->IsA<UNumericProperty>())
+  if (property_p->IsA<FNumericProperty>())
     {
-    UNumericProperty * numeric_property_p = static_cast<UNumericProperty *>(property_p);
+    FNumericProperty * numeric_property_p = static_cast<FNumericProperty *>(property_p);
     if (numeric_property_p->IsInteger() && !numeric_property_p->IsEnum())
       {
       return SkTypeID_Integer;
       }
     }
-  if (property_p->IsA<UFloatProperty>())       return SkTypeID_Real;
-  if (property_p->IsA<UStrProperty>())         return SkTypeID_String;
-  if (property_p->IsA<UNameProperty>())        return SkTypeID_Name;
-  if (property_p->IsA<UBoolProperty>())        return SkTypeID_Boolean;
+  if (property_p->IsA<FFloatProperty>())       return SkTypeID_Real;
+  if (property_p->IsA<FStrProperty>())         return SkTypeID_String;
+  if (property_p->IsA<FNameProperty>())        return SkTypeID_Name;
+  if (property_p->IsA<FBoolProperty>())        return SkTypeID_Boolean;
 
   // Any known struct?
-  if (property_p->IsA<UStructProperty>())
+  if (property_p->IsA<FStructProperty>())
     {
-    UStructProperty * struct_prop_p = CastChecked<UStructProperty>(property_p);
+    FStructProperty * struct_prop_p = CastFieldChecked<FStructProperty>(property_p);
     eSkTypeID type_id = get_skookum_struct_type(struct_prop_p->Struct);
     return (allow_all || type_id != SkTypeID_UStruct || is_struct_type_supported(struct_prop_p->Struct)) ? type_id : SkTypeID_none;
     }
 
   if (get_enum(property_p))                          return SkTypeID_Enum;
-  if (property_p->IsA<UClassProperty>())             return SkTypeID_UClass;
-  if (property_p->IsA<UDelegateProperty>())          return SkTypeID_Delegate;
-  if (property_p->IsA<UMulticastDelegateProperty>()) return SkTypeID_MulticastDelegate;
+  if (property_p->IsA<FClassProperty>())             return SkTypeID_UClass;
+  if (property_p->IsA<FDelegateProperty>())          return SkTypeID_Delegate;
+  if (property_p->IsA<FMulticastDelegateProperty>()) return SkTypeID_MulticastDelegate;
 
-  if (property_p->IsA<UObjectPropertyBase>())
+  if (property_p->IsA<FObjectPropertyBase>())
     {
-    UClass * class_p = Cast<UObjectPropertyBase>(property_p)->PropertyClass;
-    if (class_p
-     && (allow_all || does_class_have_static_class(class_p) || class_p->HasAnyClassFlags(CLASS_HasInstancedReference) || class_p->GetName() == TEXT("Object")))
-      {
-      return property_p->IsA<UWeakObjectProperty>() ? SkTypeID_UObjectWeakPtr : SkTypeID_UObject;
-      }
-
-    return SkTypeID_none;
+    return property_p->IsA<FWeakObjectProperty>() ? SkTypeID_UObjectWeakPtr : SkTypeID_UObject;
     }
 
-  if (UArrayProperty * array_property_p = Cast<UArrayProperty>(property_p))
+  if (FArrayProperty * array_property_p = CastField<FArrayProperty>(property_p))
     {
     // Reject arrays of unknown types and arrays of arrays
     return (allow_all || (is_property_type_supported(array_property_p->Inner) && (get_skookum_property_type(array_property_p->Inner, true) != SkTypeID_List))) ? SkTypeID_List : SkTypeID_none;
@@ -170,12 +163,12 @@ FSkookumScriptGeneratorHelper::eSkTypeID FSkookumScriptGeneratorHelper::get_skoo
 
 //---------------------------------------------------------------------------------------
 
-bool FSkookumScriptGeneratorHelper::is_property_type_supported(UProperty * property_p)
+bool FSkookumScriptGeneratorHelper::is_property_type_supported(FProperty * property_p)
   {
   if (property_p->HasAnyPropertyFlags(CPF_EditorOnly)
-   || property_p->IsA<ULazyObjectProperty>()
-   || property_p->IsA<USoftObjectProperty>()
-   || property_p->IsA<USoftClassProperty>())
+   || property_p->IsA<FLazyObjectProperty>()
+   || property_p->IsA<FSoftObjectProperty>()
+   || property_p->IsA<FSoftClassProperty>())
     {
     return false;
     }
@@ -217,14 +210,14 @@ bool FSkookumScriptGeneratorHelper::does_class_have_static_class(UClass * class_
 
 //---------------------------------------------------------------------------------------
 
-UEnum * FSkookumScriptGeneratorHelper::get_enum(UField * field_p)
+UEnum * FSkookumScriptGeneratorHelper::get_enum(FField * field_p)
   {
-  const UEnumProperty * enum_property_p = Cast<UEnumProperty>(field_p);
+  const FEnumProperty * enum_property_p = CastField<FEnumProperty>(field_p);
   if (enum_property_p)
     {
     return enum_property_p->GetEnum();
     }
-  const UByteProperty * byte_property_p = Cast<UByteProperty>(field_p);
+  const FByteProperty * byte_property_p = CastField<FByteProperty>(field_p);
   return byte_property_p ? byte_property_p->Enum : nullptr;
   }
 
@@ -305,7 +298,7 @@ FString FSkookumScriptGeneratorHelper::skookify_param_name(const FString & name,
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGeneratorHelper::skookify_method_name(const FString & name, UProperty * return_property_p)
+FString FSkookumScriptGeneratorHelper::skookify_method_name(const FString & name, FProperty * return_property_p)
   {
   FString method_name = skookify_param_name(name, false);
   bool is_boolean = false;
@@ -354,7 +347,7 @@ FString FSkookumScriptGeneratorHelper::skookify_method_name(const FString & name
     }
 
   // Append question mark if determined to be boolean
-  if (is_boolean && return_property_p && return_property_p->IsA<UBoolProperty>())
+  if (is_boolean && return_property_p && return_property_p->IsA<FBoolProperty>())
     {
     method_name += TEXT("?");
     }
@@ -906,12 +899,11 @@ FString FSkookumScriptGeneratorBase::get_skookified_default_enum_val_name_by_id(
   }
 
 //---------------------------------------------------------------------------------------
-
-FString FSkookumScriptGeneratorBase::get_skookum_class_name(UObject * type_p)
+FString FSkookumScriptGeneratorBase::get_skookum_class_name(FField * type_p)
   {
-  UObject * obj_p = type_p;
+  UObject * obj_p = type_p->GetOwnerStruct();
   #if WITH_EDITOR
-    UClass * class_p = Cast<UClass>(type_p);
+    UClass * class_p = type_p->GetOwnerClass();
     if (class_p)
       {
       UBlueprint * blueprint_p = UBlueprint::GetBlueprintFromClass(class_p);
@@ -923,11 +915,29 @@ FString FSkookumScriptGeneratorBase::get_skookum_class_name(UObject * type_p)
   return obj_p->IsA<UEnum>() ? skookify_enum_name(name, package_name) : skookify_class_name(name, package_name);
   }
 
+FString FSkookumScriptGeneratorBase::get_skookum_class_name(UObject * type_p)
+{
+  if (!type_p) { return TEXT(""); }
+
+  UObject * obj_p = type_p;
+#if WITH_EDITOR
+  UClass * class_p = Cast<UClass>(type_p);
+  if (class_p)
+  {
+    UBlueprint * blueprint_p = UBlueprint::GetBlueprintFromClass(class_p);
+    if (blueprint_p) obj_p = blueprint_p;
+  }
+#endif
+  FName name = obj_p->GetFName();
+  FName package_name = obj_p->GetOutermost()->GetFName();
+  return obj_p->IsA<UEnum>() ? skookify_enum_name(name, package_name) : skookify_class_name(name, package_name);
+}
+
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGeneratorBase::get_skookum_data_name(UProperty * property_p)
+FString FSkookumScriptGeneratorBase::get_skookum_data_name(FProperty * property_p)
   {
-  UObject * owner_p = property_p->GetOuter();
+  UObject * owner_p = property_p->GetOwnerUObject();
   #if WITH_EDITOR
     UClass * owner_class_p = Cast<UClass>(owner_p);
     if (owner_class_p)
@@ -936,14 +946,14 @@ FString FSkookumScriptGeneratorBase::get_skookum_data_name(UProperty * property_
       if (blueprint_p) owner_p = blueprint_p;
       }
   #endif
-  return skookify_data_name(property_p->GetFName(), owner_p->GetFName(), owner_p->GetOutermost()->GetFName(), property_p->IsA<UBoolProperty>(), DataScope_instance);
+  return skookify_data_name(property_p->GetFName(), owner_p->GetFName(), owner_p->GetOutermost()->GetFName(), property_p->IsA<FBoolProperty>(), DataScope_instance);
   }
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGeneratorBase::get_skookum_parent_name(UObject * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp)
+FString FSkookumScriptGeneratorBase::get_skookum_parent_name(FField * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp)
   {
-  UStruct * struct_or_class_p = Cast<UStruct>(type_p);
+  UStruct * struct_or_class_p = type_p->GetOwnerStruct();
   if (struct_or_class_p)
     {
     UStruct * parent_p = struct_or_class_p->GetSuperStruct();
@@ -954,33 +964,79 @@ FString FSkookumScriptGeneratorBase::get_skookum_parent_name(UObject * type_p, i
       }
 
     // Mark parent as needed
-    on_type_referenced(parent_p, include_priority + 1, referenced_flags);
+    on_type_referenced(type_p->GetOwnerUField(), include_priority + 1, referenced_flags);
 
-    return get_skookum_class_name(parent_p);
+    return get_skookum_class_name(type_p);
     }  
 
   #if WITH_EDITOR
-    UBlueprint * blueprint_p = Cast<UBlueprint>(type_p);
-    if (blueprint_p)
+  if (FFieldClass* FieldClass = type_p->GetClass())
+  {
+    if (FFieldClass* SuperField = FieldClass->GetSuperClass())
+    {
+      UBlueprint * blueprint_p = Cast<UBlueprint>(SuperField->GetDefaultObject()->GetOwnerUObject());
+      if (blueprint_p)
       {
-      UObject * parent_p = blueprint_p->ParentClass;
-
-      // Mark parent as needed
-      UField * parent_field_p = get_field(parent_p);
-      if (parent_field_p)
+        // Mark parent as needed
+        FField * parent_field_p = SuperField->GetDefaultObject();
+        if (parent_field_p)
         {
-        on_type_referenced(parent_field_p, include_priority + 1, referenced_flags);
+          on_type_referenced(parent_field_p->GetOwnerUField(), include_priority + 1, referenced_flags);
         }
-      if (out_parent_pp) *out_parent_pp = Cast<UStruct>(parent_field_p);
+        if (out_parent_pp) *out_parent_pp = parent_field_p->GetOwnerStruct();
 
-      return get_skookum_class_name(parent_p);
+        return get_skookum_class_name(parent_field_p->GetOwnerUObject());
       }
+    }
+  }
   #endif
 
   if (out_parent_pp) *out_parent_pp = nullptr;
   return TEXT("Enum");
   }
 
+//---------------------------------------------------------------------------------------
+
+FString FSkookumScriptGeneratorBase::get_skookum_parent_name(UField * type_p, int32 include_priority, uint32 referenced_flags, UStruct ** out_parent_pp)
+{
+  UStruct * struct_or_class_p = Cast<UStruct>(type_p);
+  if (struct_or_class_p)
+  {
+    UStruct * parent_p = struct_or_class_p->GetSuperStruct();
+    if (out_parent_pp) *out_parent_pp = parent_p;
+    if (!parent_p)
+    {
+      return get_skookum_struct_type(struct_or_class_p) == SkTypeID_UStruct ? TEXT("UStruct") : TEXT("Object");
+    }
+
+    // Mark parent as needed
+    on_type_referenced(parent_p, include_priority + 1, referenced_flags);
+
+    return get_skookum_class_name(parent_p);
+  }
+
+#if WITH_EDITOR
+  UBlueprint * blueprint_p = Cast<UBlueprint>(type_p);
+  if (blueprint_p)
+  {
+    UObject * parent_p = blueprint_p->ParentClass;
+    // Mark parent as needed
+    UField * parent_field_p = get_field(parent_p);
+    if (parent_field_p)
+    {
+      on_type_referenced(parent_field_p, include_priority + 1, referenced_flags);
+    }
+    if (out_parent_pp) *out_parent_pp = Cast<UStruct>(parent_field_p);
+
+    return get_skookum_class_name(parent_p);
+
+  }
+
+#endif
+
+  if (out_parent_pp) *out_parent_pp = nullptr;
+  return TEXT("Enum");
+}
 //---------------------------------------------------------------------------------------
 
 FString FSkookumScriptGeneratorBase::get_skookum_class_path(UObject * type_p, int32 include_priority, uint32 referenced_flags, FString * out_class_name_p)
@@ -998,7 +1054,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_class_path(UObject * type_p, in
   UStruct * struct_or_class_p = Cast<UStruct>(type_p);
   if (struct_or_class_p)
     {
-    bool parent_to_sk_ustruct = (get_skookum_struct_type(struct_or_class_p) == SkTypeID_UStruct);
+    bool parent_to_sk_UStruct = (get_skookum_struct_type(struct_or_class_p) == SkTypeID_UStruct);
     UStruct * super_p = struct_or_class_p;
     while ((super_p = super_p->GetSuperStruct()) != nullptr)
       {
@@ -1007,12 +1063,12 @@ FString FSkookumScriptGeneratorBase::get_skookum_class_path(UObject * type_p, in
       // Turn `Vector` into built-in `Vector3`:
       if (get_skookum_struct_type(super_p) != SkTypeID_UStruct)
         {
-        parent_to_sk_ustruct = false;
+        parent_to_sk_UStruct = false;
         break;
         }
       }
     // If it's a UStruct, group under virtual parent class "UStruct"
-    if (parent_to_sk_ustruct)
+    if (parent_to_sk_UStruct)
       {
       super_class_stack.Push(SuperClassEntry(TEXT("UStruct"), nullptr));
       }
@@ -1057,7 +1113,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_method_file_name(const FString 
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(UProperty * property_p, bool include_invokable_signature, int32 * out_first_line_length_p, int32 * out_max_line_length_p)
+FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(FProperty * property_p, bool include_invokable_signature, int32 * out_first_line_length_p, int32 * out_max_line_length_p)
   {
   eSkTypeID type_id = get_skookum_property_type(property_p, true);
   FString type_name;
@@ -1065,13 +1121,13 @@ FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(UProperty * 
 
   if (type_id == SkTypeID_UObject || type_id == SkTypeID_UObjectWeakPtr)
     {
-    UObjectPropertyBase * object_property_p = Cast<UObjectPropertyBase>(property_p);
+    FObjectPropertyBase * object_property_p = CastField<FObjectPropertyBase>(property_p);
     type_name = get_skookum_class_name(object_property_p->PropertyClass);
     }
   else if (type_id == SkTypeID_UStruct)
     {
-    UStruct * struct_p = Cast<UStructProperty>(property_p)->Struct;
-    type_name = get_skookum_class_name(struct_p);
+    FStructProperty * struct_p = CastField<FStructProperty>(property_p);
+    type_name = get_skookum_class_name(struct_p->Struct);
     }
   else if (type_id == SkTypeID_Enum)
     {
@@ -1085,12 +1141,12 @@ FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(UProperty * 
     if (type_id == SkTypeID_Delegate)
       {
       type_name_p = TEXT("Delegate");
-      signature_p = static_cast<UDelegateProperty *>(property_p)->SignatureFunction;
+      signature_p = static_cast<FDelegateProperty *>(property_p)->SignatureFunction;
       }
     else
       {
       type_name_p = TEXT("MulticastDelegate");
-      signature_p = static_cast<UMulticastDelegateProperty *>(property_p)->SignatureFunction;
+      signature_p = static_cast<FMulticastDelegateProperty *>(property_p)->SignatureFunction;
       }
     FString signature_body;
     if (include_invokable_signature)
@@ -1112,7 +1168,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(UProperty * 
   else if (type_id == SkTypeID_List)
     {
     have_max_line_length = true;
-    type_name = FString::Printf(TEXT("List{%s}"), *get_skookum_property_type_name(Cast<UArrayProperty>(property_p)->Inner, true, out_first_line_length_p, out_max_line_length_p));
+    type_name = FString::Printf(TEXT("List{%s}"), *get_skookum_property_type_name(CastField<FArrayProperty>(property_p)->Inner, true, out_first_line_length_p, out_max_line_length_p));
     }
   else
     {
@@ -1141,15 +1197,15 @@ FString FSkookumScriptGeneratorBase::get_skookum_property_type_name(UProperty * 
 
 //---------------------------------------------------------------------------------------
 
-FString FSkookumScriptGeneratorBase::get_skookum_default_initializer(UFunction * function_p, UProperty * param_p)
+FString FSkookumScriptGeneratorBase::get_skookum_default_initializer(UFunction * function_p, FProperty * param_p)
   {
   FString default_value;
 
   // For Blueprintcallable functions, assume all arguments have defaults even if not specified
   bool has_default_value = function_p->HasAnyFunctionFlags(FUNC_BlueprintCallable | FUNC_Exec) // || function_p->HasMetaData(*param_p->GetName());
     && !function_p->HasAllFunctionFlags(FUNC_Delegate) // Delegate signatures have no defaults
-    && !param_p->IsA<UDelegateProperty>()              // Delegates have no defaults
-    && !param_p->IsA<UMulticastDelegateProperty>();    // Delegates have no defaults
+    && !param_p->IsA<FDelegateProperty>()              // Delegates have no defaults
+    && !param_p->IsA<FMulticastDelegateProperty>();    // Delegates have no defaults
   if (has_default_value)
     {
     default_value = function_p->GetMetaData(*param_p->GetName());
@@ -1164,7 +1220,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_default_initializer(UFunction *
 
       // In 4.20 somewhere, default values of nullptr started getting meta data set to none.
       // See HeaderParser.cpp FHeaderParser::DefaultValueStringCppFormatToInnerFormat
-      if (param_p->IsA(UClassProperty::StaticClass()) || param_p->IsA(UObjectPropertyBase::StaticClass()))
+      if (param_p->IsA(FClassProperty::StaticClass()) || param_p->IsA(FObjectPropertyBase::StaticClass()))
         {
         if (default_value.Equals(TEXT("None")))
           {
@@ -1200,7 +1256,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_default_initializer(UFunction *
         case SkTypeID_UStruct:         default_value = get_skookum_property_type_name(param_p) + TEXT("!"); break;
         case SkTypeID_UClass:
         case SkTypeID_UObject:
-        case SkTypeID_UObjectWeakPtr:  default_value = (param_p->GetName() == TEXT("WorldContextObject")) ? TEXT("@@world") : get_skookum_class_name(Cast<UObjectPropertyBase>(param_p)->PropertyClass) + TEXT("!null"); break;
+        case SkTypeID_UObjectWeakPtr:  default_value = (param_p->GetName() == TEXT("WorldContextObject")) ? TEXT("@@world") : get_skookum_class_name(CastField<FObjectPropertyBase>(param_p)->PropertyClass) + TEXT("!null"); break;
         }
       }
     else
@@ -1253,7 +1309,7 @@ FString FSkookumScriptGeneratorBase::get_skookum_default_initializer(UFunction *
         case SkTypeID_RotationAngles:  default_value = TEXT("RotationAngles!yaw_pitch_roll(") + default_value + TEXT(")"); break;
         case SkTypeID_Transform:       break; // Not implemented yet - leave as-is for now
         case SkTypeID_Color:           default_value = TEXT("Color!rgba") + default_value; break;
-        case SkTypeID_UStruct:         if (default_value == TEXT("LatentInfo")) default_value = get_skookum_class_name(Cast<UStructProperty>(param_p)->Struct) + TEXT("!"); break;
+        case SkTypeID_UStruct:         if (default_value == TEXT("LatentInfo")) default_value = get_skookum_class_name(CastField<FStructProperty>(param_p)->Struct) + TEXT("!"); break;
         case SkTypeID_UClass:          default_value = skookify_class_name(FName(*default_value), NAME_None) + TEXT(".static_class"); break;
         case SkTypeID_UObject:
         case SkTypeID_UObjectWeakPtr:  if (default_value == TEXT("WorldContext") || default_value == TEXT("WorldContextObject") || param_p->GetName() == TEXT("WorldContextObject")) default_value = TEXT("@@world"); break;
@@ -1279,6 +1335,43 @@ uint32 FSkookumScriptGeneratorBase::get_skookum_symbol_id(const FString & string
 
 //---------------------------------------------------------------------------------------
 
+void FSkookumScriptGeneratorBase::build_comment_block(FString& comment_block, const FString& ue_name_comment)
+{
+  // Convert to comment block
+  if (!comment_block.IsEmpty())
+    {
+    // "Comment out" the comment block
+    comment_block = TEXT("// ") + comment_block;
+    comment_block.ReplaceInline(TEXT("\n"), TEXT("\n// "));
+    comment_block += TEXT("\n");
+    // Replace parameter names with their skookified versions
+    for (int32 pos = 0;;)
+      {
+      pos = comment_block.Find(TEXT("@param"), ESearchCase::IgnoreCase, ESearchDir::FromStart, pos);
+      if (pos < 0) break;
+
+      pos += 6; // Skip "@param"
+      while (pos < comment_block.Len() && FChar::IsWhitespace(comment_block[pos])) ++pos; // Skip white space
+      int32 identifier_begin = pos;
+      while (pos < comment_block.Len() && FChar::IsIdentifier(comment_block[pos])) ++pos; // Skip identifier
+      int32 identifier_length = pos - identifier_begin;
+      if (identifier_length > 0)
+        {
+        // Replace parameter name with skookified version
+        FString param_name = skookify_param_name(comment_block.Mid(identifier_begin, identifier_length), false);
+        comment_block.RemoveAt(identifier_begin, identifier_length, false);
+        comment_block.InsertAt(identifier_begin, param_name);
+        pos += param_name.Len() - identifier_length;
+        }
+      }
+    }
+
+  // Add UE4 name of this object
+  comment_block += TEXT("//\n") + ue_name_comment;
+}
+
+//---------------------------------------------------------------------------------------
+
 FString FSkookumScriptGeneratorBase::get_comment_block(UObject * type_p)
   {
   FString comment_block;
@@ -1288,9 +1381,8 @@ FString FSkookumScriptGeneratorBase::get_comment_block(UObject * type_p)
     type_p->IsA<UFunction>() ? TEXT("method") :
     (type_p->IsA<UClass>() ? TEXT("class") :
     (type_p->IsA<UStruct>() ? TEXT("struct") :
-    (type_p->IsA<UProperty>() ? TEXT("property") :
     (type_p->IsA<UEnum>() ? TEXT("enum") :
-    TEXT("type")))));
+    TEXT("type"))));
   FString ue_name_comment = FString::Printf(TEXT("// UE4 name of this %s: %s\n"), *this_kind, *type_p->GetName());
 
   #if WITH_EDITOR || HACK_HEADER_GENERATOR
@@ -1299,52 +1391,23 @@ FString FSkookumScriptGeneratorBase::get_comment_block(UObject * type_p)
       {
       // Get tool tip from meta data
       comment_block = field_p->GetToolTipText().ToString();
-      // Convert to comment block
-      if (!comment_block.IsEmpty())
-        {
-        // "Comment out" the comment block
-        comment_block = TEXT("// ") + comment_block;
-        comment_block.ReplaceInline(TEXT("\n"), TEXT("\n// "));
-        comment_block += TEXT("\n");
-        // Replace parameter names with their skookified versions
-        for (int32 pos = 0;;)
-          {
-          pos = comment_block.Find(TEXT("@param"), ESearchCase::IgnoreCase, ESearchDir::FromStart, pos);
-          if (pos < 0) break;
-
-          pos += 6; // Skip "@param"
-          while (pos < comment_block.Len() && FChar::IsWhitespace(comment_block[pos])) ++pos; // Skip white space
-          int32 identifier_begin = pos;
-          while (pos < comment_block.Len() && FChar::IsIdentifier(comment_block[pos])) ++pos; // Skip identifier
-          int32 identifier_length = pos - identifier_begin;
-          if (identifier_length > 0)
-            {
-            // Replace parameter name with skookified version
-            FString param_name = skookify_param_name(comment_block.Mid(identifier_begin, identifier_length), false);
-            comment_block.RemoveAt(identifier_begin, identifier_length, false);
-            comment_block.InsertAt(identifier_begin, param_name);
-            pos += param_name.Len() - identifier_length;
-            }
-          }
-        }
-
-      // Add UE4 name of this object
-      comment_block += TEXT("//\n") + ue_name_comment;
+      
+      build_comment_block(comment_block, ue_name_comment);
 
       // Add display name of this object
       if (field_p->HasMetaData(ms_meta_data_key_display_name))
-        {
+      {
         FString display_name = field_p->GetMetaData(ms_meta_data_key_display_name);
         comment_block += FString::Printf(TEXT("// Blueprint display name: %s\n"), *display_name);
-        }
+      }
 
       // Add Blueprint category
       if (field_p->HasMetaData(ms_meta_data_key_function_category))
-        {
+      {
         FString category_name = field_p->GetMetaData(ms_meta_data_key_function_category);
         comment_block += FString::Printf(TEXT("// Blueprint category: %s\n"), *category_name);
-        }
       }
+    }
     else
   #endif
       {
@@ -1354,6 +1417,44 @@ FString FSkookumScriptGeneratorBase::get_comment_block(UObject * type_p)
 
   return comment_block + TEXT("\n");
   }
+
+//---------------------------------------------------------------------------------------
+
+FString FSkookumScriptGeneratorBase::get_comment_block(FField * type_p)
+{
+  FString comment_block;
+
+  // Comment specifying the original name of this object
+  FString this_kind =
+    type_p->IsA<FStructProperty>() ? TEXT("struct") :
+      (type_p->IsA<FProperty>() ? TEXT("property") :
+      (type_p->IsA<FEnumProperty>() ? TEXT("enum") :
+        TEXT("type")));
+  FString ue_name_comment = FString::Printf(TEXT("// UE4 name of this %s: %s\n"), *this_kind, *type_p->GetName());
+
+#if WITH_EDITOR || HACK_HEADER_GENERATOR
+  // Get tool tip from meta data
+  comment_block = type_p->GetToolTipText().ToString();
+
+  build_comment_block(comment_block, ue_name_comment);
+
+  // Add display name of this object
+  if (type_p->HasMetaData(ms_meta_data_key_display_name))
+  {
+    FString display_name = type_p->GetMetaData(ms_meta_data_key_display_name);
+    comment_block += FString::Printf(TEXT("// Blueprint display name: %s\n"), *display_name);
+  }
+
+  // Add Blueprint category
+  if (type_p->HasMetaData(ms_meta_data_key_function_category))
+  {
+    FString category_name = type_p->GetMetaData(ms_meta_data_key_function_category);
+    comment_block += FString::Printf(TEXT("// Blueprint category: %s\n"), *category_name);
+  }
+#endif
+
+  return comment_block + TEXT("\n");
+}
 
 //---------------------------------------------------------------------------------------
 // Find its UField if type is not a UField
@@ -1388,22 +1489,22 @@ FString FSkookumScriptGeneratorBase::generate_routine_script_parameters(UFunctio
 
   FString parameter_body;
 
-  bool has_params_or_return_value = (function_p->Children != NULL);
+  bool has_params_or_return_value = (function_p->ChildProperties != NULL);
   if (has_params_or_return_value)
     {
     // Figure out column width of variable types & names
     int32 max_type_length = 0;
     int32 max_name_length = 0;
     int32 inputs_count = 0;
-    for (TFieldIterator<UProperty> param_it(function_p); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(function_p); param_it; ++param_it)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
       if ((param_p->GetPropertyFlags() & (CPF_ReturnParm | CPF_Parm)) == CPF_Parm)
         {
         int32 first_type_line_length;
         int32 max_type_line_length;
         FString type_name = get_skookum_property_type_name(param_p, true, &first_type_line_length, &max_type_line_length);
-        FString var_name = skookify_param_name(param_p->GetName(), param_p->IsA<UBoolProperty>());
+        FString var_name = skookify_param_name(param_p->GetName(), param_p->IsA<FBoolProperty>());
         max_type_length = FMath::Max(max_type_length, max_type_line_length ? max_type_line_length : first_type_line_length);
         max_name_length = FMath::Max(max_name_length, var_name.Len());
         ++inputs_count;
@@ -1415,9 +1516,9 @@ FString FSkookumScriptGeneratorBase::generate_routine_script_parameters(UFunctio
     // Format nicely
     FString separator;
     FString separator_indent = TEXT("\n") + FString::ChrN(indent_spaces, ' ');
-    for (TFieldIterator<UProperty> param_it(function_p); param_it; ++param_it)
+    for (TFieldIterator<FProperty> param_it(function_p); param_it; ++param_it)
       {
-      UProperty * param_p = *param_it;
+      FProperty * param_p = *param_it;
       if (param_p->HasAllPropertyFlags(CPF_Parm))
         {
         if (param_p->HasAllPropertyFlags(CPF_ReturnParm))
@@ -1427,7 +1528,7 @@ FString FSkookumScriptGeneratorBase::generate_routine_script_parameters(UFunctio
         else
           {
           FString type_name = get_skookum_property_type_name(param_p, true);
-          FString var_name = skookify_param_name(param_p->GetName(), param_p->IsA<UBoolProperty>());
+          FString var_name = skookify_param_name(param_p->GetName(), param_p->IsA<FBoolProperty>());
           FString default_initializer = get_skookum_default_initializer(function_p, param_p);
           parameter_body += separator + multiline_right_pad(type_name, max_type_length) + TEXT(" ");
           if (default_initializer.IsEmpty())
@@ -1518,9 +1619,9 @@ FString FSkookumScriptGeneratorBase::generate_class_instance_data_file_body(UStr
   int32 max_type_line_length = 0;
   int32 max_name_length = 0;
   int32 max_raw_name_length = 0;
-  for (TFieldIterator<UProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
+  for (TFieldIterator<FProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
     {
-    UProperty * var_p = *property_it;
+    FProperty * var_p = *property_it;
     if (can_export_property(var_p, include_priority, referenced_flags))
       {
       int32 first_line_length;
@@ -1537,9 +1638,9 @@ FString FSkookumScriptGeneratorBase::generate_class_instance_data_file_body(UStr
 
   // Format nicely
   int32 max_type_length = FMath::Max(max_type_line_length, max_first_type_line_length + max_raw_name_length + 9);
-  for (TFieldIterator<UProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
+  for (TFieldIterator<FProperty> property_it(struct_or_class_p, EFieldIteratorFlags::ExcludeSuper); property_it; ++property_it)
     {
-    UProperty * var_p = *property_it;
+    FProperty * var_p = *property_it;
     FString type_name = get_skookum_property_type_name(var_p, true);
     FString var_name = get_skookum_data_name(var_p);
     FString raw_name = var_p->GetName();

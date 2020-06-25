@@ -620,7 +620,7 @@ bool SkUERemote::spawn_remote_ide()
       #endif
         {
         // Is there an Sk project file in the usual location?
-        FString project_ini(FPaths::GameDir() / TEXT("Scripts") / TEXT("Skookum-project.ini"));
+        FString project_ini(FPaths::ProjectDir() / TEXT("Scripts") / TEXT("Skookum-project.ini"));
 
         if (FPaths::FileExists(project_ini))
           {
@@ -640,7 +640,7 @@ bool SkUERemote::spawn_remote_ide()
         launch_params += FString::Printf(TEXT(" -p \"%s\""), *project_path);
         }
 
-      launch_params.Trim();
+      launch_params.TrimStartInline();
       }
 
     // Path seems to need to be made fully qualified in order to work
