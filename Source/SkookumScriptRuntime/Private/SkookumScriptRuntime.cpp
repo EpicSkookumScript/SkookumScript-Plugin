@@ -422,7 +422,7 @@ void FSkookumScriptRuntime::PostLoadCallback()
 //---------------------------------------------------------------------------------------
 void FSkookumScriptRuntime::on_world_init_pre(UWorld * world_p, const UWorld::InitializationValues init_vals)
   {
-  A_DPRINT("on_world_init_pre: %S %p\n", *world_p->GetName(), world_p);
+  //A_DPRINT("on_world_init_pre: %S %p\n", *world_p->GetName(), world_p);
 
   if (world_p->IsGameWorld())
     {
@@ -466,7 +466,7 @@ void FSkookumScriptRuntime::on_world_init_pre(UWorld * world_p, const UWorld::In
 //---------------------------------------------------------------------------------------
 void FSkookumScriptRuntime::on_world_init_post(UWorld * world_p, const UWorld::InitializationValues init_vals)
   {
-  A_DPRINT("on_world_init_post: %S %p\n", *world_p->GetName(), world_p);
+  //A_DPRINT("on_world_init_post: %S %p\n", *world_p->GetName(), world_p);
 
   #if !WITH_EDITORONLY_DATA
     // Resolve raw data for all classes if a callback function is given
