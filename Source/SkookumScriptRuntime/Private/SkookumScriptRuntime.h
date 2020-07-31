@@ -162,6 +162,7 @@ protected:
   bool            is_dormant() const;
   bool            allow_auto_connect_to_ide() const;
   bool            is_skookum_initialized() const;
+
   void            ensure_runtime_initialized();
   void            compile_and_load_binaries();
 
@@ -191,6 +192,7 @@ protected:
 #ifdef SKOOKUM_REMOTE_UNREAL
   SkUERemote            m_remote_client;
   bool                  m_freshen_binaries_requested;
+  bool                  m_allow_remote_ide;
 #endif
 
   UWorld *                m_game_world_p;

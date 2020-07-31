@@ -556,8 +556,11 @@ void FSkookumScriptRuntime::ShutdownModule()
   m_runtime.shutdown();
 
   #ifdef SKOOKUM_REMOTE_UNREAL
+  if (m_allow_remote_ide) 
+    { 
     // Remote communication to and from SkookumScript IDE
     m_remote_client.disconnect();
+    }
   #endif
 
   // Clear out our registered delegates
@@ -611,6 +614,7 @@ void FSkookumScriptRuntime::load_ini_settings()
   const FString & ini_file_path = get_ini_file_path();
 
   #ifdef SKOOKUM_REMOTE_UNREAL
+    if (!m_allow_remote_ide) { return; }
     FString last_connected_to_ide(TEXT("0"));
     GConfig->GetString(ms_ini_section_name_p, ms_ini_key_last_connected_to_ide_p, last_connected_to_ide, ini_file_path);
     m_remote_client.set_last_connected_to_ide(!last_connected_to_ide.IsEmpty() && last_connected_to_ide[0] == '1');
@@ -626,6 +630,7 @@ void FSkookumScriptRuntime::save_ini_settings()
     const FString & ini_file_path = get_ini_file_path();
 
     #ifdef SKOOKUM_REMOTE_UNREAL
+      if (!m_allow_remote_ide) { return; }
       GConfig->SetString(ms_ini_section_name_p, ms_ini_key_last_connected_to_ide_p, m_remote_client.get_last_connected_to_ide() ? TEXT("1") : TEXT("0"), ini_file_path);
     #endif
     }
@@ -663,6 +668,7 @@ eSkProjectMode FSkookumScriptRuntime::get_project_mode() const
 bool FSkookumScriptRuntime::is_dormant() const
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
+    if(!m_allow_remote_ide){ return false; }
     return (get_project_mode() == SkProjectMode_read_only && !m_remote_client.is_authenticated());
   #else
     return false;
@@ -674,6 +680,7 @@ bool FSkookumScriptRuntime::is_dormant() const
 bool FSkookumScriptRuntime::allow_auto_connect_to_ide() const
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
+    if(!m_allow_remote_ide){ return false; }
     return !is_dormant() || m_remote_client.get_last_connected_to_ide();
   #else
     return false; // There is no way to connect to the IDE in this case
@@ -703,8 +710,11 @@ void FSkookumScriptRuntime::ensure_runtime_initialized()
 void FSkookumScriptRuntime::compile_and_load_binaries()
   {
   #if defined(SKOOKUM_REMOTE_UNREAL) && WITH_EDITOR
+    // Parse the command line to see if the user has specified that we should allow the IDE
+    m_allow_remote_ide = !FParse::Param(FCommandLine::Get(), TEXT("noskide"));
+
     // Tell IDE to compile the binaries, then load them
-    if (!IsRunningCommandlet() && allow_auto_connect_to_ide())
+    if (!IsRunningCommandlet() && allow_auto_connect_to_ide() && m_allow_remote_ide)
       {
       // At this point, wait if necessary to make sure we are connected
       m_remote_client.ensure_connected(0.0);
@@ -806,7 +816,10 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
      #if defined(SKOOKUM_REMOTE_UNREAL) && WITH_EDITOR
        // Give the IDE the updated project info so that it can load the correct overlays for remote runtimes
        // the data required in SkBrain isn't loaded until after load_compiled_scripts has completed.
+       if (m_allow_remote_ide)
+       {
        m_remote_client.cmd_project();
+       }
      #endif
   }
 
@@ -818,7 +831,10 @@ void FSkookumScriptRuntime::compile_and_load_binaries()
 void FSkookumScriptRuntime::tick_game(float deltaTime)
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
+    if (m_allow_remote_ide)
+    {
     tick_remote();
+    }
   #endif
 
   // When paused, set deltaTime to 0.0
@@ -839,7 +855,7 @@ void FSkookumScriptRuntime::tick_game(float deltaTime)
 void FSkookumScriptRuntime::tick_editor(float deltaTime)
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
-    if (!m_game_world_p)
+    if (!m_game_world_p && m_allow_remote_ide)
       {
       tick_remote();
       }
@@ -930,7 +946,7 @@ bool FSkookumScriptRuntime::is_skookum_disabled() const
 bool FSkookumScriptRuntime::is_freshen_binaries_pending() const
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
-    return m_freshen_binaries_requested;
+    return m_allow_remote_ide ? m_freshen_binaries_requested : false;
   #else
     return false;
   #endif
@@ -944,7 +960,10 @@ void FSkookumScriptRuntime::set_editor_interface(ISkookumScriptRuntimeEditorInte
   {
   m_runtime.set_editor_interface(editor_interface_p);
   #ifdef SKOOKUM_REMOTE_UNREAL
-    m_remote_client.set_editor_interface(editor_interface_p);
+    if(m_allow_remote_ide)
+      {
+      m_remote_client.set_editor_interface(editor_interface_p);
+      }
   #endif
   }
 
@@ -953,7 +972,7 @@ void FSkookumScriptRuntime::set_editor_interface(ISkookumScriptRuntimeEditorInte
 bool FSkookumScriptRuntime::is_connected_to_ide() const
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
-    return m_remote_client.is_authenticated();
+    return m_allow_remote_ide ? m_remote_client.is_authenticated() : false;
   #else
     return false;
   #endif
@@ -984,7 +1003,10 @@ void FSkookumScriptRuntime::on_editor_map_opened()
     m_generator.update_all_class_script_files(true);
 
     #ifdef SKOOKUM_REMOTE_UNREAL
-      m_remote_client.clear_class_data_need_to_be_regenerated();
+      if(m_allow_remote_ide)
+        {
+        m_remote_client.clear_class_data_need_to_be_regenerated();
+        }
     #endif
     }
   }
@@ -1023,7 +1045,7 @@ void FSkookumScriptRuntime::show_ide(const FString & focus_ue_class_name, const 
 void FSkookumScriptRuntime::freshen_compiled_binaries_if_have_errors()
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
-    if (m_remote_client.is_compiled_binaries_have_errors())
+    if (m_allow_remote_ide && m_remote_client.is_compiled_binaries_have_errors())
       {
       m_freshen_binaries_requested = true;
       }
@@ -1343,7 +1365,10 @@ bool FSkookumScriptRuntime::is_static_enum_known_to_skookum(UEnum * enum_p) cons
 void FSkookumScriptRuntime::on_class_scripts_changed_by_generator(const FString & class_name, eChangeType change_type)
   {
   #ifdef SKOOKUM_REMOTE_UNREAL
-    m_freshen_binaries_requested = true;
+    if(m_allow_remote_ide)
+      { 
+      m_freshen_binaries_requested = true;
+      }
   #endif
   }
 
