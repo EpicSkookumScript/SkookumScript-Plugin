@@ -1016,9 +1016,9 @@ void SkRemoteRuntimeBase::on_cmd_incremental_update(const void ** binary_pp, uin
 
     switch (member_info.m_type)
       {
-        case SkInvokable_method:
-        case SkInvokable_method_func:
-        case SkInvokable_method_mthd:
+        case SkMember_method:
+        case SkMember_method_func:
+        case SkMember_method_mthd:
           if (member_info.m_class_scope)
             {
             routine_update_record_p->m_previous_routine_p = member_info.get_class()->find_class_method(member_info.m_member_id.get_name());
@@ -1031,9 +1031,9 @@ void SkRemoteRuntimeBase::on_cmd_incremental_update(const void ** binary_pp, uin
             }
           break;
 
-        case SkInvokable_coroutine:
-        case SkInvokable_coroutine_func:
-        case SkInvokable_coroutine_mthd:
+        case SkMember_coroutine:
+        case SkMember_coroutine_func:
+        case SkMember_coroutine_mthd:
           SK_ASSERTX(!member_info.m_class_scope, "Coroutines cannot be class members.");
           routine_update_record_p->m_previous_routine_p = member_info.get_class()->find_coroutine(member_info.m_member_id.get_name());
           member_info.get_class()->unlink_coroutine(member_info.m_member_id.get_name());
