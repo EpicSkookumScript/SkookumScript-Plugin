@@ -459,7 +459,14 @@ class SK_API SkInstance : public SkObjectBase, public ARefCountMix<SkInstance>
     // The address of m_user_data can be used with a placement new of a data structure
     // up to pointer size * 2 bytes.
     // This includes most smart pointers like AIdxPtr<> and AIdPtr<>
+  #if PLATFORM_LINUX
+    // On linux/clang, non-aligned use of FQuat (which is 16-byte aligned) will SIGSEGV. There may be other aligned
+    // types as well, but this was the one crashing us.
+    // Baseline memory usage increased by ~33k
+    GCC_ALIGN(16) tUserData  m_user_data;
+  #else
     tUserData  m_user_data;
+  #endif
 
     // The global pool of SkInstances
     static AObjReusePool<SkInstance> ms_pool;
