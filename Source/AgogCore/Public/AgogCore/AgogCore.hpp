@@ -410,6 +410,8 @@
   #define _snprintf   snprintf
   #define _vsnprintf  vsnprintf
 
+  #define A_NO_GLOBAL_EXCEPTION_CATCH
+
   // Load given memory location into L1 cache
   #define a_prefetch(ptr) __builtin_prefetch(ptr)
 
