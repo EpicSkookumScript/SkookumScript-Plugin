@@ -34,7 +34,7 @@
 #include <SkookumScript/SkLiteral.hpp>
 #include <SkookumScript/SkLiteralClosure.hpp>
 #include <SkookumScript/SkMethodCall.hpp>
-#include <SkookumScript/SkObjectID.hpp>
+#include <SkookumScript/SkObjectId.hpp>
 #include <SkookumScript/SkParameterBase.hpp>
 #include <SkookumScript/SkRawMember.hpp>
 #include <SkookumScript/SkRuntimeBase.hpp>

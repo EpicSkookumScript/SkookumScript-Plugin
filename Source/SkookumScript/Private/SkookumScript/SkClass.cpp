@@ -24,7 +24,7 @@
 #include <SkookumScript/SkInvokedMethod.hpp>
 #include <SkookumScript/SkMethodCall.hpp>
 #include <SkookumScript/SkMind.hpp>
-#include <SkookumScript/SkObjectID.hpp>
+#include <SkookumScript/SkObjectId.hpp>
 #include <SkookumScript/SkTypedClass.hpp>
 
 

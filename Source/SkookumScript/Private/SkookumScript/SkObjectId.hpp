@@ -116,6 +116,6 @@ class SK_API SkObjectID : public SkExpressionBase
 //=======================================================================================
 
 #ifndef A_INL_IN_CPP
-  #include <SkookumScript/SkObjectID.inl>
+  #include <SkookumScript/SkObjectId.inl>
 #endif
 

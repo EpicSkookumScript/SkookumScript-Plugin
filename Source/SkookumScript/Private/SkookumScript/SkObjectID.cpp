@@ -13,9 +13,9 @@
 //=======================================================================================
 
 #include <SkookumScript/Sk.hpp> // Always include Sk.hpp first (as some builds require a designated precompiled header)
-#include <SkookumScript/SkObjectID.hpp>
+#include <SkookumScript/SkObjectId.hpp>
 #ifdef A_INL_IN_CPP
-  #include <SkookumScript/SkObjectID.inl>
+  #include <SkookumScript/SkObjectId.inl>
 #endif
 
 #include <SkookumScript/SkBrain.hpp>

@@ -42,7 +42,7 @@
 #include <SkookumScript/SkLiteralClosure.hpp>
 #include <SkookumScript/SkMethodCall.hpp>
 #include <SkookumScript/SkMind.hpp>
-#include <SkookumScript/SkObjectID.hpp>
+#include <SkookumScript/SkObjectId.hpp>
 #include <SkookumScript/SkNone.hpp>
 #include <SkookumScript/SkParameters.hpp>
 #include <SkookumScript/SkRawMember.hpp>

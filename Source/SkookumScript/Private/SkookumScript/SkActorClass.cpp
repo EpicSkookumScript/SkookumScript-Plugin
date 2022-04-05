@@ -23,7 +23,7 @@
 
 #include <AgogCore/ABinaryParse.hpp>
 #include <SkookumScript/SkDebug.hpp>
-#include <SkookumScript/SkObjectID.hpp>
+#include <SkookumScript/SkObjectId.hpp>
 #include <SkookumScript/SkSymbolDefs.hpp>
 
 
