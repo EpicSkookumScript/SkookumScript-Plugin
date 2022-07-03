@@ -1655,7 +1655,9 @@ FString FSkookumScriptGeneratorBase::generate_class_instance_data_file_body(UStr
       }
     else if (var_p->GetFName() != ms_skookum_script_instance_property_name) // Completely hide SkookumScriptInstanceProperties
       {
-      data_body += FString::Printf(TEXT("/* %s // Unsupported, Skipped in config or marked EDITOR_ONLY */\n"), *data_definition);
+      // We used to print some commented out meta-data for an unsupported property, this can be useful during debug
+      // but it can make maintaining your auto-generated files a nightmare in your source repo. So it is commented out here
+      //data_body += FString::Printf(TEXT("/* %s // Unsupported, Skipped in config or marked EDITOR_ONLY */\n"), *data_definition);
       }
     }
 
