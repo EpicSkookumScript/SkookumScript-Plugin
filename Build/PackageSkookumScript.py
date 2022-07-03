@@ -37,7 +37,7 @@ def SetSourceBuildID(file):
 
 def GetCommitSHAStr():
   repo = Repo(BuildParams.SkPluginPath)
-  print "Building for active branch: " + str(repo.active_branch) + " from " + BuildParams.SkPluginPath
+  print("Building for active branch: " + str(repo.active_branch) + " from " + BuildParams.SkPluginPath)
   commits = list(repo.iter_commits(max_count=1))
   for commit in commits:
     return str(commit.hexsha[:7])
@@ -88,35 +88,35 @@ def CheckIDEMissing():
 
 def Build():
   if CheckSkPluginsExist():
-    print "Build Failed: SkookumScript plugin already exists in Binary and/or Source engine. Remove it before building."
+    print("Build Failed: SkookumScript plugin already exists in Binary and/or Source engine. Remove it before building.")
     return -1
 
   if CheckIniFileExists():
-    print "Build Failed: SkookumIDE-user.ini file exists in SkookumIDE folder."
+    print("Build Failed: SkookumIDE-user.ini file exists in SkookumIDE folder.")
     return -1
 
   if CheckIDEMissing():
-    print "Build Failed: SkookumIDE/Engine folder is missing"
+    print("Build Failed: SkookumIDE/Engine folder is missing")
     return -1
 
-  print subprocess.list2cmdline(BuildCommand)
+  print(subprocess.list2cmdline(BuildCommand))
   buildStatus = subprocess.call(BuildCommand, cwd=BuildParams.UE4CWD)
       
   if buildStatus > 0:
-      print "Build Failed"
+      print("Build Failed")
       return -1
   else:
-    print "Setting BuildId..."
+    print("Setting BuildId...")
     SetSourceBuildID("UE4Editor.modules")
     SetSourceBuildID("UnrealHeaderTool.modules")
 
-    print "Setting VersionName"
+    print("Setting VersionName")
     SetVersionName()
 
-    print "Archiving"
+    print("Archiving")
     Zip()
 
-    print "Build Success"
+    print("Build Success")
     return 0
 
 Build()
